@@ -1,0 +1,17 @@
+  as printed: sum P_k - tables at 3 points = [0.03560, 17.05, 0.6071]
+  Table IV gamma2 col2 sign corrected: sum P_k - tables at 3 points = [0.03509, 16.97, 0.6024]
+== my D=4 totals with ln Y -> ln x + ln 4 made explicit (x = y/4) ==
+  al: (-18 + 6/x)*log(x) - 6*log(x)**2 - 36*log(2) + 24*log(2)**2 + 13/x + 1/(3*x**2)
+  be: -18*log(x) - 36*log(2) - 6 + 5/x - 1/(3*x**2) - 1/(3*x**3)
+  g1: -108*log(x) - 216*log(2) - 36 + 30/x - 2/x**2 - 2/x**3
+  g2: -18 - 5/x + 2/(3*x**2) + x**(-3)
+  g3: -36 - 5/x - 1/x**3
+  de: -12*x + 24*x*log(2) + (12*x + 10 - 4/x)*log(x) + 4*log(x)**2 - 16*log(2)**2 + 20*log(2) - 49/(6*x)
+  e1: -240*x*log(2) + 72*x + (60 - 120*x)*log(x) + 20 + 120*log(2) - 26/(3*x) - 1/(3*x**2)
+  e2: 24*x*log(2) + (12*x - 12)*log(x) - 24*log(2) - 2 + 13/(6*x) - 7/(6*x**2)
+  e3: 36*x*log(x) + 12*x + 72*x*log(2) - 8 - 11/(6*x)
+  ze: -36*x**2 + 48*x**2*log(2) - 48*x*log(2) + 24*x + (24*x**2 - 24*x + 10/3)*log(x) + 20*log(2)/3
+== hypotheses for the remaining gap ==
+  gamma2 sign fixed + delta row gets -12x: sum P_k - tables at 3 points = [0.0, 0.0, 0.0]
+  gamma2 sign fixed + gamma2 constant -18 -> +54: sum P_k - tables at 3 points = [0.0, 0.0, 0.0]
+  only delta -12x (gamma2 as printed): sum P_k - tables at 3 points = [0.0005088, 0.07447, 0.004686]

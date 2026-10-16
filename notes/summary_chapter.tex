@@ -1,0 +1,468 @@
+% =====================================================================
+% Summary of findings (consistent with the canonical list of findings of the project and with Chapters 1--9;
+% where the two disagree, the chapters are the authority)
+% =====================================================================
+\chapter{Summary of findings}
+\label{ch:summary}
+
+This chapter collects the results of the eighteen tasks of the re-derivation: Tasks~1--17 for \PI{}
+(Chapters~\ref{ch:feynman-rules}--\ref{ch:ch08}) and Task~18 for \PII{} (Chapter~\ref{ch:sk}).
+Each item points to the section where it is derived; the derivations, the comparison tables and the code checks are there.
+Every discrepancy with the printed papers is classified as
+\begin{itemize}[leftmargin=14pt,itemsep=1pt]
+\item \textbf{substantive}: it changes the physical (nonlocal) self-mass-squared or the argument of a paper;
+\item \textbf{absorbable}: a finite error of counterterm form, absorbed into the arbitrary finite constants $\Delta\alpha_i$;
+\item \textbf{typographical}: a misprint that does not propagate into any later result.
+\end{itemize}
+There are \textbf{four substantive findings (S1--S4), six absorbable findings (B1--B6) and 23 typographical errors (C1--C23)}.
+Results confirmed as printed carry the identifiers D1--D31, and the late-time (Schwinger--Keldysh) results E1--E10.
+The same identifiers are used in the documentation pages of the repository.
+
+\paragraph{Conventions.}
+\begin{itemize}[leftmargin=14pt,itemsep=1pt]
+\item The \emph{paper convention} (also called the \emph{Table-X convention}) is the sign of the self-mass contributions as \PI{} prints them:
+the 4-point part \eqI{32}, \eqI{33}, \eqI{41}, \eqI{44}; the 3-point part \eqI{47}--\eqI{67}, Tables~III--X and \eqI{160}--\eqI{167}; in \PII{}
+Table~1, \eqII{10} and Table~5. The printed \eqI{45}--\eqI{46} agree with the definition sign; identities such as \eqI{55}--\eqI{56} and
+\eqI{60}--\eqI{62} do not depend on the convention.
+\item The \emph{definition sign} is the sign fixed by \PI's own definition \eqI{168},
+$\partial_\mu(\sqrt{-g}\,g^{\mu\nu}\partial_\nu\Phi)-\int d^4x'\,M^2(x;x')\Phi(x')=0$, i.e.\ $-iM^2=\delta^2(i\Gamma)/\delta\Phi\,\delta\Phi$.
+\textbf{Definition sign $=-1\times$ paper convention.} Physical statements are made in the definition sign.
+\item Units: entries of Table~X and of \PII{} Table~1 are coefficients of $\kappa^2H^4/(4\pi)^4$, with $x\equiv y/4$; the local coefficients
+$\beta_i$ and $\alpha_i$ are in units of $H^{D-4}/(4\pi)^{D/2}$; $\khat\equiv k/H$ and $h\equiv H^2/16\pi^2$.
+\item \textbf{One $\kappa^2$ convention} (\PII, Eq.~(23)). $\Phi=u+\kappa^2\Phi_1$, where $u$ is the tree-order mode function and $\Phi_1$ is sourced by the
+one-loop self-mass-squared $M^2_1$ with the factor $\kappa^2$ stripped off:
+\[
+\Big[\partial_t^2+3H\partial_t+\frac{k^2}{a^2}\Big]\Phi_1=\mathcal R_1\equiv-\frac1{a^4}\int d\eta'\,u(\eta',k)\int d^3x'\,\big\{M^2_{++}+M^2_{+-}\big\}_1\,
+e^{i\vec k\cdot(\vec x\,'-\vec x)} .
+\]
+The entries of Table~5 and $\mathcal R_1$ are quoted in units of $H^4u(0,k)/16\pi^2$. The late-time result then reads
+$\Phi\to u(0,k)\{1+\frac{\kappa^2H^2}{16\pi^2}[\tilde C+\order{\ln a/a^2}]\}$, with $\kappa^2$ counted once.
+(The original Task~18 working report kept an extra explicit $\kappa^2$ inside $\mathcal R$ and inside the particular solution; Chapter~\ref{ch:sk}
+removes it and says so in a footnote in Sec.~\ref{sec:t18-late}.)
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{What changed and what did not}
+\label{sec:sum-overview}
+We re-derived \PI{} from the Lagrangian to the renormalized self-mass-squared, and the late-time analysis of \PII. The target equations were not used
+as input (for the exceptions see Sec.~\ref{sec:sum-limits}).
+
+\emph{Confirmed.} Most of the calculation checks out: the Feynman rules (apart from misprints) and the coincidence limits; the 3-point split;
+Table~III; Table~IV (apart from one sign typo that the paper did not use in its calculation); all non-analytic terms of Table~V; Tables~VI--IX;
+the counterterm analysis (two invariant counterterms plus the single noninvariant one, \eqI{145}); $\beta_1=0$ and the pole $-4/(D-4)$ of
+$\beta_3$; Tables~2--5 of \PII.
+
+\emph{Changed.} Three things change in the self-mass.
+\begin{enumerate}[leftmargin=18pt,itemsep=1pt]
+\item The printed $-iM^2$ is $-1$ times the one defined by \PI's own \eqI{168}. The 4-point part (the derivative rule in \eqI{32}) and the 3-point part
+(a sign slip in the step \eqI{46}$\to$\eqI{47}--\eqI{49}) are both reversed, so their relative sign, and the local cancellation stated after
+\eqI{67}, are consistent. The physical nonlocal part is $-$(corrected Table~X) (S1).
+\item Table~X needs two corrections: the $(aa')^2\nabla^4$ row lacks the Table~III term $8\ln x-16x\ln x$ (non-analytic, S2), and the constant of the
+$(aa')^3(a^2+a'^2)H^4$ row is $+18$, not $-54$ (analytic, S3). Only with both corrections does Table~X match the direct sum of the normal
+contributions pointwise to 30 digits.
+\item Finite local errors in \eqI{40} and \eqI{59} shift $\beta_2:-\tfrac{61}{3}\to-\tfrac{49}{3}$ and $\beta_3:+\tfrac{58}{3}\to+\tfrac{52}{3}$
+(paper convention). The arbitrary finite counterterms absorb these shifts (B1--B6).
+\end{enumerate}
+In addition there are 23 typographical errors without effect (C1--C23).
+
+\emph{\PII.} None of these corrections changes the late-time physics. We used the corrected self-mass in the definition sign and did not use the
+simplification \eqII{44}, whose justification fails term by term although its conclusion holds through order $k^{10}$ (S4). The mode function tends to
+$u(0,k)\{1+\frac{\kappa^2H^2}{16\pi^2}[\tilde C+\order{\ln a/a^2}]\}$. \textbf{The main conclusion of \PII{} stands: one-loop quantum gravity gives no
+significant correction to the scalar mode function at late times.}
+
+% ---------------------------------------------------------------------
+\section{Substantive findings (S1--S4)}
+\label{sec:sum-subst}
+
+\subsection*{(S1) Overall sign of the self-mass-squared}
+\begin{discbox}[(S1) The printed $-iM^2$ is $-1$ times the one defined by \eqI{168}]
+\PI{} defines $M^2$ through the effective field equation \eqI{168},
+$\partial_\mu(\sqrt{-g}\,g^{\mu\nu}\partial_\nu\Phi)-\int d^Dx'\,M^2(x;x')\Phi(x')=0$, with $-iM^2=\delta^2(i\Gamma)/\delta\Phi(x)\delta\Phi(x')$.
+Both parts of the printed bare self-mass-squared have the opposite sign:
+\begin{itemize}[leftmargin=14pt,itemsep=1pt]
+\item \textbf{4-point part.} The derivative $\partial_2$ of Table~II acts on $\delta^D(x-x')$ as $+\partial$ with respect to $x$, i.e.\ as $-\partial'$;
+\PI{} uses $+\partial'$ in \eqI{32}. Our \eqI{32}, \eqI{33} are exactly $-1$ times the printed ones: the printed coefficients
+$(-\tfrac i8,+\tfrac i4,+\tfrac i2,-i)$ become $(+\tfrac i8,-\tfrac i4,-\tfrac i2,+i)$. The sign is carried into \eqI{41} and \eqI{44}
+(Sec.~\ref{sec:t3-comp}; evidence: the definition \eqI{168}, the field-equation route, the paper's own counterterm vertex \eqI{131}, test functions and a
+lattice Hessian).
+\item \textbf{3-point part.} The 3-point derivative rule (a minus sign for each outer leg) is correct, and the printed \eqI{45}--\eqI{46} agree with ours
+(Sec.~\ref{sec:ch3-task6}). The printed \eqI{47}--\eqI{49}, however, are $-1$ times what follows from \eqI{46}, in all nine terms
+(Sec.~\ref{sec:ch3-task7}). Task~9 shows that \PI{} carried these printed signs forward (Sec.~\ref{sec:ch04:task9}); the same inherited sign is found in
+\eqI{54}--\eqI{59}, \eqI{63}--\eqI{67}, \eqI{89}, Tables~III--X, \eqI{160}--\eqI{167}, and in \PII{} Table~1, \eqII{10} and Table~5.
+\end{itemize}
+Since both parts are reversed, their \emph{relative} sign in \PI{} is consistent, and the cancellation of the local $\ln(aa')$ and $H^2$ terms between
+\eqI{44} and \eqI{67} holds in both conventions (Sec.~\ref{sec:ch04:cancel}). The local finite part is arbitrary ($\Delta\alpha_i$), but the
+nonlocal part has no counterterm freedom: \textbf{in the definition sign the physical nonlocal part of the renormalized self-mass-squared is
+$-$(corrected Table~X)} (Sec.~\ref{sec:ch08-defsign}). Chapter~\ref{ch:ch08} notes that this reverses the sign of the mode-function correction of
+\PII; Chapter~\ref{ch:sk} shows that at late times the non-falling total of that correction is zero, so only decaying terms change sign. Every entry of
+Table~5 changes sign, the total remains $0$, and $\Phi_1\to-\Phi_1$: \textbf{no late-time effect} (Sec.~\ref{sec:t18-tab5}).
+\end{discbox}
+
+\subsection*{(S2) Table~X: the $(aa')^2\nabla^4$ ($\zeta$) row}
+\begin{discbox}[(S2) The Table~III contribution is missing from the $\zeta$ row of Table~X]
+\PI{} prints the first line below (Table~X; the same row is row~12 of \PII{} Table~1); we obtain the second (both in the paper convention):
+\[
+\begin{aligned}
+\text{printed:}&\quad (aa')^2\nabla^4:\ \ \tfrac{10}{3}\ln x-24x\ln x+24x^2\ln x-36x^2,\\
+\text{corrected:}&\quad (aa')^2\nabla^4:\ \ \tfrac{34}{3}\ln x-40x\ln x+24x^2\ln x-36x^2 .
+\end{aligned}
+\]
+The difference is the third row of Table~III, $8\ln x-16x\ln x$ (Sec.~\ref{sec:ch05:t12:tab3}). \PI{} added the first two rows of Table~III to the
+$(aa')^3H^2\nabla^2$ and $(aa')^2(a^2+a'^2)H^2\nabla^2$ rows of Table~X but omitted this one, although the text says that Table~X includes Table~III.
+Twelve of the thirteen operator rows of Table~X follow exactly from Tables~III, V, VII and \eqI{159}; this row does not
+(Table~\ref{tab:ch08-TXassembly}).
+
+The term is \emph{non-analytic} in $y$, so it enters the retarded Schwinger--Keldysh kernel and changes the physical nonlocal self-mass
+(Sec.~\ref{sec:ch08-TXcorr}). In \PII{} it drops out under \eqII{44}, since it is a $\nabla^4$ row. In the full Schwinger--Keldysh calculation it
+contributes only falling terms (Sec.~\ref{sec:t18-zeta}),
+\[
+\delta\mathcal R_1=\frac{H^4u(0,k)}{16\pi^2}\Big[\khat^4\Big(\frac{4}{45a}-\frac{4}{3a^3}\Big)+\khat^6\Big(\frac{4}{175a}-\frac{2}{15a^3}\Big)+\ldots\Big]
+\qquad\text{(paper convention)},
+\]
+bounded by $C\khat^4/a$ for every $k$. With the correction the right-hand side of \eqII{29} falls like $\ln a/a^2$ instead of $\khat^4/a$.
+\textbf{No effect on the late-time mode function.}
+\end{discbox}
+
+\subsection*{(S3) The constant of the $(aa')^3(a^2+a'^2)H^4$ row ($72\gamma_2$)}
+\begin{discbox}[(S3) Table~V / Table~X: a finite term equivalent to $72\gamma_2$]
+The printed polynomial terms of Table~V correspond to no consistent convention for the integration constants: globally a finite term equivalent
+to $72\gamma_2$ acting on a constant is missing (Sec.~\ref{ch6:tableV}). The printed Tables~IV$+$V miss the direct sum by $0.0356$, $17.05$ and
+$0.607$ at the three test points; the residual is zero to 30 digits only with the $\gamma_2$ sign fix (C15) plus $72\gamma_2$.
+The term is most naturally read as a term $-12x$ dropped from the $\delta$ row, since $\nabla^2\square x=-6aa'H^4$ gives $\delta[-12x]=72\gamma_2[1]$;
+equivalently, the $\gamma_2$ row $-\tfrac5x-18$ becomes $-\tfrac5x+54$. Where the term belongs is an interpretation: the pointwise test fixes only the
+sum. In Table~X (row~7 of \PII{} Table~1) it appears as the constant of the $(aa')^3(a^2+a'^2)H^4$ row,
+\[
+\tfrac{4\ln x}{3x}-\tfrac{32}{3x}\,\mathbf{-54}\quad\longrightarrow\quad\tfrac{4\ln x}{3x}-\tfrac{32}{3x}\,\mathbf{+18}
+\qquad\text{(paper convention)}.
+\]
+The term is \emph{analytic} (independent of $y$); it is the same for the $++$ and $+-$ polarities and drops out of the retarded kernel identically
+(Secs.~\ref{sec:ch08-TXcorr} and~\ref{sec:t18-diff}). \textbf{No effect on \eqII{21}, Table~5 or the mode function.}
+\end{discbox}
+
+\paragraph{The global pointwise test (evidence for S2 and S3).} At $D=4$ and $x\neq x'$, the left-hand side is the direct sum $\sum_kP_k$ of the
+normal contributions (with naive inner derivatives and the actual $D=4$ propagator functions) plus the nonlocal term of \eqI{67}; it does not depend
+on the outer-operator reduction of the appendix. The right-hand side is the 13 operators of Table~X acting on their coefficient functions. The test
+uses three random rational spacelike-separated pairs (seed 29) and 30-digit arithmetic (Sec.~\ref{sec:ch08-global}):
+\begin{center}\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lccc}
+\toprule
+Residual (LHS $-$ operator sum) & point 0 & point 1 & point 2\\
+\midrule
+for scale: $|$LHS$|$ & $7.10$ & $0.107$ & $8.60$\\
+Table~X as printed & $-11.52$ & $64.14$ & $-3.526$\\
+with the $\zeta$ correction (S2) only & $1.182$ & $65.28$ & $0.0161$\\
+with the $\zeta$ and $72\gamma_2$ corrections (S2 and S3) & $4\times10^{-31}$ & $0$ & $-3\times10^{-31}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Neither correction alone is enough. The corrected Table~X in full is Table~\ref{tab:ch08-TXcorr}.
+
+\begin{resultbox}[Renormalized self-mass-squared, definition sign]
+\[
+-iM^2_{\rm ren}(x;x')=i\kappa^2a^4\Big(\Delta\alpha_1\square^2+\Delta\alpha_2H^2\square+\Delta\alpha_3H^2\frac{\nabla^2}{a^2}\Big)\delta^4(x-x')
+\;-\;\big[\text{corrected Table X}\big],
+\]
+Eq.~\eqref{eq:ch08-final} of Chapter~\ref{ch:ch08}, with the corrected Table~X of Table~\ref{tab:ch08-TXcorr} (written in the paper convention), and
+$\beta_1=0$, $\beta_2=\tfrac{49}{3}$, $\beta_3=\tfrac{4}{D-4}-\tfrac{52}{3}-2\gamma$ in the definition sign, Eq.~\eqref{eq:ch08-betadef}.
+\end{resultbox}
+
+\subsection*{(S4) The justification of the simplification \eqII{44}}
+\begin{discbox}[(S4) The argument for \eqII{44} fails term by term; its conclusion holds]
+\PII{} drops the $\nabla^2$ rows of its Table~1 and sets $u(\eta',k)\to u(0,k)$, $e^{i\vec k\cdot\Delta\vec x}\to1$, arguing that the deviations
+$u(\eta')-u(0)$ and $e^{i\vec k\cdot\Delta\vec x}-1$ bring at least two factors of $1/a$ or $1/a'$. This argument fails term by term: the rows
+$(aa')^2(a^2+a'^2)H^2\nabla^2$ and $(aa')^2(a^2+a'^2)\nabla^2\square$ individually \emph{grow} like $\mp\tfrac{4}{15}\khat^2a$ (definition sign), and the
+$k^2$ corrections of the rows without derivatives give $\order{1}$ constants (Sec.~\ref{sec:t18-full}). We kept the exact $u(\eta',k)$, the phase, the
+$k^2/a^2$ part of $\square$ and all $\nabla^2$ rows. The non-falling part then cancels separately at each order $k^0,\dots,k^{10}$, for the corrected and
+for the printed table (E9). The \emph{conclusion} of \eqII{44} holds (verified through $k^{10}$); only its justification is invalid. No change to the
+physics.
+\end{discbox}
+
+% ---------------------------------------------------------------------
+\section{Absorbable findings (B1--B6)}
+\label{sec:sum-abs}
+\begin{itemize}[leftmargin=14pt,itemsep=2pt]
+\item[\textbf{B1}] \textbf{\eqI{40}, finite part}, and its consequences in \eqI{41}, \eqI{44}. \PI{} prints $+2\,\delta^0_\alpha\delta^\sigma_0\,H^2/16\pi^2$;
+we obtain $-2\,\delta^0_\alpha\delta^\sigma_0\,H^2/16\pi^2$ (exact-$D$ form (I.40$'$)). The printed \eqI{40} contradicts the printed \eqI{38} through the
+trace identity ($+2h$ versus $-2h$; Sec.~\ref{sec:t4-comp}). With the correct \eqI{40} the finite $B$/$C$ parts are $\order{D-4}$, and two printed pieces
+are absent: the extra bracket of \eqI{41},
+\[
++\frac{i\kappa^2H^2}{4\pi^2}\big\{-\partial^\mu(a^2\partial_\mu\delta^4)+a^2\nabla^2\delta^4\big\},
+\]
+and the constants $-2$, $+2$ in the brackets of \eqI{44} (Sec.~\ref{sec:t5-comp}). The extra terms $i\kappa^2k(-2a^D\square+2a^{D-2}\nabla^2)\delta^D$ have the form
+of the counterterms \eqI{131}, \eqI{145}, with $\Delta\alpha_2=-\tfrac1{4\pi^2}$ and $\Delta\alpha_3=+\tfrac1{4\pi^2}$ (paper convention;
+Sec.~\ref{sec:t5-phys}). The correction shifts $\beta_2$ by $+4$ and $\beta_3$ by $-4$.
+\item[\textbf{B2}] \textbf{\eqI{59}, finite constant of the $a^{D-2}\nabla^2$ coefficient.} Adding the paper's own \eqI{54}, \eqI{57} and \eqI{58}
+($-\tfrac12$ from \eqI{57}, $-2$ from \eqI{58}) gives $-\tfrac52$ in the paper convention ($+\tfrac52$ in the definition sign); \PI{} prints $-\tfrac72$.
+The printed value minus the paper's own sum is $-\tfrac{i\kappa^2H^2}{8\pi^2}a^2\nabla^2\delta^4$, which has the form of \eqI{145} with
+$\Delta\alpha_3=-\tfrac1{8\pi^2}$ (Sec.~\ref{sec:ch04:t9comp}). The correction shifts $\beta_3$ by $+2$.
+\item[\textbf{B3}] \textbf{$\beta_2$, \eqI{163}.} Printed $-\tfrac{61}{3}$; corrected $-\tfrac{49}{3}$ in the paper convention, $+\tfrac{49}{3}$ in the definition
+sign (Sec.~\ref{sec:ch08-betacorr}). Finite; absorbed into $\Delta\alpha_2$. No pole either way.
+\item[\textbf{B4}] \textbf{$\beta_3$, \eqI{165}.} Printed $-\tfrac{4}{D-4}+\tfrac{58}{3}+2\gamma$; corrected $-\tfrac{4}{D-4}+\tfrac{52}{3}+2\gamma$ in the paper
+convention, $+\tfrac{4}{D-4}-\tfrac{52}{3}-2\gamma$ in the definition sign (Sec.~\ref{sec:ch08-betacorr}). \textbf{The pole is unchanged}; the finite shift is
+absorbed into $\Delta\alpha_3$.
+\item[\textbf{B5}] \textbf{\PII, \eqII{8}, $\alpha_2$.} Printed $\{\tfrac{61}{3}\}+\Delta\alpha_2$; corrected $\{\tfrac{49}{3}\}+\Delta\alpha_2$ in the Table-X
+convention, $\{-\tfrac{49}{3}\}+\Delta\alpha_2$ in the definition sign (Eq.~\eqref{eq:ch09-alpha}). Absorbed; enters no result.
+\item[\textbf{B6}] \textbf{\PII, \eqII{9}, $\alpha_3$.} Printed $\{\tfrac{4}{D-4}-\tfrac{58}{3}-2\gamma\}+\Delta\alpha_3$; corrected
+$\{\tfrac{4}{D-4}-\tfrac{52}{3}-2\gamma\}+\Delta\alpha_3$ in the Table-X convention, $\{-\tfrac{4}{D-4}+\tfrac{52}{3}+2\gamma\}+\Delta\alpha_3$ in the
+definition sign (Eq.~\eqref{eq:ch09-alpha}). Absorbed. The only local effect in the mode equation is
+$\mathcal R_{1,\rm local}=-\Delta\alpha_3H^2k^2u/a^2\to0$ (Eq.~\eqref{eq:ch09-local}).
+\end{itemize}
+In summary, in the paper convention ($\beta_i$ in units of $H^{D-4}/(4\pi)^{D/2}$),
+\[
+\beta_2:\ -\tfrac{61}{3}\ \to\ -\tfrac{49}{3},\qquad
+\beta_3:\ -\tfrac{4}{D-4}+\tfrac{58}{3}+2\gamma\ \to\ -\tfrac{4}{D-4}+\tfrac{52}{3}+2\gamma,\qquad \beta_1=0\ \text{(unchanged)} .
+\]
+\emph{Notes.} (a) The printed \eqI{161}--\eqI{165} are reproduced \emph{exactly} from the printed \eqI{44} and \eqI{59}, so the paper did use those
+values; the shifts come only from correcting these two inputs. (b) $\alpha_1=0+\Delta\alpha_1$ (\eqII{7}) and $\beta_1=0$ are unchanged. (c) If the
+outer $\square$ acts as a distribution, a local term could be counted twice (Sec.~\ref{sec:sum-limits}). Any such double counting would have exact
+counterterm form, $c(D)(a^D\square-a^{D-2}\nabla^2)\delta^D$, and would be absorbed into $\alpha_2,\alpha_3$. It is a potential issue, not an
+established error.
+
+% ---------------------------------------------------------------------
+\section{Typographical errors (C1--C23)}
+\label{sec:sum-typo}
+None of the following affects any result. Entries marked $^\ast$ (C2, C20, C21) were noticed while preparing these notes and are not in the
+original working reports. Entries marked $^\dagger$ (C22, C23) were noticed while refereeing the write-up and confirmed on the printed pages;
+they are not discussed in Chapters~\ref{ch:feynman-rules}--\ref{ch:sk}.
+
+{\small\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.06\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.49\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}@{}}
+\caption{Typographical errors in \PI{} and \PII.}\label{tab:sum-typos}\\
+\toprule
+ID & Where & Printed $\to$ correct & Derived in\\
+\midrule
+\endfirsthead
+\toprule
+ID & Where & Printed $\to$ correct & Derived in\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+C1 & \eqI{1}, first term & $-\tfrac12\partial_\mu\phi\,\partial_\mu\phi\,g^{\mu\nu}\sqrt{-g}\to-\tfrac12\partial_\mu\phi\,\partial_\nu\phi\,g^{\mu\nu}\sqrt{-g}$ (free index) & Sec.~\ref{sec:ch1-t1-compare}\\
+C2$^\ast$ & \eqI{6}, left-hand side & second $\phi$ missing: $\partial_\mu\phi\,\partial_\nu g^{\mu\nu}\to\partial_\mu\phi\,\partial_\nu\phi\,g^{\mu\nu}$; the right-hand side is correct; the Task~1 report retyped it as if correct & Secs.~\ref{sec:ch1-task1}, \ref{sec:ch1-t1-compare}\\
+C3 & \eqI{7}, left-hand side & $-\tfrac12\kappa a^{D-2}\partial_\alpha\phi\,\partial_\beta\phi\,h^{\alpha\beta}\to+\tfrac12\kappa\ldots$; $V_1=i\kappa a^{D-2}\partial_1^\alpha\partial_2^\beta$ is correct and was used in \eqI{46} & Secs.~\ref{sec:ch1-t2-compare}, \ref{sec:ch3-t6-compare}\\
+C4 & \eqI{14}, first coefficient of $A(y)$ & $\Gamma(\tfrac D2-1)/(\tfrac D2-1)\to\Gamma(\tfrac D2)/(\tfrac D2-1)=\Gamma(\tfrac D2-1)$; required by \eqI{52}, \eqI{26} and the recursion; the printed \eqI{52} carries the correct value & Sec.~\ref{sec:ch3-c0}\\
+C5 & Table~II, $U_2$ & $-\tfrac i4\kappa^2a^{D-2}\eta^{\alpha\rho}\eta^{\beta\sigma}\partial_1\!\cdot\partial_2\to+\tfrac i4\ldots$; the printed \eqI{33} uses $+\tfrac i4$ & Secs.~\ref{sec:ch1-t2-compare}, \ref{sec:t3-comp}\\
+C6 & \eqI{39}, finite part & index placement $\bar\eta_{\rho\sigma}\to\bar\eta^{\rho\sigma}$ (same matrix) & Sec.~\ref{sec:t4-comp}\\
+C7 & Text before \eqI{54} & ``the 4th term of (47)'' $\to$ ``the 2nd term of (47)'' & Sec.~\ref{sec:ch04:t9comp}\\
+C8 & \eqI{89}, second term & $-4(aa')^2(a+a')^2\nabla^2(yA')\to-4H^2(aa')^2(a+a')^2\nabla^2(yA')$ (paper convention; dimensions); Table~III has the $H^2$ & Sec.~\ref{sec:ch05:t12:89}\\
+C9 & Appendix, Table~XII header & $\beta=(aa')^{D-2}(a^2+a'^2)H^2\square\to(aa')^{D-1}(a^2+a'^2)H^2\square$, as in \eqI{105} & Table~\ref{ch6:tab:apptypos}\\
+C10 & Appendix, (A18) & $-2(D-1)aa'H^2\,I[f'A]\to-2(D-1)aa'H^2\,I[f'A']$ & Table~\ref{ch6:tab:apptypos}\\
+C11 & Appendix, Table~XIII, row $P_{7c}$ & repeats part of the total $\to-\tfrac12(D-1)(D-2)\,y\,I[A'\Delta C']-\tfrac12(D-1)^2(D-2)\,I^2[A'\Delta C']$; printed total correct & Table~\ref{ch6:tab:apptypos}\\
+C12 & Appendix, Table~XV, row $P_{4b}$ & $(D-1)\,y'(A'B')'\to(D-1)\,y^2(A'B')'$ & Table~\ref{ch6:tab:apptypos}\\
+C13 & Appendix, Table~XVIII, total & $\tfrac14\,y\,I^2[A'^2\Delta C']\to\tfrac14\,y\,I^2[A'\Delta C']$ & Table~\ref{ch6:tab:apptypos}\\
+C14 & \eqI{128}, list of four-derivative invariants & omission: the reduced list also contains $\phi^2R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}$ and $\phi^2\square R$; the shift symmetry removes both, so \eqI{129} is unaffected & Sec.~\ref{sec:ch7-task14}\\
+C15 & Table~IV, $\gamma_2$ row, second column & $-\tfrac{D^3-3D^2-4D+8}{4(D-1)}\to+\tfrac{D^3-3D^2-4D+8}{4(D-1)}$; Tables~VI--IX use $+$, and shift symmetry requires it (the printed sign would leave a forbidden $-\tfrac{16}{3}$ in Table~IX at $D=4$) & Secs.~\ref{ch6:tableIV}, \ref{sec:ch08-t16}\\
+C16 & Table~VII header & ``Coefficient of $i\kappa^2H^4/(4\pi)^4$'' $\to$ ``Coefficient of $\kappa^2H^4/(4\pi)^4$'' & Sec.~\ref{sec:ch08-t16}\\
+C17 & \eqI{160} & $\beta_2\square+\beta_3\nabla^2/a^2\to\beta_2H^2\square+\beta_3H^2\nabla^2/a^2$ (dimensions; \eqI{166} needs $\alpha_i=-\beta_i$) & Sec.~\ref{sec:ch08-t17}\\
+C18 & \eqI{167} & $\Delta\alpha_2\square+\Delta\alpha_3\nabla^2/a^2\to\Delta\alpha_2H^2\square+\Delta\alpha_3H^2\nabla^2/a^2$ & Sec.~\ref{sec:ch08-defsign}\\
+C19 & Table~X & the row $(aa')^2(a^2+a'^2)\nabla^2\square$ is printed twice; \PII{} Table~1 lists it once & Table~\ref{tab:ch08-TXassembly}\\
+C20$^\ast$ & \PII, \eqII{10} & $\Delta\alpha_2\square+\Delta\alpha_3\nabla^2/a^2\to\Delta\alpha_2H^2\square+\Delta\alpha_3H^2\nabla^2/a^2$ (same omission as C17--C18); the Task~18 report restored $H^2$ without comment & Sec.~\ref{sec:t18-goal}\\
+C21$^\ast$ & \PII, \eqII{34} & the $\Delta\alpha$ term without $H^2\to$ with $H^2$ (same as C20) & Secs.~\ref{sec:t18-goal}, \ref{sec:t18-late}\\
+C22$^\dagger$ & \eqI{170} & $\Delta\alpha_2\square+\Delta\alpha_3\nabla^2/a^2\to\Delta\alpha_2H^2\square+\Delta\alpha_3H^2\nabla^2/a^2$, and the result $-\kappa^2a^4\Delta\alpha_3\,k^2/a^2\,\Phi_0\to-\kappa^2a^4\Delta\alpha_3H^2k^2/a^2\,\Phi_0$ (same omission as C17--C18) & printed page 124005-15\\
+C23$^\dagger$ & Appendix, text before (A31) & ``Applying the second identity (A18) to $P_1$ and $P_6$'' $\to$ ``\ldots{} to $P_1$ and $P_4$'' (the subparts that follow are $P_{1a},P_{1b},P_{4a},\ldots$); wording only & printed page 124005-17\\
+\end{longtable}
+}
+
+\noindent\emph{Notational remarks} (not counted as errors):
+\eqI{6} writes $h^\nu_\rho$ without index staggering, which is unambiguous since $h_{\mu\nu}$ is symmetric (Sec.~\ref{sec:ch1-t1-notation});
+in \eqI{71} $\Delta x_\sigma$ must be read as $\eta_{\sigma\nu}\Delta x^\nu$, so $\Delta x_0=-\Delta\eta$ (Sec.~\ref{sec:ch05:t11:comp});
+the statement of \eqI{69} that two derivatives never produce a delta function holds for naive (pointwise) derivatives, while the distributional
+derivative adds exactly the local term counted separately in \eqI{54}--\eqI{58}, so inner derivatives must be naive, as the footnote to \eqI{75} says
+(Sec.~\ref{sec:ch05:t11:69});
+the $\square$ in \eqI{92} is distributional, \eqI{93} is pointwise (Sec.~\ref{sec:ch05:t12:93});
+the finite bracket of \eqI{125} is defined only up to the constant $(24\ln2-36)\ln2$, which $\alpha=(aa')^D\square^2$ annihilates
+(Sec.~\ref{ch6:124-125});
+the polynomial and $\ln2$ terms of Table~V depend on integration constants and cancel globally, except $72\gamma_2$ (S3; Sec.~\ref{ch6:tableV});
+\eqI{134} needs $k>0$, and in \eqI{135} $x\cdot x$ is the Minkowski product $\|\vec x\|^2-\eta^2$ (Sec.~\ref{sec:ch7-task14}).
+
+% ---------------------------------------------------------------------
+\section{Confirmed results (D1--D31)}
+\label{sec:sum-conf}
+The following were re-derived and agree with the printed papers (up to the overall sign S1 where a self-mass contribution is involved).
+
+{\small\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.06\textwidth}>{\raggedright\arraybackslash}p{0.69\textwidth}>{\raggedright\arraybackslash}p{0.18\textwidth}@{}}
+\caption{Results confirmed as printed.}\label{tab:sum-confirmed}\\
+\toprule
+ID & Item and status & Where\\
+\midrule
+\endfirsthead
+\toprule
+ID & Item and status & Where\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+D1 & \eqI{4}, \eqI{5} and the bracket of \eqI{6}: exact, general $D$, no gauge or trace condition & Sec.~\ref{sec:ch1-t1-compare}\\
+D2 & Table~I ($V_1$, $V_2$), \eqI{8}, Table~II rows $U_1,U_3,U_4$: exact & Sec.~\ref{sec:ch1-t2-compare}\\
+D3 & \eqI{31}: structure and normalization 1 & Sec.~\ref{sec:t3-comp}\\
+D4 & \eqI{34}--\eqI{38}; \eqI{39} up to C6; the $i\Delta_A$ coefficient of \eqI{40}: exact in $D$; $D=4$ finite parts $+4h$, $-2h$, $[2,2]h$ & Sec.~\ref{sec:t4-comp}\\
+D5 & \eqI{42}, \eqI{43} (plus a general-$D$ form); the algebra \eqI{41}$\to$\eqI{44}, given the printed inputs & Sec.~\ref{sec:t5-comp}\\
+D6 & \eqI{45}, \eqI{46}: identical (printed $=$ definition sign) & Sec.~\ref{sec:ch3-t6-compare}\\
+D7 & \eqI{47}--\eqI{49}: structures, magnitudes and $D$-dependence of all nine terms (overall sign: S1) & Sec.~\ref{sec:ch3-t7-compare}\\
+D8 & \eqI{50}--\eqI{53} and the local/log/normal split (complete, no overlap); \eqI{52} along three independent routes & Sec.~\ref{sec:ch3-t8-compare}\\
+D9 & \eqI{55}--\eqI{56}, \eqI{60}--\eqI{62}: exact (convention-independent) & Secs.~\ref{sec:ch04:t9comp}, \ref{sec:ch04:t10comp}\\
+D10 & \eqI{63}--\eqI{67}: magnitudes (3, 4, 9, 2) and cancellation of $\nabla^4A$; local cancellation of $3\ln(aa')a^D\square$, $-4\ln(aa')a^{D-2}\nabla^2$ and $9H^2a^D$ between \eqI{44} and \eqI{67}, at general $D$ (remainder $\propto(D-4)(D+1)/(4(D-3))$), in both conventions & Sec.~\ref{sec:ch04:cancel}\\
+D11 & \eqI{68}--\eqI{88}, \eqI{90}--\eqI{93}; the divergence count after \eqI{80}: exact & Secs.~\ref{sec:ch05:t11:comp}, \ref{sec:ch05:t12:comp}\\
+D12 & Table~III: equals the printed table in the paper convention & Sec.~\ref{sec:ch05:t12:tab3}\\
+D13 & \eqI{94}--\eqI{124}; \eqI{125} up to a constant & Sec.~\ref{ch6:comparison}\\
+D14 & Appendix Tables~XI--XX: totals exact after C9--C13, via the global pointwise test (an audit, not a re-derivation; Sec.~\ref{sec:sum-limits}) & Sec.~\ref{ch6:appendix}\\
+D15 & Table~IV: 19 of 20 entries in general $D$ (C15 is a typo) & Sec.~\ref{ch6:tableIV}\\
+D16 & Table~V: all logarithmic and inverse-power terms ($1/x$, $\ln x/x$, $\ln x$, $\ln^2x$, $x\ln x$, $x^2\ln x$) & Sec.~\ref{ch6:tableV}\\
+D17 & \eqI{126}--\eqI{145}: the two invariant counterterms \eqI{129} and their vertices \eqI{130}--\eqI{131}; the de~Sitter group with $\tfrac12D(D+1)$ parameters in the four classes \eqI{132}--\eqI{135}; the gauge \eqI{15} breaks only the spatial special conformal transformations; exactly three noninvariant counterterms \eqI{144}, of which only the last survives the flat limit; the vertex \eqI{145}; the statements after \eqI{145} (remarks: C14 and the notational remarks above) & Chapter~\ref{ch:desitter-counterterms}\\
+D18 & \eqI{146}--\eqI{159}, Tables~VI--IX: exact (with the $+$ sign of $\gamma_2$, which the paper used) & Sec.~\ref{sec:ch08-t16}\\
+D19 & The vanishing $a^D\square^2$ total of Table~VIII, hence $\beta_1=0$; independent argument: the flat-space numerator $V\cdot P\cdot V=\tfrac12p^2k^2$ gives a scaleless integral & Sec.~\ref{sec:ch08-t16}\\
+D20 & Table~IX is finite; \eqI{157}--\eqI{158} $\to\frac{\kappa^2H^4}{8\pi^2}ia^4\delta^4$ & Sec.~\ref{sec:ch08-t16}\\
+D21 & \eqI{161}--\eqI{165} from the printed inputs: $\beta_1=0$, $\beta_2=-\tfrac{61}{3}$ (no pole), $\beta_3=-\tfrac{4}{D-4}+\tfrac{58}{3}+2\gamma$, reproduced exactly; the pole $-4/(D-4)$ (paper convention) survives the corrections; the only divergence is in the de~Sitter-breaking $\beta_3$ & Sec.~\ref{sec:ch08-t17}\\
+D22 & \eqI{166}, $\alpha_i=-\beta_i+\Delta\alpha_i$ (convention-independent) & Sec.~\ref{sec:ch08-defsign}\\
+D23 & Table~X: 12 of 13 rows follow exactly from Tables~III, V, VII and \eqI{159}; 11 rows are unchanged after the corrections & Table~\ref{tab:ch08-TXassembly}\\
+D24 & \PII{} \eqII{15}--\eqII{21}: Schwinger--Keldysh rules and effective equation; reality and causality of the retarded kernel (written in the definition sign) & Sec.~\ref{sec:t18-sk}\\
+D25 & \eqII{29} and the particular solutions \eqII{30}--\eqII{33} (leading terms) & Secs.~\ref{sec:t18-sk}, \ref{sec:t18-late}\\
+D26 & \eqII{34}: only $\Delta\alpha_3$ contributes locally (C21 aside) & Sec.~\ref{sec:t18-late}\\
+D27 & \eqII{35}--\eqII{41}; $1/x$ also computed directly from the light-cone $\delta(y)$ & Secs.~\ref{sec:t18-diff}, \ref{sec:t18-tab234}\\
+D28 & Tables~2--4 (12 entries): identical through the order kept; next order obtained; quadrature agreement $\lesssim10^{-19}$ & Sec.~\ref{sec:t18-tab234}\\
+D29 & Table~5 (19 entries), total $0$: identical in the paper (Table-X) convention (sign: S1) & Sec.~\ref{sec:t18-tab5}\\
+D30 & The statement after Table~5 that the right-hand side falls at least like $1/a$ times powers of $\ln a$: consistent (corrected table: $\ln a/a^2$; printed table: $\khat^4/a$) & Secs.~\ref{sec:t18-late}, \ref{sec:t18-comp}\\
+D31 & The conclusion of \PII: no significant one-loop late-time correction (E1) & Sec.~\ref{sec:t18-late}\\
+\end{longtable}
+}
+
+% ---------------------------------------------------------------------
+\section{Late-time results (E1--E10)}
+\label{sec:sum-late}
+All results of this section are for \PII, in the definition sign, with $\kappa^2$ counted once ($\Phi=u+\kappa^2\Phi_1$; $\mathcal R_1$ in units of
+$H^4u(0,k)/16\pi^2$).
+
+\begin{resultbox}[(E1) Late-time mode function: the main physics conclusion]
+With $\Phi=u+\kappa^2\Phi_1$ (Sec.~\ref{sec:t18-late}), where $\Phi_1$ is sourced by the one-loop self-mass-squared with the factor $\kappa^2$ stripped off,
+\[
+\Phi(\eta,k)\ \xrightarrow{\ a\to\infty\ }\ u(0,k)\Big\{1+\frac{\kappa^2H^2}{16\pi^2}\Big[\tilde C+\order{\frac{\ln a}{a^2}}\Big]\Big\},
+\]
+where $\tilde C$ is a field-strength renormalization constant, not fixed by the late-time analysis. There is no growing ($a$, $\ln a$, $\ln^2a$) or
+drifting term: \textbf{one-loop quantum gravity gives no significant correction to the scalar mode function at late times.}
+This confirms the conclusion of \PII{} with the corrected input and without the approximation \eqII{44}.
+\end{resultbox}
+
+\begin{itemize}[leftmargin=14pt,itemsep=2pt]
+\item[\textbf{E2}] \textbf{One-loop correction} (Eq.~\eqref{eq:ch09-Phi1}, $\kappa^2$ stripped):
+$\Phi_1=C\,u(\eta,k)+\frac{H^2u(0,k)}{16\pi^2}\big\{\frac1{a^2}\big[4\khat^2\ln a-6+\tfrac{91}{6}\khat^2+4i\khat^3+\ldots\big]+\frac{4i\khat^3\ln a}{a^3}+\ldots\big\}$.
+$C\,u$ is a homogeneous solution that the late-time analysis does not fix, with $C=\tfrac{H^2}{16\pi^2}\tilde C$; the initial condition removes the other
+homogeneous solution, $u^*$.
+\item[\textbf{E3}] \textbf{Late-time source} with the corrected table, through $k^{10}$ (Eq.~\eqref{eq:ch09-Rlate}):
+\[
+\mathcal R_1=\frac{H^4u(0,k)}{16\pi^2}\Big\{\frac1{a^2}\Big[12-\big(8\ln a+\tfrac{103}{3}\big)\khat^2-8i\khat^3+\tfrac83\khat^4+\tfrac{32i}{45}\khat^5
+-\tfrac2{15}\khat^6+\ldots\Big]-\frac{12i\khat^3}{a^3}+\order{\frac{\ln a}{a^4}}\Big\}.
+\]
+\textbf{There is no $a^{-1}$ term.} With the printed $\zeta$ row there would be extra terms
+$\frac{H^4u(0,k)}{16\pi^2}\big[\tfrac{4}{45}\khat^4+\tfrac{4}{175}\khat^6+\tfrac{2i}{135}\khat^7-\tfrac{8}{1323}\khat^8+\ldots\big]/a$
+(Eq.~\eqref{eq:ch09-Rprinted}). The $a^{-2}$ coefficients depend on the initial time and on $\khat$, i.e.\ they are sensitive to the initial state.
+\item[\textbf{E4}] \textbf{Local part} (Eq.~\eqref{eq:ch09-local}): $\mathcal R_{1,\rm local}=-\Delta\alpha_3H^2k^2u(\eta,k)/a^2\to0$. The corrected
+finite parts of $\beta_{2,3}$ only redefine $\Delta\alpha_{2,3}$.
+\item[\textbf{E5}] \textbf{Schwinger--Keldysh polarities} built from the $++$ result (Sec.~\ref{sec:t18-sk}): $-iM^2_{++}=\text{local}-\Tab(y_{++})$,
+$-iM^2_{+-}=+\Tab(y_{+-})$, $-iM^2_{--}=(-iM^2_{++})^*$, $-iM^2_{-+}=(-iM^2_{+-})^*$, where $\Tab$ is the corrected Table~X ($=$ \PII{} Table~1) in the
+paper convention. The retarded kernel is $M^2_{++}+M^2_{+-}=\text{local}+2\,\mathrm{Im}\,\Tab(y_{++})$ for $\eta'<\eta$; its nonlocal part vanishes for
+$\eta'>\eta$. It is real and causal (support on and inside the past light cone). This is \PII's rule below \eqII{19}, written in the definition sign.
+\item[\textbf{E6}] \textbf{SK differences} (Sec.~\ref{sec:t18-diff}): $\Delta\ln x=2\pi i\theta$, $\Delta\ln^2x=4\pi i\theta\ln|x|$,
+$\Delta(x^j\ln x)=2\pi i\,x^j\theta$, $\Delta(1/x)=-8\pi i\,\delta(y_r)$, $\Delta(\text{analytic})=0$. Hence the $72\gamma_2$ correction (S3) and the
+terms $-120$, $96x$, $12x$, $-36x^2$ drop out identically.
+\item[\textbf{E7}] \textbf{Tables~2--4} (Sec.~\ref{sec:t18-tab234}): all 12 entries in exact closed form, identical to \PII; next order obtained. Compared with
+direct quadrature at $a=50$ and $a=400$, the largest difference is $1.0\times10^{-19}$.
+\item[\textbf{E8}] \textbf{Table~5$'$} (within \eqII{44}; Sec.~\ref{sec:t18-tab5}): each of the 19 entries is $-1$ times the printed one; for example the
+printed $-18,\ 2,\ 3,\ -9,\ 33-18\ln a$ become $+18,\ -2,\ -3,\ +9,\ -33+18\ln a$. The total is $0$, with the $\ln^2a$, $\pi^2$, $\ln a$ and constant parts
+cancelling separately. The $\zeta$ and $72\gamma_2$ corrections do not enter Table~5$'$.
+\item[\textbf{E9}] \textbf{Beyond \eqII{44}} (Sec.~\ref{sec:t18-full}, Table~\ref{tab:ch09-t5pp}). Keeping the exact $u(\eta',k)$, the phase
+$e^{i\vec k\cdot\Delta\vec x}$, the $k^2/a^2$ part of $\square$ and all $\nabla^2$ rows, and expanding exactly in $k$, the non-falling part of the
+right-hand side of \eqII{29} vanishes at each order $k^0,\dots,k^{10}$, for the corrected and for the printed table. Rows~10 and~11 each grow like
+$\mp\tfrac{4}{15}\khat^2a$ and cancel each other (S4). The $\zeta$ row contributes $-\khat^4/70$ at order $k^4$ and is needed for the $k^4$
+cancellation. This contribution comes from its $24x^2\ln x$ term, which is \emph{the same in the printed and the corrected row}; the correction
+$8\ln x-16x\ln x$ itself changes only falling terms (E10). The $k^8$ series agrees with exact-$k$ quadrature at $a=200$ to within
+$10^{-10}$--$2\times10^{-8}$ at $\khat=0.3$ and $5\times10^{-6}$--$9.3\times10^{-4}$ at $\khat=1$, the size of the expected $\khat^9$ truncation error.
+\item[\textbf{E10}] \textbf{Effect of each correction on the late-time result} (Table~\ref{tab:ch09-effect}). Overall sign (S1): every Table~5 entry
+flips and $\Phi_1\to-\Phi_1$; not observable at late times, since only falling terms change sign. $\zeta$ row (S2): only falling terms
+($\le C\khat^4/a$ for every $k$); it removes the $\khat^4/a$, $\khat^6/a,\dots$ tails, so that the corrected source falls like $\ln a/a^2$ instead of
+$\khat^4/a$ (Eqs.~\eqref{eq:ch09-Rlate}--\eqref{eq:ch09-Rprinted}). $72\gamma_2$ (S3): identically none. Shifts of $\beta_{2,3}$ and $\alpha_{2,3}$
+(B3--B6): none. Duplicated row (C19): none, since it is already single in \PII{} Table~1.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Summary table}
+\label{sec:sum-table}
+{\small\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.14\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}@{}}
+\caption{The findings at a glance.}\label{tab:sum-glance}\\
+\toprule
+Finding & Class & Renormalized $M^2$ & Late times & Where\\
+\midrule
+\endfirsthead
+\toprule
+Finding & Class & Renormalized $M^2$ & Late times & Where\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+S1: printed $-iM^2=-$(definition \eqI{168}); 4-point and 3-point parts both reversed & substantive & nonlocal part $=-$(corrected Table~X) & every Table~5 entry flips, total $0$; $\Phi_1\to-\Phi_1$; only falling terms change sign & Chs.~\ref{ch:fourpoint}--\ref{ch:ch04}, \ref{ch:ch08}\\
+S2: $\zeta$ row: $+8\ln x-16x\ln x$ & substantive (non-analytic) & enters the retarded kernel & falling terms only; removes the $1/a$ tails; source falls like $\ln a/a^2$ & Secs.~\ref{sec:ch08-TXcorr}, \ref{sec:t18-zeta}\\
+S3: $(aa')^3(a^2+a'^2)H^4$: $-54\to+18$ ($72\gamma_2$) & substantive (analytic) & drops out of the retarded kernel & none & Secs.~\ref{ch6:tableV}, \ref{sec:ch08-TXcorr}\\
+S4: justification of \eqII{44} & substantive (argument) & --- & fails term by term; conclusion holds through $k^{10}$ & Sec.~\ref{sec:t18-full}\\
+B1, B2: \eqI{40}, \eqI{59} & absorbable & $\beta_2:-\tfrac{61}3\to-\tfrac{49}3$, $\beta_3:\tfrac{58}3\to\tfrac{52}3$ (paper conv.); pole unchanged & none & Secs.~\ref{sec:t5-comp}, \ref{sec:ch04:t9comp}\\
+B3--B6: $\beta_2$, $\beta_3$, $\alpha_2$, $\alpha_3$ & absorbable & finite parts absorbed into $\Delta\alpha_{2,3}$ & none ($-\Delta\alpha_3H^2k^2u/a^2\to0$) & Secs.~\ref{sec:ch08-betacorr}, \ref{sec:t18-goal}\\
+C1--C23 (Table~\ref{tab:sum-typos}) & typographical & none & none & ---\\
+D1--D31 (Table~\ref{tab:sum-confirmed}), incl.\ Tables~2--5 of \PII & confirmed & --- & reproduced exactly & Chs.~\ref{ch:feynman-rules}--\ref{ch:sk}\\
+E1: late-time mode function & confirmed & --- & $u(0,k)\{1+\frac{\kappa^2H^2}{16\pi^2}[\tilde C+\order{\ln a/a^2}]\}$ & Sec.~\ref{sec:t18-late}\\
+\end{longtable}
+}
+
+% ---------------------------------------------------------------------
+\section{Methodological notes and limitations}
+\label{sec:sum-limits}
+\begin{enumerate}[leftmargin=18pt,itemsep=2pt]
+\item \textbf{How the work was done.} Each step was re-derived from its inputs, with Claude (an AI model) as a checking tool. The analytic
+derivations are kept separate from the code checks; $D$ is kept general wherever the reports kept it general. Exceptions to ``target not used as
+input'': Tables~IV--V were computed from the printed appendix totals after those totals were checked, and Table~V enters the Table~X assembly as
+printed (its non-analytic terms were confirmed in Task~13). Tables~2--5 of \PII{} were never used as input. All scripts in \texttt{code/} were re-run and
+reproduce the original logged outputs; the one cosmetic difference is the order of two tied entries in \texttt{check\_68\_80.py}, now fixed by a sort key
+(Sec.~\ref{sec:ch05:t11:code}).
+\item \textbf{The appendix ``Extracting derivatives'' was audited, not redone.} Worked examples (the $P_{3c}$/$\gamma_3$ row, the $\beta$/$\gamma_1$
+totals) were checked by hand; Tables~XII and~XIV and (A1)--(A9) were read from the printed pages; the other tables were used through their totals,
+which the global pointwise test verified (generic powers at $D=4,5$; actual $D=4$ propagators). The original Task~13 report's statement that every
+row was reproduced by hand was an overstatement (Sec.~\ref{ch6:appendix}).
+\item \textbf{A possible extra local term from the appendix operator reduction is only partially resolved.} If the outer $\square$ in $\alpha$ and
+$\delta$ acts as a distribution, the local term \eqI{54}$+$\eqI{58} could be counted twice. Task~16 showed that any such double counting has exactly
+counterterm form, $c(D)(a^D\square-a^{D-2}\nabla^2)\delta^D$ (no $\ln a$), and is absorbed into $\alpha_2$, $\alpha_3$. It was not shown that
+(A35)--(A38) produce no \emph{other} local difference at coincidence (for example a finite $H^4a^D\delta^D$); that needs a full distributional analysis.
+Partial support: the vanishing $a^D\square^2$ total and the finiteness of Table~IX (Secs.~\ref{sec:ch05:t11:delta}, \ref{ch6:physics},
+\ref{sec:ch08-distr}).
+\item \textbf{Global checks are numerical, at sample points.} The Table~V/appendix test and the Table~X test use two or three random spacelike points at
+30-digit precision. They are not symbolic identities, and they check only sums (Secs.~\ref{ch6:tableV}, \ref{sec:ch08-global}). Some other checks are
+dimension-specific: the gauge-breaking Euler--Lagrange check is done in $D=3$; counterterm completeness was checked for all 15 candidates only at
+$D=4,5,6$, with general-$D$ formulas derived for 11 of them, contrary to the Task~15 report's wording (Chapter~\ref{ch:desitter-counterterms});
+the pointwise check of the nonlocal part of \eqI{60}--\eqI{67} is done at $D=4$ (Chapter~\ref{ch:ch04}).
+\item \textbf{Where $72\gamma_2$ belongs} (a dropped $-12x$ in the $\delta$ row of Table~V) is an interpretation. The tests fix only the sum.
+\item \textbf{The Schwinger--Keldysh cancellation is exact through $k^{10}$, but not proven to all orders.} Beyond $k^{10}$ only the convergent-series
+argument is available (entire integrand, compact region; Sec.~\ref{sec:t18-full}). The $a^{-2}$ coefficients of $\mathcal R_1$ and $\Phi_1$ are
+sensitive to the initial state (Sec.~\ref{sec:t18-late}). The explanation of the $k=0$ cancellation ($M^2=\partial\partial'K$) is a heuristic,
+labelled as an assumption. The operator ordering (scale factors on the left) is assumed; it was verified in the Task~17 pointwise test. The direct
+light-cone evaluation of $S_K[1/x]$ was done by hand only (Chapter~\ref{ch:sk}).
+\item \textbf{Assumptions shared with the paper:} dimensional regularization preserves the shift symmetry and the residual symmetries of the
+gauge-fixed action; ultraviolet divergences are polynomial in $H$; coincidence limits are taken in dimensional regularization; $D=4$ is set only in
+terms not multiplied by a pole (Chapters~\ref{ch:desitter-counterterms}, \ref{ch:ch08}).
+\item \textbf{The overall sign rests on the paper's own definition.} It is fixed by \eqI{168}, with
+$-iM^2=\delta^2(i\Gamma)/\delta\Phi\,\delta\Phi$. Several
+independent lines support it: Lemma~A, the field-equation route, the counterterm vertex \eqI{131}, test functions, a lattice Hessian, and
+the consistency of the 3-point steps (Chapters~\ref{ch:fourpoint}--\ref{ch:ch04}). Once \eqI{168} is adopted the sign of the nonlocal part is physical,
+because the nonlocal part has no counterterm freedom.
+\item \textbf{Corrections made to the Turkish working reports in this write-up.} None changes a result. The Task~1 report retyped the left-hand side
+of \eqI{6} as if it were correct (C2). The Task~6 report cited (I.174) for the flat 3-point expression; the correct equation is \eqI{175}. Tasks~7
+and~9 later revised Task~6's relative-sign conclusion; this is a revision between reports, not an error inside one. The Task~12 remark that
+$\square y^{1-D/2}$ vanishes pointwise is inexact: $\square y^{1-D/2}=\tfrac{D(D-2)}{4}H^2y^{1-D/2}$; the conclusion is unaffected. The Task~13 and
+Task~15 overstatements are items 2 and 4 above. In Task~18, $\kappa^2$ was written twice, and the notation $C$ versus $\tilde C$ is made explicit here
+($\tilde C\equiv16\pi^2C/H^2$; see E2); the quadrature agreement was quoted as $10^{-20}$, $\lesssim10^{-19}$ and $\le1.2\times10^{-19}$ in
+different places, while the logged maximum is $1.02\times10^{-19}$.
+\item \textbf{Findings first noticed during the write-up}, marked as such in the chapters: C2 (the left-hand side of \eqI{6}) and the missing $H^2$ in
+\eqII{10}/\eqII{34} (C20--C21). C22 and C23 were noticed while refereeing the write-up; they were checked on the printed pages and are not discussed in
+the chapters.
+\end{enumerate}
+\noindent What these notes do \emph{not} claim: an all-orders proof of the Schwinger--Keldysh cancellation; a row-by-row re-derivation of the
+appendix of \PI; symbolic (rather than sample-point) global identities.

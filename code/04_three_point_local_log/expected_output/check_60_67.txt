@@ -1,0 +1,21 @@
+== (a) Eq. (62): A(y) at D = 4 + eps from (14) with c0 = Gamma(D/2-1) ==
+  first three terms -> H^2/(16 pi^2){4/y - 2 ln(y/4) - 1} : True
+  n-th series term at D=4 vanishes identically             : True
+  printed c0 changes A only at O(D-4)                      : True
+== (b) A(y) of (62) solves (4y-y^2)A'' + 4(2-y)A' = 3k with k = 2h  (Box A = (D-1) k H^2) ==
+   True
+== (c) delta identities on a test function g, general D (l = ln a, p = D-2) ==
+  -2i d0[a^p l d0 delta] == i ln(aa')(a^D Box - a^{D-2}Lap) delta + i(D-1)H^2 a^D delta : True
+  ln(aa') Lap delta acting on g == 2 l Lap g (time-only factor)        : True
+  d0(a^p d0 ln a) = (D-1) H^2 a^D                                      : True
+== (d) pointwise check of the non-local parts, D = 4, actual A(y) of (62), k = 2h ==
+  point 0: |V1-R1|,|W-RW|,|V3-R3|,|V4-R4| = [0.0, 0.0, 0.0, 0.0]  (scales [0.0553, 0.0515, 0.0639, 0.0428] )
+  point 1: |V1-R1|,|W-RW|,|V3-R3|,|V4-R4| = [0.0, 0.0, 0.0, 0.0]  (scales [0.00320, 0.00321, 0.00353, 0.00289] )
+  point 2: |V1-R1|,|W-RW|,|V3-R3|,|V4-R4| = [0.0, 0.0, 0.0, 0.0]  (scales [0.00203, 0.00597, 0.00544, 0.00255] )
+== (e) general-D assembly, units kappa^2 k: -V1 + (D-1)/(D-3) W - V3 - V4 ==
+  coefficients: LB: (D - 1)/(D - 3)  LL: -4/(D - 3)  M: (D - 1)**2/(D - 3)  Q4: -2*(D - 4)/(D - 3)  T: 2/(D - 3)  Tp: 2/(D - 3)
+  derived (44)_log-local + derived (67)_local = -(D - 4)*(D + 1)*(D**2*M + D*LB - 2*D*M - LB - 4*LL + M)/(4*(D - 3))
+  at D=4: LB, LL, M coefficients of (67) = [3, -4, 9]  T,Tp: [2, 2]
+== (f) the paper's (63)-(66) and (67), units kappa^2 H^2/(8 pi^2) at D=4 ==
+  each equals minus the derived term: True True True True
+  paper sum: -3*LB + 4*LL - 9*M - 2*T - 2*Tp    (paper's (67): -3LB + 4LL - 9M - 2T - 2Tp)

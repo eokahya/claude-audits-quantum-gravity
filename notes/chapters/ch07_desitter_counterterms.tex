@@ -1,0 +1,839 @@
+% =====================================================================
+% Chapter 7 -- Tasks 14 and 15
+% de Sitter symmetries, the gauge, and noninvariant counterterms:
+% Eqs. (I.126)-(I.145)
+% =====================================================================
+\providecommand{\chsevLGF}{\mathcal{L}_{\mathrm{GF}}}
+\providecommand{\chsevLie}{\pounds}
+\providecommand{\chsevct}{\mathcal{L}_{\mathrm{ct}}}
+
+\chapter{de Sitter symmetries, the gauge, and noninvariant counterterms: Eqs.~(I.126)--(I.145)}
+\label{ch:desitter-counterterms}
+
+This chapter covers the first part of Section~IV (``Renormalization'') of \PI, printed pages 124005-11 and 124005-12.
+It runs from the dimension counting of the counterterms, \eqI{126}, to the vertex \eqI{145} of the single noninvariant counterterm that is needed.
+It consists of two tasks.
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{Task 14} (Section~\ref{sec:ch7-task14}) derives the invariant counterterms \eqI{126}--\eqI{131}.
+It then solves the Killing equation of de Sitter space exactly in conformal coordinates, which proves that the $\tfrac12D(D+1)$-dimensional de Sitter group splits into the four classes \eqI{132}--\eqI{135}.
+Finally it proves that the gauge-fixing functional \eqI{15} respects the first three classes and breaks the fourth (the spatial special conformal transformations).
+\item \textbf{Task 15} (Section~\ref{sec:ch7-task15}) derives the reductions \eqI{136}--\eqI{143} with every discarded total derivative written out.
+It proves that exactly three noninvariant counterterms \eqI{144} are possible, explains why only the last of them survives the flat-space limit, and derives its vertex \eqI{145}.
+\end{itemize}
+No discrepancy with the paper that affects any result was found in this range of equations.
+There is one omission without effect: the four-derivative list \eqI{128} omits $\phi^2R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}$ and $\phi^2\square R$
+(both are excluded by the shift symmetry anyway). The Task~14 report records it as a remark; in the summary (Chapter~\ref{ch:summary}) it is counted
+among the typographical errors, as C14.
+There are two further remarks, which are not counted as errors:
+the dilatation parameter in \eqI{134} must be positive, $k>0$;
+and $x\cdot x$ in \eqI{135} is the Minkowski product $\|\vec x\|^2-\eta^2$.
+
+\begin{notebox}[Sign conventions in this chapter]
+All counterterm vertices are written with the rule ``vertex $=i\,\delta^2S_{\rm ct}/\delta\phi\,\delta\phi$'', the same rule that reproduces the printed \eqI{130}--\eqI{131}.
+This rule is consistent with \PI's own definition \eqI{168}, \ie it is the \emph{definition sign} (Task~3, Chapter~2).
+The overall sign of the printed self-mass-squared, which we found to be $-1$ times the definition (Chapters~2--4), does not affect the \emph{structure} of the counterterms derived here.
+It only affects the signs of the coefficients $\alpha_i$ that are later fitted to the divergences.
+\end{notebox}
+
+% =====================================================================
+\section{Task 14: invariant counterterms, the four parts of the de Sitter group, and the residual symmetry of the gauge, Eqs.\ (I.126)--(I.135)}
+\label{sec:ch7-task14}
+
+\subsection{Goal, inputs and notation}
+
+\paragraph{Goal.}
+Derive \eqI{126}--\eqI{135}.
+Specifically:
+(a) the counting of invariant counterterms that leaves exactly \eqI{129}, together with the vertices \eqI{130}--\eqI{131};
+(b) a proof that the $\tfrac12D(D+1)$-dimensional de Sitter group splits into the four parts (i)--(iv) of \eqI{132}--\eqI{135};
+(c) a proof that the gauge choice \eqI{15} respects the first three parts but not the fourth.
+Claim (c) is stated on p.~124005-12 of \PI{} with a reference to the literature (ref.~[29] of \PI); it is proved here from scratch.
+
+\paragraph{Notation.}
+$x^\mu=(\eta,\vec x)$ with $\eta<0$; $a=-1/(H\eta)$, hence $Ha=-1/\eta$ and $\partial_0a=Ha^2$.
+The background metric is $\hat g_{\mu\nu}=a^2\eta_{\mu\nu}$.
+We write $\xi_\mu\equiv\eta_{\mu\nu}\xi^\nu$ (index lowered with the \emph{flat} metric) and
+$x\cdot x\equiv\eta_{\mu\nu}x^\mu x^\nu=\|\vec x\|^2-\eta^2$.
+Finally $\psi_{\mu\nu}\equiv a^2h_{\mu\nu}$.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=22pt]
+\item[(G1)] \tP{} The Lagrangian \eqI{1} is invariant under $\phi\to\phi+\text{const}$, because $\phi$ enters only through its derivatives.
+\item[(G2)] \tP{} Background \eqI{2}, \eqI{9}:
+$ds^2=a^2(-d\eta^2+d\vec x^{\,2})=\dfrac{-d\eta^2+d\vec x^{\,2}}{H^2\eta^2}$.
+\item[(G3)] \tP{} Gauge-fixing term \eqI{15} (p.~124005-3):
+\begin{equation*}
+\chsevLGF=-\tfrac12a^{D-2}\eta^{\mu\nu}F_\mu F_\nu,\qquad
+F_\mu=\eta^{\rho\sigma}\Big(h_{\mu\rho,\sigma}-\tfrac12h_{\rho\sigma,\mu}+(D-2)Ha\,h_{\mu\rho}\delta^0_\sigma\Big).
+\end{equation*}
+\item[(G4)] \tP{} Metric expansion \eqI{3}: $g_{\mu\nu}=a^2(\eta_{\mu\nu}+\kappa h_{\mu\nu})$.
+\end{itemize}
+
+\begin{resultbox}[Summary of Task 14]
+\begin{itemize}[leftmargin=12pt]
+\item \textbf{\eqI{126}--\eqI{131}.} Dimension counting, the list of invariants, the shift symmetry $\phi\to\phi+\text{const}$, masslessness and the background equation $\hat R_{\mu\nu}=(D-1)H^2\hat g_{\mu\nu}$ together leave only two invariant counterterms:
+$(\square\phi)^2a^D$ and $H^2\partial\phi\cdot\partial\phi\,a^{D-2}$.
+The list \eqI{128} of the paper omits $\phi^2R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}$ and $\phi^2\square R$; both are excluded by the shift symmetry, so the result is unaffected (an omission without effect, counted as typographical error C14).
+The vertices \eqI{130}--\eqI{131} were already derived in Task~3.
+\item \textbf{The de Sitter group ($\tfrac12D(D+1)$ parameters).} The Killing equation was solved \emph{exactly} in conformal coordinates. The general solution is
+\begin{equation*}
+\xi^0=\eta\,(\lambda+2\vec b\cdot\vec x),\qquad \xi^i=c^i+\omega^i{}_jx^j+\lambda x^i+2(\vec b\cdot\vec x)x^i-(x\cdot x)\,b^i .
+\end{equation*}
+The four parameter sets give the four classes: $c$ ($D-1$), $\omega$ ($\tfrac12(D-1)(D-2)$), $\lambda$ (1) and $\vec b$ ($D-1$); in total $\tfrac12D(D+1)$.
+Their finite forms are exactly \eqI{132}--\eqI{135}. The algebra is $\mathfrak{so}(D,1)$, equal to the conformal algebra of $\mathbb R^{D-1}$.
+\item \textbf{The gauge condition.} $\chsevLGF=-\tfrac12\sqrt{-\hat g}\,\hat g^{\mu\nu}F_\mu F_\nu$, and $F_\mu=G_\mu+E_\mu$:
+$G_\mu$ is the covariant de Donder vector of the background, covariant under all isometries;
+$E_\mu=H(2\psi_{\mu\nu}u^\nu-u_\mu\psi)$ depends on the unit normal $u^\mu=\delta^\mu_0/a$, \ie on the equal-time slicing.
+Hence the gauge term is invariant precisely under the isometries that preserve $u$.
+Since $[\xi,u]=(0,\,2H\eta^2\vec b)$, these are (i)--(iii), while (iv) is broken.
+The breaking is real: $F\to F+\Delta$ with $\Delta_\mu=-(4h_{\mu i}b^i-2\delta^i_\mu b_ih)$, and the change of the action is not a boundary term.
+\end{itemize}
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\subsection{Invariant counterterms, Eqs.~(I.126)--(I.131)}
+
+\subsubsection{Dimension counting}
+\tD{}
+In $D=4$ one has $[\phi]=1$ and $[\kappa^2]=[16\pi G]=-2$ (mass dimensions).
+At one loop a counterterm is proportional to $\kappa^2\phi\phi$.
+Since a Lagrangian density has dimension 4, four units of mass remain.
+They can be explicit masses ($m$) or derivatives; a curvature counts as two derivatives.
+The possible structures are therefore $m^4$, $m^2\partial^2$ and $\partial^4$.
+
+This agrees with the paper's statement that the superficial degree of divergence is four:
+the vertices have the form $\kappa^nh^n\partial\phi\partial\phi$, each carrying two derivatives, just like the $\kappa^nh^n\partial h\partial h$ vertices of pure gravity.
+
+\subsubsection{List of invariants}
+\tD{}
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{0 derivatives:} $\kappa^2m^4\phi^2\sqrt{-g}$, which is \eqI{126}.
+\item \textbf{1 and 3 derivatives:} a parity-even scalar cannot be built by contracting an odd number of lower indices with $g^{\mu\nu}$.
+Terms containing the $\epsilon$ tensor vanish when contracted with the symmetric product $\partial_\mu\phi\,\partial_\nu\phi$ of two scalar gradients.
+Hence there are no such invariants. \checkmark
+\item \textbf{2 derivatives:} $\partial\phi\cdot\partial\phi$, $\phi\square\phi$ and $\phi^2R$.
+By partial integration $\phi\square\phi\simeq-\partial\phi\cdot\partial\phi$, which leaves \eqI{127}. \checkmark
+\item \textbf{4 derivatives:} the raw list is
+\begin{equation*}
+\begin{gathered}
+(\square\phi)^2,\quad \phi\,\square^2\phi,\quad \phi_{;\mu\nu}\phi^{;\mu\nu},\quad R\,\partial\phi\cdot\partial\phi,\quad R^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi,\quad R\,\phi\square\phi,\\
+\phi\,\partial\phi\cdot\partial R,\quad \phi^2\square R,\quad \phi^2R^2,\quad \phi^2R_{\mu\nu}R^{\mu\nu},\quad \phi^2R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}.
+\end{gathered}
+\end{equation*}
+Reductions ($\simeq$ denotes equality up to a total derivative):
+\begin{itemize}[leftmargin=14pt]
+\item $\phi\,\square^2\phi\simeq(\square\phi)^2$;
+\item $\phi\,\partial\phi\cdot\partial R=\tfrac12\partial(\phi^2)\cdot\partial R\simeq-\tfrac12\phi^2\square R$;
+\item $R\,\phi\square\phi=R\big(\tfrac12\square\phi^2-\partial\phi\cdot\partial\phi\big)\simeq\tfrac12\phi^2\square R-R\,\partial\phi\cdot\partial\phi$;
+\item the contracted Bianchi identity $\nabla^\mu R_{\mu\nu}=\tfrac12\partial_\nu R$;
+\item the commutator identity (verified by code, check (B) below)
+\begin{equation}
+\phi_{;\mu\nu}\phi^{;\mu\nu}=(\square\phi)^2-R_{\mu\nu}\phi^{;\mu}\phi^{;\nu}+\nabla_\mu\big(\phi^{;\nu}\phi_{;\nu}{}^{;\mu}-\phi^{;\mu}\square\phi\big).
+\label{eq:ch7-commutator}
+\end{equation}
+\end{itemize}
+What remains is
+$(\square\phi)^2$, $R\,\partial\phi\cdot\partial\phi$, $R^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$, $\phi^2R^2$, $\phi^2R_{\mu\nu}R^{\mu\nu}$, $\phi^2R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}$ and $\phi^2\square R$.
+\emph{Comparison with the paper:} \eqI{128} does not contain the last two.
+Both carry an undifferentiated $\phi$ and are therefore eliminated in the next step, so the result is unchanged.
+\end{itemize}
+
+\subsubsection{Eliminations}
+\tA{}\,\tD{} Three arguments shorten the list.
+\begin{enumerate}[leftmargin=18pt]
+\item \textbf{Shift symmetry.} \eqI{1} is invariant under $\phi\to\phi+\text{const}$, and dimensional regularization preserves this symmetry.
+Therefore the divergences and the counterterms respect it as well.
+Every term containing an undifferentiated $\phi$ is eliminated:
+\eqI{126}, $\phi^2R$, $\phi^2R^2$, $\phi^2R_{\mu\nu}R^{\mu\nu}$, $\phi^2R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}$ and $\phi^2\square R$.
+\item \textbf{Masslessness.} In dimensional regularization mass is renormalized multiplicatively; a massless scalar needs no counterterm of the type $m^2\partial\phi\partial\phi$.
+The only scale in the background is $H$, and it enters through the curvature.
+\item \textbf{Background equation.} $\hat R_{\mu\nu}=(D-1)H^2\hat g_{\mu\nu}$ and $\hat R=D(D-1)H^2$ (code check (A)).
+Hence
+\begin{equation*}
+R\,\partial\phi\cdot\partial\phi\,\sqrt{-g}\;\to\;D(D-1)H^2\,\partial\phi\cdot\partial\phi\,\sqrt{-\hat g},\qquad
+R^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi\,\sqrt{-g}\;\to\;(D-1)H^2\,\partial\phi\cdot\partial\phi\,\sqrt{-\hat g},
+\end{equation*}
+and the two terms become degenerate.
+(For the one-loop self-mass only the part quadratic in $\phi$ and without graviton legs is needed; this is why the metric can be set to its background value.)
+\end{enumerate}
+With $\sqrt{-\hat g}=a^D$ and $\sqrt{-\hat g}\,\hat g^{\mu\nu}=a^{D-2}\eta^{\mu\nu}$, two independent invariant counterterms remain:
+\begin{equation*}
+\tfrac12\alpha_1\kappa^2\,\square\phi\,\square\phi\,a^D\qquad\text{and}\qquad-\tfrac12\alpha_2\kappa^2H^2\,\partial_\mu\phi\,\partial^\mu\phi\,a^{D-2}.
+\tag{I.129}
+\end{equation*}
+
+\subsubsection{Vertices (I.130)--(I.131)}
+\tD{}
+These were derived in Task~3 with the rule ``vertex $=i\,\delta^2S/\delta\phi\,\delta\phi$''.
+The tool is Lemma~A of Task~3: for $F[\phi]=\int d^Dz\,K^{\mu\nu}(z)\,\partial_\mu\phi\,\partial_\nu\phi$,
+$\delta^2F/\delta\phi(x)\delta\phi(x')=-\partial_\mu\big[(K^{\mu\nu}+K^{\nu\mu})(x)\,\partial_\nu\delta^D(x-x')\big]$.
+\begin{itemize}[leftmargin=14pt]
+\item \eqI{130}: since $a^D\square=\partial_\mu(a^{D-2}\partial^\mu)$ is self-adjoint,
+$\delta^2\big[\tfrac12\alpha_1\kappa^2\!\int a^D(\square\phi)^2\big]=\alpha_1\kappa^2a^D\square^2\delta^D(x-x')$.
+\item \eqI{131}: by Lemma~A with $K^{\mu\nu}=-\tfrac12\alpha_2\kappa^2H^2a^{D-2}\eta^{\mu\nu}$,
+\begin{equation*}
+\delta^2\Big[-\tfrac12\alpha_2\kappa^2H^2\!\int a^{D-2}\partial\phi\cdot\partial\phi\Big]=\alpha_2\kappa^2H^2\,\partial_\mu\big(a^{D-2}\partial^\mu\delta^D\big)=\alpha_2\kappa^2H^2a^D\square\,\delta^D(x-x').
+\end{equation*}
+\end{itemize}
+Multiplying by $i$ gives exactly the printed \eqI{130} and \eqI{131}. \checkmark{}
+Both counterterms are de Sitter invariant.
+Had the gauge condition \eqI{15} been invariant, all divergences could have been absorbed by these two;
+since it is not, the residual symmetry has to be determined (Sections~\ref{ssec:ch7-killing}--\ref{ssec:ch7-gauge}).
+
+% ---------------------------------------------------------------------
+\subsection{de Sitter isometries: exact solution of the Killing equation}
+\label{ssec:ch7-killing}
+
+\subsubsection{The Killing equation in conformal coordinates}
+\tD{}
+We write $\chsevLie_\xi\hat g_{\mu\nu}=\xi^\lambda\partial_\lambda\hat g_{\mu\nu}+\hat g_{\lambda\nu}\partial_\mu\xi^\lambda+\hat g_{\mu\lambda}\partial_\nu\xi^\lambda$.
+With $\hat g_{\mu\nu}=a^2\eta_{\mu\nu}$ and $\partial_\lambda a^2=2a^2\,Ha\,\delta^0_\lambda=-2a^2\delta^0_\lambda/\eta$,
+the first term is $-2a^2(\xi^0/\eta)\eta_{\mu\nu}$, while the other two give $a^2(\partial_\mu\xi_\nu+\partial_\nu\xi_\mu)$ with flat lowering. Thus
+\begin{equation}
+\chsevLie_\xi\hat g_{\mu\nu}=a^2\Big[\partial_\mu\xi_\nu+\partial_\nu\xi_\mu-\frac{2\xi^0}{\eta}\,\eta_{\mu\nu}\Big]=0 .
+\label{eq:ch7-killing}
+\end{equation}
+In components (with $\xi_0=-\xi^0$, $\xi_i=\xi^i$):
+\begin{equation}
+(00):\ \partial_0\xi^0=\frac{\xi^0}{\eta};\qquad
+(0i):\ \partial_0\xi^i=\partial_i\xi^0;\qquad
+(ij):\ \partial_i\xi^j+\partial_j\xi^i=\frac{2\xi^0}{\eta}\,\delta_{ij}.
+\label{eq:ch7-killing-comp}
+\end{equation}
+(For $(00)$: $-2\partial_0\xi^0+2\xi^0/\eta=0$; for $(0i)$: $\partial_0\xi^i-\partial_i\xi^0=0$.)
+
+\subsubsection{Solution}
+\tD{} The system \eqref{eq:ch7-killing-comp} is solved in five steps.
+\begin{enumerate}[leftmargin=18pt]
+\item $(00)$: $\partial_0(\xi^0/\eta)=0$, hence $\xi^0=\eta\,f(\vec x)$.
+\item $(0i)$: $\partial_0\xi^i=\eta\,\partial_if$, hence $\xi^i=\tfrac12\eta^2\partial_if+g^i(\vec x)$.
+\item Insert into $(ij)$: $\eta^2\,\partial_i\partial_jf+\partial_ig^j+\partial_jg^i=2f\,\delta_{ij}$.
+$f$ and $g$ are independent of $\eta$, and the equation holds for every $\eta$.
+Therefore the coefficient of $\eta^2$ vanishes separately: $\partial_i\partial_jf=0$, \ie $f=\lambda+2\,\vec b\cdot\vec x$ with constants $\lambda$ and $\vec b$.
+\item The remaining equation is $\partial_ig^j+\partial_jg^i=2(\lambda+2\vec b\cdot\vec x)\delta_{ij}$. A particular solution is
+$g^i_{\rm p}=\lambda x^i+2(\vec b\cdot\vec x)x^i-\|\vec x\|^2b^i$.
+Check: $\partial_ig^j_{\rm p}=\lambda\delta_{ij}+2b_ix_j+2(\vec b\cdot\vec x)\delta_{ij}-2x_ib_j$; symmetrizing in $(ij)$ gives $2(\lambda+2\vec b\cdot\vec x)\delta_{ij}$. \checkmark
+\item The homogeneous part $k^i=g^i-g^i_{\rm p}$ satisfies the Killing equation of $\mathbb R^{D-1}$, $\partial_ik_j+\partial_jk_i=0$.
+The tensor $S_{kij}\equiv\partial_k\partial_ik_j$ is symmetric in its first two indices and antisymmetric in its last two. Hence
+\begin{equation*}
+S_{kij}=-S_{kji}=-S_{jki}=S_{jik}=S_{ijk}=-S_{ikj}=-S_{kij},
+\end{equation*}
+so $S=0$. Therefore $k$ is linear: $k^i=c^i+\omega^i{}_jx^j$ with $\omega_{ij}=-\omega_{ji}$.
+\end{enumerate}
+Collecting,
+\begin{equation}
+\boxed{\;\xi^0=\eta\,(\lambda+2\vec b\cdot\vec x),\qquad \xi^i=c^i+\omega^i{}_jx^j+\lambda x^i+2(\vec b\cdot\vec x)\,x^i-(x\cdot x)\,b^i\;}
+\label{eq:ch7-killing-sol}
+\end{equation}
+Here $\tfrac12\eta^2\partial_if=\eta^2b^i$ and $-\|\vec x\|^2b^i$ have combined into $-(x\cdot x)b^i$.
+Since the solution is general, there are no other Killing vectors.
+
+\subsubsection{Counting and the four classes}
+\tD{} Each parameter set in \eqref{eq:ch7-killing-sol} generates one class:
+\begin{center}
+\small
+\begin{tabular}{@{}llcl@{}}
+\toprule
+Parameter & Generator & Number & \PI\\
+\midrule
+$c^i$ & $P_i=\partial_i$ & $D-1$ & (i) spatial translations \eqI{132}\\
+$\omega_{ij}$ & $M_{ij}=x_i\partial_j-x_j\partial_i$ & $\tfrac12(D-1)(D-2)$ & (ii) rotations \eqI{133}\\
+$\lambda$ & $\mathcal D=\eta\partial_0+x^i\partial_i$ & $1$ & (iii) dilatation \eqI{134}\\
+$b^i$ & $K_i=2x_i(\eta\partial_0+x^j\partial_j)-(x\cdot x)\partial_i$ & $D-1$ & (iv) spatial special conformal \eqI{135}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{equation}
+(D-1)+\tfrac12(D-1)(D-2)+1+(D-1)=\tfrac12(D-1)(D+2)+1=\tfrac12D(D+1) .
+\label{eq:ch7-count}
+\end{equation}
+For $D=4$ this is $3+3+1+3=10$.
+The number agrees with $\dim SO(D,1)=\tfrac12(D+1)D$, which follows from embedding de Sitter space in $\mathbb R^{D,1}$ as the hyperboloid $-X_0^2+\sum_AX_A^2=H^{-2}$. \checkmark
+
+\subsubsection{Cross-check with the conformal Killing vectors of flat space}
+\tD{}
+Equation~\eqref{eq:ch7-killing} requires $\xi$ to be a conformal Killing vector of flat Minkowski space,
+$\partial_\mu\xi_\nu+\partial_\nu\xi_\mu=2\sigma\eta_{\mu\nu}$, with in addition $\sigma=\xi^0/\eta$.
+For $D\ge3$ the flat conformal algebra has dimension $\tfrac12(D+1)(D+2)$.
+For each generator, the quantity $\xi^0-\eta\sigma$ (which must vanish) is:
+\begin{itemize}[leftmargin=14pt]
+\item translation $a^\mu$: $\sigma=0$, value $a^0$;
+\item Lorentz transformation $\omega^\mu{}_\nu x^\nu$: $\sigma=0$, value $\omega^0{}_ix^i$;
+\item dilatation $\lambda x^\mu$: value $0$;
+\item special conformal transformation $2(b\cdot x)x^\mu-(x\cdot x)b^\mu$: $\sigma=2b\cdot x$, value $-(x\cdot x)b^0$.
+\end{itemize}
+This value vanishes everywhere for a linear combination iff $a^0=0$, $\omega^0{}_i=0$ and $b^0=0$.
+Thus time translation (1), the $D-1$ boosts and the temporal special conformal transformation (1) drop out:
+$\tfrac12(D+1)(D+2)-(D+1)=\tfrac12D(D+1)$. \checkmark
+
+\subsubsection{Finite transformations (I.132)--(I.135)}
+\tD{}
+\begin{itemize}[leftmargin=14pt]
+\item The flows of $c$, $\omega$ and $\lambda$ give \eqI{132}--\eqI{134}, with $k=e^\lambda>0$.
+$k$ must be positive; otherwise the patch $\eta<0$ is mapped to $\eta>0$ (the paper does not state this).
+Isometry check: in $ds^2=(-d\eta^2+d\vec x^{\,2})/(H^2\eta^2)$ a dilatation multiplies numerator and denominator by $k^2$. \checkmark
+\item \textbf{\eqI{135}.} A special conformal transformation is inversion $\circ$ translation $\circ$ inversion:
+$x\to x/(x\cdot x)\to x/(x\cdot x)-\theta\to$ inversion.
+Since $(x/x^2-\theta)^2=\Omega_s/x^2$, with $\Omega_s\equiv1-2\,\theta\cdot x+\theta^2\,x\cdot x$ (all products Minkowskian),
+\begin{equation}
+x'^\mu=\frac{x^\mu-\theta^\mu\,x\cdot x}{\Omega_s},\qquad dx'\cdot dx'=\frac{dx\cdot dx}{\Omega_s^2} .
+\label{eq:ch7-sct}
+\end{equation}
+The second equality is the product of the conformal factors of the two inversions, $(x^2)^{-2}$ and $(u^2)^{-2}=x^4/\Omega_s^2$, where $u=x/x^2-\theta$.
+For $\theta^0=0$ one has $\eta'=\eta/\Omega_s$ and $\theta\cdot x=\vec\theta\cdot\vec x$, $\theta^2=\|\vec\theta\|^2$; this is exactly \eqI{135}.
+Hence
+\begin{equation*}
+ds'^2=\frac{dx\cdot dx/\Omega_s^2}{H^2\eta^2/\Omega_s^2}=ds^2. \qquad\checkmark
+\end{equation*}
+\item For $\theta=s\vec b$, taking $d/ds|_{s=0}$ gives back the $b$-part of \eqref{eq:ch7-killing-sol} \checkmark{} (code check (E)).
+A choice $\theta^0\neq0$ produces an extra numerator term in $\eta'$ and is not an isometry; this is the condition $b^0=0$ found in the flat-space cross-check above.
+\end{itemize}
+
+\subsubsection{Algebra and interpretation}
+\tD{}
+The commutators (code check (I)) are
+\begin{equation}
+[\mathcal D,P_i]=-P_i,\quad[\mathcal D,K_i]=K_i,\quad[K_i,P_j]=-2(\delta_{ij}\mathcal D+M_{ij}),\quad[P_i,P_j]=[K_i,K_j]=0 .
+\label{eq:ch7-algebra}
+\end{equation}
+This is the conformal algebra of $\mathbb R^{D-1}$, isomorphic to $\mathfrak{so}(D,1)$.
+In the limit $\eta\to0$, \eqI{135} reduces to the Euclidean special conformal transformation of $\mathbb R^{D-1}$ (code check (E)).
+Together, (i)--(iii) form the similarity group of $\mathbb R^{D-1}$, of dimension $\tfrac12D(D-1)+1$; (iv) completes this subgroup to the full group.
+
+% ---------------------------------------------------------------------
+\subsection{The gauge condition (I.15): the first three symmetries are preserved, the fourth is broken}
+\label{ssec:ch7-gauge}
+
+\subsubsection{Transformation of the graviton}
+\tD{}
+From \eqI{3}, $\psi_{\mu\nu}\equiv a^2h_{\mu\nu}=(g_{\mu\nu}-\hat g_{\mu\nu})/\kappa$.
+A background isometry preserves $\hat g$, so $\psi$ transforms as a tensor.
+In infinitesimal (active) form, $\delta\psi_{\mu\nu}=\chsevLie_\xi\psi_{\mu\nu}$.
+The invariant Lagrangian (Einstein--Hilbert plus scalar) is diffeomorphism invariant; only $\chsevLGF$ can break the symmetry.
+
+\subsubsection{Covariant form}
+\tD{}
+Since $a^{D-2}\eta^{\mu\nu}=a^D\cdot a^{-2}\eta^{\mu\nu}=\sqrt{-\hat g}\,\hat g^{\mu\nu}$,
+\begin{equation}
+\chsevLGF=-\tfrac12\sqrt{-\hat g}\;\hat g^{\mu\nu}F_\mu F_\nu .
+\label{eq:ch7-LGF-cov}
+\end{equation}
+This density is invariant (up to a boundary term) if $F_\mu$ transforms as a covector.
+
+\subsubsection{\texorpdfstring{Decomposition of $F_\mu$}{Decomposition of F}}
+\tD{}
+From code check (A), $\hat\Gamma^\lambda_{\mu\nu}=Ha\big(\delta^\lambda_\mu\delta^0_\nu+\delta^\lambda_\nu\delta^0_\mu+\eta_{\mu\nu}\delta^\lambda_0\big)$.
+We compute the background de Donder vector
+$G_\mu\equiv\hat g^{\rho\sigma}\big(\hat\nabla_\sigma\psi_{\mu\rho}-\tfrac12\hat\nabla_\mu\psi_{\rho\sigma}\big)$.
+\begin{itemize}[leftmargin=14pt]
+\item $\partial_\sigma\psi_{\mu\rho}=a^2\big(\partial_\sigma h_{\mu\rho}+2Ha\,\delta^0_\sigma h_{\mu\rho}\big)$.
+\item The two Christoffel terms are
+\begin{equation*}
+\begin{aligned}
+\hat\Gamma^\lambda_{\sigma\mu}\psi_{\lambda\rho}&=a^2Ha\big(\delta^0_\mu h_{\sigma\rho}+\delta^0_\sigma h_{\mu\rho}+\eta_{\sigma\mu}h_{0\rho}\big),\\
+\hat\Gamma^\lambda_{\sigma\rho}\psi_{\mu\lambda}&=a^2Ha\big(\delta^0_\rho h_{\mu\sigma}+\delta^0_\sigma h_{\mu\rho}+\eta_{\sigma\rho}h_{\mu0}\big).
+\end{aligned}
+\end{equation*}
+Contracting with $\eta^{\rho\sigma}$ and using $\eta^{\rho\sigma}\delta^0_\sigma h_{\mu\rho}=-h_{\mu0}$ and $\eta^{\rho\sigma}\eta_{\sigma\rho}=D$:
+the $2Ha\,\delta^0_\sigma h_{\mu\rho}$ term of $\partial_\sigma\psi_{\mu\rho}$ gives $-2Ha\,h_{\mu0}$,
+and the Christoffel terms give $-Ha\big(\delta^0_\mu h-h_{\mu0}+h_{0\mu}-h_{\mu0}-h_{\mu0}+Dh_{\mu0}\big)=-Ha\,\delta^0_\mu h-(D-2)Ha\,h_{\mu0}$. Together:
+\begin{equation*}
+a^{-2}\eta^{\rho\sigma}\hat\nabla_\sigma\psi_{\mu\rho}=\eta^{\rho\sigma}\partial_\sigma h_{\mu\rho}-2Ha\,h_{\mu0}-Ha\,\delta^0_\mu h-(D-2)Ha\,h_{\mu0}
+=\eta^{\rho\sigma}\partial_\sigma h_{\mu\rho}-DHa\,h_{\mu0}-Ha\,\delta^0_\mu h .
+\end{equation*}
+\item For the trace: $\hat g^{\rho\sigma}\hat\nabla_\mu\psi_{\rho\sigma}=\partial_\mu(\hat g^{\rho\sigma}\psi_{\rho\sigma})=\partial_\mu h$, with $h\equiv\eta^{\rho\sigma}h_{\rho\sigma}$.
+\end{itemize}
+The result is $G_\mu=\eta^{\rho\sigma}\big(h_{\mu\rho,\sigma}-\tfrac12h_{\rho\sigma,\mu}\big)-DHa\,h_{\mu0}-Ha\,\delta^0_\mu h$.
+In \eqI{15}, $(D-2)Ha\,\eta^{\rho\sigma}h_{\mu\rho}\delta^0_\sigma=-(D-2)Ha\,h_{\mu0}$, so
+\begin{equation*}
+F_\mu-G_\mu=2Ha\,h_{\mu0}+Ha\,\delta^0_\mu h .
+\end{equation*}
+Define $u^\mu\equiv\delta^\mu_0/a$. It is the unit normal of the slices $\eta=\text{const}$: $u_\mu=-a\,\delta^0_\mu$, $u\cdot u=-1$.
+Then $2Ha\,h_{\mu0}=2H\psi_{\mu\nu}u^\nu$ and $Ha\,\delta^0_\mu h=-Hu_\mu\psi$, with $\psi\equiv\hat g^{\rho\sigma}\psi_{\rho\sigma}=h$:
+\begin{equation}
+\boxed{\;F_\mu=G_\mu+E_\mu,\qquad G_\mu=\hat g^{\rho\sigma}\big(\hat\nabla_\sigma\psi_{\mu\rho}-\tfrac12\hat\nabla_\mu\psi_{\rho\sigma}\big),\qquad E_\mu=H\big(2\psi_{\mu\nu}u^\nu-u_\mu\psi\big)\;}
+\label{eq:ch7-FGE}
+\end{equation}
+$G_\mu$ is built covariantly from $\psi$ and $\hat g$ alone.
+All of $E_\mu$, \ie the part that breaks de Sitter invariance, enters through the vector field $u^\mu$
+(verified component by component in code check (F)).
+
+\subsubsection{Transformation law}
+\tD{}
+Since $\chsevLie_\xi\hat g=0$, $\delta G=\chsevLie_\xi G$.
+For $E$ we use $\chsevLie_\xi(\psi_{\mu\nu}u^\nu)=(\chsevLie_\xi\psi)_{\mu\nu}u^\nu+\psi_{\mu\nu}(\chsevLie_\xi u)^\nu$ and $(\chsevLie_\xi u)_\mu=\hat g_{\mu\nu}(\chsevLie_\xi u)^\nu$. This gives
+\begin{equation}
+\delta F_\mu=\chsevLie_\xi F_\mu+\Delta_\mu,\qquad \Delta_\mu=-H\big(2\psi_{\mu\nu}w^\nu-w_\mu\psi\big),\qquad w\equiv\chsevLie_\xi u=[\xi,u].
+\label{eq:ch7-deltaF}
+\end{equation}
+Now $\delta\chsevLGF=-\sqrt{-\hat g}\,\hat g^{\mu\nu}F_\mu\,\delta F_\nu$.
+For a Killing vector $\xi$, $\nabla\cdot\xi=0$, so $\chsevLie_\xi(\sqrt{-\hat g}\,S)=\partial_\lambda(\xi^\lambda\sqrt{-\hat g}\,S)$ for any scalar $S$. Hence
+\begin{equation}
+\delta\chsevLGF=\partial_\lambda\big(\xi^\lambda\chsevLGF\big)-\sqrt{-\hat g}\,\hat g^{\mu\nu}F_\mu\Delta_\nu .
+\label{eq:ch7-deltaL}
+\end{equation}
+So an isometry is a symmetry of the gauge-fixing term $\Longleftrightarrow$ $\Delta=0$ $\Longleftrightarrow$ $[\xi,u]=0$, \ie the isometries that preserve $u$.
+
+\subsubsection{\texorpdfstring{Computation of $[\xi,u]$}{Computation of [xi,u]}}
+\tD{}
+With $u^\mu=-H\eta\,\delta^\mu_0$,
+$[\xi,u]^\mu=\xi^\nu\partial_\nu u^\mu-u^\nu\partial_\nu\xi^\mu=-H\big(\xi^0\delta^\mu_0-\eta\,\partial_0\xi^\mu\big)$.
+Inserting \eqref{eq:ch7-killing-sol}:
+\begin{itemize}[leftmargin=14pt]
+\item $\mu=0$: $-H(\xi^0-\eta\partial_0\xi^0)=-H(\eta f-\eta f)=0$. \checkmark
+\item $\mu=i$: $H\eta\,\partial_0\xi^i$. The only $\eta$-dependent term in \eqref{eq:ch7-killing-sol} is $-(x\cdot x)b^i=-(\|\vec x\|^2-\eta^2)b^i$, so $\partial_0\xi^i=2\eta b^i$.
+\end{itemize}
+\begin{equation}
+\boxed{\;[\xi,u]=\big(0,\;2H\eta^2\,\vec b\,\big)\;}
+\label{eq:ch7-xiu}
+\end{equation}
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Class & $[\xi,u]$ & $\chsevLGF$\\
+\midrule
+(i) translation $c$ & $0$ & invariant \checkmark\\
+(ii) rotation $\omega$ & $0$ & invariant \checkmark\\
+(iii) dilatation $\lambda$ & $0$ & invariant \checkmark\\
+(iv) spatial special conformal $\vec b$ & $(0,2H\eta^2\vec b)\neq0$ & \textbf{broken}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\paragraph{Intuition.}
+$u$ is the unit normal of the equal-time slices.
+(i)--(iii) map these slices into themselves and the normal into itself; for a dilatation, for example, $u'^\mu(x')=k\,u^\mu(x)=-Hk\eta\,\delta^\mu_0=u^\mu(x')$.
+(iv) instead bends the slices: since $\eta'=\eta/\Omega_s$, the equal-time surfaces are shifted in an $\vec x$-dependent way.
+
+\subsubsection{Explicit form of the breaking, and why it is real}
+\tD{}
+Insert \eqref{eq:ch7-xiu} into \eqref{eq:ch7-deltaF}.
+With $\psi_{\mu\nu}w^\nu=a^2h_{\mu i}\cdot2H\eta^2b^i$, $w_\mu=\hat g_{\mu\nu}w^\nu=2Ha^2\eta^2\,\delta^i_\mu b_i$ and $a^2\eta^2H^2=1$:
+\begin{equation}
+\Delta_\mu=-\big(4\,h_{\mu i}b^i-2\,\delta^i_\mu b_i\,h\big).
+\label{eq:ch7-Delta}
+\end{equation}
+$H$ cancels. This difference is real in two senses:
+\begin{enumerate}[leftmargin=18pt]
+\item \textbf{The gauge condition is not preserved.} On the surface $F_\mu=0$ one has $\delta F_\mu=\Delta_\mu\neq0$ (for generic $h$).
+A spatial special conformal transformation maps a configuration satisfying the gauge condition to one that does not.
+\item \textbf{The action changes.} $\delta S_{\rm GF}=-\int\sqrt{-\hat g}\,\hat g^{\mu\nu}F_\mu\Delta_\nu$ (plus a boundary term).
+A boundary term must have identically vanishing Euler--Lagrange derivative.
+In code check (H) the Euler--Lagrange derivatives of this density with respect to $h_{00}$ and $h_{12}$ were found to be nonzero in $D=3$. Hence $\delta S_{\rm GF}\neq0$.
+\end{enumerate}
+For (i)--(iii), on the other hand, a direct symbolic computation in $D=3$ gives $\delta\chsevLGF-\partial_\lambda(\xi^\lambda\chsevLGF)=0$ (code check (H)).
+
+\begin{notebox}[Scope note \tA]
+This proof addresses the property used by the paper, namely the symmetry of the gauge-fixing functional.
+The $k\ln(aa')$ term of the scalar propagator shifts by a constant under a dilatation ($a\to a/k$).
+This does not come from the gauge functional; it comes from the infrared state of the massless minimally coupled scalar (the A-type modes).
+A constant drops out under any derivative; the ultraviolet divergences, and hence the constraints on the counterterms, are not affected by it.
+\end{notebox}
+
+% ---------------------------------------------------------------------
+\subsection{Comparison with the paper}
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.55\textwidth}l@{}}
+\toprule
+Item & Result & \\
+\midrule
+\eqI{126}--\eqI{127} & dimension counting and invariants derived & \checkmark\\
+\eqI{128} & $\phi^2R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}$ and $\phi^2\square R$ are missing from the list (an omission, typographical error C14); no effect, since both are excluded by the shift symmetry & \checkmark{} (C14)\\
+\eqI{129}--\eqI{131} & derived (vertex rule as in Task~3) & \checkmark\\
+$\tfrac12D(D+1)$ and the four classes & exact solution \eqref{eq:ch7-killing-sol} of the Killing equation, counting \eqref{eq:ch7-count} & \checkmark\\
+\eqI{132}--\eqI{134} & isometries; in \eqI{134} one needs $k>0$ & \checkmark{} (remark)\\
+\eqI{135} & isometry; $x\cdot x$ must be read as $\|\vec x\|^2-\eta^2$ & \checkmark\\
+``the gauge breaks only \eqI{135}'' & proof: \eqref{eq:ch7-FGE}, \eqref{eq:ch7-deltaL}, \eqref{eq:ch7-xiu}, \eqref{eq:ch7-Delta} & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Connection to the next step}
+On p.~124005-12 the paper uses the residual symmetries as follows:
+\begin{itemize}[leftmargin=14pt]
+\item translations: no explicit dependence on $x^i$;
+\item rotations: spatial indices are contracted with each other;
+\item dilatation: $\eta$ and the derivatives enter only in the combination $a^{-1}\partial_\mu$.
+\end{itemize}
+These constraints determine the noninvariant counterterms \eqI{136}--\eqI{144} (Task~15). The table after \eqref{eq:ch7-xiu} is the precise justification for this use.
+
+% ---------------------------------------------------------------------
+\subsection{Code checks}
+\tC{}
+Script (SymPy, about 10\,s):
+\begin{center}\texttt{code/07\_desitter\_counterterms/check\_126\_135.py}\end{center}
+The checks below were actually run; they supplement the analytic derivation and do not replace it.
+Expected output: \texttt{expected\_output/}\allowbreak\texttt{check\_126\_135.txt} in the same folder; it is identical to the output recorded in the original task.
+\begin{itemize}[leftmargin=26pt]
+\item[(A)] $D=4,5$: the Christoffel formula; $R_{\mu\nu}=(D-1)H^2\hat g_{\mu\nu}$; $R=12H^2$ and $20H^2$. All \texttt{True}.
+\item[(B)] The commutator identity \eqref{eq:ch7-commutator} in de Sitter space ($D=4$) with a generic $\phi$: holds.
+\item[(C)] $D=4$: the maps \eqI{132}--\eqI{135} preserve the metric; time translation does not (contrast test prints \texttt{False}, as it should).
+\item[(D)] \eqref{eq:ch7-killing-sol} satisfies the Killing equation for $D=3,4,5$, with $6,10,15$ parameters.
+Time translation, a boost and the temporal special conformal transformation fail.
+With a polynomial ansatz of degree $\le3$ the dimension of the solution space is 6 for $D=3$ and 10 for $D=4$.
+\item[(E)] The infinitesimal limit of \eqI{135} is the $b$-part of \eqref{eq:ch7-killing-sol}; for $\eta\to0$ the Euclidean special conformal transformation of $\mathbb R^{D-1}$ is obtained.
+\item[(F)] $F_\mu=G_\mu+E_\mu$ holds component by component in $D=4$ with a generic $h_{\mu\nu}$; $a^{D-2}\eta^{\mu\nu}=\sqrt{-\hat g}\,\hat g^{\mu\nu}$.
+\item[(G)] $D=4$: $[\xi,u]=(0,2H\eta^2\vec b)$ for the general Killing vector.
+\item[(H)] $D=3$, generic $h_{\mu\nu}(\eta,x_1,x_2)$:
+for translation, rotation and dilatation $\delta\chsevLGF-\partial(\xi\chsevLGF)=0$;
+for the spatial special conformal transformation the difference equals $-a^{D-2}\eta^{\mu\nu}F_\mu\Delta_\nu$, in agreement with \eqref{eq:ch7-Delta}, and its Euler--Lagrange derivatives with respect to $h_{00}$ and $h_{12}$ are nonzero.
+\item[(I)] $D=4$: the commutators \eqref{eq:ch7-algebra} ($[\mathcal D,P_1]=-P_1$, $[\mathcal D,K_1]=K_1$, $[K_1,P_1]=-2\mathcal D$, $[K_1,P_2]=-2M_{12}$, $[K_1,K_2]=[P_1,P_2]=0$), and in addition $[M_{12},K_1]=-K_2$, $[M_{12},P_1]=-P_2$.
+\end{itemize}
+
+\subsection{Calculation record}
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{Derived.} Dimension counting and the list of invariants; the commutator identity \eqref{eq:ch7-commutator}; the eliminations and \eqI{129}; the vertices \eqI{130}--\eqI{131};
+the Killing equation \eqref{eq:ch7-killing}--\eqref{eq:ch7-killing-comp}, its exact solution \eqref{eq:ch7-killing-sol}, the counting \eqref{eq:ch7-count}, the flat conformal cross-check, the finite transformations and the isometry proof of \eqI{135} \eqref{eq:ch7-sct}, the algebra \eqref{eq:ch7-algebra};
+the covariant form \eqref{eq:ch7-LGF-cov} of $\chsevLGF$, the decomposition \eqref{eq:ch7-FGE}, the transformation law \eqref{eq:ch7-deltaF}--\eqref{eq:ch7-deltaL}, $[\xi,u]$ \eqref{eq:ch7-xiu} and the breaking term \eqref{eq:ch7-Delta}.
+\item \textbf{Checks passed.} (A)--(I), all actually run.
+\item \textbf{Discrepancies.} None that affects a result.
+Omission without effect: two terms missing from \eqI{128} (recorded in the report as a remark; typographical error C14 in Chapter~\ref{ch:summary}).
+Remarks: $k>0$ in \eqI{134}; in \eqI{135} $x\cdot x$ is the Minkowski product.
+\end{itemize}
+
+% =====================================================================
+\section{Task 15: noninvariant counterterms, Eqs.~(I.136)--(I.145)}
+\label{sec:ch7-task15}
+
+\subsection{Goal, inputs and notation}
+
+\paragraph{Goal.}
+Derive \eqI{136}--\eqI{145} (p.~124005-12 of \PI): the reductions that remove $\partial_0^2$ and $(\partial_0\varphi)^2$,
+the partial integrations \eqI{138}--\eqI{143}, the claim that only three noninvariant counterterms \eqI{144} are possible, the flat-space argument that keeps only the last of them, its vertex \eqI{145}, and the two statements that follow \eqI{145}.
+
+\paragraph{Notation.}
+$a=-1/(H\eta)$, $\partial_0a=Ha^2$, hence $\partial_0a^p=pHa^{p+1}$ and $\partial_0(a^{-1})=-H$.
+$\partial^\mu\equiv\eta^{\mu\nu}\partial_\nu$.
+$\simeq$ means equal up to a total derivative (equivalent at the level of the action).
+Following the paper, the scalar is written $\varphi$ in this part.
+
+\paragraph{Basis.}
+We use the five densities
+\begin{equation}
+\begin{aligned}
+B_1&\equiv a^D(\square\varphi)^2, &
+B_2&\equiv H^2a^{D-2}\eta^{\mu\nu}\partial_\mu\varphi\,\partial_\nu\varphi=H^2\partial_\mu\varphi\,\partial_\nu\varphi\,g^{\mu\nu}\sqrt{-g},\\
+B_3&\equiv a^{D-2}\,\square\varphi\,\nabla^2\varphi, &
+B_4&\equiv a^{D-4}(\nabla^2\varphi)^2, \qquad
+B_5\equiv H^2a^{D-2}\,\nabla\varphi\cdot\nabla\varphi .
+\end{aligned}
+\label{eq:ch7-basis}
+\end{equation}
+$B_1$ and $B_2$ are de Sitter invariant; $B_3$, $B_4$ and $B_5$ are not.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=22pt]
+\item[(G1)] \tP{} $\square$ from \eqI{42} and \eqI{90}: $a^D\square=\partial_\mu(a^{D-2}\partial^\mu)$, $\square=a^{-2}\big[-\partial_0^2-(D-2)Ha\,\partial_0+\nabla^2\big]$.
+\item[(G2)] \tD{} The invariant counterterms \eqI{129}--\eqI{131} (Task~14).
+\item[(G3)] \tD{} The residual symmetries (i)--(iii) of the gauge condition (Task~14): spatial translations, rotations, dilatation.
+\item[(G4)] Shift symmetry $\varphi\to\varphi+\text{const}$; dimension counting: $\kappa^2\varphi\varphi$ times four extra mass units (Task~14).
+\end{itemize}
+
+\begin{resultbox}[Summary of Task 15]
+\begin{itemize}[leftmargin=12pt]
+\item \eqI{136}--\eqI{143} derived. In every ``$\to$'' step the discarded total derivative is written out explicitly.
+\item \textbf{Completeness.} All local terms quadratic in $\varphi$ that respect the residual symmetries (translations, rotations, dilatation), the shift symmetry and the dimension counting fall, up to total derivatives, into a five-dimensional space: $\mathrm{span}\{B_1,\ldots,B_5\}$.
+After removing the invariant terms ($B_1$, $B_2$) the noninvariant part is exactly three-dimensional, as in \eqI{144}.
+General-$D$ reduction formulas were derived for eleven candidate terms (Table~\ref{tab:ch7-reductions}); the code verified the reduction of all fifteen candidates at $D=4,5,6$ (see the note in Section~\ref{ssec:ch7-t15-code}).
+\item \textbf{Flat-space limit.} The coefficients of $B_3$ and $B_4$ are dimensionless numbers and cannot vanish as $H\to0$.
+Since the gauge condition is Poincar\'e invariant in that limit, these two terms are forbidden. $B_5\propto H^2$ remains.
+\item \textbf{\eqI{145}:} $-\tfrac12\alpha_3\kappa^2H^2a^{D-2}\nabla\varphi\cdot\nabla\varphi\to i\alpha_3\kappa^2H^2a^{D-2}\nabla^2\delta^D$. \checkmark{} No discrepancy with the paper.
+\end{itemize}
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\subsection{The constraint imposed on the counterterms by the residual symmetries}
+\label{ssec:ch7-constraint}
+\tD{}\,\tA{} The argument rests on one assumption.
+\paragraph{Assumption.}
+Dimensional regularization preserves the symmetries of the gauge-fixed action.
+Therefore the ultraviolet divergences and the counterterms respect (i)--(iii).
+
+\paragraph{Proposition.}
+Such a counterterm density has the form
+\begin{equation}
+\chsevct=\kappa^2a^D\,Q\big(a^{-1}\partial_0,\;a^{-1}\partial_i,\;H\big)[\varphi,\varphi],
+\label{eq:ch7-ctform}
+\end{equation}
+where $Q$ is a rotation-invariant polynomial of total ``weight'' 4, quadratic in the two $\varphi$'s, in which each $\varphi$ is differentiated at least once.
+
+\paragraph{Proof.}
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{Translations.} There can be no explicit dependence on $x^i$.
+\item \textbf{Rotations.} Spatial indices are contracted with $\delta_{ij}$. In a parity-even structure, $\epsilon_{ijk}$ gives zero when contracted with the symmetric product of derivatives of two scalars.
+\item \textbf{Dilatation.} Under $\eta\to k\eta$, $\vec x\to k\vec x$: $d^Dx\to k^Dd^Dx$, $a\to a/k$, $\partial_\mu\to k^{-1}\partial_\mu$; $\varphi$ is a scalar and $H$ is a constant.
+Invariance of the action requires $\chsevct\to k^{-D}\chsevct$.
+The invariant building blocks are $a^{-1}\partial_\mu$ and $H$.
+$\eta$ itself enters only through $a$, as $\eta=-1/(Ha)$; there is no invariant function of $\eta$ alone.
+The measure factor becomes $a^D$.
+\item \textbf{Dimension.} Each $a^{-1}\partial$ and each $H$ carries one unit of mass. The total must be 4.
+\end{itemize}
+The distributions of derivatives $(n_1,n_2;\,H^m)$ with $n_1+n_2+m=4$ and $n_1,n_2\ge1$ are:
+\begin{itemize}[leftmargin=14pt]
+\item $H^0$: $(1,3)$, $(2,2)$, $(3,1)$;
+\item $H^1$: $(1,2)$, $(2,1)$;
+\item $H^2$: $(1,1)$.
+\end{itemize}
+The ordering of the factors $a^{-1}$ relative to the derivatives only produces subleading terms with $H$; for example
+$a^{-1}\partial_0(a^{-1}\partial_0\varphi)=a^{-2}\partial_0^2\varphi-Ha^{-1}\partial_0\varphi$.
+Therefore the candidate list of Section~\ref{ssec:ch7-complete} scans the whole space.
+
+% ---------------------------------------------------------------------
+\subsection{Equations (I.136)--(I.137)}
+\tD{}
+Solving \eqI{90} for $a^{-2}\partial_0^2$:
+\begin{equation*}
+\frac{1}{a^2}\partial_0^2=-\square-(D-2)\frac{H}{a}\partial_0+\frac{\nabla^2}{a^2}.
+\tag{I.136}
+\end{equation*}
+This writes every $(a^{-1}\partial_0)^2$ in \eqref{eq:ch7-ctform} in terms of a $\square$, a single $a^{-1}\partial_0$ and $a^{-2}\nabla^2$.
+With $g^{\mu\nu}=a^{-2}\eta^{\mu\nu}$ one has $\partial_\mu\varphi\,\partial_\nu\varphi\,g^{\mu\nu}=a^{-2}\big[-(\partial_0\varphi)^2+\nabla\varphi\cdot\nabla\varphi\big]$, hence
+\begin{equation*}
+\frac{(\partial_0\varphi)^2}{a^2}=-\partial_\mu\varphi\,\partial_\nu\varphi\,g^{\mu\nu}+\frac{1}{a^2}\nabla\varphi\cdot\nabla\varphi .
+\tag{I.137}
+\end{equation*}
+Multiplying by $H^2a^D$: $H^2a^{D-2}(\partial_0\varphi)^2=-B_2+B_5$.
+
+% ---------------------------------------------------------------------
+\subsection{Equations (I.138)--(I.143)}
+
+\subsubsection{\texorpdfstring{The term $Ha^{D-1}\partial_0\varphi\,\square\varphi$}{The term H a**(D-1) d0 phi Box phi}}
+\tD{}
+By \eqI{42}, $Ha^{D-1}\partial_0\varphi\,\square\varphi=Ha^{-1}\partial_0\varphi\;\partial_\mu(a^{D-2}\partial^\mu\varphi)$.
+We move $\partial_\mu$ by partial integration; the discarded current is
+\begin{equation*}
+J^\mu=Ha^{D-3}\,\partial_0\varphi\,\partial^\mu\varphi .
+\end{equation*}
+Using $\partial_\mu(a^{-1})=-H\delta^0_\mu$ and $\partial^0=-\partial_0$:
+\begin{equation*}
+\begin{aligned}
+Ha^{D-1}\partial_0\varphi\,\square\varphi&\simeq-Ha^{D-3}\partial_\mu\partial_0\varphi\,\partial_\nu\varphi\,\eta^{\mu\nu}+H^2a^{D-2}\partial_0\varphi\,\partial^0\varphi\\
+&=-Ha^{D-3}\partial_\mu\partial_0\varphi\,\partial_\nu\varphi\,\eta^{\mu\nu}-H^2a^{D-2}(\partial_0\varphi)^2 .
+\end{aligned}
+\tag{I.138}
+\end{equation*}
+\textbf{(I.139).} Write $\partial_\mu\partial_0\varphi\,\partial^\mu\varphi=\tfrac12\partial_0(\partial_\mu\varphi\,\partial^\mu\varphi)$ and apply \eqI{137} to the second term. The result is an exact equality:
+\begin{equation*}
+\begin{aligned}
+&=-\tfrac12Ha^{D-3}\partial_0(\partial_\mu\varphi\,\partial_\nu\varphi)\eta^{\mu\nu}+H^2\partial_\mu\varphi\,\partial_\nu\varphi\,g^{\mu\nu}\sqrt{-g}\\
+&\quad-H^2a^{D-2}\nabla\varphi\cdot\nabla\varphi .
+\end{aligned}
+\tag{I.139}
+\end{equation*}
+\textbf{(I.140).} The first term is integrated by parts in time. The discarded term is
+\begin{equation*}
+\partial_0\Big(-\tfrac12Ha^{D-3}\eta^{\mu\nu}\partial_\mu\varphi\,\partial_\nu\varphi\Big),
+\end{equation*}
+and with $\partial_0a^{D-3}=(D-3)Ha^{D-2}$ one obtains
+\begin{equation*}
+\begin{aligned}
+&\to\tfrac12(D-3)H^2a^{D-2}\eta^{\mu\nu}\partial_\mu\varphi\,\partial_\nu\varphi+\ldots\\
+&=\tfrac12(D-1)H^2\partial_\mu\varphi\,\partial_\nu\varphi\,g^{\mu\nu}\sqrt{-g}-H^2a^{D-2}\nabla\varphi\cdot\nabla\varphi .
+\end{aligned}
+\tag{I.140}
+\end{equation*}
+In terms of the basis: $Ha^{D-1}\partial_0\varphi\,\square\varphi\simeq\tfrac12(D-1)B_2-B_5$.
+
+\subsubsection{\texorpdfstring{The term $Ha^{D-3}\partial_0\varphi\,\nabla^2\varphi$}{The term H a**(D-3) d0 phi Lap phi}}
+\tD{}
+Partial integration in space, with discarded current $J^i=Ha^{D-3}\partial_0\varphi\,\partial_i\varphi$, then in time:
+\begin{align*}
+Ha^{D-3}\partial_0\varphi\,\nabla^2\varphi&\to-Ha^{D-3}\partial_0\nabla\varphi\cdot\nabla\varphi \tag{I.141}\\
+&=-\tfrac12Ha^{D-3}\partial_0(\nabla\varphi\cdot\nabla\varphi) \tag{I.142}\\
+&\to\tfrac12(D-3)H^2a^{D-2}\nabla\varphi\cdot\nabla\varphi . \tag{I.143}
+\end{align*}
+In the last step the discarded term is $\partial_0\big(-\tfrac12Ha^{D-3}\nabla\varphi\cdot\nabla\varphi\big)$.
+Result: $Ha^{D-3}\partial_0\varphi\,\nabla^2\varphi\simeq\tfrac12(D-3)B_5$.
+
+% ---------------------------------------------------------------------
+\subsection{Completeness: only three noninvariant counterterms}
+\label{ssec:ch7-complete}
+\tD{}
+All candidate structures of \eqref{eq:ch7-ctform} are reduced to the basis \eqref{eq:ch7-basis} with the tools of the two previous subsections and with spatial partial integration.
+In general $D$ (each entry multiplied by $\kappa^2$):
+\begin{table}[ht]
+\centering
+\small
+\caption{Reduction of the admissible candidate densities to the basis \eqref{eq:ch7-basis}, in general $D$ (all equalities up to total derivatives).}
+\label{tab:ch7-reductions}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}ll>{\raggedright\arraybackslash}p{2.9cm}@{}}
+\toprule
+Candidate ($\times\kappa^2$) & Reduction ($\simeq$) & Source\\
+\midrule
+$a^D(a^{-2}\partial_0^2\varphi)^2$ & $B_1-2B_3+B_4+(D-2)(B_2-B_5)$ & \eqI{136}; then \eqI{137}, \eqI{140}, \eqI{143}\\
+$a^D(a^{-2}\partial_0^2\varphi)(a^{-2}\nabla^2\varphi)$ & $-B_3+B_4-\tfrac12(D-2)(D-3)B_5$ & \eqI{136}, \eqI{143}\\
+$a^{D-4}(\nabla^2\varphi)^2$ & $B_4$ & ---\\
+$a^{D-4}(\partial_0\partial_i\varphi)^2$ & $-B_3+B_4-(D-3)B_5$ & partial int.\ in $\partial_i$, then $\partial_0$\\
+$a^{D-4}(\partial_i\partial_j\varphi)^2$ & $B_4$ & partial int.\ in $\partial_i$ twice\\
+$a^{D-4}\partial_0\varphi\,\partial_0^3\varphi$ & $-B_1+2B_3-B_4-\big[(D-2)+\tfrac12(D-3)(D-4)\big](B_2-B_5)$ & partial int.\ in $\partial_0$\\
+$Ha^{D-3}\partial_0\varphi\,\partial_0^2\varphi$ & $\tfrac12(D-3)(B_2-B_5)$ & $\tfrac12\partial_0(\partial_0\varphi)^2$, \eqI{137}\\
+$Ha^{D-3}\partial_0\varphi\,\nabla^2\varphi$ & $\tfrac12(D-3)B_5$ & \eqI{141}--\eqI{143}\\
+$Ha^{D-3}\partial_i\varphi\,\partial_0\partial_i\varphi$ & $-\tfrac12(D-3)B_5$ & $\tfrac12\partial_0(\nabla\varphi)^2$\\
+$Ha^{D-1}\partial_0\varphi\,\square\varphi$ & $\tfrac12(D-1)B_2-B_5$ & \eqI{138}--\eqI{140}\\
+$H^2a^{D-2}(\partial_0\varphi)^2$ & $-B_2+B_5$ & \eqI{137}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Example: the first row.}
+By \eqI{136}, $a^{-2}\partial_0^2\varphi=-\square\varphi-(D-2)Ha^{-1}\partial_0\varphi+a^{-2}\nabla^2\varphi$. Squaring and multiplying by $a^D$:
+\begin{equation*}
+\begin{aligned}
+a^D(\ldots)^2&=B_1+(D-2)^2H^2a^{D-2}(\partial_0\varphi)^2+B_4+2(D-2)Ha^{D-1}\partial_0\varphi\,\square\varphi\\
+&\quad-2B_3-2(D-2)Ha^{D-3}\partial_0\varphi\,\nabla^2\varphi .
+\end{aligned}
+\end{equation*}
+Reducing the rows one at a time (with the last two rows of Table~\ref{tab:ch7-reductions} and with \eqI{143}):
+\begin{itemize}[leftmargin=14pt]
+\item coefficient of $B_2$: $-(D-2)^2+(D-2)(D-1)=D-2$;
+\item coefficient of $B_5$: $(D-2)^2-2(D-2)-(D-2)(D-3)=-(D-2)$.
+\end{itemize}
+This is the first row of the table.
+
+\begin{resultbox}[Result: the noninvariant counterterms]
+Up to total derivatives, the space of allowed counterterms is $\mathrm{span}\{B_1,\ldots,B_5\}$.
+The five terms are independent, because their Euler--Lagrange operators are linearly independent (code check at $D=4,5,6$ in Section~\ref{ssec:ch7-t15-code}).
+$B_1$ and $B_2$ are the invariant counterterms of \eqI{129}. Three noninvariant terms remain:
+\begin{equation*}
+\tfrac12\kappa^2a^{D-2}\,\square\varphi\,\nabla^2\varphi,\qquad \tfrac12\kappa^2a^{D-4}\,\nabla^2\varphi\,\nabla^2\varphi,\qquad -\tfrac12\kappa^2H^2a^{D-2}\,\nabla\varphi\cdot\nabla\varphi .
+\tag{I.144}
+\end{equation*}
+This is identical to \eqI{144} of the paper. \checkmark{}
+The normalizations ($\pm\tfrac12$) are a choice and are absorbed into the free coefficients.
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\subsection{Flat-space limit: only the third term}
+\tD{}\,\tA{}
+Take $H\to0$ at fixed comoving time $t$: $a=e^{Ht}\to1$, $a^{-1}\partial_\eta=\partial_t$ and $a^{-1}\nabla\to\nabla$.
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{Gauge condition.} In \eqI{15}, $(D-2)Ha\,h_{\mu\rho}\delta^0_\sigma\to0$, and $F_\mu$ tends to the flat-space de Donder vector.
+The gauge-fixed theory becomes Poincar\'e invariant.
+In the language of Task~14: $E_\mu=H(2\psi_{\mu\nu}u^\nu-u_\mu\psi)\to0$.
+\item \textbf{Assumption} \tA. In dimensional regularization the dependence of the ultraviolet divergences on $H$ is polynomial.
+At $H=0$ the divergences are Poincar\'e invariant. Therefore the coefficients of the noninvariant counterterms must vanish as $H\to0$.
+\item $B_3$ and $B_4$ carry four derivatives. By dimension counting their coefficients are dimensionless numbers (apart from $\kappa^2$) and cannot contain $H$.
+As $H\to0$, $B_3\to(-\partial_t^2+\nabla^2)\varphi\,\nabla^2\varphi$ and $B_4\to(\nabla^2\varphi)^2$, which are not Poincar\'e invariant. Hence their coefficients are zero.
+\item $B_5=H^2a^{D-2}\nabla\varphi\cdot\nabla\varphi\to0$, so it is allowed.
+\end{itemize}
+Consequently, the only noninvariant counterterm is the last term of \eqI{144}. \checkmark
+
+% ---------------------------------------------------------------------
+\subsection{Equation (I.145): the vertex}
+\tD{}
+First, $-\tfrac12\alpha_3\kappa^2H^2a^D\big(\tfrac{\nabla}{a}\varphi\big)\cdot\big(\tfrac{\nabla}{a}\varphi\big)=-\tfrac12\alpha_3\kappa^2H^2a^{D-2}\nabla\varphi\cdot\nabla\varphi$.
+We apply Lemma~A of Task~3 with the purely spatial kernel $K^{ij}=-\tfrac12\alpha_3\kappa^2H^2a^{D-2}\delta^{ij}$; $a$ does not depend on $x^i$:
+\begin{equation*}
+\frac{\delta^2S}{\delta\varphi(x)\,\delta\varphi(x')}=-\partial_i\Big[(K+K^T)^{ij}\,\partial_j\delta^D(x-x')\Big]=\alpha_3\kappa^2H^2a^{D-2}\,\nabla^2\delta^D(x-x') .
+\end{equation*}
+\begin{equation*}
+\boxed{\;-\tfrac12\alpha_3\kappa^2H^2a^D\,\frac{\nabla}{a}\varphi\cdot\frac{\nabla}{a}\varphi\;\longrightarrow\;i\alpha_3\kappa^2H^2a^{D-2}\,\nabla^2\delta^D(x-x')\;}
+\tag{I.145}
+\end{equation*}
+The rule ``vertex $=i\,\delta^2S$'' is the same as for \eqI{130}--\eqI{131} and is consistent with the paper's definition \eqI{168} (Task~3). \checkmark{}
+The overall sign of the paper's $M^2$ (Tasks~3--13) does not affect the \emph{structure} of the counterterms; it only affects the sign of the fitted coefficients $\alpha_i$.
+
+% ---------------------------------------------------------------------
+\subsection{The two statements after (I.145)}
+\tD{}
+The paper draws two consequences from the structure of the counterterms. Both follow directly from Section~\ref{ssec:ch7-complete}.
+(The paper's list after \eqI{145} has three items; the first, converting all factors of $a'$ into $a$ on the local terms, is a procedural instruction rather than a consequence and is not discussed here.)
+\begin{enumerate}[leftmargin=18pt]
+\item \textbf{There can be no term of the type $Ha^{D-3}\nabla^2\partial_0\delta^D$.}
+The only candidate that could produce it is $S=\int c(\eta)\,\partial_0\varphi\,\nabla^2\varphi$. Its Euler--Lagrange operator is
+\begin{equation*}
+-\partial_0\big(c\,\nabla^2\varphi\big)+\nabla^2\big(c\,\partial_0\varphi\big)=-c'\,\nabla^2\varphi .
+\end{equation*}
+The $\partial_0$ drops out; the vertex is $-c'\nabla^2\delta^D$. This is the vertex-level counterpart of \eqI{143}.
+\item \textbf{There can be no divergence of the type $H^3a^{D-1}\partial_0\delta^D$.}
+A term with $H^3$ and a single derivative leaves one $\varphi$ undifferentiated. It is forbidden by the shift symmetry (Section~\ref{ssec:ch7-constraint}).
+\end{enumerate}
+
+% ---------------------------------------------------------------------
+\subsection{Code checks}
+\label{ssec:ch7-t15-code}
+\tC{}
+Script (SymPy, about 5\,s):
+\begin{center}\texttt{code/07\_desitter\_counterterms/check\_136\_145.py}\end{center}
+These checks were actually run; they supplement the analytic derivation and do not replace it.
+Expected output: \texttt{expected\_output/}\allowbreak\texttt{check\_136\_145.txt} (identical to the output recorded in the original task).
+In the script the field depends on $\eta$ and three spatial coordinates; $D$ enters through the powers of $a$ and through $\square$ (G1), which are the only places where $D$ appears in these reductions.
+\begin{itemize}[leftmargin=14pt]
+\item The identities \eqI{136} and \eqI{137}, with symbolic $D$: \texttt{True}.
+\item \eqI{138}, \eqI{140}, \eqI{141}, \eqI{143}: the differences across the ``$\to$'' steps are exactly the divergences of the currents given above; \eqI{139} and \eqI{142} are exact equalities. Symbolic $D$; all \texttt{True}.
+\item \textbf{Completeness} ($D=4,5,6$). The Euler--Lagrange operators of $B_1$--$B_5$ are linearly independent.
+The operator of each of fifteen candidate densities lies in their span.
+The coefficients agree with the general-$D$ formulas of Table~\ref{tab:ch7-reductions}; for example, for the first row one obtains $(1,2,-2,1,-2)$, $(1,3,-2,1,-3)$, $(1,4,-2,1,-4)$ at $D=4,5,6$.
+The Euler--Lagrange operator vanishes on total derivatives and gives the vertex. This test is therefore a direct proof of equivalence ``up to total derivatives''.
+\item \eqI{145}: the Euler--Lagrange operator is $\alpha_3\kappa^2H^2a^{D-2}\nabla^2\varphi$; the two written forms of the counterterm are identical.
+\item Statement 1 after \eqI{145}: the operator of $c(\eta)\,\partial_0\varphi\,\nabla^2\varphi$ is $-c'\nabla^2\varphi$.
+\end{itemize}
+The full coordinate vectors $c(B_1,\ldots,B_5)$ printed by the script are:
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Candidate & $D=4$ & $D=5$ & $D=6$\\
+\midrule
+$a^D(a^{-2}\partial_0^2\varphi)^2$ & $(1,2,-2,1,-2)$ & $(1,3,-2,1,-3)$ & $(1,4,-2,1,-4)$\\
+$a^D(a^{-2}\partial_0^2\varphi)(a^{-2}\nabla^2\varphi)$ & $(0,0,-1,1,-1)$ & $(0,0,-1,1,-3)$ & $(0,0,-1,1,-6)$\\
+$a^D(a^{-2}\nabla^2\varphi)^2$ & $(0,0,0,1,0)$ & $(0,0,0,1,0)$ & $(0,0,0,1,0)$\\
+$a^{D-4}(\partial_0\partial_i\varphi)^2$ & $(0,0,-1,1,-1)$ & $(0,0,-1,1,-2)$ & $(0,0,-1,1,-3)$\\
+$a^{D-4}(\partial_i\partial_j\varphi)^2$ & $(0,0,0,1,0)$ & $(0,0,0,1,0)$ & $(0,0,0,1,0)$\\
+$a^{D-4}\partial_0\varphi\,\partial_0^3\varphi$ & $(-1,-2,2,-1,2)$ & $(-1,-4,2,-1,4)$ & $(-1,-7,2,-1,7)$\\
+$a^{D-4}\partial_0\varphi\,\partial_0\nabla^2\varphi$ & $(0,0,1,-1,1)$ & $(0,0,1,-1,2)$ & $(0,0,1,-1,3)$\\
+$a^{D-4}\partial_i\varphi\,\partial_i\partial_0^2\varphi$ & $(0,0,1,-1,1)$ & $(0,0,1,-1,3)$ & $(0,0,1,-1,6)$\\
+$a^{D-4}\partial_i\varphi\,\partial_i\nabla^2\varphi$ & $(0,0,0,-1,0)$ & $(0,0,0,-1,0)$ & $(0,0,0,-1,0)$\\
+$a^D\big(a^{-1}\partial_0(a^{-1}\partial_0\varphi)\big)^2$ & $(1,0,-2,1,0)$ & $(1,0,-2,1,0)$ & $(1,0,-2,1,0)$\\
+$Ha^{D-3}\partial_0\varphi\,\partial_0^2\varphi$ & $(0,\tfrac12,0,0,-\tfrac12)$ & $(0,1,0,0,-1)$ & $(0,\tfrac32,0,0,-\tfrac32)$\\
+$Ha^{D-3}\partial_0\varphi\,\nabla^2\varphi$ & $(0,0,0,0,\tfrac12)$ & $(0,0,0,0,1)$ & $(0,0,0,0,\tfrac32)$\\
+$Ha^{D-3}\partial_i\varphi\,\partial_0\partial_i\varphi$ & $(0,0,0,0,-\tfrac12)$ & $(0,0,0,0,-1)$ & $(0,0,0,0,-\tfrac32)$\\
+$Ha^{D-1}\partial_0\varphi\,\square\varphi$ & $(0,\tfrac32,0,0,-1)$ & $(0,2,0,0,-1)$ & $(0,\tfrac52,0,0,-1)$\\
+$H^2a^{D-2}(\partial_0\varphi)^2$ & $(0,-1,0,0,1)$ & $(0,-1,0,0,1)$ & $(0,-1,0,0,1)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+All eleven rows of Table~\ref{tab:ch7-reductions} agree with these values at $D=4,5,6$.
+
+\begin{notebox}[Note on the extent of the verification]
+The original summary of Task~15 states that general-$D$ reduction formulas were given and symbolically verified for each of the fifteen candidates.
+More precisely: general-$D$ formulas were derived for the eleven candidates of Table~\ref{tab:ch7-reductions};
+the identities \eqI{136}--\eqI{143} were verified with symbolic $D$;
+and the reduction of all fifteen candidates was verified by code at $D=4,5,6$ only.
+For the four candidates without a general-$D$ entry in Table~\ref{tab:ch7-reductions}
+($a^{D-4}\partial_0\varphi\,\partial_0\nabla^2\varphi$, $a^{D-4}\partial_i\varphi\,\partial_i\partial_0^2\varphi$, $a^{D-4}\partial_i\varphi\,\partial_i\nabla^2\varphi$ and $a^D(a^{-1}\partial_0(a^{-1}\partial_0\varphi))^2$),
+the $D=4,5,6$ values are consistent with $B_3-B_4+(D-3)B_5$, $B_3-B_4+\tfrac12(D-2)(D-3)B_5$, $-B_4$ and $B_1-2B_3+B_4$, respectively.
+These four general-$D$ forms are a reading of the code output and were not derived in the original task.
+None of this affects the conclusion: every candidate lies in $\mathrm{span}\{B_1,\ldots,B_5\}$ at each $D$ tested, and the five basis operators are independent.
+\end{notebox}
+
+% ---------------------------------------------------------------------
+\subsection{Comparison with the paper}
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.42\textwidth}>{\raggedright\arraybackslash}p{0.42\textwidth}l@{}}
+\toprule
+Item & Result & \\
+\midrule
+Structure from the residual symmetries (p.~124005-12, first paragraph) & justified by \eqref{eq:ch7-ctform} & \checkmark\\
+\eqI{136}, \eqI{137} & derived & \checkmark\\
+\eqI{138}--\eqI{140} & derived; discarded currents explicit & \checkmark\\
+\eqI{141}--\eqI{143} & derived & \checkmark\\
+\eqI{144}, ``only three'' & completeness proof (Table~\ref{tab:ch7-reductions}, code checks) & \checkmark\\
+flat-space limit & derived (under the stated assumption) & \checkmark\\
+\eqI{145} & derived & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Calculation record}
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{Derived.} The counterterm structure \eqref{eq:ch7-ctform} from the residual symmetries; \eqI{136}--\eqI{137}; \eqI{138}--\eqI{140} and \eqI{141}--\eqI{143} with their discarded currents;
+the completeness table and \eqI{144}; the flat-space limit; \eqI{145}; the justification of the two statements after \eqI{145}.
+\item \textbf{Checks passed.} All checks of Section~\ref{ssec:ch7-t15-code}, actually run (identities with symbolic $D$; completeness at $D=4,5,6$).
+\item \textbf{Discrepancies.} None.
+\item \textbf{Assumptions} \tA: dimensional regularization preserves the symmetries of the gauge-fixed action; the ultraviolet divergences are polynomial in $H$.
+\end{itemize}

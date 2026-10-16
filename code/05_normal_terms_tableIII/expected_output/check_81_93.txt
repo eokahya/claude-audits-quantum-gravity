@@ -1,0 +1,29 @@
+== (81)-(83) ==
+  (81) d'_i y = -d_i y                          : True
+  (82) d_0 y = Ha(y-2a'H deta) = Ha(y-2+2a'/a)  : True True
+  (83) d'_0 y = Ha'(y+2aH deta) = Ha'(y-2+2a/a'): True True
+== (84)-(88), generic f(y) and f = y^alpha for I[f] ==
+  (84) (d0+d0')f = H(a+a') y f'        : True
+  (85) (a'd0+a d0')f = 2Haa' aa'H^2 r^2 f': True
+  (86) D=4, f=y^alpha                  : True
+  (87) operator identity               : True
+  (88) D=4, f=y^alpha                  : True
+== (90): Box from (42) == -a^-2 d0^2 - (D-2)(H/a) d0 + a^-2 Lap, general D ==
+   True
+== (91)-(92), A = y^beta (pointwise), D=4,5; Box applied via (42) in explicit coordinates ==
+  D=4: (91) True   (92) True
+  D=5: (91) True   (92) True
+== (93): Box f(y) = H^2[(4y-y^2)f'' + D(2-y)f'] = Box' f(y), f = y^alpha, D=4,5 ==
+  D=4: Box True   Box' True
+  D=5: Box True   Box' True
+== (89) and Table III: pointwise, D=4, actual A(y) of (62) ==
+  point 0: derived(67)_nonlocal + Table III(paper) = 0.0  | derived - Table III(paper) = 0.0000509  (scale 0.0000254)
+           (89) with H^2 restored == -derived : True   (89) as printed (no H^2) == -derived : False
+  point 1: derived(67)_nonlocal + Table III(paper) = 0.0  | derived - Table III(paper) = 0.000202  (scale 0.000101)
+           (89) with H^2 restored == -derived : True   (89) as printed (no H^2) == -derived : False
+  point 2: derived(67)_nonlocal + Table III(paper) = 0.0  | derived - Table III(paper) = 0.000303  (scale 0.000152)
+           (89) with H^2 restored == -derived : True   (89) as printed (no H^2) == -derived : False
+  Table III coefficients from A(y) (dropping terms killed by Lap / Lap^2):
+    -12*A/h        = 24*log(x) + 12 - 12/x
+    -4*y A'/h      = 8 + 4/x
+    2*I[A]/h       = -16*x*log(x) + 8*x + 8*log(x) + 16*log(2)

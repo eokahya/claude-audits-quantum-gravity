@@ -1,0 +1,27 @@
+== (A) Table X assembled from Tables III, V, VII and Eq. (159) (paper's convention, gamma3/eps3 eliminated) ==
+  (aa')^4 Box^3/H^2             : assembled - paper = 0
+  (aa')^4 Box^2                 : assembled - paper = 0
+  (aa')^4 H^2 Box               : assembled - paper = 0
+  (aa')^4 H^4                   : assembled - paper = 0
+  (aa')^3(a^2+a'^2) Box^3/H^2   : assembled - paper = 0
+  (aa')^3(a^2+a'^2) Box^2       : assembled - paper = 0
+  (aa')^3(a^2+a'^2) H^2 Box     : assembled - paper = 0
+  (aa')^3(a^2+a'^2) H^4         : assembled - paper = 0
+  (aa')^3 H^2 Lap               : assembled - paper = 0
+  (aa')^3 Lap Box               : assembled - paper = 0
+  (aa')^2(a^2+a'^2) H^2 Lap     : assembled - paper = 0
+  (aa')^2(a^2+a'^2) Lap Box     : assembled - paper = 0
+  (aa')^2 Lap^2                 : assembled - paper = 0
+  Table III zeta contribution not contained in paper's (aa')^2 Lap^2 row: -16*x*log(x) + 8*log(x)
+== (B) (152), (153) nonlocal parts reproduce (4/y)^2, (4/y)^3 pointwise at D=4 ==
+  N152 - (4/y)^2 = 0 ;  N153 - (4/y)^3 = 0
+  (159) pointwise: H^2 Box[8/y - 4 ln(y/4)]/H^4 - 12 = 0
+== (C) beta coefficients (160)-(165) ==
+  beta1 = Table VIII col1 total = 0
+  beta2 assembled == (162): True
+  beta3 assembled == (164) [with -3 written exactly as -(3/2)Gamma(D-1)/Gamma(D/2)]: True
+  (163) beta2 at D=4: -61/3
+  (165) beta3 expansion: 2*EulerGamma + 58/3 - 4/e    [paper: -4/(D-4) + 58/3 + 2 EulerGamma]
+  corrected (paper convention): beta2(D=4) = -49/3 ;  beta3 = 2*EulerGamma + 52/3 - 4/e
+  definition convention (x -1): beta2 = 49/3 ;  beta3 = -52/3 - 2*EulerGamma + 4/e
+  divergent parts: beta2 has no pole: True ; beta3 pole residue: -4

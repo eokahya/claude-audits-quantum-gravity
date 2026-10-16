@@ -1,0 +1,6 @@
+== (F4a) generic powers A=y^b, B=y^g, dC=y^e, D=5 ==
+  [powers D=5] point 0: sum P_k = 0.000022293633103230   sum ops x appendix totals = 0.000022293633103230   diff = 0.0
+  [powers D=5] point 1: sum P_k = -0.000085694344300951   sum ops x appendix totals = -0.000085694344300951   diff = 0.0
+== (F4b) generic powers, D=4 ==
+  [powers D=4] point 0: sum P_k = 0.000091979967502145   sum ops x appendix totals = 0.000091979967502145   diff = 0.0
+  [powers D=4] point 1: sum P_k = -0.023934798645569   sum ops x appendix totals = -0.023934798645569   diff = 0.0

@@ -1,0 +1,9 @@
+== (a) index algebra (45) -> (46), D=3, generic within-pair-symmetric X_{ab rs}(x;x') ==
+  Sum_IJ V_I(x) V_J(x') X  ==  (46)  with derived V_1 = +i kappa ...  : True
+  with the sign of (7)'s printed LHS (V_1 = -i kappa ...)            : False   (difference = -2*(t2+t3): True )
+== (b) normalization: (1/2) * 2 * 2 * (1/2i)^2 * i^2 * 2 ==
+  factor = 1
+== (c) derivative rules, 1D toy with explicit smooth kernels and test functions ==
+  Gateaux  d^2(i Gamma)/de1 de2 = 0.779492709611
+  (45) rule  int f1 K f2        = 0.779492709611   equal: True
+  one outer leg with + sign     = -0.779492709611   equal: False

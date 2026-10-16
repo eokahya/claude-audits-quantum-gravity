@@ -1,0 +1,16 @@
+== (A) local part extracted directly from (45) + Table I (no use of (47)-(49)) ==
+  D=4: local polynomial == (D-1)/(D-3) P0P0' dA + (P.P')_spatial dB - 2(D-2)/(D-3) P0P0' dC : True
+  D=5: local polynomial == (D-1)/(D-3) P0P0' dA + (P.P')_spatial dB - 2(D-2)/(D-3) P0P0' dC : True
+  D=6: local polynomial == (D-1)/(D-3) P0P0' dA + (P.P')_spatial dB - 2(D-2)/(D-3) P0P0' dC : True
+== (B) outer derivatives on a^{D-2} delta^D(x-x'), acting on a test function g (D=4 coordinates) ==
+  d0 d0'[a^{D-2} delta] == (a^D Box - a^{D-2} Lap) delta : True
+  sum_i d_i d_i'[a^{D-2} delta] == - a^{D-2} Lap delta   : True
+  (55)-(56): -d0(a^{D-2} d0' delta) == -a^D Box + a^{D-2} Lap : True
+== (C) assembling (59): units of i kappa^2 k, k = H^{D-2}/(4pi)^{D/2} Gamma(D-1)/Gamma(D/2) ==
+  derived coeff of a^D Box     : (D**2*pihat - 4*D*pihat + 3*pihat - 2)/(D**2 - 6*D + 9)
+  derived coeff of a^{D-2} Lap : (-D**3*pihat + 6*D**2*pihat + D**2 - 11*D*pihat - 4*D + 6*pihat + 5)/(D**3 - 8*D**2 + 21*D - 18)
+  finite parts at D=4 (pihat-terms kept exact):  Box: -2    Lap: 5/2
+  sum of the paper's own (54)+(57)+(58):  Box: (-D*pihat + 2*D + pihat - 6)/(D - 3)    Lap: (D*pihat - 5*D/2 - pihat + 15/2)/(D - 3)
+  paper's printed (59):                    Box: -(D-1)/(D-3)*pihat + 2   Lap: (D-1)/(D-3)*pihat - 7/2
+  paper's (54),(57),(58) = -(derived) term by term: True True True
+  check k -> H^2/(8 pi^2) at D=4: H**2/(8*pi**2)

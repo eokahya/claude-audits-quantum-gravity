@@ -1,0 +1,12 @@
+printed Table 1, non-falling part per k-order: [0, 0, 0, 0, 0, 0, 0]
+zeta correction, Table-X convention:
+   k^4: 4*(a**2 - 15)/(45*a**3)
+   k^6: 2*(6*a**2 - 35)/(525*a**3)
+corrected Table X total, through O(1/a):
+   k^0: 0
+   k^1: 0
+   k^2: 0
+   k^3: 0
+   k^4: 0
+   k^5: 0
+   k^6: 0

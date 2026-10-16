@@ -1,0 +1,858 @@
+% =====================================================================
+% Chapter 9 -- Schwinger-Keldysh mode equation and late-time mode function (Paper II)
+% Source: Task 18 report (Turkish) and command log.
+% =====================================================================
+\providecommand{\chixDk}{\mathcal{D}_k}
+\providecommand{\chixR}{\mathcal{R}}
+
+\chapter{Schwinger--Keldysh mode equation and the late-time mode function (Paper II)}
+\label{ch:sk}
+
+This chapter takes the renormalized one-loop self-mass-squared obtained in the preceding chapters ---
+the corrected Table~X of \PI, with the overall sign fixed by \PI's own definition \eqI{168} --- and
+uses it in the Schwinger--Keldysh (SK) effective field equation of \PII. It consists of one task
+(Task~18). We
+(i)~construct the self-mass-squared of all four SK polarities from the $++$ result,
+(ii)~re-derive the integrals of Tables~2--4 of \PII{} and the Table~5 cancellation with the corrected input,
+(iii)~redo the late-time analysis without the simplification \eqII{44}, and
+(iv)~determine the late-time one-loop correction to the scalar mode function.
+The target tables of \PII{} (Tables~2--5) were never used as input; they were compared with our results only at the end.
+
+\section{Task 18: Schwinger--Keldysh polarities, Table 5 with the corrected self-mass, and the late-time mode function}
+\label{sec:task18}
+
+\begin{resultbox}[Summary of Task 18]
+\begin{itemize}[leftmargin=12pt,itemsep=2pt]
+\item \textbf{SK structure} \tD. The self-mass-squared of all four polarities was built from the $++$ result.
+In the definition sign the retarded kernel is
+$M^2_{++}+M^2_{+-}=2\,\mathrm{Im}\big[\text{Table X}(y_{++})\big]+\text{local}$.
+It is real and supported on and inside the past light cone. Constant and analytic terms
+(the $72\gamma_2$ correction, $-120$, $96x$, $12x$, $-36x^2$) vanish \emph{identically} in the SK difference.
+\item \textbf{Tables 2--4} \tC. All 12 entries were re-derived in exact closed form; all agree with the paper.
+The $1/x$ entries were also computed directly from the light-cone $\delta(y)$, without using \eqII{35}.
+The exact expansion agrees with direct numerical integration to $\lesssim10^{-19}$.
+\item \textbf{Table 5$'$} (definition sign, within the approximation \eqII{44}). Each of the 19 entries is exactly $-1$
+times the printed one; the total is again $0$. The $\zeta$ correction of Task~17 is a $\nabla^4$ row and drops out under \eqII{44};
+the $72\gamma_2$ correction drops out of the SK difference. Neither enters Table~5$'$.
+\item \textbf{Without \eqII{44}} \tD\tC. Keeping the exact $u(\eta',k)$, the phase $e^{i\vec k\cdot\Delta\vec x}$, the $k^2/a^2$ part of $\square$
+and all $\nabla^2$ rows, and expanding exactly in $k$: the non-falling part vanishes \emph{separately} at each order
+$k^0,k^1,\dots,k^{10}$. The justification given for \eqII{44} does \emph{not} hold term by term: the rows
+$(aa')^2(a^2+a'^2)H^2\nabla^2$ and $(aa')^2(a^2+a'^2)\nabla^2\square$ individually \emph{grow} like $\mp\tfrac4{15}\khat^2a$;
+the cancellation occurs only in the sum over all rows. The term $24x^2\ln x$ of the $\zeta$ row gives $-\khat^4/70$,
+which is needed for the cancellation at order $k^4$. This term is the same in the printed and the corrected row; the correction
+$8\ln x-16x\ln x$ itself changes only falling terms, so the cancellation holds for the printed table as well.
+\item \textbf{Effect of our corrections on the mode function.}
+Overall sign: reverses $\Phi_1$ entirely; since the non-falling total is zero, this has no observable late-time effect, only the signs of falling terms change.
+$\zeta$ correction: contributes only to falling terms, with a rigorous bound $\le C\khat^4/a$ for every $k$; moreover it removes exactly the tails
+$\tfrac4{45}\khat^4/a,\ \tfrac4{175}\khat^6/a,\dots$ left by the printed row, so that the corrected right-hand side falls like $\ln a/a^2$
+(with the printed row it would fall like $\khat^4/a$).
+$72\gamma_2$: identically no effect. Finite parts of $\beta_{2,3}$: absorbed into $\Delta\alpha_{2,3}$; the only local effect, $-\Delta\alpha_3H^2k^2u/a^2$, falls off.
+\item \textbf{Late-time result} \tD:
+$\displaystyle \Phi(\eta,k)\to u(0,k)\Big\{1+\frac{\kappa^2H^2}{16\pi^2}\Big[\tilde C+\order{\frac{\ln a}{a^2}}\Big]\Big\}$,
+with $\tilde C$ a field-strength renormalization. \textbf{There is no significant one-loop late-time correction.}
+The conclusion of \PII{} is confirmed with the corrected input and without the approximation \eqII{44}.
+\end{itemize}
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\subsection{Goal, inputs and notation}
+\label{sec:t18-goal}
+
+\paragraph{Goal.}
+Add the other SK polarities to the $++$ self-mass-squared constructed in Task~17 (Chapter~8); set up the SK mode equation of \PII;
+build the analogue of Table~5 of \PII{} with the corrected self-mass; and find the late-time behaviour of the one-loop correction
+$\Phi_1$ to the mode function, also beyond the simplification \eqII{44}.
+
+\paragraph{Inputs.}
+The corrected Table~X of Task~17 (reproduced below as the corrected Table~1 of \PII), the corrected counterterm coefficients of Task~17,
+and the definition sign. Tables~2--5 of \PII{} were \emph{not} used as input.
+
+\paragraph{Notation.}
+$x\equiv y/4$; $\Delta\eta\equiv\eta-\eta'$; $r\equiv\|\vec x\,'-\vec x\|$; $X_0\equiv\tfrac14aa'H^2\Delta\eta^2$; $\khat\equiv k/H$.
+In intermediate steps we set $H=1$ and restore it by dimensional analysis. We define
+\begin{equation}
+\Dop\equiv-\big(a^2\partial_a^2+4a\,\partial_a\big),\qquad \chixDk\equiv\Dop-\frac{\khat^2}{a^2}.
+\label{eq:ch09-Dop}
+\end{equation}
+These are $\square/H^2$ acting on $F(\eta)e^{-i\vec k\cdot\vec x}$; $\Dop$ is the $k=0$ case of \eqII{37}.
+Paper~II uses $y(x;x')=a(\eta)a(\eta')\{\|\vec x-\vec x'\|^2-(|\eta-\eta'|-i\delta)^2\}$, \eqII{12}, i.e.\ the length function with $H=1$.
+Everything in this chapter refers to the renormalized self-mass-squared in the unregulated limit $D=4$; general $D$ appears only in
+the counterterm coefficients \eqref{eq:ch09-alpha}.
+
+\paragraph{Two signs.} \tA{}
+The \emph{Table-X convention} is the sign of the printed tables (\PII{} Table~1, which reproduces \PI{} Table~X, and \PII{} Table~5).
+The \emph{definition sign} is the sign fixed by \PI's definition \eqI{168}; it equals $-1$ times the Table-X convention
+(Tasks~3--13 and~17). Physical results are always quoted in the definition sign.
+
+\subsubsection{Input: the corrected Table 1}
+
+\PII{} prints in its Table~1 \tP{} the same nonlocal contributions to $-iM^2(x;x')$ as \PI{} Table~X, except that the row printed twice in \PI{} appears only once.
+The $\zeta$ row and the constant $-54$ were corrected in Task~17 (the latter as the Table-X form of the $72\gamma_2$ finding of Task~13). The input used here is:
+
+{\small\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}r l p{0.52\textwidth}@{}}
+\toprule
+\# & External operator & Coefficient (Table-X convention, $\times\frac{\kappa^2H^4}{(4\pi)^4}$)\\
+\midrule
+\endhead
+0 & $(aa')^4\square^3/H^2$ & $-\frac{\ln x}{3x}$\\
+1 & $(aa')^4\square^2$ & $\frac{26\ln x}{3x}+\frac{38}{3x}-6\ln^2x-18\ln x$\\
+2 & $(aa')^4H^2\square$ & $-\frac{6\ln x}{x}+\frac4x-4\ln x$\\
+3 & $(aa')^4H^4$ & $\frac{4\ln x}{x}+\frac{18}x-108\ln x-120$\\
+4 & $(aa')^3(a^2+a'^2)\square^3/H^2$ & $\frac{\ln x}{6x}$\\
+5 & $(aa')^3(a^2+a'^2)\square^2$ & $-\frac{\ln x}{3x}+\frac1{6x}$\\
+6 & $(aa')^3(a^2+a'^2)H^2\square$ & $-\frac{2\ln x}{3x}+\frac5x-18\ln x$\\
+7 & $(aa')^3(a^2+a'^2)H^4$ & $\frac{4\ln x}{3x}-\frac{32}{3x}\,\bm{+18}$ \quad(printed: $-54$)\\
+8 & $(aa')^3H^2\nabla^2$ & $-\frac{2\ln x}{3x}-\frac{16}x+84\ln x-48x\ln x+96x$\\
+9 & $(aa')^3\nabla^2\square$ & $\frac{\ln x}{3x}$\\
+10 & $(aa')^2(a^2+a'^2)H^2\nabla^2$ & $-\frac{7\ln x}{3x}+\frac{11}{2x}-12\ln x+48x\ln x+12x$\\
+11 & $(aa')^2(a^2+a'^2)\nabla^2\square$ & $-\frac{17\ln x}{6x}-\frac{49}{6x}+4\ln^2x+10\ln x+12x\ln x$\\
+12 & $(aa')^2\nabla^4$ & $\bm{\frac{34}3}\ln x\,\bm{-40}\,x\ln x+24x^2\ln x-36x^2$ \quad(printed: $\frac{10}3$, $-24$)\\
+\bottomrule
+\end{longtable}
+}
+
+\noindent\textbf{Operator ordering} \tA. Scale factors stand on the left; $\square$ and $\nabla^2$ act only on $f(y)$.
+This is the ordering used in the pointwise test of Task~17, where it was verified to 30 digits. The factor $a^{4-K}$ in \eqII{45} implies the same ordering.
+
+\subsubsection{Corrected counterterms (analogue of (II.7)--(II.9))}
+
+\PII{} prints \tP
+\begin{equation*}
+\alpha_1=0+\Delta\alpha_1,\qquad
+\alpha_2=\frac{H^{D-4}}{(4\pi)^{D/2}}\Big\{\frac{61}{3}\Big\}+\Delta\alpha_2,\qquad
+\alpha_3=\frac{H^{D-4}}{(4\pi)^{D/2}}\Big\{\frac{4}{D-4}-\frac{58}{3}-2\gamma\Big\}+\Delta\alpha_3 .
+\end{equation*}
+From the results of Task~17, with $\alpha_i=-\beta_i+\Delta\alpha_i$, we obtain \tD
+\begin{equation}
+\begin{aligned}
+&\text{Table-X conv.:}\quad \alpha_2=\tfrac{H^{D-4}}{(4\pi)^{D/2}}\Big\{\tfrac{49}{3}\Big\}+\Delta\alpha_2,\qquad
+\alpha_3=\tfrac{H^{D-4}}{(4\pi)^{D/2}}\Big\{\tfrac4{D-4}-\tfrac{52}3-2\gamma\Big\}+\Delta\alpha_3,\\
+&\text{definition sign:}\quad \alpha_2=\tfrac{H^{D-4}}{(4\pi)^{D/2}}\Big\{-\tfrac{49}{3}\Big\}+\Delta\alpha_2,\qquad
+\alpha_3=\tfrac{H^{D-4}}{(4\pi)^{D/2}}\Big\{-\tfrac4{D-4}+\tfrac{52}3+2\gamma\Big\}+\Delta\alpha_3 .
+\end{aligned}
+\label{eq:ch09-alpha}
+\end{equation}
+The printed values are $\tfrac{61}3$ and $-\tfrac{58}3$; $\alpha_1=0+\Delta\alpha_1$ is unchanged. Since the finite parts are absorbed into the arbitrary $\Delta\alpha_i$,
+they enter none of the results below.
+
+\PII{} writes the renormalized self-mass-squared in its Eq.~(10) as \tP
+\begin{equation*}
+-iM^2(x;x')=i\kappa^2a^4\Big(\Delta\alpha_1\square^2+\Delta\alpha_2\square+\Delta\alpha_3\frac{\nabla^2}{a^2}\Big)\delta^4(x-x')+\Big(\text{Table 1}\Big).
+\end{equation*}
+In the definition sign, and with the factors of $H^2$ shown explicitly, we use \tD
+\begin{equation}
+-iM^2_{++}(x;x')=i\kappa^2a^4\Big(\Delta\alpha_1\square^2+\Delta\alpha_2H^2\square+\Delta\alpha_3H^2\frac{\nabla^2}{a^2}\Big)\delta^4(x-x')\;-\;\Tab\big(y_{++}\big),
+\label{eq:ch09-Mpp}
+\end{equation}
+where $\Tab(y)$ denotes the sum of the corrected Table~1 above, in the Table-X convention. The minus sign in front of $\Tab$ produces the definition sign.%
+\footnote{The factors $H^2$ next to $\Delta\alpha_2$ and $\Delta\alpha_3$ are required by dimensions when $\Delta\alpha_i$ is dimensionless at $D=4$; \PII, Eqs.~(10) and~(34),
+prints them without $H^2$, the same omission as in \eqI{160} and \eqI{167}. The original report writes the $H^2$ without comment; this footnote was added in the write-up.}
+
+% ---------------------------------------------------------------------
+\subsection{Schwinger--Keldysh self-masses}
+\label{sec:t18-sk}
+
+\subsubsection{Rules}
+\tP{} Each propagator splits into four polarities; only $y$ changes, \eqII{15}--\eqII{18}:
+\begin{equation}
+y_{\pm\pm'}=aa'\big[r^2-(\ldots)^2\big],\qquad
+(\ldots)=\begin{cases}
+|\Delta\eta|-i\delta & (++)\\
+\Delta\eta+i\delta & (+-)\\
+\Delta\eta-i\delta & (-+)\\
+|\Delta\eta|+i\delta & (--)
+\end{cases}
+\label{eq:ch09-ypol}
+\end{equation}
+The $+$ vertex is identical to the in-out vertex, the $-$ vertex is its conjugate. All lines at a given vertex have the same polarity.
+
+\subsubsection{Obtaining the \texorpdfstring{$+-$}{+-} self-mass from the \texorpdfstring{$++$}{++} one}
+At the level of diagrams there are three steps:
+\begin{enumerate}[leftmargin=16pt]
+\item \textbf{Vertex factor.} The vertex at $x'$ has $-$ polarity. Its factor is $(i\,\delta^nS)^*=-i\,\delta^nS$ instead of $i\,\delta^nS$, because the vertex functionals are real.
+This gives an overall factor $-1$.
+\item \textbf{Propagators.} Every line from $x$ to $x'$ becomes $i\Delta_{+-}$, so every $y$ is replaced by $y_{+-}$.
+The external operators --- the derivatives at $x$ and $x'$ and the scale factors --- are unchanged.
+\item \textbf{Local terms.} Terms proportional to $\delta^4(x-x')$ have two sources: the 4-point vertex (both external legs at the same point) and the
+$\partial_0|\Delta\eta|$ terms that arise when derivatives act on the time-ordered propagator. Neither exists for mixed polarity:
+for $x\neq x'$ the vertices are distinct, and $|\Delta\eta|$ does not occur in $y_{+-}$.
+\end{enumerate}
+Hence \tD
+\begin{equation}
+\boxed{-iM^2_{+-}(x;x')=+\,\Tab\big(y_{+-}\big)}
+\label{eq:ch09-Mpm}
+\end{equation}
+This is the rule stated in \PII{} below \eqII{19} --- discard the delta-function terms, reverse the sign and replace $y$ by $y_{+-}$ --- written in the definition sign.
+The coefficients and scale factors of $\Tab$ are real, so $\Tab(y)^*=\Tab(y^*)$. Using $y_{++}^*=y_{--}$ and $y_{+-}^*=y_{-+}$ in \eqII{20},
+\begin{equation}
+-iM^2_{--}=-i\kappa^2a^4\Big(\Delta\alpha_1\square^2+\Delta\alpha_2H^2\square+\Delta\alpha_3H^2\tfrac{\nabla^2}{a^2}\Big)\delta^4-\Tab(y_{--}),\qquad
+-iM^2_{-+}=+\,\Tab(y_{-+}).
+\label{eq:ch09-Mmm}
+\end{equation}
+
+\paragraph{Symmetry.} $y_{-+}(x;x')=aa'[r^2-(\eta-\eta'-i\delta)^2]$. Under $x\leftrightarrow x'$ this becomes
+$aa'[r^2-(\eta-\eta'+i\delta)^2]=y_{+-}(x;x')$. Since the operators of the table are symmetric under $x\leftrightarrow x'$,
+\begin{equation}
+M^2_{-+}(x';x)=M^2_{+-}(x;x').
+\label{eq:ch09-sym}
+\end{equation}
+
+\subsubsection{Effective field equation}
+We vary $\Gamma[\varphi_+,\varphi_-]$ of \eqII{19} with respect to $\varphi_+(x)$. $M^2_{++}$ is symmetric and \eqref{eq:ch09-sym} holds, so
+\begin{equation}
+\frac{\delta\Gamma}{\delta\varphi_+(x)}=\frac{\delta S}{\delta\varphi_+(x)}-\int d^4x'\Big[M^2_{++}(x;x')\varphi_+(x')+M^2_{+-}(x;x')\varphi_-(x')\Big].
+\label{eq:ch09-varGamma}
+\end{equation}
+Setting $\varphi_\pm=\Phi$ and using $\delta S/\delta\Phi=\partial_\mu(a^2\partial^\mu\Phi)=a^4\square\Phi$ gives \eqII{21},
+\begin{equation*}
+a^4\square\Phi(x)-\int_{\eta_i}^0d\eta'\!\int d^3x'\,\big\{M^2_{++}(x;x')+M^2_{+-}(x;x')\big\}\Phi(x')=0 .
+\tag{II.21}
+\end{equation*}
+Variation with respect to $\varphi_-$ gives the complex conjugate of this equation and therefore no new information.
+With $\square=-(a^2\partial_0^2+2a^3H\partial_0)/a^4+\nabla^2/a^2$ and $\partial_0=a\partial_t$ one has
+$\partial_0^2=a^2\partial_t^2+a^2H\partial_t$, hence $a^4\square=-a^4\big[\partial_t^2+3H\partial_t+k^2/a^2\big]$ on a plane wave. With
+$\Phi=u+\kappa^2\Phi_1$ this gives \eqII{29}:
+\begin{equation*}
+\Big[\partial_t^2+3H\partial_t+\frac{k^2}{a^2}\Big]\Phi_1=-\frac1{a^4}\int_{\eta_i}^0\!d\eta'\,u(\eta',k)\!\int\! d^3x'\,\big\{M^2_{++}+M^2_{+-}\big\}_1\,e^{i\vec k\cdot(\vec x\,'-\vec x)}\equiv\chixR(\eta,k).
+\tag{II.29}
+\label{eq:ch09-mode}
+\end{equation*}
+Here $\{M^2_{++}+M^2_{+-}\}_1$ is the coefficient of $\kappa^2$ in $M^2_{++}+M^2_{+-}$ (\PII, Eq.~(22)), i.e.\ the one-loop self-mass-squared with
+the factor $\kappa^2$ stripped off. \tA{} Throughout this chapter $\kappa^2$ is counted once: it appears in $\Phi=u+\kappa^2\Phi_1$, while
+$\chixR$ and $\Phi_1$ carry no factor $\kappa^2$.
+
+\subsubsection{Reality and causality}
+From \eqref{eq:ch09-Mpp} and \eqref{eq:ch09-Mpm}, in the definition sign,
+\begin{equation}
+M^2_{++}+M^2_{+-}=\underbrace{-\kappa^2a^4\Big(\Delta\alpha_1\square^2+\Delta\alpha_2H^2\square+\Delta\alpha_3H^2\tfrac{\nabla^2}{a^2}\Big)\delta^4(x-x')}_{\text{local}}
++i\big[-\Tab(y_{++})+\Tab(y_{+-})\big].
+\label{eq:ch09-retarded}
+\end{equation}
+\begin{itemize}[leftmargin=14pt]
+\item $\eta'>\eta$: $(\Delta\eta+i\delta)^2=(|\Delta\eta|-i\delta)^2$, i.e.\ $y_{+-}=y_{++}$ and the bracket vanishes. The kernel is retarded.
+\item $\eta'<\eta$: $y_{+-}=y_{++}^*$. The bracket becomes $-2i\,\mathrm{Im}\,\Tab(y_{++})$, and after multiplication by $i$ the nonlocal kernel is $2\,\mathrm{Im}\,\Tab(y_{++})$, which is real.
+\item Spacelike separation: $y$ is real and positive in both cases, so the difference vanishes. The support is on and inside the past light cone.
+\end{itemize}
+This reproduces the statements of \PII{} below \eqII{21}, now in the definition sign.
+
+% ---------------------------------------------------------------------
+\subsection{The SK differences, Eqs.~(II.39)--(II.41)}
+\label{sec:t18-diff}
+
+Inside the light cone ($\Delta\eta>r\ge0$),
+$y_{++}=aa'(r^2-\Delta\eta^2)+2i\delta aa'\Delta\eta=-|y|+i0$ and $y_{+-}=-|y|-i0$.
+On the principal branch of the logarithm $\ln y_{+\pm}=\ln|y|\pm i\pi$. For $\Delta f\equiv f(y_{++}/4)-f(y_{+-}/4)$ this gives \tD
+\begin{equation}
+\begin{aligned}
+\Delta\ln x&=2\pi i\,\theta(\Delta\eta-r),\\
+\Delta\ln^2x&=(\ln|x|+i\pi)^2-(\ln|x|-i\pi)^2=4\pi i\,\theta(\Delta\eta-r)\ln|x|,\\
+\Delta\big(x^j\ln x\big)&=2\pi i\,x^j\theta(\Delta\eta-r),\qquad x\to-\tfrac14aa'(\Delta\eta^2-r^2)\quad\text{\eqII{41}},\\
+\Delta\Big(\frac1x\Big)&=4\Big[\frac1{y_r+i0}-\frac1{y_r-i0}\Big]=-8\pi i\,\delta(y_r),
+\end{aligned}
+\label{eq:ch09-Delta}
+\end{equation}
+where $y_r\equiv aa'(r^2-\Delta\eta^2)$, $|x|=X_0(1-z^2)$ and $z\equiv r/\Delta\eta$. The first two lines are \eqII{39} and \eqII{40}.
+\textbf{Analytic functions} (constants, $x$, $x^2$) are the same for both polarities, so $\Delta=0$ for them.
+Consequently the \textbf{$72\gamma_2$ correction} ($-54\to+18$), and the terms $-120$, $96x$, $12x$ and $-36x^2$, drop out of the retarded kernel \emph{identically}.
+The equivalent form of the $72\gamma_2$ correction given in Task~17 --- adding $-12x$ to the $\delta$ row of \PI{} Table~V (the operator of that row acting on $-12x$ reproduces $72\gamma_2$, since $\nabla^2\square x\neq0$; Tasks~13 and~17) --- drops out for the same reason.
+
+\paragraph{The identities for \texorpdfstring{$1/x$}{1/x} and \texorpdfstring{$\ln x/x$}{ln x/x}} \tD.
+We checked \eqII{35}--\eqII{36} directly. At $D=4$, $\square f(y)=H^2\big[(4y-y^2)f''+4(2-y)f'\big]$.
+For $f=\ln(y/4)$: $f'=1/y$, $f''=-1/y^2$, so $\square f/H^2=-(4y-y^2)/y^2+4(2-y)/y=4/y-3$.
+For $f=\tfrac12L^2-L$ with $L=\ln(y/4)$: $f'=(L-1)/y$, $f''=(2-L)/y^2$, so
+$\square f/H^2=(4/y-1)(2-L)+(8/y-4)(L-1)=\tfrac4yL-3L+2$. Hence
+\begin{equation*}
+\frac4y=\frac{\square}{H^2}\ln\Big(\frac y4\Big)+3,\qquad
+\frac4y\ln\Big(\frac y4\Big)=\frac{\square}{H^2}\Big\{\frac12\ln^2\Big(\frac y4\Big)-\ln\Big(\frac y4\Big)\Big\}+3\ln\Big(\frac y4\Big)-2,
+\tag{II.35--36}
+\end{equation*}
+in agreement with \PII. Since $\ln y$ and $\ln^2y$ are integrable, these identities leave no $\delta^4$ remainder.
+$\square_x$ commutes with $\int d^4x'$ over the fixed region $[\eta_i,0]\times\mathbb R^3$.
+
+% ---------------------------------------------------------------------
+\subsection{Tables 2--4: independent derivation of the integrals}
+\label{sec:t18-tab234}
+
+\PII{} prints in Tables~2, 3 and~4 \tP{} the integrals
+$-\frac{iH^4}{16\pi^2}\int d^4x'\,a'^K\{f(\frac{y_{++}}4)-f(\frac{y_{+-}}4)\}$ for $K=3,4,5$ and $f=\frac1x,\frac{\ln x}x,\ln x,\ln^2x$
+(retyped in Table~\ref{tab:ch09-234} below). They were used only for the final comparison.
+
+\subsubsection{Master formulas}
+Define ($H=1$)
+\begin{equation}
+S_K[f]\equiv-\frac{i}{16\pi^2}\int d^4x'\,a'^K\,\Delta f .
+\label{eq:ch09-SK}
+\end{equation}
+With $d\eta'=da'/a'^2$, $\Delta\eta=1/a'-1/a$, $a(\eta_i)=1$ and $\int d^3r\,\theta(\Delta\eta-r)=\tfrac{4\pi}3\Delta\eta^3$, the differences \eqref{eq:ch09-Delta} give \tD
+\begin{equation}
+\begin{aligned}
+S_K[\ln x]&=\frac{-i}{16\pi^2}(2\pi i)\frac{4\pi}{3}\int d\eta'\,a'^K\Delta\eta^3=\frac16\int_1^a\!da'\,a'^{K-2}\Big(\frac1{a'}-\frac1a\Big)^3,\\
+S_K[\ln^2x]&=\int_1^a\!da'\,a'^{K-2}\Delta\eta^3\Big[\frac13\ln X_0+C_0\Big],\qquad C_0=\int_0^1\!z^2\ln(1-z^2)\,dz=\frac23\ln2-\frac89,\\
+S_K[x^j\ln x]&=\frac12(-1)^jB_j\int_1^a\!da'\,a'^{K-2}X_0^j\Delta\eta^3,\qquad B_0=\frac13,\ B_1=\frac2{15},\ B_2=\frac8{105},\\
+S_K[1/x]&=\frac{-i}{16\pi^2}\int d\eta'\,a'^K\!\int d^3r\,(-8\pi i)\,\delta\big(aa'(r^2-\Delta\eta^2)\big)=-\frac1a\int_1^a\!da'\,a'^{K-3}\Big(\frac1{a'}-\frac1a\Big),
+\end{aligned}
+\label{eq:ch09-master}
+\end{equation}
+with $B_j\equiv\int_0^1z^2(1-z^2)^jdz$. In the $\ln^2x$ line, $(-i)(4\pi i)/(16\pi^2)\times4\pi=1$ and $\ln|x|=\ln X_0+\ln(1-z^2)$.
+In the last line we used $\int d^3r\,\delta\big(aa'(r^2-\Delta\eta^2)\big)=4\pi\Delta\eta^2/(2aa'\Delta\eta)$.
+This line is \textbf{independent of \eqII{35}}.
+
+\paragraph{Scaling variable.} With $a'=as$ one finds $\Delta\eta=(1-s)/(as)$ and $X_0=(1-s)^2/(4s)$, which is \textbf{independent of $a$}. The general integral is
+\begin{equation}
+\begin{aligned}
+&\int_1^a\!da'\,a'^{Q-2}\Delta\eta^NX_0^jG(X_0)=a^{Q-1-N}\int_{1/a}^1\!ds\,s^{Q-2-N}(1-s)^N X_0^jG(X_0),\\
+&\ln X_0=2\ln(1-s)-\ln s-2\ln2.
+\end{aligned}
+\label{eq:ch09-scaling}
+\end{equation}
+Everything reduces to three elementary integrals; with $\epsilon=1/a$,
+\begin{equation}
+\int_\epsilon^1 s^p\,ds,\qquad \int_\epsilon^1s^p\ln s\,ds,\qquad
+\int_\epsilon^1 s^p\ln(1-s)\,ds=C_p-\sum_{n=1}^{q}\frac1n\int_\epsilon^1\!s^{p+n}ds+\sum_{n>q}\frac{\epsilon^{p+n+1}}{n(p+n+1)},
+\label{eq:ch09-elem}
+\end{equation}
+where $q=\max(0,-p-1)$ and the constant is $C_p=\int_0^1s^p\big[\ln(1-s)+\sum_{n\le q}s^n/n\big]ds$.
+(The last formula follows from $\ln(1-s)=-\sum_n s^n/n$: the terms $n\le q$ are kept as divergent or logarithmic integrals; for $n>q$,
+$\int_\epsilon^1s^{p+n}ds=\frac{1-\epsilon^{p+n+1}}{p+n+1}$.) The series gives $C_p=-\sum_{n>q}1/(n(n+p+1))$, i.e.
+\begin{equation}
+C_p=-\frac{H_{p+1}}{p+1}\ \ (p\ge0),\qquad C_{-1}=-\frac{\pi^2}6,\qquad C_p=-\frac{H_q}{q}\ \ (p\le-2),
+\label{eq:ch09-Cp}
+\end{equation}
+with $H_n$ the harmonic numbers. \textbf{The only source of $\pi^2$ in the tables is $C_{-1}=-\pi^2/6$.}
+
+\subsubsection{Examples derived by hand}
+The following entries were derived by hand \tD.
+\paragraph{$\ln x$.} Expand $a'^{K-2}(1/a'-1/a)^3$ binomially. For $K=4$:
+\begin{equation}
+\begin{aligned}
+S_4[\ln x]&=\frac16\Big[\ln a-3\,\frac{a-1}a+3\,\frac{a^2-1}{2a^2}-\frac{a^3-1}{3a^3}\Big]
+=\frac16\ln a-\frac{11}{36}+\frac1{2a}-\frac1{4a^2}+\frac1{18a^3},\\
+S_3[\ln x]&=\frac16-\frac{\ln a}{2a}+\frac1{4a}-\frac1{2a^2}+\frac1{12a^3},\qquad
+S_5[\ln x]=\frac a{24}-\frac16+\frac1{4a}+\order{a^{-2}}.
+\end{aligned}
+\label{eq:ch09-Sln}
+\end{equation}
+
+\paragraph{$1/x$ directly from the light cone.} From the last line of \eqref{eq:ch09-master}:
+\begin{equation}
+S_4[\tfrac1x]=-\frac1a\Big[\frac a2-1+\frac1{2a}\Big]=-\frac12+\frac1a-\ldots,\qquad
+S_3[\tfrac1x]=-\frac{\ln a}a+\frac1a-\frac1{a^2},\qquad
+S_5[\tfrac1x]=-\frac a6+\frac1{2a}-\ldots
+\label{eq:ch09-S1x}
+\end{equation}
+These agree term by term with $\Dop S_K[\ln x]$, i.e.\ with \eqII{35} (the constant $3$ drops out of $\Delta$). Example for $K=3$:
+$\Dop(\tfrac16)=0$, $\Dop(-\tfrac{\ln a}{2a})=\tfrac{1-2\ln a}{2a}$, $\Dop(\tfrac1{4a})=\tfrac1{2a}$, with sum $\tfrac{1-\ln a}a$;
+and $\Dop(-\tfrac1{2a^2})=-\tfrac1{a^2}$. (Useful: $\Dop a^n=-n(n+3)a^n$.)
+
+\paragraph{$\ln^2x$, $K=4$.} In \eqref{eq:ch09-scaling} $Q=4$, $N=3$, so the power of $a$ is $a^0$.
+$\tfrac13\ln X_0+C_0=\tfrac23\ln(1-s)-\tfrac13\ln s-\tfrac89$: \textbf{the $\ln2$ cancels}. With $(1-s)^3/s=1/s-3+3s-s^2$:
+\begin{equation}
+\begin{aligned}
+&\int_\epsilon^1(\ldots)\,ds=\ln a-\tfrac{11}6,\qquad
+\int_\epsilon^1(\ldots)\ln s\,ds=-\tfrac{\ln^2a}2+\tfrac{85}{36},\\
+&\int_0^1(\ldots)\ln(1-s)\,ds=-\tfrac{\pi^2}6+3-\tfrac94+\tfrac{11}{18}=-\tfrac{\pi^2}6+\tfrac{49}{36},\\
+&S_4[\ln^2x]=\tfrac23\Big(-\tfrac{\pi^2}6+\tfrac{49}{36}\Big)-\tfrac13\Big(-\tfrac{\ln^2a}2+\tfrac{85}{36}\Big)-\tfrac89\Big(\ln a-\tfrac{11}6\Big)
+=\tfrac16\ln^2a-\tfrac89\ln a+\tfrac74-\tfrac{\pi^2}9,
+\end{aligned}
+\label{eq:ch09-Sln2}
+\end{equation}
+up to $\order{\ln a/a}$. This is the last row of Table~3 of \PII.
+
+\subsubsection{Result for Tables 2--4}
+Equations \eqref{eq:ch09-master}--\eqref{eq:ch09-Cp} were implemented symbolically, in exact rational arithmetic,
+in the script \texttt{engine.py} (\S\ref{sec:t18-code}). There \eqII{35} was used for $1/x$ and \eqII{36} for $\ln x/x$.
+The table below gives the result \tC{} together with the next order, which the paper leaves as $\order{\cdot}$.
+
+{\small\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}c c p{0.34\textwidth} p{0.40\textwidth} c@{}}
+\caption{Tables 2--4 of \PII: printed entries versus our derivation ($H=1$; $S_K[f]$ of Eq.~\eqref{eq:ch09-SK}).}\label{tab:ch09-234}\\
+\toprule
+$K$ & $f$ & Paper II (printed) & This work (incl.\ next order) & \\
+\midrule
+\endfirsthead
+\toprule
+$K$ & $f$ & Paper II (printed) & This work (incl.\ next order) & \\
+\midrule
+\endhead
+3 & $\frac1x$ & $-\frac{\ln a}a+\frac1a+\order{\frac1{a^2}}$ & $\frac{1-\ln a}{a}-\frac1{a^2}$ & $\checkmark$\\[3pt]
+3 & $\frac{\ln x}x$ & $-\frac{\ln^2a}{2a}+\frac{2\ln a}a-\frac3a+\frac{\pi^2}{3a}+\order{\frac{\ln a}{a^2}}$ & $\frac{-\frac12\ln^2a+2\ln a-3+\frac{\pi^2}3}{a}-\frac{\ln a+1}{a^2}$ & $\checkmark$\\[3pt]
+3 & $\ln x$ & $\frac16-\frac{\ln a}{2a}+\frac1{4a}+\order{\frac1{a^2}}$ & $\frac16-\frac{\ln a}{2a}+\frac1{4a}-\frac1{2a^2}$ & $\checkmark$\\[3pt]
+3 & $\ln^2x$ & $\frac13\ln a-\frac{11}9-\frac{\ln^2a}{2a}+\frac{2\ln a}a-\frac9{4a}+\frac{\pi^2}{3a}+\order{\frac{\ln a}{a^2}}$ & $\frac{\ln a}3-\frac{11}9+\frac{-\frac12\ln^2a+2\ln a-\frac94+\frac{\pi^2}3}{a}-\frac{\ln a}{a^2}$ & $\checkmark$\\[3pt]
+\midrule
+4 & $\frac1x$ & $-\frac12+\order{\frac1a}$ & $-\frac12+\frac1a$ & $\checkmark$\\[3pt]
+4 & $\frac{\ln x}x$ & $\frac34+\order{\frac1a}$ & $\frac34+\frac{\ln a-1}a$ & $\checkmark$\\[3pt]
+4 & $\ln x$ & $\frac16\ln a-\frac{11}{36}+\order{\frac1a}$ & $\frac{\ln a}6-\frac{11}{36}+\frac1{2a}$ & $\checkmark$\\[3pt]
+4 & $\ln^2x$ & $\frac16\ln^2a-\frac89\ln a+\frac74-\frac{\pi^2}9+\order{\frac{\ln a}a}$ & $\frac{\ln^2a}6-\frac{8\ln a}9+\frac74-\frac{\pi^2}9+\frac{\ln a-1}a$ & $\checkmark$\\[3pt]
+\midrule
+5 & $\frac1x$ & $-\frac16a+\order{\frac1a}$ & $-\frac a6+\frac1{2a}$ & $\checkmark$\\[3pt]
+5 & $\frac{\ln x}x$ & $\frac{17}{36}a+\order{\frac1a}$ & $\frac{17a}{36}+\frac{2\ln a-3}{4a}$ & $\checkmark$\\[3pt]
+5 & $\ln x$ & $\frac1{24}a-\frac16+\order{\frac1a}$ & $\frac a{24}-\frac16+\frac1{4a}$ & $\checkmark$\\[3pt]
+5 & $\ln^2x$ & $-\frac{13}{144}a-\frac13\ln a+\frac59+\order{\frac{\ln a}a}$ & $-\frac{13a}{144}-\frac{\ln a}3+\frac59+\frac{2\ln a-3}{4a}$ & $\checkmark$\\
+\bottomrule
+\end{longtable}
+}
+\noindent All 12 entries agree exactly with the paper through the order it keeps.
+As an independent numerical test, \eqref{eq:ch09-master} was evaluated by direct quadrature (over $\eta'$ and $z$) at $a=50$ and $a=400$;
+the difference from the exact expansion is $\lesssim10^{-19}$ (script \texttt{numcheck.py}).
+
+% ---------------------------------------------------------------------
+\subsection{Table 5\texorpdfstring{$'$}{'}: definition sign, within the approximation (II.44)}
+\label{sec:t18-tab5}
+
+\subsubsection{The rule}
+Consider a row term $c\,a^pa'^q\,\square^n\times f$. In \eqref{eq:ch09-Mpp}, \eqref{eq:ch09-Mpm} and \eqref{eq:ch09-mode} set $e^{i\vec k\cdot\Delta\vec x}\to1$
+and $u(\eta')\to u(0)$, which is the simplification \eqII{44} \tP:
+\begin{equation*}
+-\frac1{a^4}\int_{\eta_i}^0\!d\eta'\!\int\!d^3x'\,M^2_1(x;x')\,u(\eta',k)\,e^{i\vec k\cdot(\vec x\,'-\vec x)}\ \longrightarrow\ -\frac{u(0,k)}{a^4}\int_{\eta_i}^0\!d\eta'\!\int\!d^3x'\,M^2_1(x;x').
+\end{equation*}
+In the Table-X convention one then has \tD
+\begin{equation}
+\chixR\ni-\frac{u(0)}{a^4}\,ic\,\frac{1}{(4\pi)^4}\,a^p\square^n\!\int\! d^4x'\,a'^q\,\Delta f=\frac{H^4u(0)}{16\pi^2}\times\Big\{c\,a^{p-4}\,\Dop^nS_q[f]\Big\},
+\label{eq:ch09-rule}
+\end{equation}
+using $(4\pi)^4=16\pi^2\cdot16\pi^2$. In the definition sign the entry is $-c\,a^{p-4}\Dop^nS_q[f]$.
+The factor $(aa')^3(a^2+a'^2)$ is the sum of $(p,q)=(5,3)$ and $(3,5)$; since $p+q=8$, $a^{p-4}=a^{4-q}$, which corresponds to the factor $a^{4-K}$ of \PII, Eq.~(45) \tP:
+\begin{equation*}
+-u(0,k)\frac{iH^8a^{4-K}}{(4\pi)^4}\Big(\frac{\square}{H^2}\Big)^N\int_{\eta_i}^0d\eta'\,a'^K\!\int d^3x'\Big\{f\Big(\frac{y_{++}}4\Big)-f\Big(\frac{y_{+-}}4\Big)\Big\}.
+\end{equation*}
+Rows containing $\nabla^2$ vanish under \eqII{44}, because $\int d^3x'\,F(|\vec x-\vec x\,'|)$ does not depend on $\vec x$.
+
+\paragraph{Examples by hand} (Table-X convention). We use $\Dop(\ln^2a)=-2-6\ln a$, $\Dop(\ln a)=-3$, $\Dop(1)=0$
+(e.g.\ $\partial_a\ln^2a=2\ln a/a$, $\partial_a^2\ln^2a=(2-2\ln a)/a^2$, so $\Dop\ln^2a=-(2-2\ln a+8\ln a)$):
+\begin{equation}
+\begin{aligned}
+(aa')^4\square^2\times(-6\ln^2x):&\quad -6\,\Dop^2S_4[\ln^2x]=-6\,\Dop\big(\tfrac73-\ln a\big)=-6\cdot3=-18,\\
+(aa')^4H^4\times(-108\ln x):&\quad -108\big(\tfrac{\ln a}6-\tfrac{11}{36}\big)=33-18\ln a,\\
+(aa')^3(a^2+a'^2)H^4\times\big(-\tfrac{32}{3x}\big):&\quad -\tfrac{32}3\big[a\,S_3[\tfrac1x]+a^{-1}S_5[\tfrac1x]\big]=-\tfrac{32}3\big[1-\ln a-\tfrac16\big]=-\tfrac{80}9+\tfrac{32}3\ln a.
+\end{aligned}
+\label{eq:ch09-t5ex}
+\end{equation}
+In the first line $\Dop\big(\tfrac16\ln^2a-\tfrac89\ln a\big)=\tfrac{-2-6\ln a}6+\tfrac83=\tfrac73-\ln a$.
+Since $\Dop a^n=-n(n+3)a^n$ preserves the power of $a$, truncating before or after acting with $\Dop$ is consistent.
+
+\subsubsection{Table 5\texorpdfstring{$'$}{'}}
+\PII's Table~5 \tP{} lists, in the Table-X convention, the coefficient of $u(0,k)\times\frac{H^4}{16\pi^2}$ of
+\begin{equation*}
+-\frac{u(0,k)}{a^4}\,\frac{iH^8}{(4\pi)^4}\int d^4x'\,(\text{Ext.\ Operator})\times\Big\{f\Big(\frac{y_{++}}4\Big)-f\Big(\frac{y_{+-}}4\Big)\Big\}
+\end{equation*}
+for each contributing nonlocal term. Our result:
+
+{\small\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}l l l@{}}
+\caption{Table 5 of \PII{} (Table-X convention) and Table 5$'$ of this work (definition sign), in units of $\frac{H^4u(0,k)}{16\pi^2}$, non-falling part.}\label{tab:ch09-t5}\\
+\toprule
+External operator $\times f(x)$ & Paper II (Table-X conv.) & \textbf{This work, definition sign}\\
+\midrule
+\endfirsthead
+\toprule
+External operator $\times f(x)$ & Paper II (Table-X conv.) & \textbf{This work, definition sign}\\
+\midrule
+\endhead
+$(aa')^4\square^3/H^2\times-\frac{\ln x}{3x}$ & $0$ & $0$\\
+$(aa')^4\square^2\times\frac{26\ln x}{3x}$ & $0$ & $0$\\
+$(aa')^4\square^2\times\frac{38}{3x}$ & $0$ & $0$\\
+$(aa')^4\square^2\times-6\ln^2x$ & $-18$ & $+18$\\
+$(aa')^4\square^2\times-18\ln x$ & $0$ & $0$\\
+$(aa')^4H^2\square\times-\frac{6\ln x}{x}$ & $0$ & $0$\\
+$(aa')^4H^2\square\times\frac4x$ & $0$ & $0$\\
+$(aa')^4H^2\square\times-4\ln x$ & $2$ & $-2$\\
+$(aa')^4H^4\times\frac{4\ln x}{x}$ & $3$ & $-3$\\
+$(aa')^4H^4\times\frac{18}x$ & $-9$ & $9$\\
+$(aa')^4H^4\times-108\ln x$ & $33-18\ln a$ & $-33+18\ln a$\\
+$(aa')^3(a^2{+}a'^2)\square^3/H^2\times\frac{\ln x}{6x}$ & $\frac{-325+12\pi^2}{27}+\frac{14}3\ln a-\frac23\ln^2a$ & $\frac{325-12\pi^2}{27}-\frac{14}3\ln a+\frac23\ln^2a$\\[2pt]
+$(aa')^3(a^2{+}a'^2)\square^2\times-\frac{\ln x}{3x}$ & $\frac{85-12\pi^2}{27}-4\ln a+\frac23\ln^2a$ & $\frac{-85+12\pi^2}{27}+4\ln a-\frac23\ln^2a$\\[2pt]
+$(aa')^3(a^2{+}a'^2)\square^2\times\frac1{6x}$ & $\frac89-\frac23\ln a$ & $-\frac89+\frac23\ln a$\\[2pt]
+$(aa')^3(a^2{+}a'^2)H^2\square\times-\frac{2\ln x}{3x}$ & $\frac{160-12\pi^2}{27}-\frac{10}3\ln a+\frac23\ln^2a$ & $\frac{-160+12\pi^2}{27}+\frac{10}3\ln a-\frac23\ln^2a$\\[2pt]
+$(aa')^3(a^2{+}a'^2)H^2\square\times\frac5x$ & $\frac{55}3-10\ln a$ & $-\frac{55}3+10\ln a$\\[2pt]
+$(aa')^3(a^2{+}a'^2)H^2\square\times-18\ln x$ & $-15+18\ln a$ & $15-18\ln a$\\[2pt]
+$(aa')^3(a^2{+}a'^2)H^4\times\frac{4\ln x}{3x}$ & $\frac{-91+12\pi^2}{27}+\frac83\ln a-\frac23\ln^2a$ & $\frac{91-12\pi^2}{27}-\frac83\ln a+\frac23\ln^2a$\\[2pt]
+$(aa')^3(a^2{+}a'^2)H^4\times-\frac{32}{3x}$ & $-\frac{80}9+\frac{32}3\ln a$ & $\frac{80}9-\frac{32}3\ln a$\\[2pt]
+$(aa')^3(a^2{+}a'^2)H^4\times(+18)$, corrected & ($-54$ not listed) & $0$ (analytic, Eq.~\eqref{eq:ch09-Delta})\\
+5 rows with $\nabla^2$ (incl.\ $\zeta$) & (not listed) & $0$ (under \eqII{44})\\
+\midrule
+\textbf{Total} & $\bm{0}$ & $\bm{0}$\\
+\bottomrule
+\end{longtable}
+}
+\noindent The code (\texttt{table5.py}) reproduces all 19 entries of the paper exactly in the Table-X convention \tC. The definition sign only multiplies each entry by $-1$.
+Individual terms grow as fast as $\pm\tfrac23\ln^2a$; in the total, the $\ln^2a$, $\ln a$, $\pi^2$ and constant parts cancel separately. In the definition sign the partial sums are
+\begin{equation}
+\begin{aligned}
+\ln^2a:&\quad \tfrac23(1-1-1+1)=0,\qquad
+\pi^2:\quad \tfrac{12}{27}(-1+1+1-1)=0,\\
+\ln a:&\quad 18-\tfrac{14}3+4+\tfrac23+\tfrac{10}3+10-18-\tfrac83-\tfrac{32}3=0,
+\end{aligned}
+\label{eq:ch09-t5sums}
+\end{equation}
+and for the constants $18-2-3+9-33+\tfrac{325-85-24-160-495+405+91+240}{27}=-11+11=0$.
+
+\begin{notebox}[Why is a cancellation at $k=0$ expected? \tA]
+The scalar couples to gravity only through derivatives ($\kappa h\partial\varphi\partial\varphi$). At the level of diagrams the self-mass-squared therefore has the structure
+$M^2(x;x')=\partial_\mu\partial'_\nu K^{\mu\nu}$. Consequently $\int d^4x'\,M^2_{\rm ret}(x;x')\cdot1$ leaves only terms from the initial surface ($\eta'=\eta_i$),
+i.e.\ terms that decay with time. The vanishing total of Table~5 is therefore a \emph{consistency test}: it tests the rows without $\nabla^2$.
+It does not test the $\nabla^2$ rows, and hence not the $\zeta$ row.
+\end{notebox}
+
+% ---------------------------------------------------------------------
+\subsection{Without the approximation (II.44): the full SK right-hand side}
+\label{sec:t18-full}
+
+\subsubsection{The justification of (II.44) does not hold term by term}
+\PII{} argues that $u(\eta')-u(0)$ and $e^{i\vec k\cdot\Delta\vec x}-1$ introduce at least two factors of $1/a'$ or $1/a$, and concludes from this that the $\nabla^2$ rows can be discarded.
+Two effects spoil this argument:
+\begin{itemize}[leftmargin=14pt]
+\item positive powers $x^j\propto(aa')^j$ and the prefactors $a^p$ multiply the contributions from the early-time region by powers of $a$;
+\item at early $\eta'$, $\ln|x|\simeq\ln\frac{a}{4a'}$, i.e.\ it contains $\ln a$.
+\end{itemize}
+
+\paragraph{Example by hand} \tD{} (Table-X convention). The $(p,q)=(4,2)$ part of row~10 contains $48\,x\ln x$. Take $\nabla^2\to-\khat^2$ and $u\to u(0)$. With
+$X_0=\tfrac14aa'\Delta\eta^2$ in \eqref{eq:ch09-master},
+\begin{equation}
+S_2[x\ln x]=-\frac12\cdot\frac2{15}\cdot\frac a4\int_1^a\!da'\,a'\Big(\frac1{a'}-\frac1a\Big)^5=-\frac a{60}\Big(\frac13-\frac5{2a}+\ldots\Big)=-\frac{a}{180}+\frac1{24}+\ldots
+\label{eq:ch09-S2xlnx}
+\end{equation}
+(with $a'=as$ the integral is $a^{-3}\int_\epsilon^1s^{-4}(1-s)^5ds=\tfrac13-\tfrac5{2a}+\ldots$). Hence
+\begin{equation}
+\begin{aligned}
+&\text{row 10:}\quad 48\,(-\khat^2)\Big(-\frac a{180}\Big)=+\frac4{15}\khat^2a,\\
+&\text{row 11:}\quad 12\,(-\khat^2)\,\Dop\Big(-\frac a{180}\Big)=12(-\khat^2)\frac{4a}{180}=-\frac4{15}\khat^2a,
+\end{aligned}
+\label{eq:ch09-row1011}
+\end{equation}
+using $\Dop a=-4a$. Each of them alone \textbf{grows like $a$}, which in \eqII{29} would give $\Phi_1\propto a$; they only cancel each other.
+Similarly, the $k^2$ corrections of the rows without derivatives give $\order{1}$ constants. A complete expansion is therefore needed instead of \eqII{44}.
+
+\subsubsection{Systematic expansion}
+We keep all $k$ dependence in \eqref{eq:ch09-mode}:
+\begin{equation}
+\begin{aligned}
+&\frac{u(\eta',k)}{u(0,k)}=(1-iw)\,e^{iw}=1+\frac{w^2}2+\frac{iw^3}3-\frac{w^4}8+\ldots\qquad\Big(w=\frac{\khat}{a'}\Big),\\
+&\Big\langle e^{i\vec k\cdot\vec r}\Big\rangle_{\rm angles}=\frac{\sin kr}{kr}=\sum_m\frac{(-1)^m(kr)^{2m}}{(2m+1)!},
+\end{aligned}
+\label{eq:ch09-kser}
+\end{equation}
+where the first expansion follows from the tree-order mode function \eqII{24}, $u(\eta,k)=\frac{H}{\sqrt{2k^3}}\big(1-\frac{ik}{aH}\big)e^{ik/(aH)}$, and
+\begin{equation}
+\begin{aligned}
+&\frac{\square}{H^2}\to\chixDk=\Dop-\frac{\khat^2}{a^2},\qquad \nabla^2\to-k^2,\\
+&\frac1x\to\chixDk\ln x,\qquad \frac{\ln x}x\to\chixDk\Big(\frac12\ln^2x-\ln x\Big)+3\ln x .
+\end{aligned}
+\label{eq:ch09-krules}
+\end{equation}
+Every term reduces to integrals of the type \eqref{eq:ch09-master}--\eqref{eq:ch09-elem}: the power of $a'$ shifts (by $-n$ for the $w^n$ term) and a weight $r^{2m}$
+appears (integrals of $z^{2+2m}$). The integrand is an entire function of $k$ and the region is compact ($\eta'\in[-1/H,\eta]$, $r\le\Delta\eta$);
+hence the expansion converges at every fixed $a$ and for every $k$. The code \texttt{kexp.py} expands each row exactly up to $k^{10}$.
+
+\paragraph{Check by hand: row 3, order $\khat^2$} (Table-X convention). The $\khat^2$ part of $S_4$ has two sources: the $u$ correction $\tfrac{w^2}{2}$ and $-\tfrac{k^2r^2}6$
+(the latter with radial weight $\tfrac12\cdot\tfrac15$). Using $\int_1^a da'\,\Delta\eta^3\to\tfrac12$ and $\int_1^a da'\,a'^2\Delta\eta^5\to\tfrac12$ (both $\int_1^\infty a'^{-3}da'$ at leading order),
+\begin{equation}
+\begin{aligned}
+G^{(2)}_4[\ln x]&=\frac1{12}\int\!da'\,\Delta\eta^3-\frac1{60}\int\!da'\,a'^2\Delta\eta^5\to\frac1{24}-\frac1{120}=\frac1{30},\\
+G^{(2)}_4[\ln^2x]&\ni\Big(\frac1{12}-\frac1{60}\Big)\ln a=\frac{\ln a}{15},
+\end{aligned}
+\label{eq:ch09-G2}
+\end{equation}
+where the $\ln a$ in the second expression comes from $\ln X_0\simeq\ln a$ at early times. Then
+$-108\ln x\to-\tfrac{18}5$; $\tfrac{4\ln x}x\to4\big[\Dop\big(\tfrac{\ln a}{30}\big)+\tfrac3{30}\big]=4\big[-\tfrac1{10}+\tfrac1{10}\big]=0$; and $\tfrac{18}x\to0$.
+Row~3 thus gives $-\tfrac{18}5$ at order $\khat^2$, the same as the code. The early-time $\ln|x|\ni\ln a$ is decisive here.
+
+\subsubsection{Table 5\texorpdfstring{$''$}{''}: the non-falling part, row by row (definition sign)}
+Values in units of $\frac{H^4u(0,k)}{16\pi^2}$; only terms that do not fall off as $a\to\infty$ are shown. The order $k^1$ vanishes in every row.
+The entries were computed with \texttt{kexp.py} and \texttt{extract.py} \tC. The hand checks in this section reproduce only parts of the table: the row-3 entry at order $\khat^2$, the growing parts $\mp\tfrac4{15}\khat^2a$ of rows~10 and~11, and the row-12 entry at order $\khat^4$ (below the table).
+
+{\small\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}r l l l l l@{}}
+\caption{Table 5$''$: non-falling part of $\chixR$ beyond \eqII{44}, definition sign.}\label{tab:ch09-t5pp}\\
+\toprule
+\# & Row & $\khat^0$ ($=$ Table 5$'$) & $\khat^2$ & $\khat^3$ & $\khat^4$\\
+\midrule
+\endfirsthead
+\toprule
+\# & Row & $\khat^0$ ($=$ Table 5$'$) & $\khat^2$ & $\khat^3$ & $\khat^4$\\
+\midrule
+\endhead
+0 & $(aa')^4\square^3/H^2$ & 0 & 0 & 0 & 0\\
+1 & $(aa')^4\square^2$ & $18$ & 0 & 0 & 0\\
+2 & $(aa')^4H^2\square$ & $-2$ & 0 & 0 & 0\\
+3 & $(aa')^4H^4$ & $18\ln a-27$ & $\tfrac{18}5$ & $2i$ & $-\tfrac{27}{35}$\\[2pt]
+4 & $(aa')^3(a^2{+}a'^2)\square^3/H^2$ & $\tfrac23\ln^2a-\tfrac{14}3\ln a+\tfrac{325-12\pi^2}{27}$ & $\tfrac29\ln a-\tfrac{22}{27}$ & $\tfrac{2i(6\ln a-23)}{81}$ & $\tfrac{239}{900}-\tfrac{\ln a}{15}$\\[2pt]
+5 & $(aa')^3(a^2{+}a'^2)\square^2$ & $-\tfrac23\ln^2a+\tfrac{14}3\ln a+\tfrac{12\pi^2-109}{27}$ & $\tfrac{22}{27}-\tfrac29\ln a$ & $\tfrac{2i(23-6\ln a)}{81}$ & $\tfrac{\ln a}{15}-\tfrac{239}{900}$\\[2pt]
+6 & $(aa')^3(a^2{+}a'^2)H^2\square$ & $-\tfrac23\ln^2a-\tfrac{14}3\ln a+\tfrac{12\pi^2-250}{27}$ & $-\tfrac29\ln a-\tfrac{20}{27}$ & $-\tfrac{2i(6\ln a+19)}{81}$ & $\tfrac{\ln a}{15}+\tfrac{181}{900}$\\[2pt]
+7 & $(aa')^3(a^2{+}a'^2)H^4$ & $\tfrac23\ln^2a-\tfrac{40}3\ln a+\tfrac{331-12\pi^2}{27}$ & $\tfrac29\ln a-\tfrac{61}{27}$ & $\tfrac{4i(3\ln a-31)}{81}$ & $\tfrac{629}{900}-\tfrac{\ln a}{15}$\\[2pt]
+8 & $(aa')^3H^2\nabla^2$ & 0 & $\tfrac25$ & 0 & $\tfrac3{35}$\\[2pt]
+9 & $(aa')^3\nabla^2\square$ & 0 & 0 & 0 & 0\\
+10 & $(aa')^2(a^2{+}a'^2)H^2\nabla^2$ & 0 & $1-\tfrac{4a}{15}$ & 0 & $\tfrac15-\tfrac{12a}{175}$\\[2pt]
+11 & $(aa')^2(a^2{+}a'^2)\nabla^2\square$ & 0 & $\tfrac{4a}{15}-2$ & 0 & $\tfrac{12a}{175}-\tfrac25$\\[2pt]
+12 & $(aa')^2\nabla^4$ (corrected) & 0 & 0 & 0 & $-\tfrac1{70}$\\
+\midrule
+ & \textbf{Total} & $\bm0$ & $\bm0$ & $\bm0$ & $\bm0$\\
+\bottomrule
+\end{longtable}
+}
+\begin{itemize}[leftmargin=14pt]
+\item Column $\khat^2$: the terms $\propto a$ cancel between rows~10 and~11, the $\ln a$ terms among rows~4--7. For the constants:
+$\tfrac{18}5-\tfrac{22}{27}+\tfrac{22}{27}-\tfrac{20}{27}-\tfrac{61}{27}+\tfrac25+1-2=4-3-1=0$.
+\item Column $\khat^4$ (definition sign): rows~3+8 give $-\tfrac{24}{35}$, rows~4--7 give $+\tfrac{9}{10}$, rows~10--11 give $-\tfrac15$, row~12 gives $-\tfrac1{70}$.
+The total is $\tfrac{-48+63-14-1}{70}=0$. \textbf{Without the $\zeta$ row there would be no cancellation.} The row-12 entry comes from the term
+$24x^2\ln x$, which is the same in the printed and the corrected row (next item); the correction $8\ln x-16x\ln x$ contributes only falling terms (\S\ref{sec:t18-zeta}).
+\item The $\tfrac1{70}$ of row~12 comes from $24x^2\ln x$. By hand, with $S_2[x^2\ln x]=\tfrac12\cdot\tfrac8{105}\cdot\tfrac{a^2}{16}\int da'\,a'^2\Delta\eta^7$ and
+$\int_1^a da'\,a'^2\Delta\eta^7\to\int_1^\infty a'^{-5}da'=\tfrac14$:
+$24\,a^{-2}\khat^4\cdot\tfrac12\cdot\tfrac8{105}\cdot\tfrac{a^2}{16}\cdot\tfrac14=24\cdot\tfrac{8}{2\cdot105\cdot16\cdot4}\,\khat^4=\tfrac{\khat^4}{70}$ (Table-X convention).
+\item Code output (total, non-falling part, each $\khat^n$): \texttt{k\^{}0 \ldots{} k\^{}10: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}. The same holds for the printed table (see \S\ref{sec:t18-zeta}).
+At orders $k^6$--$k^{10}$ the terms $\propto a$ of rows~10--11 ($\pm\frac{8a}{441}\khat^6,\dots$) also cancel each other.
+\end{itemize}
+
+\paragraph{Numerical check} \tC. The series truncated at $k^8$ was compared with direct quadrature using the exact $u(\eta',k)$ and $\sin kr/kr$ at $a=200$.
+The difference is $10^{-10}$--$2\times10^{-8}$ at $\khat=0.3$ and $5\times10^{-6}$--$9.3\times10^{-4}$ at $\khat=1$, i.e.\ of the size of the expected $\khat^9$ truncation error
+(script \texttt{numcheck\_k.py}; numbers in \S\ref{sec:t18-code}).
+
+\subsubsection{Contribution of the \texorpdfstring{$\zeta$}{zeta} correction}
+\label{sec:t18-zeta}
+The correction is $\delta\Tab=(aa')^2\nabla^4\,(8\ln x-16x\ln x)$ (corrected minus printed row~12). In the Table-X convention, by hand \tD{}
+(with $S_2[\ln x]=\tfrac16\int_1^ada'\,\Delta\eta^3=\tfrac16(\tfrac12-\tfrac3a+\ldots)$ and \eqref{eq:ch09-S2xlnx}):
+\begin{equation}
+\begin{aligned}
+8\,a^{-2}\khat^4\,S_2[\ln x]&=8a^{-2}\khat^4\cdot\frac16\Big(\frac12-\frac3a+\ldots\Big)=\frac23\frac{\khat^4}{a^2}+\ldots,\\
+-16\,a^{-2}\khat^4\,S_2[x\ln x]&=-16a^{-2}\khat^4\Big(-\frac a{180}+\frac1{24}-\ldots\Big)=\frac4{45}\frac{\khat^4}a-\frac23\frac{\khat^4}{a^2}+\ldots
+\end{aligned}
+\label{eq:ch09-zetahand}
+\end{equation}
+The exact result from the code \tC{} is
+\begin{equation}
+\delta\chixR=\khat^4\Big(\frac4{45a}-\frac4{3a^3}\Big)+\khat^6\Big(\frac{4}{175a}-\frac{2}{15a^3}\Big)+\ldots\qquad\text{(Table-X convention)}.
+\label{eq:ch09-zetacode}
+\end{equation}
+\textbf{There are only falling terms.}
+
+\paragraph{A rigorous bound for every $k$} \tD. We have $|u(\eta')/u(0)|=\sqrt{1+k^2\eta'^2}\le\sqrt{1+\khat^2}$, $|e^{i\vec k\cdot\vec r}|=1$ and $|x|\le\tfrac14aa'\Delta\eta^2$. Therefore
+\begin{equation}
+|\delta\chixR_{\ln x}|\le C\frac{\khat^4}{a^2}\int_1^a\!da'\Big(\frac1{a'}-\frac1a\Big)^3\le C'\frac{\khat^4}{a^2},\qquad
+|\delta\chixR_{x\ln x}|\le C\frac{\khat^4}{a}\int_1^a\!da'\,a'\Big(\frac1{a'}-\frac1a\Big)^5\le C'\frac{\khat^4}{a},
+\label{eq:ch09-bound}
+\end{equation}
+where the constants contain the factor $\sqrt{1+\khat^2}$. Thus the $\zeta$ correction goes to zero at late times \emph{for every mode}, without relying on the $k$ expansion.
+
+% ---------------------------------------------------------------------
+\subsection{Late-time effect on the mode function}
+\label{sec:t18-late}
+
+\subsubsection{Local part}
+Inserting the local part of \eqref{eq:ch09-Mpp} into \eqref{eq:ch09-mode} gives
+\begin{equation*}
+-\frac1{a^4}\int d^4x'\,(-a^4)(\ldots)\,\delta^4(x-x')\,\Phi_0(x')=\Big[\Delta\alpha_1\square^2+\Delta\alpha_2H^2\square+\Delta\alpha_3H^2\frac{\nabla^2}{a^2}\Big]\Phi_0 ,
+\end{equation*}
+where the factor $\kappa^2$ of \eqref{eq:ch09-retarded} has been stripped off, as in \eqref{eq:ch09-mode}.
+Since $\square\Phi_0=0$, only \eqII{34} remains:
+\begin{equation}
+\chixR_{\rm local}=-\Delta\alpha_3\frac{H^2k^2}{a^2}\,u(\eta,k)\ \to\ 0 .
+\label{eq:ch09-local}
+\end{equation}
+The corrected finite parts of $\beta_{2,3}$ only shift the definition of $\Delta\alpha_{2,3}$ and leave no physical trace.
+
+\subsubsection{The complete late-time form of the right-hand side}
+Summing all rows (definition sign, through $k^{10}$) one finds that \textbf{there is no $a^{-1}$ term at all} \tD\tC:
+\begin{equation}
+\begin{split}
+\chixR=\frac{H^4u(0,k)}{16\pi^2}\Bigg\{&\frac{1}{a^2}\Big[12-\Big(8\ln a+\frac{103}3\Big)\khat^2-8i\khat^3+\frac83\khat^4+\frac{32i}{45}\khat^5-\frac2{15}\khat^6+\ldots\Big]\\
+&-\frac{12i\khat^3}{a^3}+\order{\frac{\ln a}{a^4}}\Bigg\}.
+\end{split}
+\label{eq:ch09-Rlate}
+\end{equation}
+(The code also gives the next $a^{-2}$ coefficients, $-\tfrac{16i}{1575}\khat^7-\tfrac4{945}\khat^8-\tfrac{16i}{6615}\khat^9+\tfrac{11}{14175}\khat^{10}$, and no other $a^{-3}$ term through $k^{10}$.)
+Had the printed $\zeta$ row been used (in the definition sign), $\chixR$ would contain the additional terms
+\begin{equation}
+\frac{H^4u(0)}{16\pi^2}\Big[\frac4{45}\frac{\khat^4}{a}+\frac4{175}\frac{\khat^6}{a}+\frac{2i}{135}\frac{\khat^7}{a}-\frac{8}{1323}\frac{\khat^8}{a}+\ldots\Big].
+\label{eq:ch09-Rprinted}
+\end{equation}
+The correction therefore accelerates the fall-off of the right-hand side from $1/a$ to $\ln a/a^2$. We record this as an \emph{observation}, not as an independent proof of the correction.
+The $a^{-2}$ coefficient of \eqref{eq:ch09-Rlate} depends on the initial time and on $\khat$ (e.g.\ the oscillatory $\khat^3,\khat^5$ parts). According to the discussion in \PII,
+this order cannot be distinguished from corrections to the initial state.
+
+\subsubsection{Solving for \texorpdfstring{$\Phi_1$}{Phi1}}
+Define $\theta\equiv a\partial_a$, so that $\partial_t=H\theta$. For $\chixR\propto a^nP(\ln a)$,
+\begin{equation}
+(\theta^2+3\theta)\big[a^nP\big]=a^n\big[(n^2+3n)P+(2n+3)P'+P''\big],
+\label{eq:ch09-theta}
+\end{equation}
+with $P'\equiv dP/d\ln a$ (from $\theta(a^nP)=a^n(nP+P')$). \eqII{30}--\eqII{33} follow from this:
+\begin{itemize}[leftmargin=14pt]
+\item $n=0$: $3P'+P''=R$. For $R=\ln a$, $P=\tfrac16\ln^2a-\tfrac19\ln a$ \eqII{30}; for $R=1$, $P=\tfrac13\ln a$ \eqII{31}.
+\item $n=-1$: $-2P+P'+P''=R$. For $R=1$, $P=-\tfrac12$ \eqII{33}; for $R=\ln a$, $P=-\tfrac12\ln a-\tfrac14$ \eqII{32}.
+\item $n=-2$: $-2P-P'+P''=\alpha\ln a+\beta$ $\Rightarrow$ $P=-\tfrac\alpha2\ln a+\tfrac\alpha4-\tfrac\beta2$.
+\item $n=-3$ is resonant with the homogeneous solution: $-3P'+P''=R$ $\Rightarrow$ $P\propto\ln a$ (for constant $R$, $P=-\tfrac R3\ln a$).
+\end{itemize}
+(The leading terms agree with \PII{} \eqII{30}--\eqII{33}, which keep only the leading late-time terms and the arbitrary constants.)
+In \eqref{eq:ch09-Rlate} $\alpha=-8\khat^2$ and $\beta=12-\tfrac{103}3\khat^2-8i\khat^3+\ldots$, so that $P=4\khat^2\ln a-2\khat^2-6+\tfrac{103}{6}\khat^2+4i\khat^3+\ldots$
+The $k^2/a^2$ term on the left-hand side adds to the $a^{-2}$ solution only terms of order $a^{-4}$. Dividing by $H^2$ (from $\partial_t^2+3H\partial_t=H^2(\theta^2+3\theta)$) we obtain \tD
+\begin{equation}
+\Phi_1=C\,u(\eta,k)+\frac{H^2u(0,k)}{16\pi^2}\Bigg\{\frac{1}{a^2}\Big[4\khat^2\ln a-6+\frac{91}6\khat^2+4i\khat^3+\ldots\Big]+\frac{4i\khat^3\ln a}{a^3}+\ldots\Bigg\}.
+\label{eq:ch09-Phi1}
+\end{equation}
+$C\,u(\eta,k)$ is a homogeneous solution (an exact solution of the left-hand side); it is not fixed by the late-time analysis and is a field-strength renormalization.
+The other homogeneous solution, $u^*$, is removed by the initial condition. Hence
+\begin{equation}
+\boxed{\;\Phi(\eta,k)=u(\eta,k)+\kappa^2\Phi_1\ \xrightarrow{\ a\to\infty\ }\ u(0,k)\Big\{1+\frac{\kappa^2H^2}{16\pi^2}\Big[\tilde C+\order{\frac{\ln a}{a^2}}\Big]\Big\}\;}
+\label{eq:ch09-final}
+\end{equation}
+There is no term that grows ($\ln a$, $\ln^2a$, $a$) or that drifts like $\ln a$.%
+\footnote{Bookkeeping of $\kappa^2$: $\Phi_1$ is sourced by the self-mass-squared with $\kappa^2$ stripped off (see below \eqII{29}), so $\chixR$ and $\Phi_1$ in
+Eqs.~\eqref{eq:ch09-rule}--\eqref{eq:ch09-Phi1} carry no factor $\kappa^2$; $\kappa^2$ enters only through $\Phi=u+\kappa^2\Phi_1$ (\PII, Eq.~(23)), and
+$\tilde C\equiv16\pi^2C/H^2$. The original working report wrote an explicit $\kappa^2$ also in $\chixR$ and in the particular solution, i.e.\ it counted $\kappa^2$
+twice; that slip has been removed in this write-up. It does not affect the conclusion.}
+
+\subsubsection{Answer to the question: the effect of our corrections}
+
+{\small\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.26\textwidth} >{\raggedright\arraybackslash}p{0.30\textwidth} >{\raggedright\arraybackslash}p{0.38\textwidth}@{}}
+\caption{Effect of the corrections found in Tasks 3--17 on the SK kernel and on the mode function.}\label{tab:ch09-effect}\\
+\toprule
+Correction & Effect on the SK kernel & Effect on the mode function\\
+\midrule
+\endfirsthead
+\toprule
+Correction & Effect on the SK kernel & Effect on the mode function\\
+\midrule
+\endhead
+Overall sign ($M^2_{\rm def}=-M^2_{\rm printed}$) & every Table~5 entry is reversed & $\Phi_1\to-\Phi_1$. Since the total is $0$, not observable at late times; only the sign of falling terms changes.\\
+$\zeta$: $+8\ln x-16x\ln x$ ($\nabla^4$) & zero under \eqII{44}; in the full calculation only falling terms & none ($\le C\khat^4/a$ for every $k$). It removes the $\khat^{4,6,\dots}/a$ tails.\\
+$72\gamma_2$ ($-54\to+18$) & analytic; $\Delta f\equiv0$ & identically none\\
+finite parts of $\beta_2,\beta_3$ & absorbed into $\Delta\alpha_{2,3}$ & none; $-\Delta\alpha_3H^2k^2u/a^2\to0$\\
+duplicated row & already single in \PII{} Table~1 & none\\
+\bottomrule
+\end{longtable}
+}
+\noindent In the summary (Chapter~\ref{ch:summary}) the rows of this table are the findings S1 (overall sign), S2 ($\zeta$ row), S3 ($72\gamma_2$),
+B3--B6 (finite parts of $\beta_{2,3}$ and $\alpha_{2,3}$) and C19 (duplicated row).
+
+% ---------------------------------------------------------------------
+\subsection{Comparison with Paper II}
+\label{sec:t18-comp}
+
+{\small\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.34\textwidth} >{\raggedright\arraybackslash}p{0.44\textwidth} >{\raggedright\arraybackslash}p{0.14\textwidth}@{}}
+\caption{Claims of \PII{} versus this work.}\label{tab:ch09-comp}\\
+\toprule
+Claim of \PII & This work & \\
+\midrule
+\endfirsthead
+\toprule
+Claim of \PII & This work & \\
+\midrule
+\endhead
+\eqII{15}--\eqII{21}: SK rules and effective equation & derived; in the definition sign Eqs.~\eqref{eq:ch09-Mpm}--\eqref{eq:ch09-retarded} & $\checkmark$\\
+\eqII{34}: only $\Delta\alpha_3$ contributes & same & $\checkmark$\\
+\eqII{35}--\eqII{41} & same; $1/x$ also directly with $\delta(y)$ & $\checkmark$\\
+Tables 2--4 (12 entries) & exactly the same & $\checkmark$\\
+Table 5 (19 entries), total 0 & same in the Table-X convention; $-1$ times in the definition sign, total 0 & $\checkmark$\\
+\eqII{44}: $\nabla^2$ rows negligible & false term by term (rows 10, 11 $\propto\khat^2a$); cancellation in the sum verified through $k^{10}$ & justification \texttimes{} / result $\checkmark$\\
+RHS falls at least like $\ln^na/a$ & with the corrected table $\ln a/a^2$; with the printed one $\khat^4/a$ & $\checkmark$\\
+no significant one-loop correction & Eq.~\eqref{eq:ch09-final} & $\checkmark$\\
+\bottomrule
+\end{longtable}
+}
+
+\begin{discbox}[Discrepancies with \PII{} found in this task]
+\begin{itemize}[leftmargin=12pt,itemsep=2pt]
+\item \textbf{Sign convention} (inherited from \PI): the printed Table~1 and Table~5 are in the Table-X convention; in the definition sign of \eqI{168} every Table~5 entry is $-1$ times the printed one.
+The total, and hence the physical conclusion, is unchanged.
+\item \textbf{Justification of \eqII{44}}: the argument that the deviations $u(\eta')-u(0)$ and $e^{i\vec k\cdot\Delta\vec x}-1$ only produce falling terms fails term by term
+(rows 10 and 11 grow like $\mp\frac4{15}\khat^2a$). The conclusion survives because all non-falling terms cancel in the sum, order by order through $k^{10}$.
+\item \textbf{Fall-off of the right-hand side}: with the corrected $\zeta$ row the right-hand side falls like $\ln a/a^2$; with the printed $\zeta$ row like $\khat^4/a$.
+Both are consistent with the paper's statement that the right-hand side falls off at least like $1/a$ times powers of $\ln a$.
+\item \textbf{Inputs}: the $\zeta$-row and $72\gamma_2$ corrections of Tasks~13 and~17 and the finite shifts of $\beta_{2,3}$ do not change any late-time result.
+\item (Write-up remark) \PII, \eqII{10} and \eqII{34}, prints $\Delta\alpha_2\square$ and $\Delta\alpha_3\nabla^2/a^2$ without the factor $H^2$ (cf.\ \eqI{160}, \eqI{167}).
+\end{itemize}
+\end{discbox}
+
+% ---------------------------------------------------------------------
+\subsection{Code checks (separate from the analytic derivation)}
+\label{sec:t18-code}
+
+All scripts are in \texttt{code/09\_schwinger\_keldysh/} and run standalone (\texttt{python3 <script>.py}); their outputs are stored in \texttt{expected\_output/}.
+All were re-run for these notes and agree with the outputs recorded in the original command log. Units $H=1$; unless stated otherwise the scripts work in the Table-X convention.
+A first attempt, which used sympy's generic integration followed by a series expansion in $1/a$, failed (sympy cannot expand the resulting polylogarithms asymptotically);
+it was replaced by the closed-form engine below.
+
+\begin{description}[leftmargin=10pt,style=nextline]
+\item[\texttt{engine.py}] Helper module: Eqs.~\eqref{eq:ch09-master}--\eqref{eq:ch09-Cp}. Exact $a'$ integrals in terms of harmonic numbers and $-\pi^2/6$, expanded in $\epsilon=1/a$;
+functions $W(q,f,\nu,m,j)$ (with $a'$-power shift $\nu$ and weight $r^{2m}$), $\Dop$, truncation in powers of $a$.
+\item[\texttt{rows.py}] Helper module: the corrected Table~1 (13 rows) and the printed differences (rows 7 and 12).
+\item[\texttt{tables234.py}] Tables~2--4: 12/12 entries equal to the paper (\texttt{paper - derived = 0}); the next order is listed (Table~\ref{tab:ch09-234}).
+\item[\texttt{numcheck.py}] Exact expansion versus mpmath quadrature (30 digits) at $a=50$ and $400$ for seven integrals, including $\ln^2x$, $x\ln x$, $x^2\ln x$, an $r^2$ weight and a $u$-correction power.
+Largest difference $1.0\times10^{-19}$ (on values of order $10^{-2}$--$10^{2}$).
+\item[\texttt{table5.py}] Table~5: 19/19 entries equal to the paper (Table-X convention); total $0$.
+\item[\texttt{kexp.py N}] Full $k$ dependence (exact $u(\eta',k)$, $\sin kr/kr$, $\chixDk$, $\nabla^2$ rows) through $k^N$. For $N=2,4,6,10$ the non-falling total vanishes at every order $k^0\ldots k^N$.
+Per-row output for $N=4$ in the Table-X convention equals $-1$ times Table~\ref{tab:ch09-t5pp}.
+\item[\texttt{numcheck\_k.py}] $k^8$ series versus quadrature with the exact $k$ dependence at $a=200$; the differences are the $k^9$ truncation error (table below).
+\item[\texttt{analysis2.py}, \texttt{analysis3.py}] Printed versus corrected table (through $k^6$): non-falling part $0$ in both; their difference is the $\zeta$ contribution
+$\khat^4\big(\frac4{45a}-\frac4{3a^3}\big)+\khat^6\big(\frac4{175a}-\frac2{15a^3}\big)$ (Table-X convention); the corrected total has no $a^{-1}$ term.
+\item[\texttt{extract.py}] Coefficients of Eq.~\eqref{eq:ch09-Rlate} and Table~\ref{tab:ch09-t5pp} in the definition sign through $k^{10}$; no $a^{-1}$ term in the corrected table; the $a^{-1}$ tails of the printed table, Eq.~\eqref{eq:ch09-Rprinted}.
+\end{description}
+
+\paragraph{Output of \texttt{numcheck.py}} (exact expansion through $a^{-6}$ minus quadrature):
+
+{\small\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}l r r r@{}}
+\toprule
+integral $(q,f,\nu,m,j)$ & $a$ & value & difference\\
+\midrule
+$(3,\ln^2x,0,0,0)$ & 50 & $1.044668871077\times10^{-1}$ & $8.6\times10^{-20}$\\
+ & 400 & $7.625801334629\times10^{-1}$ & $-1.9\times10^{-22}$\\
+$(5,\ln^2x,0,0,0)$ & 50 & $-5.238650049936$ & $7.0\times10^{-20}$\\
+ & 400 & $-3.754710715781\times10^{1}$ & $-1.2\times10^{-20}$\\
+$(4,\ln x,0,0,0)$ & 50 & $3.563487231269\times10^{-1}$ & $1.3\times10^{-22}$\\
+ & 400 & $6.942703073305\times10^{-1}$ & $-2.1\times10^{-22}$\\
+$(2,x^2\ln x,0,0,2)$ & 50 & $1.233789926420$ & $4.5\times10^{-22}$\\
+ & 400 & $9.304066793408\times10^{1}$ & $3.1\times10^{-20}$\\
+$(4,x\ln x,0,0,1)$ & 50 & $-5.943089724365\times10^{-1}$ & $-1.4\times10^{-22}$\\
+ & 400 & $-6.257239585918$ & $-4.7\times10^{-24}$\\
+$(3,\ln^2x,2,1,0)$ & 50 & $2.119909445756\times10^{-2}$ & $1.0\times10^{-19}$\\
+ & 400 & $1.070846521197\times10^{-1}$ & $5.0\times10^{-24}$\\
+$(5,\ln x,0,1,0)$ & 50 & $7.131707669239\times10^{-2}$ & $1.3\times10^{-23}$\\
+ & 400 & $9.385859378877\times10^{-2}$ & $-3.8\times10^{-23}$\\
+\bottomrule
+\end{longtable}
+}
+
+\paragraph{Output of \texttt{numcheck\_k.py}} ($a=200$; $|$series to $k^8$ $-$ quadrature$|$):
+
+{\small\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}l c c c@{}}
+\toprule
+integral $(q,g,j)$ & series value at $\khat=0.3$ & $|\text{diff}|$, $\khat=0.3$ & $|\text{diff}|$, $\khat=1$\\
+\midrule
+$(4,\ln x,0)$ & $0.58286138936+4.836236\times10^{-4}\,i$ & $9.9\times10^{-11}$ & $5.0\times10^{-6}$\\
+$(3,\ln^2x,0)$ & $0.54090541361+1.722483\times10^{-3}\,i$ & $3.6\times10^{-10}$ & $1.8\times10^{-5}$\\
+$(2,x^2\ln x,2)$ & $23.318751186+0.11626771\,i$ & $1.9\times10^{-8}$ & $9.3\times10^{-4}$\\
+$(4,x\ln x,1)$ & $-3.0218131879-7.179600\times10^{-3}\,i$ & $1.2\times10^{-9}$ & $5.8\times10^{-5}$\\
+\bottomrule
+\end{longtable}
+}
+
+\paragraph{Output of \texttt{extract.py}} (definition sign). Non-falling totals $k^0\ldots k^{10}$: all $0$, for the corrected and for the printed table.
+$a^{-2}$ coefficients of the corrected total: $k^0$: $12$; $k^1$: $0$; $k^2$: $-8\ln a-\frac{103}3$; $k^3$: $-8i$; $k^4$: $\frac83$; $k^5$: $\frac{32i}{45}$; $k^6$: $-\frac2{15}$;
+$k^7$: $-\frac{16i}{1575}$; $k^8$: $-\frac4{945}$; $k^9$: $-\frac{16i}{6615}$; $k^{10}$: $\frac{11}{14175}$. The only $a^{-3}$ coefficient is $-12i$ at $k^3$.
+Printed minus corrected: no $a^{-2}$ terms; $a^{-1}$ terms $\frac4{45}$ ($k^4$), $\frac4{175}$ ($k^6$), $\frac{2i}{135}$ ($k^7$), $-\frac8{1323}$ ($k^8$), $-\frac{i}{525}$ ($k^9$), $\frac4{8019}$ ($k^{10}$);
+$a^{-3}$ terms $-\frac43$, $-\frac2{15}$, $-\frac i9$, $\frac2{35}$, $\frac{i}{45}$, $-\frac4{567}$ at the same orders.
+Per-row $k^6$ coefficients (not shown in Table~\ref{tab:ch09-t5pp}): row~3 $\frac4{63}$; rows~4--7 $\frac{4\ln a}{567}-\frac{593}{19845}$, $\frac{593}{19845}-\frac{4\ln a}{567}$, $-\frac{4\ln a}{567}-\frac{43}{2205}$, $\frac{4\ln a}{567}-\frac{167}{2205}$;
+row~8 $-\frac4{189}$; row~10 $\frac{8a}{441}-\frac2{35}$; row~11 $\frac4{35}-\frac{8a}{441}$; row~12 $-\frac4{945}$.
+
+% ---------------------------------------------------------------------
+\subsection{Calculation record}
+\label{sec:t18-record}
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{Input:} the corrected Table~X of Task~17 ($\zeta$ row $\tfrac{34}3\ln x-40x\ln x+\dots$; $\gamma_2$ constant $+18$) and the definition sign $-iM^2_{\rm nonlocal}=-\Tab$.
+Tables~2--5 of \PII{} were not used as input.
+\item \textbf{SK:} $-iM^2_{+-}=+\Tab(y_{+-})$, $-iM^2_{--}=(-iM^2_{++})^*$, $-iM^2_{-+}=(-iM^2_{+-})^*$. The retarded kernel is $2\,\mathrm{Im}\,\Tab(y_{++})$ plus the local part; it is real and causal.
+Analytic terms drop out.
+\item \textbf{Tables 2--4:} re-derived in closed form; all correct. For $1/x$, \eqII{35} was confirmed directly with the light-cone $\delta$.
+\item \textbf{Table 5$'$:} in the definition sign every entry is $-1$ times the paper's; total $0$.
+\item \textbf{Without \eqII{44}:} the non-falling part is $0$ at every order through $k^{10}$. The term-by-term justification of \eqII{44} is invalid (rows 10--11: $\mp\tfrac4{15}\khat^2a$).
+The $24x^2\ln x$ term of the $\zeta$ row, which is the same in the printed and the corrected row, is needed for the $k^4$ cancellation.
+\item \textbf{Effect of the corrections:} none at late times. The sign reverses $\Phi_1$. $\zeta$ enters only falling terms and removes the $1/a$ tail. $72\gamma_2$ and the $\beta$ shifts leave no trace.
+\item \textbf{Result:} $\Phi\to u(0,k)\{1+\frac{\kappa^2H^2}{16\pi^2}[\tilde C+\order{\ln a/a^2}]\}$. One-loop quantum gravity does not change the mode function of the massless minimally coupled scalar significantly at late times.
+\item \textbf{Open point:} no general proof of the cancellation at all orders in $k$ was given; it is exact through $k^{10}$, and beyond that only the convergent-series argument is available. The $a^{-2}$ coefficients are sensitive to the initial state.
+\end{itemize}

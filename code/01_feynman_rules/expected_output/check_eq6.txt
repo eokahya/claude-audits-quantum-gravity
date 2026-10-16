@@ -1,0 +1,8 @@
+symbolic D=2: all entries zero -> True
+symbolic D=3: all entries zero -> True
+random rational D=4: all entries zero -> True
+random rational D=5: all entries zero -> True
+random rational D=6: all entries zero -> True
+conformal case, general D: True
+  order-2 coefficient of exact: c**2*(D - 4)*(D - 2)/8
+g_{mu rho} g^{rho nu} - delta == kappa^3 h_{mu rho} h^rho_sigma h^{sigma nu} (D=4 symbolic): True

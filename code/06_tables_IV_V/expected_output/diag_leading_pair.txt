@@ -1,0 +1,7 @@
+analytic leading-pair coefficient A'dC' at (4/y)^(D-1): -8
+  term: -24/(D - 2)**2  exponent D - 1  e= z**D/z
+  term: -6*D**2/(D - 2)**2  exponent D - 1  e= z**D/z
+  term: D/(D - 2)  exponent D - 1  e= z**D/z
+  term: D**3/(2*(D - 2)**2)  exponent D - 1  e= z**D/z
+  term: 22*D/(D - 2)**2  exponent D - 1  e= z**D/z
+  term: -D**2/(2*D - 4)  exponent D - 1  e= z**D/z

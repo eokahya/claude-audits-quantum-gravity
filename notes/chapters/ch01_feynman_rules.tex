@@ -1,0 +1,1598 @@
+% =====================================================================
+% Chapter 1: Lagrangian expansion and Feynman rules (Tasks 1 and 2)
+% =====================================================================
+\providecommand{\chAh}{\mathsf{h}}            % matrix (h)^mu_nu
+\providecommand{\chAone}{\mathbf{1}}          % unit matrix
+\providecommand{\chATr}{\operatorname{Tr}}    % matrix trace
+\providecommand{\chAdd}{\partial_1\!\cdot\partial_2}
+\providecommand{\chAdp}{\partial\phi\cdot\partial\phi}
+
+\chapter{Lagrangian expansion and Feynman rules: Eqs.~(I.6)--(I.8), Tables~I--II}
+\label{ch:feynman-rules}
+
+This chapter covers the first two steps of the re-derivation. Task~1 expands
+the scalar kinetic term of \PI{} to second order in the graviton field. Starting
+from the definitions alone, it recovers Eq.~\eqI{6}, together with the inverse
+metric \eqI{4} and the volume element \eqI{5}. Task~2 turns the expanded
+Lagrangian into the 3-point and 4-point vertex operators of Eqs.~\eqI{7},
+\eqI{8} and Tables~I and~II. Both steps are pure algebra. No propagator, partial
+integration or dimensional-regularization limit enters, and the spacetime
+dimension $D$ is kept general throughout.
+
+\paragraph{Labels and numbering.}
+\tP\ marks an expression given in the paper, \tD\ one derived here, \tA\ an
+assumption or convention, and \tC\ a check by computer algebra. The original
+reports used one label for every check, whether it was done by hand or by code.
+Here \tC\ is reserved for code checks. Cross-checks done by hand are presented
+separately as \emph{analytic checks}. A reference such as \eqI{6} means Eq.~(6)
+of \PI. When we display our own derived version of a numbered equation of the
+paper, it carries the tag \eqI{n}, or (I.n$'$) when our result differs from the
+printed one. Our intermediate equations are numbered automatically. Unnumbered
+displays introduced by ``\PI{} prints'' are retypings of the printed equations.
+
+\begin{resultbox}[Summary of the chapter]
+\begin{itemize}[leftmargin=1.2em,itemsep=1pt]
+\item \eqI{4}, \eqI{5} and \eqI{6} are reproduced exactly, term by term and
+sign by sign, for general $D$ and without any gauge or trace condition.
+\item Table~I, Eq.~\eqI{8} and rows 1, 3, 4 of Table~II are reproduced
+exactly.
+\item There are two sign misprints in the Feynman rules (C3 and C5 in Chapter~\ref{ch:summary}). The left-hand side of
+\eqI{7} should read $+\tfrac12\kappa a^{D-2}\partial_\alpha\phi\,\partial_\beta\phi\,h^{\alpha\beta}$;
+$V_1$ itself is correct. Table~II, row~2 should read
+$U_2=+\tfrac i4\kappa^2a^{D-2}\eta^{\alpha\rho}\eta^{\beta\sigma}\chAdd$.
+Task~3 (next chapter) shows that the paper's own Eq.~\eqI{33} uses
+$+\tfrac i4$, so the second misprint does not propagate.
+\item There are two minor typesetting slips that have no effect (C1 and C2): the first term of
+\eqI{1} is printed with $\partial_\mu\phi\,\partial_\mu\phi$, and the
+left-hand side of \eqI{6} is printed without its second $\phi$.
+\end{itemize}
+\end{resultbox}
+
+% =====================================================================
+\section{Task 1: expansion of the scalar kinetic term, Eq.~(I.6)}
+\label{sec:ch1-task1}
+
+\subsection{Goal, inputs and scope}
+
+\paragraph{Target.} \tP\ The target is Eq.~\eqI{6} of \PI{} (printed page
+124005-2). \PI{} prints
+\begin{equation*}
+\begin{aligned}
+-\tfrac12\partial_\mu\phi\,\partial_\nu g^{\mu\nu}\sqrt{-g}
+={}& -\tfrac12\partial_\mu\phi\,\partial_\nu\phi\,a^{D-2}
+\times\Big\{\eta^{\mu\nu}-\kappa h^{\mu\nu}+\tfrac12\eta^{\mu\nu}\kappa h
++\tfrac18\eta^{\mu\nu}\kappa^2h^2\\
+&-\tfrac14\eta^{\mu\nu}\kappa^2h^{\rho\sigma}h_{\rho\sigma}
+-\tfrac12\kappa^2hh^{\mu\nu}+\kappa^2h^{\mu\rho}h^{\nu}_{\rho}+O(\kappa^3)\Big\}.
+\end{aligned}
+\end{equation*}
+\begin{notebox}[Note on the printed left-hand side]
+On the left-hand side the second scalar field is missing in print: it reads
+$\partial_\nu g^{\mu\nu}$, not $\partial_\nu\phi\,g^{\mu\nu}$. The original Task~1
+report retyped the left-hand side as
+$-\tfrac12\partial_\mu\phi\,\partial_\nu\phi\,g^{\mu\nu}\sqrt{-g}$. We noticed the
+omission only when the printed page was re-read for this write-up. It is an
+evident typesetting slip. The right-hand side carries
+$\partial_\mu\phi\,\partial_\nu\phi$, and the only consistent reading of the
+left-hand side is the kinetic term \eqref{eq:ch1-G1} below. Nothing in the
+derivation depends on it.
+\end{notebox}
+Eq.~\eqI{6} is \emph{not used as an input at any step} of the derivation. It
+enters only in the final comparison (Sec.~\ref{sec:ch1-t1-compare}). Eqs.~\eqI{4}
+and \eqI{5} are not taken as inputs either. They are re-derived in
+Secs.~\ref{sec:ch1-t1-inverse} and~\ref{sec:ch1-t1-volume} and compared in
+Sec.~\ref{sec:ch1-t1-compare}.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=1.4em]
+\item[(In1)] \tP\ The scalar Lagrangian density. This is the first term of
+\eqI{1}, in the form stated in the task:
+\begin{equation*}
+\mathcal L_\phi=-\tfrac12\,\partial_\mu\phi\,\partial_\nu\phi\,g^{\mu\nu}\sqrt{-g}.
+\tag{In1}\label{eq:ch1-G1}
+\end{equation*}
+\emph{Note.} In Eq.~\eqI{1} the first term is printed as
+$-\tfrac12\partial_\mu\phi\,\partial_\mu\phi\,g^{\mu\nu}\sqrt{-g}$, i.e.\ with
+$\partial_\mu$ twice. This was confirmed on the printed page. It is a
+typesetting error: the only consistent reading that leaves no free index is
+$\partial_\mu\phi\,\partial_\nu\phi\,g^{\mu\nu}$. The report added that the
+left-hand side of \eqI{6} has this form. As noted above, the printed
+left-hand side of \eqI{6} in fact lacks the second $\phi$, while its
+right-hand side has $\partial_\mu\phi\,\partial_\nu\phi$. We use \eqref{eq:ch1-G1}.
+\item[(In2)] \tP\ The background, Eq.~\eqI{2}:
+$ds^2=a^2(-d\eta^2+d\vec x\cdot d\vec x)$, $a(\eta)=-1/(H\eta)$. Only the
+signature of the metric and $a>0$ are used from this equation.
+\item[(In3)] \tP\ The metric perturbation, Eq.~\eqI{3}:
+\begin{equation*}
+g_{\mu\nu}=a^2(\eta)\big(\eta_{\mu\nu}+\kappa h_{\mu\nu}\big),\qquad \kappa^2=16\pi G.
+\tag{In3}\label{eq:ch1-G3}
+\end{equation*}
+\end{itemize}
+
+\paragraph{Scope.} The Einstein--Hilbert term is not expanded. No partial
+integration is performed and no field equations are used. Vertex operators,
+\eqI{7}, \eqI{8} and the tables are not treated here; they are the subject of
+Sec.~\ref{sec:ch1-task2}. All equalities in this section are pointwise
+algebraic identities (see Sec.~\ref{sec:ch1-t1-order}).
+
+% ---------------------------------------------------------------------
+\subsection{Notation and conventions}
+\label{sec:ch1-t1-notation}
+
+\paragraph{Signature and dimension.} \tA\ The spacetime dimension $D$ is
+general. The indices $\mu,\nu,\ldots$ run over $0,1,\ldots,D-1$, and
+$x^\mu=(x^0,\vec x)=(\eta,\vec x)$. The line element (In2) gives the
+signature $(-,+,\ldots,+)$:
+\begin{equation}
+\begin{aligned}
+&\eta_{\mu\nu}=\mathrm{diag}\big(-1,\underbrace{+1,\ldots,+1}_{D-1}\big),\qquad
+\eta^{\mu\rho}\eta_{\rho\nu}=\delta^\mu{}_\nu,\\
+&\eta^{\mu\nu}\eta_{\mu\nu}=\delta^\mu{}_\mu=D,\qquad
+\det(\eta_{\mu\nu})=-1 .
+\end{aligned}
+\label{eq:ch1-eta}
+\end{equation}
+The last equality holds for every $D$, because there is a single negative entry
+on the diagonal. Since $\eta_{\mu\nu}$ is symmetric,
+$\eta_{\mu\rho}\eta^{\rho\nu}=\delta_\mu{}^\nu$ holds as well. Repeated indices,
+one up and one down, are summed. The only exception is stated explicitly in
+Sec.~\ref{sec:ch1-t1-leibniz}.
+
+\paragraph{Two different $\eta$'s and the symbol $H$.} An $\eta$ without
+indices is conformal time ($x^0$). The Minkowski metric is always written with
+indices, $\eta_{\mu\nu}$ or $\eta^{\mu\nu}$. On the conformal patch
+$-\infty<\eta<0$, so
+\begin{equation}
+a(\eta)=-\frac{1}{H\eta}>0 .
+\label{eq:ch1-apos}
+\end{equation}
+$H$ is reserved for the Hubble constant, so the perturbation matrix is denoted
+by $\chAh$ below. We also write $g\equiv\det(g_{\mu\nu})$.
+
+\paragraph{The indices of the perturbation are moved with $\eta$ only.} \tA
+\begin{equation}
+h\equiv\eta^{\mu\nu}h_{\mu\nu},\qquad
+h^\mu{}_\nu\equiv\eta^{\mu\rho}h_{\rho\nu},\qquad
+h_\mu{}^\nu\equiv h_{\mu\rho}\eta^{\rho\nu},\qquad
+h^{\mu\nu}\equiv\eta^{\mu\rho}\eta^{\nu\sigma}h_{\rho\sigma}.
+\label{eq:ch1-raise}
+\end{equation}
+The indices of $h_{\mu\nu}$ are raised and lowered with $\eta_{\mu\nu}$ and
+$\eta^{\mu\nu}$, not with the full metric $g_{\mu\nu}$. The distinction is not
+merely formal. For example, the object raised with the full metric would be,
+using \eqref{eq:ch1-ginv} derived below,
+\begin{equation}
+g^{\mu\alpha}g^{\nu\beta}h_{\alpha\beta}
+=a^{-4}\big(\eta^{\mu\alpha}-\kappa h^{\mu\alpha}\big)\big(\eta^{\nu\beta}-\kappa h^{\nu\beta}\big)h_{\alpha\beta}+O(\kappa^2)
+=a^{-4}\big[h^{\mu\nu}-2\kappa\,h^{\mu\alpha}h_\alpha{}^\nu\big]+O(\kappa^2).
+\label{eq:ch1-fullraise}
+\end{equation}
+Here we used $h^{\mu\alpha}\eta^{\nu\beta}h_{\alpha\beta}=h^{\mu\alpha}h_\alpha{}^\nu$
+and $\eta^{\mu\alpha}h^{\nu\beta}h_{\alpha\beta}=h^{\nu\beta}h^\mu{}_\beta=h^{\mu\alpha}h_\alpha{}^\nu$
+(for the second see \eqref{eq:ch1-I2form}). This object carries a factor
+$a^{-4}$ and an extra term at order $\kappa$. The coefficients in \eqI{6}
+therefore make sense only in the convention \eqref{eq:ch1-raise}. Throughout
+this chapter $h^{\mu\nu}$ has the meaning \eqref{eq:ch1-raise}.
+
+\paragraph{Symmetry; no gauge or trace condition.} \tA\ We use
+$h_{\mu\nu}=h_{\nu\mu}$. This has two consequences:
+\begin{equation}
+h^{\mu\nu}=h^{\nu\mu},\qquad
+h_\nu{}^\mu=h_{\nu\rho}\eta^{\rho\mu}=\eta^{\mu\rho}h_{\rho\nu}=h^\mu{}_\nu .
+\label{eq:ch1-symm}
+\end{equation}
+The middle step uses $h_{\nu\rho}=h_{\rho\nu}$ and $\eta^{\rho\mu}=\eta^{\mu\rho}$.
+The horizontal order of the indices of a mixed component is therefore
+irrelevant. The $h^\nu_\rho$ that the paper writes without staggering in \eqI{6}
+is the same object as $h_\rho{}^\nu=h^\nu{}_\rho$. No gauge condition and no
+trace condition ($h=0$) is imposed in the general derivation; $h_{\mu\nu}$ is an
+arbitrary symmetric tensor.
+
+\paragraph{Contraction identities.} \tD
+\begin{equation}
+\begin{aligned}
+&\text{(a)}\quad \eta_{\mu\rho}h^{\rho\nu}=\eta_{\mu\rho}\eta^{\rho\alpha}\eta^{\nu\beta}h_{\alpha\beta}=\delta_\mu{}^\alpha\eta^{\nu\beta}h_{\alpha\beta}=h_{\mu\beta}\eta^{\beta\nu}=h_\mu{}^\nu,\\[2pt]
+&\text{(b)}\quad \eta_{\mu\rho}h^\rho{}_\nu=\eta_{\mu\rho}\eta^{\rho\alpha}h_{\alpha\nu}=\delta_\mu{}^\alpha h_{\alpha\nu}=h_{\mu\nu},\\[2pt]
+&\text{(c)}\quad h^{\mu\rho}\eta_{\rho\sigma}=\eta^{\mu\alpha}\eta^{\rho\beta}\eta_{\rho\sigma}h_{\alpha\beta}=\eta^{\mu\alpha}\delta^\beta{}_\sigma h_{\alpha\beta}=\eta^{\mu\alpha}h_{\alpha\sigma}=h^\mu{}_\sigma,\\[2pt]
+&\text{(d)}\quad h^\mu{}_\rho\eta^{\rho\nu}=\eta^{\mu\alpha}h_{\alpha\rho}\eta^{\rho\nu}=\eta^{\mu\alpha}\eta^{\nu\rho}h_{\alpha\rho}=h^{\mu\nu}.
+\end{aligned}
+\label{eq:ch1-contr}
+\end{equation}
+Each line uses only \eqref{eq:ch1-eta} and \eqref{eq:ch1-raise}. In (c) the
+symmetry of $\eta$ gives $\eta^{\rho\beta}\eta_{\rho\sigma}=\delta^\beta{}_\sigma$.
+
+\paragraph{Matrix notation and traces.} \tD\ Define
+$(\chAh)^\mu{}_\nu\equiv h^\mu{}_\nu$, with the row index up and the column index
+down. In this arrangement matrix multiplication always contracts a lower index
+with an upper one: $(\chAh^2)^\mu{}_\nu=h^\mu{}_\rho h^\rho{}_\nu$. The traces are
+\begin{gather}
+\chATr\chAh=h^\mu{}_\mu=\eta^{\mu\rho}h_{\rho\mu}=h, \label{eq:ch1-tr1}\\
+\chATr\chAh^2=h^\mu{}_\rho h^\rho{}_\mu
+=\eta^{\mu\alpha}h_{\alpha\rho}\,\eta^{\rho\beta}h_{\beta\mu}
+=h_{\alpha\rho}\big(\eta^{\rho\beta}\eta^{\alpha\mu}h_{\beta\mu}\big)
+=h_{\alpha\rho}h^{\rho\alpha}
+=h_{\alpha\rho}h^{\alpha\rho}
+=h_{\rho\sigma}h^{\rho\sigma}. \label{eq:ch1-tr2}
+\end{gather}
+In the third step $\eta^{\rho\beta}\eta^{\alpha\mu}h_{\beta\mu}=h^{\rho\alpha}$
+(both indices raised with $\eta$). The fourth step uses the symmetry
+$h^{\rho\alpha}=h^{\alpha\rho}$. The last step renames the dummy indices,
+$\alpha\to\rho$ and $\rho\to\sigma$.
+
+There are therefore two distinct second-order scalars. One is
+$h^2\equiv(h)^2=(\chATr\chAh)^2$, the square of the trace. The other is
+$h^{\rho\sigma}h_{\rho\sigma}=\chATr\chAh^2$, the full contraction. In general
+they differ. For example, if only $h_{01}=h_{10}=b$ is non-zero, then $h=0$.
+On the other hand $h^{01}=\eta^{00}\eta^{11}h_{01}=-b$, so
+$h^{\rho\sigma}h_{\rho\sigma}=2h^{01}h_{01}=-2b^2\neq0$.
+
+\paragraph{Perturbative order and the meaning of the equalities.} \tA
+\label{sec:ch1-t1-order}
+\begin{itemize}[leftmargin=1.4em]
+\item $h_{\mu\nu}$ is an order-one field and $\kappa$ is the expansion
+parameter. $O(\kappa^n)$ denotes terms with at least $n$ factors of
+$\kappa h$. The expansions are formal power series in $\kappa$. The Neumann
+series also converges for $\|\kappa\chAh\|<1$, but the derivation does not need
+convergence.
+\item All equalities in this section are pointwise, algebraic equalities
+between local functions of $x$. No distributions, no partial integration and no
+dimensional-regularization limit appear.
+\item $D$ appears only as the matrix size and in the exponents of $a^D$ and
+$a^{D-2}$. No step uses a particular value of $D$. This task has no pole
+factor, so no finite contribution of the type ``pole $\times\,O(D-4)$'' can arise.
+Even so, no $D$-dependent term has been dropped. The only terms dropped are
+those that are strictly $O(\kappa^3)$, independently of $D$.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\subsection{The inverse metric: from (In3) to \texorpdfstring{$g^{\mu\nu}$}{g\textasciicircum\{mu nu\}}}
+\label{sec:ch1-t1-inverse}
+
+\paragraph{Factorization.} \tD\ In (In3) write
+$\eta_{\mu\nu}=\eta_{\mu\rho}\delta^\rho{}_\nu$ and, by
+\eqref{eq:ch1-contr}(b), $h_{\mu\nu}=\eta_{\mu\rho}h^\rho{}_\nu$:
+\begin{equation}
+g_{\mu\nu}=a^2\big(\eta_{\mu\rho}\delta^\rho{}_\nu+\kappa\,\eta_{\mu\rho}h^\rho{}_\nu\big)=a^2\,\eta_{\mu\rho}\big(\delta^\rho{}_\nu+\kappa h^\rho{}_\nu\big).
+\label{eq:ch1-factor}
+\end{equation}
+With the matrices $(G)_{\mu\nu}=g_{\mu\nu}$, $(N)_{\mu\nu}=\eta_{\mu\nu}$ and
+$(N^{-1})^{\mu\nu}=\eta^{\mu\nu}$ this reads $G=a^2N(\chAone+\kappa\chAh)$. Using
+$(ABC)^{-1}=C^{-1}B^{-1}A^{-1}$ and $(a^2)^{-1}=a^{-2}$ for the scalar $a^2$:
+\begin{equation}
+G=a^2\,N\,(\chAone+\kappa\chAh)\quad\Longrightarrow\quad G^{-1}=a^{-2}\,(\chAone+\kappa\chAh)^{-1}N^{-1}.
+\label{eq:ch1-Ginv}
+\end{equation}
+
+\paragraph{Series for the matrix inverse.} \tD
+\begin{equation}
+(\chAone+\kappa\chAh)(\chAone-\kappa\chAh+\kappa^2\chAh^2)
+=\chAone+(\kappa\chAh-\kappa\chAh)+(\kappa^2\chAh^2-\kappa^2\chAh^2)+\kappa^3\chAh^3
+=\chAone+\kappa^3\chAh^3 .
+\label{eq:ch1-neumann-prod}
+\end{equation}
+Since $\chAh$ commutes with its own powers, the product in the reverse order gives
+the same result. Multiplying \eqref{eq:ch1-neumann-prod} from the left by
+$(\chAone+\kappa\chAh)^{-1}$ gives
+$\chAone-\kappa\chAh+\kappa^2\chAh^2=(\chAone+\kappa\chAh)^{-1}+\kappa^3(\chAone+\kappa\chAh)^{-1}\chAh^3$.
+Therefore
+\begin{equation}
+(\chAone+\kappa\chAh)^{-1}=\chAone-\kappa\chAh+\kappa^2\chAh^2+O(\kappa^3),\qquad\text{next term: }-\kappa^3\chAh^3 .
+\label{eq:ch1-neumann}
+\end{equation}
+
+\paragraph{Components.} \tD\ Inserting \eqref{eq:ch1-neumann} into
+\eqref{eq:ch1-Ginv} and writing out the $\mu\nu$ component:
+\begin{equation}
+g^{\mu\nu}=(G^{-1})^{\mu\nu}=a^{-2}\big[\delta^\mu{}_\rho-\kappa h^\mu{}_\rho+\kappa^2h^\mu{}_\sigma h^\sigma{}_\rho+O(\kappa^3)\big]\eta^{\rho\nu}.
+\label{eq:ch1-ginv-comp}
+\end{equation}
+Term by term: $\delta^\mu{}_\rho\eta^{\rho\nu}=\eta^{\mu\nu}$; by
+\eqref{eq:ch1-contr}(d), $h^\mu{}_\rho\eta^{\rho\nu}=h^{\mu\nu}$; and by
+\eqref{eq:ch1-contr}(d) with $\mu\to\sigma$,
+$h^\mu{}_\sigma h^\sigma{}_\rho\eta^{\rho\nu}=h^\mu{}_\sigma h^{\sigma\nu}$.
+Renaming the dummy index $\sigma\to\rho$ in the last term:
+\begin{equation*}
+\boxed{\;g^{\mu\nu}=\frac{1}{a^2}\Big(\eta^{\mu\nu}-\kappa h^{\mu\nu}+\kappa^2h^\mu{}_\rho h^{\rho\nu}+O(\kappa^3)\Big)\;}
+\qquad\text{next term: }-\kappa^3h^\mu{}_\rho h^\rho{}_\sigma h^{\sigma\nu}.
+\tag{I.4}\label{eq:ch1-ginv}
+\end{equation*}
+
+\noindent\tD\ The $\kappa^2$ term is symmetric under $\mu\leftrightarrow\nu$.
+By \eqref{eq:ch1-contr}(c),
+$h^\mu{}_\rho h^{\rho\nu}=h^{\mu\beta}\eta_{\beta\rho}h^{\rho\nu}$. Exchange
+$\mu\leftrightarrow\nu$ and rename the dummies $\beta\leftrightarrow\rho$. This
+gives $h^{\nu\rho}\eta_{\rho\beta}h^{\beta\mu}=h^{\mu\beta}\eta_{\beta\rho}h^{\rho\nu}$,
+using $h^{\nu\rho}=h^{\rho\nu}$, $h^{\beta\mu}=h^{\mu\beta}$ and
+$\eta_{\rho\beta}=\eta_{\beta\rho}$. So $g^{\mu\nu}$ is symmetric, as it must be.
+
+\paragraph{Independent derivation by coefficient matching.} \tD\ Independently
+of the series, take the ansatz with unknown coefficients $A^{\mu\nu}$,
+$B^{\mu\nu}$
+\begin{equation}
+g^{\mu\nu}=a^{-2}\big(\eta^{\mu\nu}+\kappa A^{\mu\nu}+\kappa^2B^{\mu\nu}+O(\kappa^3)\big).
+\label{eq:ch1-ansatz}
+\end{equation}
+Multiplying by (In3), $a^2a^{-2}=1$, and order by order
+\begin{equation*}
+g_{\mu\rho}g^{\rho\nu}=\eta_{\mu\rho}\eta^{\rho\nu}
++\kappa\big(\eta_{\mu\rho}A^{\rho\nu}+h_{\mu\rho}\eta^{\rho\nu}\big)
++\kappa^2\big(\eta_{\mu\rho}B^{\rho\nu}+h_{\mu\rho}A^{\rho\nu}\big)+O(\kappa^3)\overset{!}{=}\delta_\mu{}^\nu .
+\end{equation*}
+\begin{itemize}[leftmargin=1.4em]
+\item $\kappa^1$: $\eta_{\mu\rho}A^{\rho\nu}=-h_\mu{}^\nu$. Contracting with
+$\eta^{\lambda\mu}$ and using $\eta^{\lambda\mu}\eta_{\mu\rho}=\delta^\lambda{}_\rho$
+gives $A^{\lambda\nu}=-\eta^{\lambda\mu}h_{\mu\sigma}\eta^{\sigma\nu}=-h^{\lambda\nu}$.
+\item $\kappa^2$: $\eta_{\mu\rho}B^{\rho\nu}=-h_{\mu\rho}A^{\rho\nu}=+h_{\mu\rho}h^{\rho\nu}$.
+The same contraction gives
+$B^{\lambda\nu}=\eta^{\lambda\mu}h_{\mu\rho}h^{\rho\nu}=h^\lambda{}_\rho h^{\rho\nu}$.
+\end{itemize}
+The result coincides with \eqref{eq:ch1-ginv} and was obtained without the
+Neumann series.
+
+\paragraph{Analytic check: $g_{\mu\rho}g^{\rho\nu}=\delta_\mu{}^\nu+O(\kappa^3)$.}
+Multiply (In3) explicitly by the truncated \eqref{eq:ch1-ginv}:
+\begin{equation}
+\begin{aligned}
+g_{\mu\rho}g^{\rho\nu}
+&=a^2\big(\eta_{\mu\rho}+\kappa h_{\mu\rho}\big)\,a^{-2}\big(\eta^{\rho\nu}-\kappa h^{\rho\nu}+\kappa^2h^\rho{}_\sigma h^{\sigma\nu}\big)\\
+&=\underbrace{\eta_{\mu\rho}\eta^{\rho\nu}}_{\kappa^0}
++\kappa\underbrace{\big(-\eta_{\mu\rho}h^{\rho\nu}+h_{\mu\rho}\eta^{\rho\nu}\big)}_{\kappa^1}
++\kappa^2\underbrace{\big(\eta_{\mu\rho}h^\rho{}_\sigma h^{\sigma\nu}-h_{\mu\rho}h^{\rho\nu}\big)}_{\kappa^2}
++\kappa^3h_{\mu\rho}h^\rho{}_\sigma h^{\sigma\nu}.
+\end{aligned}
+\label{eq:ch1-ggcheck}
+\end{equation}
+\begin{itemize}[leftmargin=1.4em]
+\item $\kappa^0$: $\delta_\mu{}^\nu$.
+\item $\kappa^1$: \eqref{eq:ch1-contr}(a) gives $-h_\mu{}^\nu$ and the definition
+\eqref{eq:ch1-raise} gives $+h_\mu{}^\nu$. They sum to zero.
+\item $\kappa^2$: by \eqref{eq:ch1-contr}(b), $\eta_{\mu\rho}h^\rho{}_\sigma=h_{\mu\sigma}$,
+so $h_{\mu\sigma}h^{\sigma\nu}-h_{\mu\rho}h^{\rho\nu}=0$ ($\sigma\to\rho$).
+\item $\kappa^3$: $h_{\mu\rho}h^\rho{}_\sigma h^{\sigma\nu}$ remains, because
+\eqref{eq:ch1-ginv} was truncated. The discarded term
+$-\kappa^3a^{-2}h^\rho{}_\alpha h^\alpha{}_\beta h^{\beta\nu}$, multiplied by
+$a^2\eta_{\mu\rho}$, gives exactly $-\kappa^3h_{\mu\alpha}h^\alpha{}_\beta h^{\beta\nu}$
+and would cancel this remainder.
+\end{itemize}
+\begin{equation}
+g_{\mu\rho}g^{\rho\nu}=\delta_\mu{}^\nu+\kappa^3h_{\mu\rho}h^\rho{}_\sigma h^{\sigma\nu}=\delta_\mu{}^\nu+O(\kappa^3).
+\label{eq:ch1-ggres}
+\end{equation}
+Since $g_{\mu\nu}$ and the truncated $g^{\mu\nu}$ are symmetric,
+$g^{\nu\rho}g_{\rho\mu}=g_{\mu\rho}g^{\rho\nu}$. The left inverse is therefore
+satisfied to the same order.
+
+% ---------------------------------------------------------------------
+\subsection{The volume element \texorpdfstring{$\sqrt{-g}$}{sqrt(-g)}}
+\label{sec:ch1-t1-volume}
+
+\paragraph{Determinant.} \tD\ Applying $\det(AB)=\det A\,\det B$,
+$\det(c\,\chAone)=c^D$ for $D\times D$ matrices, and \eqref{eq:ch1-eta} to
+\eqref{eq:ch1-Ginv}:
+\begin{gather}
+g=\det G=\det(a^2\chAone)\,\det N\,\det(\chAone+\kappa\chAh)=a^{2D}\cdot(-1)\cdot\det(\chAone+\kappa\chAh),
+\label{eq:ch1-detg}\\
+\sqrt{-g}=\sqrt{a^{2D}}\,\big[\det(\chAone+\kappa\chAh)\big]^{1/2}=a^D\big[\det(\chAone+\kappa\chAh)\big]^{1/2}.
+\label{eq:ch1-sqrtg}
+\end{gather}
+By \eqref{eq:ch1-apos}, $\sqrt{a^{2D}}=|a|^D=a^D$. Perturbatively,
+$\det(\chAone+\kappa\chAh)=1+O(\kappa)>0$, so the principal root is real and tends
+to $1$ as $\kappa\to0$.
+
+\paragraph{Route A: $\det=\exp\chATr\ln$.} \tD\ \emph{Identity.} Let
+$\lambda_i$ be the eigenvalues of $\chAh$, counted with multiplicity.
+Triangularization gives $\det(\chAone+\kappa\chAh)=\prod_i(1+\kappa\lambda_i)$ and
+$\chATr\chAh^n=\sum_i\lambda_i^n$. Hence
+$\chATr\ln(\chAone+\kappa\chAh)=\sum_i\ln(1+\kappa\lambda_i)$ and
+$\exp\chATr\ln(\chAone+\kappa\chAh)=\det(\chAone+\kappa\chAh)$. As a formal series the
+identity holds at every order.
+
+Following the expansion
+$\ln(\chAone+\kappa\chAh)=\kappa\chAh-\tfrac12\kappa^2\chAh^2+\tfrac13\kappa^3\chAh^3-\cdots$
+and using \eqref{eq:ch1-tr1}, \eqref{eq:ch1-tr2}:
+\begin{gather}
+\chATr\ln(\chAone+\kappa\chAh)=\kappa\chATr\chAh-\tfrac12\kappa^2\chATr\chAh^2+O(\kappa^3)=\kappa h-\tfrac12\kappa^2h_{\rho\sigma}h^{\rho\sigma}+O(\kappa^3),
+\label{eq:ch1-trln}\\
+\big[\det(\chAone+\kappa\chAh)\big]^{1/2}=\exp\!\big(\tfrac12\chATr\ln(\chAone+\kappa\chAh)\big)\equiv e^X,\qquad X=\tfrac12\kappa h-\tfrac14\kappa^2h_{\rho\sigma}h^{\rho\sigma}+O(\kappa^3).
+\label{eq:ch1-X}
+\end{gather}
+Since $e^X=1+X+\tfrac12X^2+O(X^3)$ and $X=O(\kappa)$, we have $X^3=O(\kappa^3)$.
+The square is
+\begin{equation*}
+X^2=\big(\tfrac12\kappa h\big)^2+2\big(\tfrac12\kappa h\big)\big(-\tfrac14\kappa^2h_{\rho\sigma}h^{\rho\sigma}\big)+\cdots=\tfrac14\kappa^2h^2+O(\kappa^3),
+\end{equation*}
+\begin{equation*}
+e^X=1+\underbrace{\tfrac12\kappa h-\tfrac14\kappa^2h_{\rho\sigma}h^{\rho\sigma}}_{X}+\underbrace{\tfrac12\cdot\tfrac14\kappa^2h^2}_{\frac12X^2}+O(\kappa^3),
+\end{equation*}
+\begin{equation*}
+\boxed{\;\sqrt{-g}=a^D\Big(1+\tfrac12\kappa h+\tfrac18\kappa^2h^2-\tfrac14\kappa^2h^{\rho\sigma}h_{\rho\sigma}+O(\kappa^3)\Big)\;}
+\tag{I.5}\label{eq:ch1-vol}
+\end{equation*}
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+Term & Origin (Route A) & Coefficient\\
+\midrule
+$\kappa h$ & first order of $X$: $\tfrac12\times\chATr\chAh$ & $\tfrac12$\\
+$\kappa^2h^2$ & second order of the exponential, $\tfrac12X^2$: $\tfrac12\times(\tfrac12)^2$ & $\tfrac18$\\
+$\kappa^2h^{\rho\sigma}h_{\rho\sigma}$ & second order of the logarithm: $\tfrac12\times(-\tfrac12)\chATr\chAh^2$ & $-\tfrac14$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The structure $h^2$ does not come from the logarithm at all. It comes only from
+the $\tfrac12X^2$ term of the exponential, and dropping that term would lose
+$\tfrac18\kappa^2h^2$. The structure $h^{\rho\sigma}h_{\rho\sigma}$ comes only
+from $\chATr\chAh^2$.
+
+\paragraph{Route B: Leibniz expansion (without $\chATr\ln$).}
+\label{sec:ch1-t1-leibniz}
+This analytic check reaches the same result by a different route. In this
+paragraph $i,j,k$ are explicit component labels and \emph{the summation
+convention is not used}; all sums are written out. For
+$M^i{}_j=\delta^i{}_j+\kappa h^i{}_j$,
+\begin{equation*}
+\det M=\sum_{\sigma\in S_D}\mathrm{sgn}(\sigma)\prod_{i=0}^{D-1}M^i{}_{\sigma(i)}.
+\end{equation*}
+Each $i$ with $\sigma(i)\neq i$ brings an off-diagonal factor
+$\kappa h^i{}_{\sigma(i)}=O(\kappa)$. Every non-identity permutation moves at
+least two indices. Up to $O(\kappa^2)$, only the identity and the
+transpositions $(ij)$ contribute; permutations moving three or more indices
+give at least $\kappa^3$:
+\begin{equation*}
+\begin{aligned}
+\text{identity:}\quad&\prod_i\big(1+\kappa h^i{}_i\big)=1+\kappa\sum_ih^i{}_i+\kappa^2\sum_{i<j}h^i{}_ih^j{}_j+O(\kappa^3),\\
+\text{transposition }(ij),\ \mathrm{sgn}=-1:\quad&-\big(\kappa h^i{}_j\big)\big(\kappa h^j{}_i\big)\prod_{k\neq i,j}\big(1+\kappa h^k{}_k\big)=-\kappa^2h^i{}_jh^j{}_i+O(\kappa^3).
+\end{aligned}
+\end{equation*}
+\begin{equation}
+\det M=1+\kappa\sum_ih^i{}_i+\kappa^2\sum_{i<j}\big(h^i{}_ih^j{}_j-h^i{}_jh^j{}_i\big)+O(\kappa^3).
+\label{eq:ch1-leibniz}
+\end{equation}
+Now $\sum_{i<j}h^i{}_ih^j{}_j=\tfrac12\big[(\sum_ih^i{}_i)^2-\sum_i(h^i{}_i)^2\big]$.
+Since $h^i{}_jh^j{}_i$ is symmetric under $i\leftrightarrow j$,
+$\sum_{i<j}h^i{}_jh^j{}_i=\tfrac12\big[\sum_{i,j}h^i{}_jh^j{}_i-\sum_i(h^i{}_i)^2\big]$.
+In the difference the $\sum_i(h^i{}_i)^2$ terms cancel:
+\begin{equation}
+\det(\chAone+\kappa\chAh)=1+\kappa h+\tfrac12\kappa^2\big(h^2-h_{\rho\sigma}h^{\rho\sigma}\big)+O(\kappa^3)\equiv1+\varepsilon.
+\label{eq:ch1-det2}
+\end{equation}
+Using $\sqrt{1+\varepsilon}=1+\tfrac12\varepsilon-\tfrac18\varepsilon^2+O(\varepsilon^3)$
+and $\varepsilon^2=\kappa^2h^2+O(\kappa^3)$:
+\begin{equation}
+\begin{aligned}
+\sqrt{1+\varepsilon}&=1+\tfrac12\kappa h+\underbrace{\tfrac14\kappa^2h^2}_{\frac12\varepsilon}-\underbrace{\tfrac14\kappa^2h_{\rho\sigma}h^{\rho\sigma}}_{\frac12\varepsilon}-\underbrace{\tfrac18\kappa^2h^2}_{-\frac18\varepsilon^2}+O(\kappa^3)\\
+&=1+\tfrac12\kappa h+\tfrac18\kappa^2h^2-\tfrac14\kappa^2h_{\rho\sigma}h^{\rho\sigma}+O(\kappa^3).
+\end{aligned}
+\label{eq:ch1-sqrt-leibniz}
+\end{equation}
+The result coincides with \eqref{eq:ch1-vol}. In Route B the $\tfrac18$ arises
+as $\tfrac14-\tfrac18$. The $\tfrac14$ comes from the $(\chATr\chAh)^2$ part of the
+determinant and the $-\tfrac18$ from the second-order term of the square root.
+The $-\tfrac14$ is half of the $-\chATr\chAh^2$ part of the determinant. The two
+routes distribute the coefficients differently, but the totals agree.
+
+% ---------------------------------------------------------------------
+\subsection{The product \texorpdfstring{$\sqrt{-g}\,g^{\mu\nu}$}{sqrt(-g) g\textasciicircum\{mu nu\}} and the kinetic term}
+\label{sec:ch1-t1-product}
+
+\paragraph{Order labels.} \tD
+\begin{gather}
+g^{\mu\nu}=a^{-2}\big[I_0+\kappa I_1+\kappa^2I_2+O(\kappa^3)\big],\qquad I_0=\eta^{\mu\nu},\quad I_1=-h^{\mu\nu},\quad I_2=h^\mu{}_\rho h^{\rho\nu},
+\label{eq:ch1-Ilabels}\\
+\sqrt{-g}=a^D\big[S_0+\kappa S_1+\kappa^2S_2+O(\kappa^3)\big],\qquad S_0=1,\quad S_1=\tfrac12h,\quad S_2=\tfrac18h^2-\tfrac14h^{\rho\sigma}h_{\rho\sigma}.
+\label{eq:ch1-Slabels}
+\end{gather}
+$I_2$ is brought to the form used in \eqI{6} as follows. From
+\eqref{eq:ch1-contr}(a), $h_\rho{}^\nu=\eta_{\rho\sigma}h^{\sigma\nu}$; then
+\eqref{eq:ch1-contr}(c) and the renaming $\sigma\to\rho$ give
+\begin{equation}
+h^{\mu\rho}h_\rho{}^\nu=h^{\mu\rho}\eta_{\rho\sigma}h^{\sigma\nu}=h^\mu{}_\sigma h^{\sigma\nu}=h^\mu{}_\rho h^{\rho\nu}\quad\Longrightarrow\quad I_2=h^{\mu\rho}h_\rho{}^\nu.
+\label{eq:ch1-I2form}
+\end{equation}
+
+\paragraph{The common factor $a^{D-2}$.} The $a^{-2}$ comes from the $(a^2)^{-1}$
+in the inverse metric (see \eqref{eq:ch1-Ginv}). The $a^D$ comes from
+$\sqrt{a^{2D}}$ in the determinant (see \eqref{eq:ch1-sqrtg}). Their product
+$a^D\cdot a^{-2}=a^{D-2}$ is the same common factor at every order. At $D=4$
+this factor is $a^2$. At $D=2$ it is $a^0=1$, which reflects, at the level of
+the background, the Weyl invariance of the scalar kinetic term in two
+dimensions (see the conformal check in Sec.~\ref{sec:ch1-t1-checks}).
+
+\paragraph{Cauchy product and the cross term.} \tD
+\begin{equation*}
+a^{-(D-2)}\sqrt{-g}\,g^{\mu\nu}=\sum_{N\ge0}\kappa^N P_N,\qquad P_N=\sum_{m+n=N}S_mI_n ,
+\end{equation*}
+\begin{equation}
+\begin{aligned}
+P_0&=S_0I_0=\eta^{\mu\nu},\\
+P_1&=S_0I_1+S_1I_0=-h^{\mu\nu}+\tfrac12\eta^{\mu\nu}h,\\
+P_2&=S_0I_2+S_1I_1+S_2I_0,\\[3pt]
+&\qquad S_0I_2=1\cdot h^{\mu\rho}h_\rho{}^\nu=h^{\mu\rho}h_\rho{}^\nu,\\
+&\qquad S_1I_1=\big(\tfrac12h\big)\big(-h^{\mu\nu}\big)=-\tfrac12\,hh^{\mu\nu}\qquad\text{(cross term)},\\
+&\qquad S_2I_0=\big(\tfrac18h^2-\tfrac14h^{\rho\sigma}h_{\rho\sigma}\big)\eta^{\mu\nu}=\tfrac18\eta^{\mu\nu}h^2-\tfrac14\eta^{\mu\nu}h^{\rho\sigma}h_{\rho\sigma}.
+\end{aligned}
+\label{eq:ch1-cauchy}
+\end{equation}
+$S_1I_1=-\tfrac12hh^{\mu\nu}$ is the only cross term at second order. It is
+present in neither $g^{\mu\nu}$ nor $\sqrt{-g}$ alone. The products dropped are
+$S_1I_2$ and $S_2I_1$ (order $\kappa^3$), $S_2I_2$ ($\kappa^4$), and $S_0I_3$ and
+$S_3I_0$ ($\kappa^3$). The unknown $S_3$ and $I_3$ enter only at $\kappa^3$.
+Truncating each factor at $\kappa^2$ therefore gives the product exactly up to
+$\kappa^2$. The dummy indices ($\rho\sigma$ in $S_2$, $\rho$ in $I_2$) sit in
+different products and do not clash with the free $\mu\nu$.
+\begin{equation}
+\boxed{\begin{aligned}\sqrt{-g}\,g^{\mu\nu}=a^{D-2}\Big\{&\eta^{\mu\nu}-\kappa h^{\mu\nu}+\tfrac12\kappa\,\eta^{\mu\nu}h\\
+&+\tfrac18\kappa^2\eta^{\mu\nu}h^2-\tfrac14\kappa^2\eta^{\mu\nu}h^{\rho\sigma}h_{\rho\sigma}
+-\tfrac12\kappa^2hh^{\mu\nu}+\kappa^2h^{\mu\rho}h_\rho{}^\nu+O(\kappa^3)\Big\}\end{aligned}}
+\label{eq:ch1-product}
+\end{equation}
+
+\paragraph{Scalar derivatives and the factor $-\tfrac12$.} \tD\ Since $\phi$ is
+a scalar, $\partial_\mu\phi$ is independent of the metric and of $\kappa$; no
+Christoffel symbol enters. Inserting \eqref{eq:ch1-product} into (In1) gives
+\eqI{6} in its common-factor form:
+\begin{equation*}
+\begin{aligned}\mathcal L_\phi=-\tfrac12\,\partial_\mu\phi\,\partial_\nu\phi\,a^{D-2}\Big\{&\eta^{\mu\nu}-\kappa h^{\mu\nu}+\tfrac12\eta^{\mu\nu}\kappa h\\
+&+\tfrac18\eta^{\mu\nu}\kappa^2h^2-\tfrac14\eta^{\mu\nu}\kappa^2h^{\rho\sigma}h_{\rho\sigma}
+-\tfrac12\kappa^2hh^{\mu\nu}+\kappa^2h^{\mu\rho}h_\rho{}^\nu+O(\kappa^3)\Big\}.\end{aligned}
+\tag{I.6}\label{eq:ch1-eq6}
+\end{equation*}
+$\partial_\mu\phi\,\partial_\nu\phi$ is symmetric under $\mu\leftrightarrow\nu$,
+so only the symmetric part of the curly bracket contributes. Every structure in
+the bracket is already symmetric: $\eta^{\mu\nu}$, $h^{\mu\nu}$, $hh^{\mu\nu}$,
+and, by the symmetry argument in Sec.~\ref{sec:ch1-t1-inverse},
+$h^{\mu\rho}h_\rho{}^\nu$. Symmetrization therefore neither loses information
+nor produces extra coefficients.
+
+\paragraph{The Lagrangian order by order.} \tD
+\begin{gather}
+\mathcal L_\phi=\mathcal L^{(0)}+\kappa\,\mathcal L^{(1)}+\kappa^2\mathcal L^{(2)}+O(\kappa^3),
+\label{eq:ch1-Lorders}\\
+\begin{aligned}
+\mathcal L^{(0)}&=-\tfrac12\,a^{D-2}\,\eta^{\mu\nu}\,\partial_\mu\phi\,\partial_\nu\phi,\\[2pt]
+\mathcal L^{(1)}&=+\tfrac12\,a^{D-2}\,h^{\mu\nu}\,\partial_\mu\phi\,\partial_\nu\phi-\tfrac14\,a^{D-2}\,h\,\eta^{\mu\nu}\,\partial_\mu\phi\,\partial_\nu\phi,\\[2pt]
+\mathcal L^{(2)}&=-\tfrac12\,a^{D-2}\,h^{\mu\rho}h_\rho{}^\nu\,\partial_\mu\phi\,\partial_\nu\phi+\tfrac14\,a^{D-2}\,h\,h^{\mu\nu}\,\partial_\mu\phi\,\partial_\nu\phi\\
+&\quad-\tfrac1{16}\,a^{D-2}\,h^2\,\eta^{\mu\nu}\,\partial_\mu\phi\,\partial_\nu\phi+\tfrac18\,a^{D-2}\,h^{\rho\sigma}h_{\rho\sigma}\,\eta^{\mu\nu}\,\partial_\mu\phi\,\partial_\nu\phi .
+\end{aligned}
+\label{eq:ch1-L012}
+\end{gather}
+
+\begin{center}
+\small
+\begin{tabular}{lccc}
+\toprule
+Structure $\times\,a^{D-2}\partial_\mu\phi\,\partial_\nu\phi$ & Bracket coefficient in \eqref{eq:ch1-product} & $\times(-\tfrac12)$ & Belongs to\\
+\midrule
+$\eta^{\mu\nu}$ & $1$ & $-\tfrac12$ & $\mathcal L^{(0)}$\\
+$h^{\mu\nu}$ & $-1$ & $+\tfrac12$ & $\mathcal L^{(1)}$\\
+$\eta^{\mu\nu}h$ & $+\tfrac12$ & $-\tfrac14$ & $\mathcal L^{(1)}$\\
+$h^{\mu\rho}h_\rho{}^\nu$ & $+1$ & $-\tfrac12$ & $\mathcal L^{(2)}$\\
+$hh^{\mu\nu}$ & $-\tfrac12$ & $+\tfrac14$ & $\mathcal L^{(2)}$\\
+$\eta^{\mu\nu}h^2$ & $+\tfrac18$ & $-\tfrac1{16}$ & $\mathcal L^{(2)}$\\
+$\eta^{\mu\nu}h^{\rho\sigma}h_{\rho\sigma}$ & $-\tfrac14$ & $+\tfrac18$ & $\mathcal L^{(2)}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The $\mathcal L^{(n)}$ contain no explicit factor of $\kappa$. They depend only
+on $\phi$, $h_{\mu\nu}$, $\eta_{\mu\nu}$ and $a(\eta)$, and on $D$ through
+$a^{D-2}$. $\mathcal L^{(1)}$ is linear in $h$ (type $\phi\phi h$);
+$\mathcal L^{(2)}$ is quadratic in $h$ (type $\phi\phi hh$).
+
+% ---------------------------------------------------------------------
+\subsection{Independent analytic checks}
+\label{sec:ch1-t1-checks}
+
+The three checks below were done by hand. Each compares the general result with
+a direct evaluation of the full metric in a special case.
+
+\paragraph{(i) The limit $\kappa\to0$.} From
+\eqref{eq:ch1-Lorders}--\eqref{eq:ch1-L012}, $\mathcal L_\phi\to\mathcal L^{(0)}$.
+With $\eta^{00}=-1$ and $\eta^{ij}=\delta^{ij}$,
+\begin{equation}
+\mathcal L^{(0)}=-\tfrac12a^{D-2}\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi=\tfrac12a^{D-2}\big[(\partial_0\phi)^2-\delta^{ij}\partial_i\phi\,\partial_j\phi\big].
+\label{eq:ch1-L0}
+\end{equation}
+Direct computation: for $\hat g_{\mu\nu}=a^2\eta_{\mu\nu}$ we have
+$\hat g^{\mu\nu}=a^{-2}\eta^{\mu\nu}$ (exactly,
+$\hat g_{\mu\rho}\hat g^{\rho\nu}=\delta_\mu{}^\nu$) and $\sqrt{-\hat g}=\sqrt{a^{2D}}=a^D$.
+Hence
+$-\tfrac12\sqrt{-\hat g}\,\hat g^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi=-\tfrac12a^{D-2}\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$,
+the same as \eqref{eq:ch1-L0}. The time-derivative term comes with a positive
+sign in signature $(-,+,\ldots,+)$, which is the correct kinetic sign.
+\emph{Passed.}
+
+\paragraph{(ii) The conformal special case $h_{\mu\nu}=c\,\eta_{\mu\nu}$.}
+Here, and only for this check, we take $h_{\mu\nu}=c\,\eta_{\mu\nu}$. The
+scalar $c$ is arbitrary; since the calculation is pointwise, it may depend
+on $x$.
+
+\emph{(a) Directly from the full metric.} $g_{\mu\nu}=a^2(1+\kappa c)\eta_{\mu\nu}$.
+The inverse metric is $g^{\mu\nu}=a^{-2}(1+\kappa c)^{-1}\eta^{\mu\nu}$, and
+$g_{\mu\rho}g^{\rho\nu}=(1+\kappa c)(1+\kappa c)^{-1}\delta_\mu{}^\nu=\delta_\mu{}^\nu$
+holds exactly. Since
+$\det g_{\mu\nu}=\big(a^2(1+\kappa c)\big)^D\det\eta=-a^{2D}(1+\kappa c)^D$, we
+get $\sqrt{-g}=a^D(1+\kappa c)^{D/2}$, with $1+\kappa c>0$ perturbatively. Thus
+\begin{equation}
+\sqrt{-g}\,g^{\mu\nu}=a^{D-2}(1+\kappa c)^{\frac{D-2}{2}}\eta^{\mu\nu}.
+\label{eq:ch1-conf-exact}
+\end{equation}
+With the binomial expansion $(1+x)^p=1+px+\tfrac{p(p-1)}2x^2+O(x^3)$ and
+$p=\tfrac{D-2}2$, $p-1=\tfrac{D-4}2$, $\tfrac{p(p-1)}2=\tfrac{(D-2)(D-4)}8$:
+\begin{equation}
+\sqrt{-g}\,g^{\mu\nu}\Big|_{\text{exact}}=a^{D-2}\eta^{\mu\nu}\Big[1+\tfrac{D-2}{2}\kappa c+\tfrac{(D-2)(D-4)}{8}\kappa^2c^2+O(\kappa^3)\Big].
+\label{eq:ch1-conf-binom}
+\end{equation}
+
+\emph{(b) Inserted into the general result.} From \eqref{eq:ch1-raise} and
+\eqref{eq:ch1-eta},
+\begin{equation*}
+\begin{aligned}
+&h^{\mu\nu}=c\,\eta^{\mu\alpha}\eta^{\nu\beta}\eta_{\alpha\beta}=c\,\eta^{\mu\nu},\qquad h=c\,\eta^{\mu\nu}\eta_{\mu\nu}=cD,\qquad h^{\rho\sigma}h_{\rho\sigma}=c^2\eta^{\rho\sigma}\eta_{\rho\sigma}=c^2D,\\
+&h_\rho{}^\nu=c\,\delta_\rho{}^\nu,\qquad h^{\mu\rho}h_\rho{}^\nu=c^2\eta^{\mu\nu}.
+\end{aligned}
+\end{equation*}
+\begin{center}
+\small
+\begin{tabular}{lc}
+\toprule
+Term of \eqref{eq:ch1-product} & Value for $h_{\mu\nu}=c\eta_{\mu\nu}$, divided by $\eta^{\mu\nu}$\\
+\midrule
+$-\kappa h^{\mu\nu}$ & $-\kappa c$\\
+$+\tfrac12\kappa\eta^{\mu\nu}h$ & $+\tfrac12D\,\kappa c$\\
+$+\kappa^2h^{\mu\rho}h_\rho{}^\nu$ & $+1\cdot\kappa^2c^2$\\
+$-\tfrac12\kappa^2hh^{\mu\nu}$ & $-\tfrac12D\,\kappa^2c^2$\\
+$+\tfrac18\kappa^2\eta^{\mu\nu}h^2$ & $+\tfrac18D^2\,\kappa^2c^2$\\
+$-\tfrac14\kappa^2\eta^{\mu\nu}h^{\rho\sigma}h_{\rho\sigma}$ & $-\tfrac14D\,\kappa^2c^2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{equation}
+\kappa^1:\ \big(-1+\tfrac D2\big)c=\tfrac{D-2}{2}c,\qquad
+\kappa^2:\ \Big(1-\tfrac D2+\tfrac{D^2}8-\tfrac D4\Big)c^2=\tfrac{D^2-6D+8}{8}c^2=\tfrac{(D-2)(D-4)}{8}c^2 .
+\label{eq:ch1-conf-gen}
+\end{equation}
+\eqref{eq:ch1-conf-gen} agrees with \eqref{eq:ch1-conf-binom} at both orders.
+\emph{Passed.}
+
+\begin{notebox}[Strength and limits of this check]
+The equality holds for every integer $D\ge2$, so it can be compared
+coefficient by coefficient as a polynomial identity in $D$. This uses the fact
+that the coefficients of the general result are independent of $D$. That
+holds here because $D$ enters Secs.~\ref{sec:ch1-t1-inverse}--\ref{sec:ch1-t1-product}
+only as the matrix size. At first order, the condition
+$\alpha+\beta D=\tfrac{D-2}2$ for $\alpha h^{\mu\nu}+\beta\eta^{\mu\nu}h$ fixes
+$\alpha=-1$ and $\beta=\tfrac12$ by itself. At second order, write the general
+bracket as
+$A\,h^{\mu\rho}h_\rho{}^\nu+B\,hh^{\mu\nu}+C\,\eta^{\mu\nu}h^2+E\,\eta^{\mu\nu}h^{\rho\sigma}h_{\rho\sigma}$.
+This check gives the condition $A+(B+E)D+CD^2=\tfrac{(D-2)(D-4)}8$, i.e.\
+$A=1$, $C=\tfrac18$ and $B+E=-\tfrac34$. It does \emph{not} fix $B$ and $E$
+separately, which is why check (iii) was added.
+
+Side remarks: at $D=2$ both orders vanish. The reason is that
+$\sqrt{-g}\,g^{\mu\nu}$ is Weyl invariant in two dimensions. At $D=4$ the
+$\kappa^2$ term vanishes, because $(1+\kappa c)^1$ is exactly linear.
+\end{notebox}
+
+\paragraph{(iii) An additional special case: only $h_{00}=b$.} This check was
+not requested in the task. It was added because it separates $B$ and $E$. The
+special case is $h_{\mu\nu}=b\,\delta^0_\mu\delta^0_\nu$.
+
+\emph{(a) From the full metric.} $g_{00}=-a^2(1-\kappa b)$, $g_{0i}=0$ and
+$g_{ij}=a^2\delta_{ij}$. Since the metric is diagonal,
+$g^{00}=-a^{-2}(1-\kappa b)^{-1}$ and $g^{ij}=a^{-2}\delta^{ij}$. Since
+$\det g=-a^{2D}(1-\kappa b)$, $\sqrt{-g}=a^D(1-\kappa b)^{1/2}$. With
+$(1-x)^{-1/2}=1+\tfrac12x+\tfrac38x^2+\cdots$ and
+$(1-x)^{1/2}=1-\tfrac12x-\tfrac18x^2+\cdots$:
+\begin{equation}
+\begin{aligned}\sqrt{-g}\,g^{00}&=-a^{D-2}(1-\kappa b)^{-1/2}=-a^{D-2}\big[1+\tfrac12\kappa b+\tfrac38\kappa^2b^2\big]+O(\kappa^3),\\
+\sqrt{-g}\,g^{ij}&=a^{D-2}\delta^{ij}(1-\kappa b)^{1/2}=a^{D-2}\delta^{ij}\big[1-\tfrac12\kappa b-\tfrac18\kappa^2b^2\big]+O(\kappa^3),\qquad \sqrt{-g}\,g^{0i}=0.\end{aligned}
+\label{eq:ch1-h00-exact}
+\end{equation}
+
+\emph{(b) From the general result.} $h=\eta^{00}b=-b$, $h^{00}=(\eta^{00})^2b=b$,
+$h^{0i}=h^{ij}=0$ and $h^{\rho\sigma}h_{\rho\sigma}=h^{00}h_{00}=b^2$. Among the
+mixed components the only non-zero one is $h_0{}^0=h_{00}\eta^{00}=-b$. The only
+non-zero component of $h^{\mu\rho}h_\rho{}^\nu$ is therefore
+$h^{00}h_0{}^0=-b^2$.
+\begin{equation}
+\begin{aligned}
+00:\quad&\kappa^1:\ -b+\tfrac12(-1)(-b)=-\tfrac12b,\\
+&\kappa^2:\ \underbrace{(-b^2)}_{A}-\tfrac12\underbrace{(-b)(b)}_{B}+\tfrac18\underbrace{(-1)b^2}_{C}-\tfrac14\underbrace{(-1)b^2}_{E}=\big(-1+\tfrac12-\tfrac18+\tfrac14\big)b^2=-\tfrac38b^2,\\
+ij:\quad&\kappa^1:\ \tfrac12\delta^{ij}(-b)=-\tfrac12b\,\delta^{ij},\qquad
+\kappa^2:\ \tfrac18\delta^{ij}b^2-\tfrac14\delta^{ij}b^2=-\tfrac18b^2\delta^{ij}.
+\end{aligned}
+\label{eq:ch1-h00-gen}
+\end{equation}
+The labels under the braces in \eqref{eq:ch1-h00-gen} name the coefficient
+($A,B,C,E$ of check (ii)) whose structure each piece is. The numbers in front
+are the coefficients of \eqref{eq:ch1-product}.
+
+Every component at every order agrees with \eqref{eq:ch1-h00-exact}; the $0i$
+components vanish on both sides. \emph{Passed.} The $ij$ component gives
+$C+E=-\tfrac18$. Together with $C=\tfrac18$ from check (ii) this gives
+$E=-\tfrac14$, and hence $B=-\tfrac34-E=-\tfrac12$. The $00$ component reads
+$-(A+B+C+E)\,b^2=-\tfrac38b^2$, i.e.\ $A+B+C+E=\tfrac38$. The values found
+satisfy this as a consistency condition: $1-\tfrac12+\tfrac18-\tfrac14=\tfrac38$.
+The two special cases are computed from the full metric alone. Together they
+fix all four $\kappa^2$ coefficients independently of \eqref{eq:ch1-product}.
+
+% ---------------------------------------------------------------------
+\subsection{Comparison with the paper}
+\label{sec:ch1-t1-compare}
+
+\paragraph{Inverse metric: derived \eqref{eq:ch1-ginv} versus printed \eqI{4}.} \PI{} prints
+$g^{\mu\nu}=\frac{1}{a^2}\big(\eta^{\mu\nu}-\kappa h^{\mu\nu}+\kappa^2h^\mu{}_\rho h^{\rho\nu}-\ldots\big)$.
+\begin{center}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Structure $\times a^{-2}$ & Order & Derived \eqref{eq:ch1-ginv} & \PI{} \eqI{4} & \\
+\midrule
+$\eta^{\mu\nu}$ & $\kappa^0$ & $+1$ & $+1$ & \checkmark\\
+$h^{\mu\nu}$ & $\kappa^1$ & $-1$ & $-1$ & \checkmark\\
+$h^\mu{}_\rho h^{\rho\nu}$ & $\kappa^2$ & $+1$ & $+1$ & \checkmark\\
+next term & $\kappa^3$ & $-h^\mu{}_\rho h^\rho{}_\sigma h^{\sigma\nu}$ & ``$-\ldots$'' & \checkmark\ (sign)\\
+\bottomrule
+\end{tabular}
+\end{center}
+Dummy-index change: $h^\mu{}_\sigma h^{\sigma\nu}$ of \eqref{eq:ch1-ginv-comp}
+becomes the paper's $h^\mu{}_\rho h^{\rho\nu}$ under $\sigma\to\rho$.
+
+\paragraph{Volume element: derived \eqref{eq:ch1-vol} versus printed \eqI{5}.} \PI{} prints
+$\sqrt{-g}=a^D\big(1+\tfrac12\kappa h+\tfrac18\kappa^2h^2-\tfrac14\kappa^2h^{\rho\sigma}h_{\rho\sigma}+\ldots\big)$.
+\begin{center}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Structure $\times a^{D}$ & Order & Derived \eqref{eq:ch1-vol} & \PI{} \eqI{5} & \\
+\midrule
+$1$ & $\kappa^0$ & $+1$ & $+1$ & \checkmark\\
+$h$ & $\kappa^1$ & $+\tfrac12$ & $+\tfrac12$ & \checkmark\\
+$h^2$ & $\kappa^2$ & $+\tfrac18$ & $+\tfrac18$ & \checkmark\\
+$h^{\rho\sigma}h_{\rho\sigma}$ & $\kappa^2$ & $-\tfrac14$ & $-\tfrac14$ & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+Dummy-index change: $h_{\alpha\rho}h^{\alpha\rho}$ of \eqref{eq:ch1-tr2} becomes
+$h_{\rho\sigma}h^{\rho\sigma}$ under $\alpha\to\rho$, $\rho\to\sigma$. Since the
+factors commute, this is the same as $h^{\rho\sigma}h_{\rho\sigma}$.
+
+\paragraph{Target: derived \eqref{eq:ch1-eq6} versus printed \eqI{6}.} The printed equation is
+retyped at the beginning of this section.
+\begin{center}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Structure (inside the bracket) & Order & Derived \eqref{eq:ch1-product}/\eqref{eq:ch1-eq6} & \PI{} \eqI{6} & \\
+\midrule
+common factor & -- & $-\tfrac12\partial_\mu\phi\,\partial_\nu\phi\,a^{D-2}$ & $-\tfrac12\partial_\mu\phi\,\partial_\nu\phi\,a^{D-2}$ & \checkmark\\
+$\eta^{\mu\nu}$ & $\kappa^0$ & $+1$ & $+1$ & \checkmark\\
+$h^{\mu\nu}$ & $\kappa^1$ & $-1$ & $-1$ & \checkmark\\
+$\eta^{\mu\nu}h$ & $\kappa^1$ & $+\tfrac12$ & $+\tfrac12$ & \checkmark\\
+$\eta^{\mu\nu}h^2$ & $\kappa^2$ & $+\tfrac18$ & $+\tfrac18$ & \checkmark\\
+$\eta^{\mu\nu}h^{\rho\sigma}h_{\rho\sigma}$ & $\kappa^2$ & $-\tfrac14$ & $-\tfrac14$ & \checkmark\\
+$hh^{\mu\nu}$ & $\kappa^2$ & $-\tfrac12$ & $-\tfrac12$ & \checkmark\\
+$h^{\mu\rho}h_\rho{}^\nu\;(=h^{\mu\rho}h^\nu_\rho)$ & $\kappa^2$ & $+1$ & $+1$ & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+\emph{Dummy-index and notational mappings.}
+\begin{enumerate}[leftmargin=1.6em]
+\item The $\kappa^2$ chain: $h^\mu{}_\rho h^{\rho\nu}$ of \eqref{eq:ch1-ginv}
+equals $h^{\mu\rho}h_\rho{}^\nu$ by \eqref{eq:ch1-I2form}. The paper's
+unstaggered $h^\nu_\rho$ is $h_\rho{}^\nu=h^\nu{}_\rho$ by \eqref{eq:ch1-symm}.
+The two expressions are identical.
+\item The full contraction: $h_{\alpha\rho}h^{\alpha\rho}\to h_{\rho\sigma}h^{\rho\sigma}=h^{\rho\sigma}h_{\rho\sigma}$
+(see the comparison with \eqI{5}).
+\item Order of factors: the paper's $\eta^{\mu\nu}\kappa h$ and
+$\eta^{\mu\nu}\kappa^2h^2$ are identical to $\kappa\,\eta^{\mu\nu}h$ and
+$\kappa^2\eta^{\mu\nu}h^2$ of \eqref{eq:ch1-product}; the factors commute and
+are only reordered.
+\end{enumerate}
+
+\begin{resultbox}[Result of Task 1]
+The derived \eqref{eq:ch1-eq6} agrees with Eq.~\eqI{6} of \PI{} structure by
+structure, coefficient by coefficient and sign by sign. The bracket is the
+same. The only difference is on the printed left-hand side, which lacks the
+second $\phi$ (typesetting slip; see the note at the start of this section).
+The intermediate results \eqref{eq:ch1-ginv} and \eqref{eq:ch1-vol} agree with
+\eqI{4} and \eqI{5}. There is no discrepancy in the expansion itself.
+\end{resultbox}
+
+\paragraph{Observations on the paper.}
+\begin{itemize}[leftmargin=1.4em]
+\item \eqI{1}: the first term is printed with
+$\partial_\mu\phi\,\partial_\mu\phi\,g^{\mu\nu}$. This is a typesetting error
+and does not affect the result.
+\item \eqI{6}: the left-hand side is printed as
+$-\tfrac12\partial_\mu\phi\,\partial_\nu g^{\mu\nu}\sqrt{-g}$, without the second
+$\phi$. This is a typesetting slip and does not affect the result. It was
+noticed in the preparation of these notes, not in the original report.
+\item \eqI{6}: $h^\nu_\rho$ is written without index staggering. Since
+$h_{\mu\nu}$ is symmetric, this notation is unambiguous
+(Sec.~\ref{sec:ch1-t1-notation}).
+\item \eqI{4}: the sign of the next term, indicated by ``$-\ldots$'', agrees with
+the derived $-\kappa^3h^\mu{}_\rho h^\rho{}_\sigma h^{\sigma\nu}$.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\subsection{Code check}
+\label{sec:ch1-t1-code}
+
+\tC\ As an additional check, which does not replace the analytic derivation,
+a script was run with Python~3 and SymPy~1.14.0:
+\texttt{code/01\_feynman\_rules/check\_eq6.py} (runtime about 23\,s). The script
+obtains the inverse metric and $\sqrt{-\det g}$ from SymPy's \emph{exact}
+adjugate and determinant. It uses no Neumann series and no $\chATr\ln$ input.
+It then expands the result in $\kappa$ to order $\kappa^2$ and compares it with
+the bracket of \eqref{eq:ch1-product}. The $a$-dependence is exactly the common
+factor $a^{D-2}$ (Sec.~\ref{sec:ch1-t1-product}), so the comparison is done at
+$a=1$.
+\begin{itemize}[leftmargin=1.4em]
+\item $D=2$ and $D=3$: fully symbolic, general symmetric $h_{\mu\nu}$ (3 and 6
+independent components). The difference is identically zero.
+\item $D=4,5,6$: random rational symmetric $h_{\mu\nu}$, exact arithmetic. The
+difference is zero.
+\item Conformal case, symbolic $D$: \eqref{eq:ch1-conf-binom} and
+\eqref{eq:ch1-conf-gen} are identical, and the $\kappa^2$ coefficient is
+$c^2(D-4)(D-2)/8$.
+\item $D=4$, symbolic: $g_{\mu\rho}g^{\rho\nu}-\delta_\mu{}^\nu=\kappa^3h_{\mu\rho}h^\rho{}_\sigma h^{\sigma\nu}$
+holds exactly; see \eqref{eq:ch1-ggres}.
+\end{itemize}
+Every line printed \texttt{True}. \emph{Passed.} The output of the re-run
+(identical, line by line, to the output recorded in the original session) is
+\begin{center}
+\begin{minipage}{0.97\linewidth}
+\footnotesize
+\begin{verbatim}
+symbolic D=2: all entries zero -> True
+symbolic D=3: all entries zero -> True
+random rational D=4: all entries zero -> True
+random rational D=5: all entries zero -> True
+random rational D=6: all entries zero -> True
+conformal case, general D: True
+  order-2 coefficient of exact: c**2*(D - 4)*(D - 2)/8
+g_{mu rho} g^{rho nu} - delta == kappa^3 h_{mu rho} h^rho_sigma h^{sigma nu}
+  (D=4 symbolic): True
+\end{verbatim}
+\end{minipage}
+\end{center}
+(The last line is broken in two for typesetting.)
+
+% ---------------------------------------------------------------------
+\subsection{Calculation record}
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Derived.} The inverse metric \eqref{eq:ch1-ginv} was obtained in
+two independent ways: by the Neumann series and by coefficient matching. The
+volume element \eqref{eq:ch1-vol} was also obtained in two independent ways: by
+$\exp\chATr\ln$ and by the Leibniz expansion. We derived the product
+\eqref{eq:ch1-product}, the kinetic term \eqref{eq:ch1-eq6} in the form of
+\eqI{6}, and the split \eqref{eq:ch1-L012} into $\mathcal L^{(0)}$,
+$\mathcal L^{(1)}$, $\mathcal L^{(2)}$. Everything holds for general $D$ and
+without a gauge condition.
+\item \textbf{Checks passed.} \eqref{eq:ch1-ggres}:
+$g_{\mu\rho}g^{\rho\nu}=\delta_\mu{}^\nu+\kappa^3h_{\mu\rho}h^\rho{}_\sigma h^{\sigma\nu}$.
+Analytic checks: (i) the background limit $\kappa\to0$; (ii) the conformal
+special case $h_{\mu\nu}=c\,\eta_{\mu\nu}$, both orders, general $D$; (iii) the
+additional special case $h_{00}=b$, which fixes the four $\kappa^2$
+coefficients separately. Code check: SymPy, exact symbolic or rational
+arithmetic, $D=2,\ldots,6$, actually run (Sec.~\ref{sec:ch1-t1-code}). The
+intermediate results \eqref{eq:ch1-ginv} and \eqref{eq:ch1-vol} agree fully with
+\eqI{4} and \eqI{5}, and the final result \eqref{eq:ch1-eq6} agrees fully with
+\eqI{6}.
+\item \textbf{Open discrepancies or ambiguities.} None in the expansion. We
+noted only the typesetting error $\partial_\mu\phi\,\partial_\mu\phi$ in
+\eqI{1}; the correct form, as stated in the task, was used. (In preparing these
+notes we also noticed the missing second $\phi$ on the printed left-hand side of
+\eqI{6}; see the note at the start of the section.) Check (ii) alone cannot
+separate the coefficients of $hh^{\mu\nu}$ and $h^{\rho\sigma}h_{\rho\sigma}$;
+this gap was closed by check (iii).
+\end{itemize}
+
+% =====================================================================
+\section{Task 2: vertex operators, Eqs.~(I.7), (I.8), Tables~I and~II}
+\label{sec:ch1-task2}
+
+\begin{discbox}[Summary finding of Task 2]
+The vertices derived from \eqI{6} agree exactly with Eq.~\eqI{8} of \PI, with
+both rows of Table~I, and with rows 1, 3 and 4 of Table~II. There are two sign
+differences:
+\begin{enumerate}[leftmargin=1.6em,label=(\roman*)]
+\item The left-hand side of \eqI{7} reads $-\tfrac12\kappa$; \eqI{6} gives
+$+\tfrac12\kappa$. The vertex $V_1$ on the right-hand side is correct. The
+difference is a typesetting error on the left-hand side.
+\item Table~II, row~2 reads $-\tfrac i4$; the derived value is $+\tfrac i4$.
+\end{enumerate}
+The second difference is also confirmed by independent checks that do not use
+\eqI{6} and work directly from the full metric
+(Sec.~\ref{sec:ch1-t2-checks}). Details are in Sec.~\ref{sec:ch1-t2-compare}.
+\emph{Later resolution (Task~3, next chapter):} the paper's own Eq.~\eqI{33}
+contains $+\tfrac i4$, so the derived $U_2$ was used in the paper's
+calculation, and the printed table entry is a misprint only.
+\end{discbox}
+
+\subsection{Goals, inputs and scope}
+
+\paragraph{Targets.} \tP\ From printed page 124005-2 of \PI{} (all symbols
+checked on the printed page). \PI{} prints
+\begin{equation*}
+\begin{aligned}
+&\eqI{7}\quad -\tfrac12\kappa a^{D-2}\partial_\alpha\phi\,\partial_\beta\phi\,h^{\alpha\beta}\ \Rightarrow\ V_1^{\alpha\beta}=i\kappa a^{D-2}\partial_1^\alpha\partial_2^\beta,\\
+&\eqI{8}\quad -\tfrac{\kappa^2}{16}a^{D-2}\partial^\mu\phi\,\partial_\mu\phi\,h^2\ \Rightarrow\ U_1^{\alpha\beta\rho\sigma}=-\tfrac i8\kappa^2a^{D-2}\eta^{\alpha\beta}\eta^{\rho\sigma}\chAdd,
+\end{aligned}
+\end{equation*}
+and the two tables (Table~I: 3-point vertex operators $V_I^{\alpha\beta}$
+contracted into $\phi_1\phi_2h_{\alpha\beta}$; Table~II: 4-point vertex
+operators $U_I^{\alpha\beta\rho\sigma}$ contracted into
+$\phi_1\phi_2h_{\alpha\beta}h_{\rho\sigma}$):
+\begin{center}
+\small
+\begin{tabular}{cl@{\qquad}cl}
+\toprule
+\multicolumn{2}{c}{Table I (as printed)} & \multicolumn{2}{c}{Table II (as printed)}\\
+$I$ & $V_I^{\alpha\beta}$ & $I$ & $U_I^{\alpha\beta\rho\sigma}$\\
+\midrule
+1 & $i\kappa a^{D-2}\partial_1^\alpha\partial_2^\beta$ & 1 & $-\tfrac i8\kappa^2a^{D-2}\eta^{\alpha\beta}\eta^{\rho\sigma}\chAdd$\\
+2 & $-\tfrac i2\kappa a^{D-2}\eta^{\alpha\beta}\chAdd$ & 2 & $-\tfrac i4\kappa^2a^{D-2}\eta^{\alpha\rho}\eta^{\beta\sigma}\chAdd$\\
+ & & 3 & $\tfrac i2\kappa^2a^{D-2}\eta^{\alpha\beta}\partial_1^\rho\partial_2^\sigma$\\
+ & & 4 & $-i\kappa^2a^{D-2}\partial_1^\alpha\eta^{\beta\rho}\partial_2^\sigma$\\
+\bottomrule
+\end{tabular}
+\end{center}
+These targets are \emph{not used as input at any step} of the derivation. They
+enter only in the comparison (Sec.~\ref{sec:ch1-t2-compare}). The single
+exception is the normalization test in Sec.~\ref{sec:ch1-t2-checks}, check~(i),
+where \eqI{8} is used as a \emph{check}; it is not used to fix the normalization.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=1.4em]
+\item[(E6)] \tP\ Eq.~\eqI{6}, derived and verified independently in Task~1
+\tD\ (Sec.~\ref{sec:ch1-task1}). The left-hand side is written in its evident
+corrected form, with $\partial_\nu\phi$; the printed left-hand side lacks the
+second $\phi$ (see the note at the start of Sec.~\ref{sec:ch1-task1}):
+\begin{equation*}
+\begin{aligned}
+-\tfrac12\partial_\mu\phi\,\partial_\nu\phi\,g^{\mu\nu}\sqrt{-g}
+={}& -\tfrac12\partial_\mu\phi\,\partial_\nu\phi\,a^{D-2}
+\Big\{\eta^{\mu\nu}-\kappa h^{\mu\nu}+\tfrac12\eta^{\mu\nu}\kappa h\\
+&+\tfrac18\eta^{\mu\nu}\kappa^2h^2-\tfrac14\eta^{\mu\nu}\kappa^2h^{\rho\sigma}h_{\rho\sigma}
+-\tfrac12\kappa^2hh^{\mu\nu}+\kappa^2h^{\mu\rho}h_\rho{}^{\nu}+O(\kappa^3)\Big\}.
+\end{aligned}
+\tag{E6}\label{eq:ch1-E6}
+\end{equation*}
+\item[(FR)] \tP\ The Feynman-rule conventions stated in the text of the paper
+(page 124005-2, left column), summarized:
+(FRa) the 3-point and 4-point interaction terms are represented as vertex
+operators acting on the fields;
+(FRb) the fields are numbered first the two scalars ``1'', ``2'', then the
+gravitons ``3'', ``4'';
+(FRc) a factor $\tfrac12$ is extracted for the two identical scalars;
+(FRd) no similar factor $\tfrac12$ is extracted for the identical gravitons of
+the 4-point vertices, so no symmetry factor is needed;
+(FRe) according to the table captions, the operators $V_I^{\alpha\beta}$ are
+contracted into $\phi_1\phi_2h_{\alpha\beta}$ and the operators
+$U_I^{\alpha\beta\rho\sigma}$ into $\phi_1\phi_2h_{\alpha\beta}h_{\rho\sigma}$.
+\item[(iS)] \tA\ The standard rule: when the path integral is weighted by
+$e^{iS}$, each vertex carries $i$ times the corresponding coefficient in the
+action. The paper does not state this explicitly, but the explicit factors $i$
+in the tables are consistent with this rule.
+\item[(Conv)] \tA\ The conventions of Task~1: signature $(-,+,\ldots,+)$; the
+indices of $h_{\mu\nu}$ are moved with $\eta$ only \eqref{eq:ch1-raise};
+$h_{\mu\nu}=h_{\nu\mu}$; no gauge condition; general $D$.
+\end{itemize}
+
+\paragraph{Scope.} Propagators, diagrams and Sec.~III of the paper are not
+treated. The single exception is the short remark in
+Sec.~\ref{sec:ch1-t2-norm}, paragraph ``The graviton pair''. There the exchange
+symmetry of a bosonic two-point function is used to illustrate the meaning of
+(FRd); the paper's propagator expressions \eqI{20}--\eqI{30} are not used. No
+partial integration is performed and no dimensional limit is taken.
+
+% ---------------------------------------------------------------------
+\subsection{Conventions and vertex normalization}
+\label{sec:ch1-t2-norm}
+
+\paragraph{Indices on derivatives.} \tA
+\begin{equation}
+\partial^\alpha\equiv\eta^{\alpha\mu}\partial_\mu,\qquad \chAdd\equiv\eta^{\mu\nu}\partial_{1\mu}\partial_{2\nu},\qquad \partial^\mu\phi\,\partial_\mu\phi\equiv\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi\equiv\chAdp .
+\label{eq:ch1-dindex}
+\end{equation}
+Reason: in (E6) all factors of the background metric are collected in the
+common factor $a^{D-2}$, and all contractions inside the bracket use $\eta$.
+Raising with the full background metric would give
+$\hat g^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi=a^{-2}\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$
+and change the powers of $a$. \eqref{eq:ch1-dindex} is also consistent with the
+notation $\partial^\mu\phi\,\partial_\mu\phi$ on the left-hand side of \eqI{8}.
+
+\paragraph{Distribution of the derivatives over the legs.} \tP\ $\partial_i$
+acts only on field (leg) number $i$ (FRb). In (E6) the derivatives act only on
+$\phi$; $a^{D-2}(\eta)$ is not differentiated. Assigning the derivatives to the
+legs therefore requires no partial integration, and the $a^{D-2}$ in a vertex
+operator is a factor evaluated at the vertex point. Functional derivatives are
+distributions; for example,
+$\delta^2S/\delta\phi(x_1)\delta\phi(x_2)$ contains factors such as
+$\partial_\mu\delta^D(x-x_1)$. The notation ``$\partial_{1\mu}$'' is shorthand
+for this: the derivative acts on the line attached to leg~1 at the vertex
+point $x$.
+
+\paragraph{Explicit form of the normalization.} \tA\ (FRc), (FRd), (FRe) and
+(iS) together give the following definition. A factor $\tfrac12$ is extracted
+for the two scalars and $1/i$ for the vertex; no additional $\tfrac12$ is
+extracted for the gravitons:
+\begin{gather}
+\kappa\,\mathcal L^{(1)}=\frac12\cdot\frac1i\sum_I\Big[V_I^{\alpha\beta}\,\phi_1\phi_2\Big]_{\phi_1=\phi_2=\phi}h_{\alpha\beta},
+\label{eq:ch1-normV}\\
+\kappa^2\mathcal L^{(2)}=\frac12\cdot\frac1i\sum_I\Big[U_I^{\alpha\beta\rho\sigma}\,\phi_1\phi_2\Big]_{\phi_1=\phi_2=\phi}h_{\alpha\beta}h_{\rho\sigma}.
+\label{eq:ch1-normU}
+\end{gather}
+\emph{Practical rule.} Suppose a term is written as
+$C\,T^{\alpha\beta}(\partial\phi,\partial\phi)\,h_{\alpha\beta}$ or
+$C\,T^{\alpha\beta\rho\sigma}(\partial\phi,\partial\phi)\,h_{\alpha\beta}h_{\rho\sigma}$,
+where $C$ contains the numerical coefficient times $\kappa^n a^{D-2}$ and $T$ is
+bilinear in the two $\partial\phi$. Then
+\begin{equation}
+V^{\alpha\beta}=2i\,C\;T^{\alpha\beta}(\partial_1,\partial_2),\qquad U^{\alpha\beta\rho\sigma}=2i\,C\;T^{\alpha\beta\rho\sigma}(\partial_1,\partial_2).
+\label{eq:ch1-rule}
+\end{equation}
+Verification: inserting \eqref{eq:ch1-rule} into
+\eqref{eq:ch1-normV}--\eqref{eq:ch1-normU} returns
+$\tfrac12\cdot\tfrac1i\cdot2iC\,T(\partial\phi,\partial\phi)=C\,T(\partial\phi,\partial\phi)$.
+This interpretation was not taken from \eqI{7} or \eqI{8}; it was built only
+from the text (FR) and (iS). It is tested against \eqI{8} in
+Sec.~\ref{sec:ch1-t2-checks}, check~(i).
+
+\paragraph{Meaning of the factor $2iC$ as a functional derivative.} \tD\
+\emph{Lemma 1 (scalar polarization).} Let $\mathcal L\supset C\,X^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$,
+with $X^{\mu\nu}=X^{\nu\mu}$ symmetric and independent of $\phi$. Setting
+$\phi=\phi_1+\phi_2$, the part bilinear in $\phi_1\phi_2$ is
+\begin{equation}
+C\,X^{\mu\nu}\big(\partial_\mu\phi_1\partial_\nu\phi_2+\partial_\mu\phi_2\partial_\nu\phi_1\big)=2C\,X^{\mu\nu}\,\partial_\mu\phi_1\,\partial_\nu\phi_2 .
+\label{eq:ch1-lemma1}
+\end{equation}
+In the second term $\mu\leftrightarrow\nu$ was renamed and the symmetry of $X$
+used. $i$ times this bilinear coefficient is the full vertex
+$i\,\delta^2S/\delta\phi_1\delta\phi_2$, namely
+$2iC\,X^{\mu\nu}\partial_{1\mu}\partial_{2\nu}$. By Task~1
+(Sec.~\ref{sec:ch1-t1-product}, paragraph ``Scalar derivatives''), every term
+of (E6) has this form. The $V_I$ and $U_I$ of \eqref{eq:ch1-rule} are therefore
+full functional derivatives with respect to the scalar pair. ``Extracting the
+$\tfrac12$'' exactly compensates the factor $2$ from the polarization.
+
+\paragraph{The graviton pair and the ``symmetry factor''.} \tD\ \tA\ In a term
+quadratic in $h$, the polarization $h=h_3+h_4$ gives, in the notation of
+\eqref{eq:ch1-normU}, $U[h_3,h_4]+U[h_4,h_3]$, where
+$U[h_3,h_4]\equiv U^{\alpha\beta\rho\sigma}h_{3\,\alpha\beta}h_{4\,\rho\sigma}$.
+This shows that the $U$ in \eqref{eq:ch1-normU} carries \emph{only one} graviton
+assignment of the full 4-point vertex. For the operators derived below, the
+full vertex is shown to be $U[3,4]+U[4,3]$ (Sec.~\ref{sec:ch1-t2-4pt}). In the
+paper's one-loop 4-point diagram, the two graviton legs are contracted with each
+other through the coincident two-point function $X_{\alpha\beta\rho\sigma}$. If
+the full vertex is used, this diagram carries a symmetry factor $\tfrac12$:
+\begin{equation}
+\tfrac12\big(U^{\alpha\beta\rho\sigma}+U^{\rho\sigma\alpha\beta}\big)X_{\alpha\beta\rho\sigma}
+=\tfrac12U^{\alpha\beta\rho\sigma}X_{\alpha\beta\rho\sigma}+\tfrac12U^{\alpha\beta\rho\sigma}X_{\rho\sigma\alpha\beta}
+=U^{\alpha\beta\rho\sigma}X_{\alpha\beta\rho\sigma}.
+\label{eq:ch1-symfactor}
+\end{equation}
+In the second term $(\alpha\beta)\leftrightarrow(\rho\sigma)$ was renamed. The
+last equality uses the pair symmetry $X_{\alpha\beta\rho\sigma}=X_{\rho\sigma\alpha\beta}$
+\tA. This symmetry is a general property of a bosonic time-ordered two-point
+function such as $\langle T\,h_{\alpha\beta}(x)h_{\rho\sigma}(x)\rangle$. (FRd)
+therefore means
+$(U,\ \text{no symmetry factor})\equiv(U_{\rm full},\ \tfrac12)$. This remark
+serves only to interpret the convention; it is not used in the derivation
+below.
+
+% ---------------------------------------------------------------------
+\subsection{\texorpdfstring{$\mathcal L^{(1)}$ and $\mathcal L^{(2)}$}{L(1) and L(2)} from (E6)}
+\label{sec:ch1-t2-L12}
+
+The overall factor $-\tfrac12$ of (E6) is distributed over every term of the
+bracket. Each sign follows from the product of the ``outer $-\tfrac12$'' and the
+``bracket coefficient $b$'':
+\begin{center}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Structure in (E6) & Order & Bracket coefficient $b$ & $C/(a^{D-2}\kappa^n)=-\tfrac12b$ & Sign\\
+\midrule
+$\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$ & $\kappa^0$ & $+1$ & $-\tfrac12$ & $(-)(+)=-$\\
+$h^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$ & $\kappa^1$ & $-1$ & $+\tfrac12$ & $(-)(-)=+$\\
+$h\,\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$ & $\kappa^1$ & $+\tfrac12$ & $-\tfrac14$ & $(-)(+)=-$\\
+$h^2\,\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$ & $\kappa^2$ & $+\tfrac18$ & $-\tfrac1{16}$ & $(-)(+)=-$\\
+$h^{\rho\sigma}h_{\rho\sigma}\,\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$ & $\kappa^2$ & $-\tfrac14$ & $+\tfrac18$ & $(-)(-)=+$\\
+$h\,h^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$ & $\kappa^2$ & $-\tfrac12$ & $+\tfrac14$ & $(-)(-)=+$\\
+$h^{\mu\rho}h_\rho{}^\nu\partial_\mu\phi\,\partial_\nu\phi$ & $\kappa^2$ & $+1$ & $-\tfrac12$ & $(-)(+)=-$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{equation}
+\begin{aligned}
+\kappa\mathcal L^{(1)}&=\kappa a^{D-2}\Big[+\tfrac12h^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi-\tfrac14h\,\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi\Big],\\
+\kappa^2\mathcal L^{(2)}&=\kappa^2a^{D-2}\Big[-\tfrac1{16}h^2\,\chAdp+\tfrac18h^{\rho\sigma}h_{\rho\sigma}\,\chAdp\\
+&\hspace{6.2em}+\tfrac14h\,h^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi-\tfrac12h^{\mu\rho}h_\rho{}^\nu\partial_\mu\phi\,\partial_\nu\phi\Big].
+\end{aligned}
+\label{eq:ch1-L12}
+\end{equation}
+This is the same as Task~1, \eqref{eq:ch1-L012}; here it has been read off again
+directly from (E6). The $\kappa^0$ term is the free scalar kinetic term and is
+not a vertex. $\mathcal L^{(1)}$ contains two terms of type $\phi\phi h$; they
+correspond to the two rows of Table~I. $\mathcal L^{(2)}$ contains four terms of
+type $\phi\phi hh$; they correspond to the four rows of Table~II.
+
+% ---------------------------------------------------------------------
+\subsection{Bringing the terms into the form ``contracted into \texorpdfstring{$\phi_1\phi_2h_{\alpha\beta}(h_{\rho\sigma})$}{phi1 phi2 h h}''}
+\label{sec:ch1-t2-contract}
+
+\tD\ Goal: in every term, write the $h$'s with lower indices as $h_{\alpha\beta}$
+and $h_{\rho\sigma}$, and move all remaining indices onto $\eta$ and the
+$\partial\phi$'s. Tools: \eqref{eq:ch1-dindex}, the definitions
+\eqref{eq:ch1-raise} of Task~1, and the symmetry of $\eta$.
+
+\paragraph{(a) $h^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$.}
+\begin{equation}
+h^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi=\eta^{\mu\alpha}\eta^{\nu\beta}h_{\alpha\beta}\,\partial_\mu\phi\,\partial_\nu\phi=(\eta^{\alpha\mu}\partial_\mu\phi)(\eta^{\beta\nu}\partial_\nu\phi)\,h_{\alpha\beta}=\partial^\alpha\phi\,\partial^\beta\phi\;h_{\alpha\beta}.
+\label{eq:ch1-ca}
+\end{equation}
+Renaming the dummies directly, $\mu\to\alpha$, $\nu\to\beta$, the same term can
+also be written $\partial_\alpha\phi\,\partial_\beta\phi\,h^{\alpha\beta}$, which is
+the notation of \eqI{7}.
+
+\paragraph{(b) $h\,\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$.}
+\begin{equation}
+h\,\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi=\eta^{\alpha\beta}\,\chAdp\;h_{\alpha\beta}.
+\label{eq:ch1-cb}
+\end{equation}
+
+\paragraph{(c) $h^2\,\chAdp$.}
+\begin{equation}
+h^2\,\chAdp=(\eta^{\alpha\beta}h_{\alpha\beta})(\eta^{\rho\sigma}h_{\rho\sigma})\,\chAdp=\eta^{\alpha\beta}\eta^{\rho\sigma}\,\chAdp\;h_{\alpha\beta}h_{\rho\sigma}.
+\label{eq:ch1-cc}
+\end{equation}
+By \eqref{eq:ch1-dindex}, $h^2\,\chAdp=\partial^\mu\phi\,\partial_\mu\phi\,h^2$,
+which is the notation of \eqI{8}.
+
+\paragraph{(d) $h^{\rho\sigma}h_{\rho\sigma}\,\chAdp$.} First rename the
+dummies $\rho\sigma\to\alpha\beta$, then expand the upper indices with
+\eqref{eq:ch1-raise}:
+\begin{equation}
+\begin{aligned}
+&h^{\rho\sigma}h_{\rho\sigma}=h^{\alpha\beta}h_{\alpha\beta}=\eta^{\alpha\rho}\eta^{\beta\sigma}h_{\rho\sigma}h_{\alpha\beta}=\eta^{\alpha\rho}\eta^{\beta\sigma}h_{\alpha\beta}h_{\rho\sigma}\\
+&\Longrightarrow\quad h^{\rho\sigma}h_{\rho\sigma}\,\chAdp=\eta^{\alpha\rho}\eta^{\beta\sigma}\,\chAdp\;h_{\alpha\beta}h_{\rho\sigma}.
+\end{aligned}
+\label{eq:ch1-cd}
+\end{equation}
+Since $h_{\rho\sigma}$ is symmetric, $\eta^{\alpha\sigma}\eta^{\beta\rho}$ would be
+equivalent. The paper uses the choice $\eta^{\alpha\rho}\eta^{\beta\sigma}$.
+
+\paragraph{(e) $h\,h^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$.} Using
+\eqref{eq:ch1-ca} with $\alpha\beta\to\rho\sigma$:
+\begin{equation}
+h\,h^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi=(\eta^{\alpha\beta}h_{\alpha\beta})(\partial^\rho\phi\,\partial^\sigma\phi\,h_{\rho\sigma})=\eta^{\alpha\beta}\,\partial^\rho\phi\,\partial^\sigma\phi\;h_{\alpha\beta}h_{\rho\sigma}.
+\label{eq:ch1-ce}
+\end{equation}
+Here the trace has been placed in the first graviton slot ($\alpha\beta$) and the
+derivative pair in the second slot ($\rho\sigma$). The opposite assignment
+$\eta^{\rho\sigma}\partial^\alpha\phi\,\partial^\beta\phi$ gives the same
+Lagrangian. Since the gravitons are not symmetrized (FRd), this is a choice of
+slot; the full vertex is the same for either choice
+(Sec.~\ref{sec:ch1-t2-norm}). The paper uses the first choice.
+
+\paragraph{(f) $h^{\mu\rho}h_\rho{}^\nu\partial_\mu\phi\,\partial_\nu\phi$.} To
+avoid a clash, first rename the inner dummy $\rho\to\lambda$. Then write
+$h^{\mu\lambda}=\eta^{\mu\alpha}\eta^{\lambda\beta}h_{\alpha\beta}$ and
+$h_\lambda{}^\nu=h_{\lambda\sigma}\eta^{\sigma\nu}$:
+\begin{equation}
+\begin{aligned}
+h^{\mu\lambda}h_\lambda{}^\nu\partial_\mu\phi\,\partial_\nu\phi
+&=\eta^{\mu\alpha}\eta^{\lambda\beta}h_{\alpha\beta}\,h_{\lambda\sigma}\eta^{\sigma\nu}\,\partial_\mu\phi\,\partial_\nu\phi
+\overset{\lambda\to\rho}{=}(\eta^{\alpha\mu}\partial_\mu\phi)\,h_{\alpha\beta}\,\eta^{\beta\rho}\,h_{\rho\sigma}\,(\eta^{\sigma\nu}\partial_\nu\phi)\\
+&=\partial^\alpha\phi\,\eta^{\beta\rho}\,\partial^\sigma\phi\;h_{\alpha\beta}h_{\rho\sigma}.
+\end{aligned}
+\label{eq:ch1-cf}
+\end{equation}
+In contracted form \eqref{eq:ch1-L12} becomes
+\begin{gather}
+\kappa\mathcal L^{(1)}=\kappa a^{D-2}\Big[\tfrac12\,\partial^\alpha\phi\,\partial^\beta\phi-\tfrac14\,\eta^{\alpha\beta}\,\chAdp\Big]h_{\alpha\beta},
+\label{eq:ch1-L1c}\\
+\begin{aligned}
+\kappa^2\mathcal L^{(2)}=\kappa^2a^{D-2}\Big[&-\tfrac1{16}\eta^{\alpha\beta}\eta^{\rho\sigma}\chAdp+\tfrac18\eta^{\alpha\rho}\eta^{\beta\sigma}\chAdp\\
+&+\tfrac14\eta^{\alpha\beta}\partial^\rho\phi\,\partial^\sigma\phi-\tfrac12\partial^\alpha\phi\,\eta^{\beta\rho}\partial^\sigma\phi\Big]h_{\alpha\beta}h_{\rho\sigma}.
+\end{aligned}
+\label{eq:ch1-L2c}
+\end{gather}
+
+% ---------------------------------------------------------------------
+\subsection{3-point vertices: Eq.~(I.7) and Table~I}
+\label{sec:ch1-t2-3pt}
+
+\paragraph{$I=1$.} \tD\ In the first term of \eqref{eq:ch1-L1c},
+$C=+\tfrac12\kappa a^{D-2}$ and $T^{\alpha\beta}=\partial^\alpha\phi\,\partial^\beta\phi$.
+By \eqref{eq:ch1-rule}:
+\begin{equation}
+V_1^{\alpha\beta}=2i\cdot\tfrac12\kappa a^{D-2}\,\partial_1^\alpha\partial_2^\beta=i\kappa a^{D-2}\,\partial_1^\alpha\partial_2^\beta .
+\label{eq:ch1-V1}
+\end{equation}
+\emph{Analytic cross-check with Lemma~1.} $X^{\mu\nu}=h^{\mu\nu}$ is symmetric
+and $C=\tfrac12\kappa a^{D-2}$. The full vertex is
+$2i\cdot\tfrac12\kappa a^{D-2}h^{\mu\nu}\partial_{1\mu}\partial_{2\nu}=i\kappa a^{D-2}\partial_1^\alpha\partial_2^\beta h_{\alpha\beta}$,
+which is \eqref{eq:ch1-V1} contracted into $h_{\alpha\beta}$. Contracted into
+$h_{\alpha\beta}$, $V_1$ is symmetric under $1\leftrightarrow2$:
+$\partial_2^\alpha\partial_1^\beta h_{\alpha\beta}=\partial_1^\beta\partial_2^\alpha h_{\beta\alpha}=\partial_1^\alpha\partial_2^\beta h_{\alpha\beta}$
+(renaming and the symmetry of $h$). Hence $\tfrac12[V(1,2)+V(2,1)]=V(1,2)$, and
+symmetrizing over the scalars introduces no extra factor.
+
+The derived form of \eqI{7}:
+\begin{equation*}
+\boxed{\;+\tfrac12\kappa a^{D-2}\,\partial_\alpha\phi\,\partial_\beta\phi\,h^{\alpha\beta}\ \Rightarrow\ V_1^{\alpha\beta}=i\kappa a^{D-2}\,\partial_1^\alpha\partial_2^\beta\;}
+\tag{I.7$'$}\label{eq:ch1-eq7}
+\end{equation*}
+
+\paragraph{$I=2$.} \tD\ In the second term of \eqref{eq:ch1-L1c},
+$C=-\tfrac14\kappa a^{D-2}$ and $T^{\alpha\beta}=\eta^{\alpha\beta}\,\chAdp$.
+Polarization turns $\chAdp\to2\,\chAdd$. By \eqref{eq:ch1-rule}:
+\begin{equation}
+V_2^{\alpha\beta}=2i\cdot\big(-\tfrac14\big)\kappa a^{D-2}\,\eta^{\alpha\beta}\,\chAdd=-\tfrac i2\kappa a^{D-2}\,\eta^{\alpha\beta}\,\chAdd .
+\label{eq:ch1-V2}
+\end{equation}
+
+\paragraph{Derived Table~I.}
+\begin{center}
+\small
+\begin{tabular}{cll}
+\toprule
+$I$ & $V_I^{\alpha\beta}$ (derived) & Source term\\
+\midrule
+1 & $i\kappa a^{D-2}\partial_1^\alpha\partial_2^\beta$ & $+\tfrac12\kappa a^{D-2}h^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$\\
+2 & $-\tfrac i2\kappa a^{D-2}\eta^{\alpha\beta}\chAdd$ & $-\tfrac14\kappa a^{D-2}h\,\chAdp$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ---------------------------------------------------------------------
+\subsection{4-point vertices: Eq.~(I.8) and Table~II}
+\label{sec:ch1-t2-4pt}
+
+\paragraph{Row-by-row application.} \tD\ Apply \eqref{eq:ch1-rule} to each
+term of \eqref{eq:ch1-L2c}. In each term the polarization distributes the two
+$\partial\phi$ over $\partial_1$ and $\partial_2$, and the factor $2$ is contained
+in the $2i$ of \eqref{eq:ch1-rule}:
+\begin{equation}
+\begin{aligned}
+U_1^{\alpha\beta\rho\sigma}&=2i\big(-\tfrac1{16}\big)\kappa^2a^{D-2}\,\eta^{\alpha\beta}\eta^{\rho\sigma}\,\chAdd=-\tfrac i8\kappa^2a^{D-2}\,\eta^{\alpha\beta}\eta^{\rho\sigma}\,\chAdd,\\
+U_2^{\alpha\beta\rho\sigma}&=2i\big(+\tfrac18\big)\kappa^2a^{D-2}\,\eta^{\alpha\rho}\eta^{\beta\sigma}\,\chAdd=+\tfrac i4\kappa^2a^{D-2}\,\eta^{\alpha\rho}\eta^{\beta\sigma}\,\chAdd,\\
+U_3^{\alpha\beta\rho\sigma}&=2i\big(+\tfrac14\big)\kappa^2a^{D-2}\,\eta^{\alpha\beta}\,\partial_1^\rho\partial_2^\sigma=+\tfrac i2\kappa^2a^{D-2}\,\eta^{\alpha\beta}\,\partial_1^\rho\partial_2^\sigma,\\
+U_4^{\alpha\beta\rho\sigma}&=2i\big(-\tfrac12\big)\kappa^2a^{D-2}\,\partial_1^\alpha\eta^{\beta\rho}\partial_2^\sigma=-i\kappa^2a^{D-2}\,\partial_1^\alpha\eta^{\beta\rho}\partial_2^\sigma .
+\end{aligned}
+\label{eq:ch1-U}
+\end{equation}
+Together, \eqref{eq:ch1-cc} and the first line of \eqref{eq:ch1-U} give the
+derived form of \eqI{8}:
+\begin{equation*}
+\boxed{\;-\tfrac{\kappa^2}{16}a^{D-2}\,\partial^\mu\phi\,\partial_\mu\phi\,h^2\ \Rightarrow\ U_1^{\alpha\beta\rho\sigma}=-\tfrac i8\kappa^2a^{D-2}\,\eta^{\alpha\beta}\eta^{\rho\sigma}\,\chAdd\;}
+\tag{I.8}\label{eq:ch1-eq8}
+\end{equation*}
+
+\paragraph{Compact rule.} \tD\ Combining \eqref{eq:ch1-rule} with
+$C=-\tfrac12b\,\kappa^na^{D-2}$ from Sec.~\ref{sec:ch1-t2-L12} gives
+$2iC=-i\,b\,\kappa^na^{D-2}$. Every vertex is $-i$ times the corresponding
+bracket coefficient of (E6):
+\begin{equation}
+V_I,\ U_I\;=\;-\,i\,b_I\,\kappa^n a^{D-2}\times(\text{contracted structure}_I).
+\label{eq:ch1-compact}
+\end{equation}
+\begin{center}
+\small
+\begin{tabular}{lccc}
+\toprule
+Structure & $b_I$ in (E6) & $-ib_I$ & Vertex\\
+\midrule
+$h^{\mu\nu}\to\partial_1^\alpha\partial_2^\beta$ & $-1$ & $+i$ & $V_1$\\
+$\eta^{\mu\nu}h\to\eta^{\alpha\beta}\chAdd$ & $+\tfrac12$ & $-\tfrac i2$ & $V_2$\\
+$\eta^{\mu\nu}h^2\to\eta^{\alpha\beta}\eta^{\rho\sigma}\chAdd$ & $+\tfrac18$ & $-\tfrac i8$ & $U_1$\\
+$\eta^{\mu\nu}h^{\rho\sigma}h_{\rho\sigma}\to\eta^{\alpha\rho}\eta^{\beta\sigma}\chAdd$ & $-\tfrac14$ & $+\tfrac i4$ & $U_2$\\
+$hh^{\mu\nu}\to\eta^{\alpha\beta}\partial_1^\rho\partial_2^\sigma$ & $-\tfrac12$ & $+\tfrac i2$ & $U_3$\\
+$h^{\mu\rho}h_\rho{}^\nu\to\partial_1^\alpha\eta^{\beta\rho}\partial_2^\sigma$ & $+1$ & $-i$ & $U_4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Full vertex with distinct legs: the example of $U_4$.} This is an
+analytic check. Matrix shorthand:
+$\partial_1h_3h_4\partial_2\equiv\partial_1^\alpha h_{3\,\alpha\beta}\eta^{\beta\rho}h_{4\,\rho\sigma}\partial_2^\sigma$.
+Apply $\phi\to\phi_1+\phi_2$ and $h\to h_3+h_4$ to the term
+$-\tfrac12\kappa^2a^{D-2}\,\partial^\alpha\phi\,h_{\alpha\beta}\eta^{\beta\rho}h_{\rho\sigma}\partial^\sigma\phi$.
+The coefficient of $\phi_1\phi_2h_3h_4$ is
+\begin{equation}
+\begin{aligned}
+&-\tfrac12\kappa^2a^{D-2}\big[\partial_1h_3h_4\partial_2+\partial_1h_4h_3\partial_2+\partial_2h_3h_4\partial_1+\partial_2h_4h_3\partial_1\big]\\
+&\qquad=-\kappa^2a^{D-2}\big[\partial_1h_3h_4\partial_2+\partial_1h_4h_3\partial_2\big].
+\end{aligned}
+\label{eq:ch1-U4full}
+\end{equation}
+Here we used $\partial_2h_3h_4\partial_1=\partial_1h_4h_3\partial_2$: a scalar
+equals its own transpose, and $h_3$, $h_4$, $\eta$ are symmetric. Multiplied
+by $i$, \eqref{eq:ch1-U4full} equals $U_4[h_3,h_4]+U_4[h_4,h_3]$. This proves
+analytically, for $U_4$, the relation ``full vertex $=U[3,4]+U[4,3]$'' of
+Sec.~\ref{sec:ch1-t2-norm}. The same relation for all four rows was verified
+symbolically by code check (A) (Sec.~\ref{sec:ch1-t2-code}).
+
+\paragraph{Derived Table~II.}
+\begin{center}
+\small
+\begin{tabular}{cll}
+\toprule
+$I$ & $U_I^{\alpha\beta\rho\sigma}$ (derived) & Source term\\
+\midrule
+1 & $-\tfrac i8\kappa^2a^{D-2}\eta^{\alpha\beta}\eta^{\rho\sigma}\chAdd$ & $-\tfrac1{16}\kappa^2a^{D-2}h^2\,\chAdp$\\
+2 & $+\tfrac i4\kappa^2a^{D-2}\eta^{\alpha\rho}\eta^{\beta\sigma}\chAdd$ & $+\tfrac18\kappa^2a^{D-2}h^{\rho\sigma}h_{\rho\sigma}\,\chAdp$\\
+3 & $+\tfrac i2\kappa^2a^{D-2}\eta^{\alpha\beta}\partial_1^\rho\partial_2^\sigma$ & $+\tfrac14\kappa^2a^{D-2}hh^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$\\
+4 & $-i\kappa^2a^{D-2}\partial_1^\alpha\eta^{\beta\rho}\partial_2^\sigma$ & $-\tfrac12\kappa^2a^{D-2}h^{\mu\rho}h_\rho{}^\nu\partial_\mu\phi\,\partial_\nu\phi$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ---------------------------------------------------------------------
+\subsection{Independent analytic checks}
+\label{sec:ch1-t2-checks}
+
+\paragraph{(i) Test of the normalization interpretation.} Suppose a factor
+$\tfrac12$ were also extracted for the gravitons in \eqref{eq:ch1-normU}, i.e.\
+$\kappa^2\mathcal L^{(2)}=\tfrac14\cdot\tfrac1i\,U'\phi_1\phi_2hh$. Then $U'=4iC$
+and
+$U_1'=-\tfrac i4\kappa^2a^{D-2}\eta^{\alpha\beta}\eta^{\rho\sigma}\chAdd$. The
+paper writes $-\tfrac i8$ in \eqI{8}. This supports the interpretation
+\eqref{eq:ch1-normU} and is consistent with the text (FRd). For the 3-point
+vertices there is no alternative interpretation: $V$ is already a full
+functional derivative (Sec.~\ref{sec:ch1-t2-3pt}).
+
+\paragraph{(ii) Check from the full metric I: $h_{\mu\nu}=c\,\eta_{\mu\nu}$.}
+This check does not use (E6). It uses only the full metric
+$g_{\mu\nu}=a^2(1+\kappa c)\eta_{\mu\nu}$ and the normalization
+\eqref{eq:ch1-normV}--\eqref{eq:ch1-normU}. The exact inverse metric and
+determinant give
+$\sqrt{-g}\,g^{\mu\nu}=a^{D-2}(1+\kappa c)^{(D-2)/2}\eta^{\mu\nu}$
+(Task~1, \eqref{eq:ch1-conf-exact}). Therefore
+\begin{equation}
+\begin{aligned}\mathcal L_\phi&=-\tfrac12a^{D-2}(1+\kappa c)^{\frac{D-2}2}\chAdp\\
+\Rightarrow\quad \kappa\mathcal L^{(1)}&=-\tfrac{D-2}{4}\,\kappa c\,a^{D-2}\,\chAdp,\qquad
+\kappa^2\mathcal L^{(2)}=-\tfrac{(D-2)(D-4)}{16}\,\kappa^2c^2a^{D-2}\,\chAdp .\end{aligned}
+\label{eq:ch1-conf-L}
+\end{equation}
+Take an ansatz with general coefficients,
+$V=i\kappa a^{D-2}\big[x\,\partial_1^\alpha\partial_2^\beta+y\,\eta^{\alpha\beta}\chAdd\big]$
+and
+\begin{equation*}
+U=i\kappa^2a^{D-2}\big[u_1\eta^{\alpha\beta}\eta^{\rho\sigma}\chAdd+u_2\eta^{\alpha\rho}\eta^{\beta\sigma}\chAdd+u_3\eta^{\alpha\beta}\partial_1^\rho\partial_2^\sigma+u_4\partial_1^\alpha\eta^{\beta\rho}\partial_2^\sigma\big].
+\end{equation*}
+For $h_{\alpha\beta}=c\eta_{\alpha\beta}$ the contractions are
+$\eta^{\alpha\beta}h_{\alpha\beta}=cD$,
+$\partial^\alpha\phi\,\partial^\beta\phi\,h_{\alpha\beta}=c\,\chAdp$,
+$\eta^{\alpha\rho}\eta^{\beta\sigma}h_{\alpha\beta}h_{\rho\sigma}=c^2D$, and
+$\partial^\alpha\phi\,h_{\alpha\beta}\eta^{\beta\rho}h_{\rho\sigma}\partial^\sigma\phi=c^2\chAdp$.
+Inserting into \eqref{eq:ch1-normV}--\eqref{eq:ch1-normU}:
+\begin{equation}
+\tfrac12(x+yD)\,c=-\tfrac{D-2}4c,\qquad \tfrac12\big(u_1D^2+(u_2+u_3)D+u_4\big)c^2=-\tfrac{(D-2)(D-4)}{16}c^2 .
+\label{eq:ch1-conf-sys}
+\end{equation}
+The coefficients are numbers independent of $D$. Since the equality holds for
+every $D$, the powers of $D$ can be matched separately: $x=1$, $y=-\tfrac12$,
+$u_1=-\tfrac18$, $u_2+u_3=\tfrac34$, $u_4=-1$. Table~I is completely fixed in
+this way and agrees with \eqref{eq:ch1-V1}, \eqref{eq:ch1-V2}. \emph{Passed.}
+\begin{itemize}[leftmargin=1.4em]
+\item If the $-\tfrac12$ on the left-hand side of \eqI{7} were correct, we would
+have $x=-1$. This gives $\tfrac12(-1-\tfrac D2)=-\tfrac{D+2}4\neq-\tfrac{D-2}4$.
+\emph{Fails.}
+\item The derived Table~II, $(u_1,u_2,u_3,u_4)=(-\tfrac18,\tfrac14,\tfrac12,-1)$,
+satisfies $u_2+u_3=\tfrac34$. \emph{Passed.}
+\item The printed Table~II, $(-\tfrac18,-\tfrac14,\tfrac12,-1)$, gives
+$u_2+u_3=\tfrac14\neq\tfrac34$. The reconstructed Lagrangian deviates from the
+exact result by $-\tfrac D4\kappa^2c^2a^{D-2}\chAdp$. \emph{Fails.}
+\end{itemize}
+
+\paragraph{(iii) Check from the full metric II: only $h_{00}=b$.} This check
+does not use (E6) either. $g_{00}=-a^2(1-\kappa b)$, $g_{0i}=0$,
+$g_{ij}=a^2\delta_{ij}$, hence
+$\sqrt{-g}\,g^{00}=-a^{D-2}(1-\kappa b)^{-1/2}$ and
+$\sqrt{-g}\,g^{ij}=a^{D-2}\delta^{ij}(1-\kappa b)^{1/2}$ (Task~1,
+\eqref{eq:ch1-h00-exact}). Writing $\phi'\equiv\partial_0\phi$ and
+$|\nabla\phi|^2\equiv\delta^{ij}\partial_i\phi\,\partial_j\phi$, the $\kappa^2$
+part is
+\begin{equation}
+\kappa^2\mathcal L^{(2)}=-\tfrac12\Big[\big(-\tfrac38\kappa^2b^2\big)\phi'^2+\big(-\tfrac18\kappa^2b^2\big)|\nabla\phi|^2\Big]a^{D-2}=\kappa^2b^2a^{D-2}\Big[\tfrac3{16}\phi'^2+\tfrac1{16}|\nabla\phi|^2\Big].
+\label{eq:ch1-h00-L}
+\end{equation}
+For $h_{00}=b$ the structures of the ansatz take the values
+$\eta^{\alpha\beta}h_{\alpha\beta}=-b$;
+$h^{\rho\sigma}h_{\rho\sigma}=b^2$;
+$\chAdp=-\phi'^2+|\nabla\phi|^2$;
+$h_{\rho\sigma}\partial^\rho\phi\,\partial^\sigma\phi=b\,(\partial^0\phi)^2=b\,\phi'^2$;
+$\partial^\alpha\phi\,h_{\alpha\beta}\eta^{\beta\rho}h_{\rho\sigma}\partial^\sigma\phi=\partial^0\phi\,b\,\eta^{00}\,b\,\partial^0\phi=-b^2\phi'^2$.
+Inserting into \eqref{eq:ch1-normU}:
+\begin{equation}
+\kappa^2\mathcal L^{(2)}_{\rm ansatz}=\tfrac12\kappa^2b^2a^{D-2}\Big[-(u_1+u_2+u_3+u_4)\,\phi'^2+(u_1+u_2)\,|\nabla\phi|^2\Big].
+\label{eq:ch1-h00-ansatz}
+\end{equation}
+Comparison with \eqref{eq:ch1-h00-L} gives $u_1+u_2=\tfrac18$ and
+$u_1+u_2+u_3+u_4=-\tfrac38$. Together with $u_1=-\tfrac18$ from check (ii) this
+gives $u_2=\tfrac14$, and hence $u_3=\tfrac34-u_2=\tfrac12$. Consistency:
+$-\tfrac18+\tfrac14+\tfrac12-1=-\tfrac38$. \emph{Passed.}
+
+\begin{resultbox}
+Using only the full metric, without any reference to \eqI{6}, the coefficients
+of Table~II are found uniquely as
+$(u_1,u_2,u_3,u_4)=(-\tfrac18,+\tfrac14,+\tfrac12,-1)$. This agrees with
+\eqref{eq:ch1-U}. The printed $u_2=-\tfrac14$ gives
+$u_1+u_2=-\tfrac38\neq\tfrac18$ and fails.
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\subsection{Code checks}
+\label{sec:ch1-t2-code}
+
+\tC\ The script \texttt{code/01\_feynman\_rules/check\_vertices.py} (Python~3,
+SymPy~1.14.0; about 10\,s) performs three checks. They do not replace the
+analytic derivation. The script sets $a=1$ and tracks the powers of $\kappa$
+separately. The symbol $p_\mu$ represents a $\partial_\mu$ acting on a scalar
+leg. A switch selects the sign of $U_2$: the derived $+\tfrac i4$ or the printed
+$-\tfrac i4$.
+\begin{itemize}[leftmargin=1.4em]
+\item[(A)] Full vertices from (E6) by polarization, with distinct legs
+($p_1\neq p_2$, $h_3\neq h_4$; $D=3,4$, fully symbolic):
+\begin{itemize}[leftmargin=1.2em]
+\item $i\cdot\text{coeff}[\phi_1\phi_2h_3]=V_1+V_2$: \texttt{True}.
+\item $i\cdot\text{coeff}[\phi_1\phi_2h_3h_4]=U[3,4]+U[4,3]$: difference with the
+derived table is $0$.
+\item The difference with the printed table is
+$-i\,(p_1\!\cdot p_2)(h_3^{\rho\sigma}h_{4\,\rho\sigma})$. In the script output
+it appears with $p_0q_0-p_1q_1-\ldots=-p_1\!\cdot p_2$ and
+$a_{00}b_{00}-2a_{01}b_{01}+\ldots=h_3^{\rho\sigma}h_{4\,\rho\sigma}$. This is
+exactly the sign difference in $U_2$.
+\end{itemize}
+\item[(B)] From the full metric (without (E6)), coincident legs:
+\begin{itemize}[leftmargin=1.2em]
+\item $D=2,3$ with symbolic $h$; $D=4,5$ with random rational $h$ and symbolic $p$.
+\item $\kappa\mathcal L^{(1)}=\tfrac1{2i}V[h]$, and with the derived table
+$\kappa^2\mathcal L^{(2)}=\tfrac1{2i}U[h,h]$: all \texttt{True}.
+\item The difference with the printed table is
+$-\tfrac14(\chAdp)(h^{\rho\sigma}h_{\rho\sigma})$, without the factor $\kappa^2a^{D-2}$.
+\end{itemize}
+\item[(C)] The linear system of checks (ii) and (iii) above, solved by computer.
+The conformal case is taken with general $D$, the $h_{00}$ case with $D=4$ and
+general $p$. Unique solution: $x=1$, $y=-\tfrac12$, $u=(-\tfrac18,\tfrac14,\tfrac12,-1)$.
+\end{itemize}
+The output of the re-run, identical line by line to the output recorded in the
+original session, is reproduced below. Long lines are broken by hand, with
+``\texttt{\textbackslash}'' marking a continuation.
+\begin{center}
+\begin{minipage}{0.99\linewidth}
+\scriptsize
+\begin{verbatim}
+== (A) full vertices from Eq. (6) by polarization, distinct legs p1,p2,h3,h4 ==
+D=3: i*coeff[phi1 phi2 h3] of kappa L^(1)  == Table I : True
+D=3: U[3,4]+U[4,3] - i*coeff[phi1 phi2 h3 h4], derived (U2=+i/4): 0
+D=3: U[3,4]+U[4,3] - i*coeff[phi1 phi2 h3 h4], paper   (U2=-i/4): \
+     I*(p0*q0 - p1*q1 - p2*q2)*(a00*b00 - 2*a01*b01 - 2*a02*b02 + a11*b11 \
+     + 2*a12*b12 + a22*b22)
+D=4: i*coeff[phi1 phi2 h3] of kappa L^(1)  == Table I : True
+D=4: U[3,4]+U[4,3] - i*coeff[phi1 phi2 h3 h4], derived (U2=+i/4): 0
+D=4: U[3,4]+U[4,3] - i*coeff[phi1 phi2 h3 h4], paper   (U2=-i/4): \
+     I*(p0*q0 - p1*q1 - p2*q2 - p3*q3)*(a00*b00 - 2*a01*b01 - 2*a02*b02 \
+     - 2*a03*b03 + a11*b11 + 2*a12*b12 + 2*a13*b13 + a22*b22 + 2*a23*b23 + a33*b33)
+== (B) tables vs EXACT metric (no Eq. (6) input), coincident legs ==
+D=2 (symbolic h): L^(1) == (1/2i)V[h]: True;  L^(2) == (1/2i)U[h,h] derived: True; \
+     paper - exact = (p0 - p1)*(p0 + p1)*(h00**2 - 2*h01**2 + h11**2)/4
+D=3 (symbolic h): L^(1) == (1/2i)V[h]: True;  L^(2) == (1/2i)U[h,h] derived: True; \
+     paper - exact = (p0**2 - p1**2 - p2**2)*(h00**2 - 2*h01**2 - 2*h02**2 + h11**2 \
+     + 2*h12**2 + h22**2)/4
+D=4 (random rational h): L^(1) == (1/2i)V[h]: True;  L^(2) == (1/2i)U[h,h] derived: True; \
+     paper - exact = -77563*(p0**2 - p1**2 - p2**2 - p3**2)/1600
+D=5 (random rational h): L^(1) == (1/2i)V[h]: True;  L^(2) == (1/2i)U[h,h] derived: True; \
+     paper - exact = -1373629*(p0**2 - p1**2 - p2**2 - p3**2 - p4**2)/44100
+== (C) determine the table coefficients from the exact metric alone ==
+solution: [{u1: -1/8, u2: 1/4, u3: 1/2, u4: -1, x: 1, y: -1/2}]
+   (Table I : x=1 -> V1 = i kappa d1^a d2^b ; y=-1/2 -> V2 = -(i/2) kappa eta^{ab} d1.d2)
+   (Table II: U_I = i kappa^2 a^{D-2} u_I x structure_I)
+\end{verbatim}
+\end{minipage}
+\end{center}
+
+% ---------------------------------------------------------------------
+\subsection{Comparison with the paper}
+\label{sec:ch1-t2-compare}
+
+\begin{center}
+\small
+\begin{tabular}{llll}
+\toprule
+Item & Derived & \PI{} (printed) & \\
+\midrule
+\eqI{7} left side & $+\tfrac12\kappa a^{D-2}\partial_\alpha\phi\,\partial_\beta\phi\,h^{\alpha\beta}$ & $-\tfrac12\kappa a^{D-2}\partial_\alpha\phi\,\partial_\beta\phi\,h^{\alpha\beta}$ & $\times$ sign\\
+\eqI{7} right side $=V_1$ & $i\kappa a^{D-2}\partial_1^\alpha\partial_2^\beta$ & $i\kappa a^{D-2}\partial_1^\alpha\partial_2^\beta$ & \checkmark\\
+\eqI{8} left side & $-\tfrac{\kappa^2}{16}a^{D-2}\partial^\mu\phi\,\partial_\mu\phi\,h^2$ & $-\tfrac{\kappa^2}{16}a^{D-2}\partial^\mu\phi\,\partial_\mu\phi\,h^2$ & \checkmark\\
+\eqI{8} right side $=U_1$ & $-\tfrac i8\kappa^2a^{D-2}\eta^{\alpha\beta}\eta^{\rho\sigma}\chAdd$ & same & \checkmark\\
+Table I, $V_2$ & $-\tfrac i2\kappa a^{D-2}\eta^{\alpha\beta}\chAdd$ & same & \checkmark\\
+Table II, $U_2$ & $+\tfrac i4\kappa^2a^{D-2}\eta^{\alpha\rho}\eta^{\beta\sigma}\chAdd$ & $-\tfrac i4\kappa^2a^{D-2}\eta^{\alpha\rho}\eta^{\beta\sigma}\chAdd$ & $\times$ sign\\
+Table II, $U_3$ & $\tfrac i2\kappa^2a^{D-2}\eta^{\alpha\beta}\partial_1^\rho\partial_2^\sigma$ & same & \checkmark\\
+Table II, $U_4$ & $-i\kappa^2a^{D-2}\partial_1^\alpha\eta^{\beta\rho}\partial_2^\sigma$ & same & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+The tensor structures and slot choices ($\eta^{\alpha\rho}\eta^{\beta\sigma}$;
+$\eta^{\alpha\beta}\partial_1^\rho\partial_2^\sigma$;
+$\partial_1^\alpha\eta^{\beta\rho}\partial_2^\sigma$) are literally those of the
+paper. No dummy-index mapping was needed.
+
+\paragraph{The sign on the left-hand side of \eqI{7}.} In (E6) the bracket
+coefficient of the $h^{\mu\nu}$ term is $-\kappa$. Multiplying by the outer
+$-\tfrac12$ gives $+\tfrac12\kappa$. The paper's own normalization, as read off
+from \eqI{8}, is $U_1/C=2i$. With this normalization a coefficient
+$-\tfrac12\kappa$ would give $V_1=-i\kappa\ldots$. The paper, however, writes
+$V_1=+i\kappa\ldots$, so it is internally inconsistent at this point. $V_1$
+agrees both with (E6) and with the full-metric check of
+Sec.~\ref{sec:ch1-t2-checks} ($x=+1$). Conclusion: the sign on the left-hand
+side of \eqI{7} is a typesetting error, and $V_1$ in Table~I is correct.
+
+\paragraph{The sign in row 2 of Table~II.} The magnitude ($\tfrac14$) and the
+tensor structure ($\eta^{\alpha\rho}\eta^{\beta\sigma}\chAdd$) agree; only the
+sign is reversed. Three independent pieces of evidence support the derived
+sign:
+\begin{enumerate}[leftmargin=1.6em]
+\item Starting from (E6), the same rule \eqref{eq:ch1-compact} that reproduces
+\eqI{8} and the other three rows of Table~II exactly gives $+\tfrac i4$.
+\item The two full-metric checks (Sec.~\ref{sec:ch1-t2-checks}, (ii)--(iii)),
+which do not use (E6) at all, give $u_2=+\tfrac14$ as the unique solution.
+\item The SymPy checks (A) and (B) give the same result.
+\end{enumerate}
+With the printed sign, the reconstructed Lagrangian deviates from the exact one
+by
+\begin{equation}
+\tfrac1{2i}\big(U_2^{\rm printed}-U_2^{\rm derived}\big)[h,h]=-\tfrac14\kappa^2a^{D-2}\,h^{\rho\sigma}h_{\rho\sigma}\,\partial^\mu\phi\,\partial_\mu\phi .
+\label{eq:ch1-U2dev}
+\end{equation}
+From page 124005-2 alone one cannot tell whether this difference is only a
+misprint in the table or whether it also enters the 4-point computation of
+Sec.~III\,A of the paper. The report noted that this must be checked
+separately, at the step where $U_2$ is contracted with the coincident graviton
+propagator; Task~2 did not go on to that step.
+
+\begin{notebox}[Later resolution (Task 3)]
+The open point was settled in Task~3 (next chapter). There the derived Table~II
+(with $U_2=+\tfrac i4$) was used. The second term of the printed Eq.~\eqI{33}
+is $+\tfrac i4$, which is what the paper's own rule gives with $U_2=+\tfrac i4$
+and not with the printed $-\tfrac i4$. The Table~II entry is therefore a
+misprint only; the paper's calculation used the correct vertex.
+\end{notebox}
+
+% ---------------------------------------------------------------------
+\subsection{Calculation record}
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Derived.} $\mathcal L^{(1)}$ and $\mathcal L^{(2)}$ were read off
+from (E6) with the sign table \eqref{eq:ch1-L12}. The six terms were brought
+into the form contracted into $\phi_1\phi_2h_{\alpha\beta}(h_{\rho\sigma})$,
+\eqref{eq:ch1-ca}--\eqref{eq:ch1-L2c}. The normalization
+\eqref{eq:ch1-normV}--\eqref{eq:ch1-rule} was built from the text of the paper
+and justified by the functional derivative (Lemma~1,
+\eqref{eq:ch1-symfactor}). As a result we obtained \eqI{7} [derived form
+\eqref{eq:ch1-eq7}], \eqI{8} [\eqref{eq:ch1-eq8}], Table~I
+[\eqref{eq:ch1-V1}, \eqref{eq:ch1-V2}] and Table~II [\eqref{eq:ch1-U}].
+Compact rule: vertex $=-i\times$ (bracket coefficient in \eqI{6})
+\eqref{eq:ch1-compact}. Everything holds for general $D$ and without a gauge
+condition.
+\item \textbf{Checks passed.} Back-substitution into
+\eqref{eq:ch1-normV}--\eqref{eq:ch1-normU}; the cross-check of $V_1$ with
+Lemma~1; the full vertex of $U_4$ with distinct legs \eqref{eq:ch1-U4full}; the
+test of the normalization interpretation against \eqI{8} (check (i)); the
+conformal and $h_{00}$ checks from the full metric, which fix the vertex
+coefficients uniquely and independently of \eqI{6} (checks (ii)--(iii)); the
+SymPy checks (A), (B) and (C), actually run.
+\item \textbf{Discrepancies.} (i) The left-hand side of \eqI{7} is printed with
+$-\tfrac12\kappa$; the correct coefficient is $+\tfrac12\kappa$. This is a
+typesetting error, and $V_1$ is not affected. (ii) Table~II, row~2 is printed
+with $-\tfrac i4$; the derived and independently verified value is $+\tfrac i4$.
+\textbf{Open point at the end of Task~2:} whether (ii) propagates into the
+paper's computation of the 4-point contribution. This was resolved in Task~3:
+it does not, and (ii) is a misprint only.
+\end{itemize}

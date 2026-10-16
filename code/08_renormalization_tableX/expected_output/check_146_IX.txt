@@ -1,0 +1,70 @@
+== (A) pointwise parts of (148), (149), (150) and residues ==
+  (148) pointwise: True
+  (149) pointwise: True
+  (150) pointwise: Box/H^2 (4/y)^(D/2-1) = D/2(D/2-1)(4/y)^(D/2-1): True
+  y^(D/2-2) f for f=(4/y)^(D/2-1): 2**(D - 2)   -> residue 4^(D/2-1)
+  y^(D/2-2) f for f=(4/y)^(D-2): 2**(2*D - 4)*y**(1 - D/2)   for f=(4/y)^(D-3): 2**(2*D - 6)*y**(2 - D/2)   (y-dependent for generic D -> no residue)
+  (147) delta coefficient for (4/y)^(D/2-1), divided by H^2: True
+  consistency with a^D Box A_lead = i delta, A_lead = N Gamma(D/2-1)(4/y)^(D/2-1): True
+== (B) (151) from (149) and (150), then (152) and (153) as D -> 4 ==
+  (151) = (149) - 2/((D-3)(D-4)) x [(150)=0]: True
+  delta coefficient 2C/((D-3)(D-4)) == (4pi)^(D/2) H^-D (D-2)/((D-3)(D-4)Gamma(D/2)): True
+  2/((D-3)(D-4)) [(4/y)^(D-3)-(4/y)^(D/2-1)] ->  z*log(z)   (= -(4/y)ln(y/4))
+  -4/(D-4){...} -> z*(-2*log(z) - 1)   (= 2(4/y)ln(y/4) - 4/y with ln z = -ln(y/4))
+  (153): 2/(D-2)^2 Box/H^2 [(152)] - 2/(D-2)[(152)];  at D=4 coefficients of Box(NL), NL: 1/2 -1
+  local: 2/(D-2)^2 * (D-2) = 2/(D-2) (Box/H^2 term) and -2/(D-2)*(D-2) = -2  ->  {2/(D-2) Box/H^2 - 2}  OK
+== (C) flat Euclidean analogue of the 'add zero' step (151), exact in D (radial test function exp(-r^2)) ==
+  <r^-2(D-2),phi> == [<r^-2(D-3) - r^(2-D), Lap phi> - (D-2) Omega phi(0)] / (2(D-3)(D-4))  for all D: True
+  pole structure: <r^-2(D-2),phi> = pi**2*((D - 4)*(-2*EulerGamma - log(pi) + 1) - 2)/(D - 4)  (simple pole at D=4)
+== (D) Table VI from Table IV via (152),(153), with gamma3 = 2 gamma1 + gamma2, eps3 = 2 eps1 + eps2 eliminated ==
+  alpha  : derived = D/((D - 2)*(D - 1))                                          matches paper: True
+  beta   : derived = -(2*Box_H2*D + D**4 - 5*D**3 + 20*D - 16)/(4*(D - 2)*(D - 1)) matches paper: True
+  gamma1 : derived = -(2*Box_H2*D**2 + D**5 - 7*D**4 + 10*D**3 + 16*D**2 - 48*D + 32)/(4*(D - 2)) matches paper: True
+  gamma2 : derived = (D - 2)*(D**3 - 3*D**2 - 4*D + 8)/(4*(D - 1))                matches paper: True
+  delta  : derived = 0                                                            matches paper: True
+  eps1   : derived = (D**2 - 6*D + 4)/(2*(D - 1))                                 matches paper: True
+  eps2   : derived = -(2*D - 1)/(D - 1)                                           matches paper: True
+  zeta   : derived = 0                                                            matches paper: True
+  (with Table IV's printed gamma2 sign the gamma2 row would be -(D - 2)*(D**3 - 3*D**2 - 4*D + 8)/(4*(D - 1))  -> paper's Table VI uses the corrected sign)
+== (E) Table VII at D=4 from the nonlocal parts of (152),(153) ==
+  alpha  : (c1,c2)|_D=4 = (0,1/3)   matches paper Table VII: True
+  beta   : (c1,c2)|_D=4 = (-1/3,-1/3)   matches paper Table VII: True
+  gamma1 : (c1,c2)|_D=4 = (-4,-2)   matches paper Table VII: True
+  gamma2 : (c1,c2)|_D=4 = (0,2/3)   matches paper Table VII: True
+  delta  : (c1,c2)|_D=4 = (0,0)   matches paper Table VII: True
+  eps1   : (c1,c2)|_D=4 = (0,-1/3)   matches paper Table VII: True
+  eps2   : (c1,c2)|_D=4 = (0,-7/6)   matches paper Table VII: True
+  zeta   : (c1,c2)|_D=4 = (0,0)   matches paper Table VII: True
+== (F) kernel identities (154), (155) and the other conversions, general D ==
+  (154): True
+  (155): True
+  alpha = (aa')^D Box^2      -> a^D Box^2 delta     : True
+  gamma1 Box/H^2 = (aa')^D H^2 Box -> a^D H^2 Box   : True
+  gamma1 = (aa')^D H^4        -> a^D H^4             : True
+  gamma2 = (aa')^{D-1}(a^2+a'^2)H^4 -> 2 a^D H^4     : True
+  eps1 = (aa')^{D-1}H^2 Lap   -> a^{D-2} H^2 Lap      : True
+  eps2 = (aa')^{D-2}(a^2+a'^2)H^2 Lap -> 2 a^{D-2}H^2 Lap: True
+== (G) Tables VIII and IX from Table VI; totals; consistency checks ==
+  alpha   : [D/((D - 2)*(D - 1)), 0, 0, 0]
+  betaB   : [-D/((D - 2)*(D - 1)), 6*D/((D - 2)*(D - 1)), -4*D/((D - 2)*(D - 1)), -D*(D**2 - 2*D + 2)/((D - 2)*(D - 1))]
+  beta    : [0, -(D - 4)*(D + 2)/2, 0, (D - 4)*(D + 2)/2]
+  gamma1B : [0, -D**2/(2*(D - 2)), 0, 0]
+  gamma1  : [0, 0, 0, -(D**4 - 5*D**3 + 16*D - 16)/4]
+  gamma2  : [0, 0, 0, (D - 2)*(D**3 - 3*D**2 - 4*D + 8)/(2*(D - 1))]
+  eps1    : [0, 0, (D**2 - 6*D + 4)/(2*(D - 1)), 0]
+  eps2    : [0, 0, -2*(2*D - 1)/(D - 1), 0]
+  totals: [0, -(D - 4)*(D**3 - D + 4)/(2*(D - 2)*(D - 1)), (D**3 - 16*D**2 + 28*D - 16)/(2*(D - 2)*(D - 1)), -(D - 4)*(D**4 - 5*D**3 + 16*D - 16)/(4*(D - 2))]
+  Table VIII totals match paper: [True, True, True]
+  Table IX total matches paper: True   (has factor (D-4): finite)
+  with Table IV's printed gamma2 sign, Table IX total = -(D**6 - 6*D**5 + D**4 + 44*D**3 - 48*D**2 - 48*D + 64)/(4*(D - 2)*(D - 1))  -> value at D=4: -16/3 (nonzero: forbidden H^4 divergence)
+== (H) (156)-(159) ==
+  Box ln a = -(D-1)H^2  =>  a^D Box[k ln(aa')] = -(D-1) k H^2 a^D : True
+  (157) coefficient (x Gamma(D/2) i kappa^2 H^{D-4}/(4pi)^{D/2}): -(D**4 - 5*D**3 + 16*D - 16)/(4*(D - 3)*(D - 2))
+  (158) D->4: 1/(8*pi**2)  = 1/(8 pi^2)
+  (159) Box part: H^4/(8pi^2) A(y) - H^6/(4pi)^4 [2*4/y - 4 ln(y/4)] is y-independent: True
+  (159) H^4 part: -H^4/(8pi^2)*3kH^2 == -kappa^2H^4/(4pi)^4 * 12 H^4 : True
+== (I) flat-space limit: numerator of the 3-point loop, V^{ab}(p,k) P_{abrs} V^{rs}(k,p) = (1/2) p^2 k^2 ==
+  D=4: N - p^2 k^2/2 = 0
+  D=5: N - p^2 k^2/2 = 0
+  D=6: N - p^2 k^2/2 = 0
+  => Sigma_flat ~ (p^2/2) int d^Dk 1/(p-k)^2 = 0 in dimensional regularization (scaleless): the a^D Box^2 divergence must vanish

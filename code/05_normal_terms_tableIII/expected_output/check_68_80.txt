@@ -1,0 +1,21 @@
+== (A) Eq. (70): f{A'' dy d'y + A' dd'y} = dd' I^2[fA''] + dd'y I[f'A'],  f=y^alpha, A=y^beta, D=4 ==
+  integration by parts consistency  I[fA''] == fA' - I[f'A'] : True
+  all 16 components at random points : True
+== (B) Eqs. (71)-(73): mixed second derivative of y, lower-index Dx_sigma = eta_{sigma nu}(x-x')^nu ==
+  (71) all components : True
+  (72a) d0 d0' y = H^2 aa'[2 - y + 2 aa' H^2 |Dx|^2] : True
+== (C) Eq. (74): aa'H^2|Dx|^2 f = -(D-1)/2 I[f] - grad.grad' I^2[f]/(4aa'H^2), D=4,5 ==
+  D=4: True
+  D=5: True
+== (D) Eqs. (75)-(78) (naive derivatives), f=y^alpha, A=y^beta, D=4,5 ==
+  D=4: (75) True  (76) True  (77) True  (78) i=j True  i!=j True
+  D=5: (75) True  (76) True  (77) True  (78) i=j True  i!=j True
+== (E) Eqs. (79)-(80): grad.grad'[(aa')^{D-2} A grad.grad' A], A=y^beta, D=4,5 ==
+  D=4: (79) True   (80) True
+  D=5: (79) True   (80) True
+== (F) delta content: the y^{1-D/2} part of I^2[f A''] is c_f * A_lead (c_f = constant part of f) ==
+  y^{1-D/2} part of I^2[fA''] : 2**(D - 2)*N*Y**(1 - D/2)*c*c0    expected c*N*c0*4^(D/2-1)*Y^(1-D/2): True
+  powers present in I^2[fA''] (exponent of Y): [1 - D/2, 2 - D, 2 - D/2, 3 - D, 4 - D]
+== (G) power counting after (80), D=4: y^s is locally integrable in D dims iff s > -D/2 ==
+  I^2[AA'']: [(2 - D, 'DIVERGENT'), (1 - D/2, 'finite'), (3 - D, 'finite'), (2 - D/2, 'finite'), (4 - D, 'finite'), (3 - D/2, 'finite')]
+  I[A'^2]  : [(1 - D, 'DIVERGENT'), (2 - D, 'DIVERGENT'), (1 - D/2, 'finite'), (3 - D, 'finite'), (2 - D/2, 'finite'), (1, 'finite')]

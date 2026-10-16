@@ -1,0 +1,39 @@
+% Shared macros for the derivation notes (and the arXiv paper).
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{booktabs,longtable,array,multirow}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\definecolor{tagP}{HTML}{8A5A00}  % given in the paper
+\definecolor{tagD}{HTML}{0B5D3B}  % derived here
+\definecolor{tagA}{HTML}{4B3C8F}  % assumption / convention
+\definecolor{tagC}{HTML}{9B1C31}  % check (symbolic / numerical code)
+\newcommand{\badge}[2]{{\setlength{\fboxsep}{1.2pt}\colorbox{#1}{\textcolor{white}{\sffamily\bfseries\tiny #2}}}}
+\newcommand{\tP}{\badge{tagP}{P}}   % paper-given
+\newcommand{\tD}{\badge{tagD}{D}}   % derived
+\newcommand{\tA}{\badge{tagA}{A}}   % assumption / convention
+\newcommand{\tC}{\badge{tagC}{C}}   % code check
+% references to the two papers: Paper I = PRD 76, 124005 (2007); Paper II = arXiv:0710.5282
+\newcommand{\PI}{Paper~I}
+\newcommand{\PII}{Paper~II}
+\newcommand{\eqI}[1]{(I.#1)}
+\newcommand{\eqII}[1]{(II.#1)}
+% physics notation (Paper I conventions)
+\newcommand{\kap}{\kappa}
+\newcommand{\Dl}{\Delta}
+\newcommand{\ie}{i.e.\ }
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\order}[1]{\mathcal{O}\!\left(#1\right)}
+\newcommand{\Mtwo}{M^2}
+\newcommand{\pihat}{\hat\pi}
+\newcommand{\Dx}{\Delta x}
+\newcommand{\lnx}{\ln x}
+\newcommand{\reg}{_{\rm reg}}
+\newcommand{\ren}{_{\rm ren}}
+\newcommand{\Tab}{\mathcal{T}}
+\newcommand{\Dop}{\mathcal{D}}
+\newcommand{\khat}{\hat k}
+% boxes
+\usepackage[most]{tcolorbox}
+\newtcolorbox{resultbox}[1][]{colback=tagD!5,colframe=tagD!70!black,boxrule=0.5pt,arc=1pt,left=4pt,right=4pt,top=3pt,bottom=3pt,title={#1},fonttitle=\bfseries\small}
+\newtcolorbox{discbox}[1][]{colback=tagC!4,colframe=tagC!70!black,boxrule=0.5pt,arc=1pt,left=4pt,right=4pt,top=3pt,bottom=3pt,title={#1},fonttitle=\bfseries\small}
+\newtcolorbox{notebox}[1][]{colback=black!3,colframe=black!40,boxrule=0.4pt,arc=1pt,left=4pt,right=4pt,top=3pt,bottom=3pt,title={#1},fonttitle=\bfseries\small}

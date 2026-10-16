@@ -1,0 +1,37 @@
+== (A) background: Christoffels, R_mn = (D-1)H^2 g_mn, R = D(D-1)H^2 ==
+  D=4: Gamma = Ha(d^l_m d^0_n + d^l_n d^0_m + eta_mn d^l_0): True;  R_mn = (D-1)H^2 g_mn: True;  R = 12*H**2
+  D=5: Gamma = Ha(d^l_m d^0_n + d^l_n d^0_m + eta_mn d^l_0): True;  R_mn = (D-1)H^2 g_mn: True;  R = 20*H**2
+== (B) phi;mn phi;^mn - (Box phi)^2 + R_mn phi^;m phi^;n is a total divergence (D=4 dS, generic phi) ==
+  identity holds: True
+== (C) finite transformations (132)-(135) are isometries of ds^2 = (-d eta^2 + dx^2)/(H^2 eta^2), D=4 ==
+  (132) translation: True
+  (133) rotation   : True
+  (134) dilatation : True
+  (135) spatial SCT: True
+  for contrast, time translation t -> t + c : False
+== (D) Killing vectors: general solution, failures, parameter count ==
+  D=3: general xi solves Killing eq: True;  parameters = 6 = D(D+1)/2 = 6;  time translation / boost / temporal SCT fail: [True, True, True]
+  D=4: general xi solves Killing eq: True;  parameters = 10 = D(D+1)/2 = 10;  time translation / boost / temporal SCT fail: [True, True, True]
+  D=5: general xi solves Killing eq: True;  parameters = 15 = D(D+1)/2 = 15;  time translation / boost / temporal SCT fail: [True, True, True]
+  D=3: polynomial ansatz deg<=3 -> dimension of Killing solution space = 6
+  D=4: polynomial ansatz deg<=3 -> dimension of Killing solution space = 10
+== (E) infinitesimal limit of (135) and boundary limit eta -> 0 ==
+  d/ds (135)|_{theta = s b} == (2 b.x eta, 2 (b.x) x^i - (x.x) b^i): True
+  eta -> 0: x'^i = (x^i - theta^i |x|^2)/(1 - 2 theta.x + |theta|^2 |x|^2)  (Euclidean SCT of R^{D-1}): True
+== (F) gauge functional: F_mu = G_mu + E_mu, G = covariant de Donder of psi = a^2 h, E = H(2 psi_mn u^n - u_m psi), u^m = d^m_0/a ==
+  F_mu - G_mu - E_mu = 0 : True
+  L_GF = -1/2 a^{D-2} eta^mn F F = -1/2 sqrt(-g) g^mn F F : True
+== (G) [xi, u] for the general Killing vector, D=4 ==
+  [xi,u] = [0, 2*H*b1*t**2, 2*H*b2*t**2, 2*H*b3*t**2]   (= (0, 2 H eta^2 b^i): vanishes iff b = 0)
+== (H) variation of L_GF under each generator, D=3 (generic h_mn(eta,x1,x2)) ==
+  translation : delta L_GF - d_l(xi^l L_GF) = 0   -> symmetry of the gauge-fixing action
+  rotation    : delta L_GF - d_l(xi^l L_GF) = 0   -> symmetry of the gauge-fixing action
+  dilatation  : delta L_GF - d_l(xi^l L_GF) = 0   -> symmetry of the gauge-fixing action
+  spatial SCT : anomaly != 0;  anomaly == -a^(D-2) eta^mn F_m Delta_n with Delta_m = -(4 h_mi b^i - 2 b_m h): True;  Euler-Lagrange of anomaly w.r.t. h_00, h_12 nonzero: [True, True]
+== (I) Lie algebra of the Killing vectors, D=4: P_i, M_ij, Dil, K_i ==
+  [Dil, P_1] = -P_1        : True
+  [Dil, K_1] = +K_1        : True
+  [K_1, P_1] = -2 Dil      : True
+  [K_1, P_2] = -2 M_12     : True
+  [K_1, K_2] = 0, [P_1,P_2] = 0: True True
+  [M_12, K_1] = -K_2, [M_12, P_1] = -P_2: True True

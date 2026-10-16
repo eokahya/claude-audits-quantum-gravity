@@ -1,0 +1,887 @@
+% ===================================================================
+% Chapter 5: Normal contributions and Table III, Eqs. (I.68)-(I.93)
+% Tasks 11 and 12 of the re-derivation.
+% ===================================================================
+\providecommand{\chVdd}{\nabla\!\cdot\!\nabla'}          % grad . grad'
+\providecommand{\chVlead}{A_{\rm lead}}                  % leading term of A(y)
+\providecommand{\chVAh}{\hat A}                          % A(y)/h at D=4
+\providecommand{\chVyes}{\textcolor{tagD}{agrees}}
+\providecommand{\chVno}{\textcolor{tagC}{differs}}
+
+\chapter{Normal contributions and Table III: Eqs. (I.68)--(I.93)}
+\label{ch:05}
+% Equations tagged (I.nn) do not step the equation counter; with hyperref's default anchor
+% names they would share anchors with the next numbered equation. Use unique anchors here.
+\hypersetup{hypertexnames=false}
+
+This chapter covers the first part of the ``normal'' 3-point contributions of \PI. These are the terms
+\eqI{53} in which two derivatives act on one propagator function and the result is multiplied by a second
+propagator function $f(y)$. \PI{} reduces them by extracting the derivatives \emph{generically}, using the
+indefinite integral $I[f]$ of \eqI{68}.
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{Task 11} (Section~\ref{sec:ch05:t11}) re-derives the derivative-extraction identities \eqI{68}--\eqI{80}.
+It also examines in detail the statement \eqI{69} that no delta function is produced.
+\item \textbf{Task 12} (Section~\ref{sec:ch05:t12}) re-derives the time-derivative identities \eqI{81}--\eqI{88}.
+It applies them to the nonlocal logarithm term of \eqI{67}, which gives \eqI{89} and Table~III.
+It then derives \eqI{90}--\eqI{93}, which prepare the reduction of the mixed $A$ terms; the reduced normal contributions are collected in Tables~IV and V (next chapter).
+\end{itemize}
+The identities \eqI{68}--\eqI{88} and \eqI{90}--\eqI{93} do not depend on any sign convention.
+Only \eqI{89} and Table~III carry the overall sign of the self-mass. For them we state explicitly whether an equation
+is in the \emph{paper convention} or in the \emph{definition sign} fixed by \eqI{168}.
+
+\paragraph{Notation used in this chapter.}
+$\Delta x^\mu\equiv x^\mu-x'^\mu$. The lower-index form is $\Delta x_\sigma\equiv\eta_{\sigma\nu}\Delta x^\nu$, so that $\Delta x_0=-\Delta\eta$, with $\Delta\eta\equiv\eta-\eta'$.
+We write $\|\Delta\vec x\|^2=\sum_i(\Delta x^i)^2$. The functions $f$, $A$, $F$, $G$, $K$ depend on $y$ only, and primes on them denote $d/dy$.
+$\partial$ and $\partial'$ are derivatives with respect to $x$ and $x'$. Since $a=-1/(H\eta)$, we have $\partial_0a=Ha^2$.
+The constants are those of earlier chapters:
+\begin{equation*}
+\begin{gathered}
+\mathcal N\equiv\frac{H^{D-2}}{(4\pi)^{D/2}},\qquad
+k\equiv\mathcal N\,\frac{\Gamma(D-1)}{\Gamma(\frac D2)}\xrightarrow{D\to4}\frac{H^2}{8\pi^2},\\
+\pihat\equiv-\pi\cot\big(\tfrac{\pi D}{2}\big)=-\frac{2}{D-4}+\order{D-4},\qquad
+h\equiv\frac{H^2}{16\pi^2}.
+\end{gathered}
+\end{equation*}
+The leading term of the massless minimally coupled propagator function is
+$\chVlead\equiv\mathcal N\,\Gamma(\tfrac D2-1)\,(4/y)^{\frac D2-1}$. Here the first coefficient of \eqI{14} is the corrected value
+$\Gamma(\frac D2-1)$ established in Task~8; the paper prints $\Gamma(\frac D2-1)/(\frac D2-1)$, a typographical error.
+$I[f]$ is the indefinite integral \eqI{68}, and $I^n$ is its $n$-fold iterate.
+Results of earlier tasks are cited by task number together with the equation or section of these notes where they are derived: Task~4 in Chapter~\ref{ch:fourpoint}, Tasks~7 and~8 in Chapter~\ref{ch:three-point-setup}, and Tasks~9 and~10 in Chapter~\ref{ch:ch04}.
+
+% ===================================================================
+\section[Task 11: derivative-extraction identities, Eqs. (I.68)--(I.80)]{Task 11: derivative-extraction identities for the normal contributions, Eqs.~(I.68)--(I.80)}
+\label{sec:ch05:t11}
+
+\begin{resultbox}[Summary of findings (Task 11)]
+\begin{itemize}[leftmargin=12pt,itemsep=2pt]
+\item \textbf{\eqI{68}--\eqI{80}} are identities that do not depend on the sign convention: neither the factor $\kappa^2$ nor the sign question of \eqI{47} enters.
+All of them were derived and checked. \eqI{71}--\eqI{73} also agree term by term with the derivative table \eqref{eq:ch3-yder} of Task~8.
+\item \textbf{A qualification of \eqI{69}.} The statement that two derivatives acting on a product of two propagators never produce a delta function holds for the \emph{naive} (pointwise) derivative.
+In dimensional regularization the \emph{distributional} derivative produces a term
+$\delta^0_\rho\delta^0_\sigma\,\delta^D(x-x')$ from the component of $F(y)$ with exactly the power $y^{1-D/2}$.
+For $I^2[fA'']$ this component is $c_f\,\chVlead$, where $c_f$ is the constant part of $f$.
+The distributional delta content is therefore \emph{exactly the same} as the local contribution counted separately in \eqI{54}--\eqI{58}.
+Consequently \eqI{70} holds in both readings, provided both sides are naive or both are distributional.
+But since the local contribution is counted separately, the derivatives in the normal contributions must be taken naively.
+Otherwise the local term, which has a pole for $I=A$, would be counted twice.
+Whether the paper follows this rule in Tables~IV--VI is to be checked there.
+\item \textbf{The divergence count after \eqI{80} is correct.} At $D=4$ only $y^{2-D}$ in $I^2[AA'']$, and only $y^{1-D}$ and $y^{2-D}$ in $I[A'^2]$, fail to be locally integrable.
+In all other terms one may set $D=4$.
+\end{itemize}
+\end{resultbox}
+
+% -------------------------------------------------------------------
+\subsection{Goal, inputs and scope}
+
+\paragraph{Targets \tP.}
+The targets are Eqs.~\eqI{68}--\eqI{69} (p.~124005-7, left column), \eqI{70}--\eqI{78} (p.~124005-7, right column) and \eqI{79}--\eqI{80} (p.~124005-8, left column).
+A footnote to \eqI{75} specifies that its left-hand side means the naive second derivative, without the delta function.
+The printed equations were \emph{not} used as input to the derivation. They enter only in the comparison, Section~\ref{sec:ch05:t11:comp}.
+\eqI{68} is a definition.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=14pt]
+\item[(G1)] \tP\ \eqI{11}: $y=aa'H^2\big\{\|\Delta\vec x\|^2-(|\Delta\eta|-i\delta)^2\big\}$ with $a=-1/(H\eta)$.
+\item[(G2)] \tD\ \eqI{52} and its split into a local part and a regular part (Task~8). In particular, at fixed $\delta>0$ the singular part is
+\begin{equation}
+\Big[\partial_0\partial'_0F(y)\Big]_{\rm sing}=-4i\delta\,aa'H^2\,F'(y)\Big|_{\Delta\eta=0}\,\delta(\Delta\eta)
+\qquad\text{(Task 8, Eqs.\ \eqref{eq:ch3-chain}--\eqref{eq:ch3-Sdelta})}.
+\label{eq:ch05:t11:sing}
+\end{equation}
+\item[(G3)] \tP\ The definition \eqI{53} of the normal contribution: $f(y)\times$[the regular part of \eqI{52}], with $f\in\{A,B,C\}$.
+For $I=A$ we have $f=A(y)$. The logarithm part is treated separately (Task~10).
+\end{itemize}
+
+\paragraph{Scope.}
+\eqI{81} and beyond, and Tables~III--V, are not treated in this task. All identities are derived in general $D$.
+
+% -------------------------------------------------------------------
+\subsection[Eq. (I.68): the indefinite integral]{Eq.~(I.68): the indefinite integral \tA}
+
+\begin{equation}
+I[f](y)\equiv\int^y dy'\,f(y'),\qquad \frac{d}{dy}I[f]=f,\qquad I^n\equiv I\circ\cdots\circ I .
+\tag{I.68}\label{eq:ch05:I68}
+\end{equation}
+\paragraph{Ambiguity of the constants.}
+$I[f]$ is defined only up to a constant, and $I^2[f]$ only up to $c_1y+c_0$. In each identity below this ambiguity cancels when the constants are chosen consistently.
+For example, in \eqI{70} the change $I^2[fA'']\to I^2[fA'']+c_1y+c_0$ produces $c_1\,\partial_\rho\partial'_\sigma y$ under $\partial_\rho\partial'_\sigma$.
+This is compensated by $I[f'A']\to I[f'A']-c_1$. The results are therefore independent of the integration constants.
+
+% -------------------------------------------------------------------
+\subsection[Eq. (I.69): chain rule and delta-function content]{Eq.~(I.69): chain rule and delta-function content \tD}
+\label{sec:ch05:t11:69}
+
+\paragraph{Naive derivative.}
+As long as $F$ is smooth, the chain rule holds pointwise:
+\begin{equation}
+\partial_\rho\partial'_\sigma F(y)=F''(y)\,\frac{\partial y}{\partial x^\rho}\frac{\partial y}{\partial x'^\sigma}+F'(y)\,\frac{\partial^2y}{\partial x^\rho\partial x'^\sigma}.
+\tag{I.69}\label{eq:ch05:I69}
+\end{equation}
+
+\paragraph{Distributional derivative.}
+As in Task~8, at fixed $\delta>0$ a single singular term comes from the kink of $|\Delta\eta|$:
+$\delta^0_\rho\delta^0_\sigma\,(-4i\delta\,a^2H^2)\,F'(y)\big|_{\Delta\eta=0}\,\delta(\Delta\eta)$.
+At $\Delta\eta=0$ one has $y=a^2H^2(r^2+\delta^2)$ with $r=\|\Delta\vec x\|$.
+For a component $F\supset y^s$, so that $F'\propto y^{s-1}$, the $d^{D-1}x$ integral of this term scales as
+\begin{equation}
+\delta\int d^{D-1}x\,(r^2+\delta^2)^{s-1}\;\propto\;\delta^{\,D+2s-2}.
+\label{eq:ch05:t11:scaling}
+\end{equation}
+Consequently:
+\begin{itemize}[leftmargin=14pt]
+\item If $s=1-\frac D2$, the exponent vanishes and a finite $\delta^D$ term remains (Task~8, Eq.~\eqref{eq:ch3-lead}).
+\item For every other $s$, the exponent $D+2s-2$ is a nonzero analytic function of $D$. In the region where its real part is positive the limit $\delta\to0$ is zero.
+In dimensional regularization it is then zero for general $D$ by analytic continuation \tA.
+\end{itemize}
+Hence
+\begin{equation}
+\Big[\partial_\rho\partial'_\sigma F\Big]_{\rm distr}=\eqref{eq:ch05:I69}+\delta^0_\rho\delta^0_\sigma\,\gamma_F\,\frac{i}{a^{D-2}}\,\delta^D(x-x'),
+\qquad F\supset\gamma_F\cdot\mathcal N\,\Gamma(\tfrac D2-1)\Big(\frac4y\Big)^{\frac D2-1}.
+\label{eq:ch05:t11:distr}
+\end{equation}
+The normalization of $\gamma_F$ is chosen so that $F=\chVlead$ gives $\gamma_F=1$, with the local coefficient $i\,a^{2-D}$ fixed in Task~8.
+
+\paragraph{Conclusion.}
+\eqI{69} holds for the naive derivative. For the distributional derivative it holds only if $F$ has no $y^{1-D/2}$ component.
+A product of two propagators $i\Delta_I\,i\Delta_A$ \emph{does} contain this component: the constant part of one factor times the leading term of the other.
+So $\gamma_F\neq0$. Section~\ref{sec:ch05:t11:delta} shows why this matters.
+
+% -------------------------------------------------------------------
+\subsection[Eq. (I.70)]{Eq.~(I.70) \tD}
+
+Take $G\equiv I^2[fA'']$, so that $G'=I[fA'']$ and $G''=fA''$. By \eqref{eq:ch05:I69},
+\begin{equation*}
+\partial_\rho\partial'_\sigma I^2[fA'']=fA''\,\partial_\rho y\,\partial'_\sigma y+I[fA'']\,\partial_\rho\partial'_\sigma y .
+\end{equation*}
+Integration by parts gives $I[fA'']=fA'-I[f'A']$, with consistent constants. Substituting:
+\begin{resultbox}
+\begin{equation}
+f(y)\Big\{A''(y)\,\frac{\partial y}{\partial x^\rho}\frac{\partial y}{\partial x'^\sigma}+A'(y)\,\frac{\partial^2y}{\partial x^\rho\partial x'^\sigma}\Big\}
+=\partial_\rho\partial'_\sigma I^2[fA''](y)+\frac{\partial^2y}{\partial x^\rho\partial x'^\sigma}\,I[f'A'](y).
+\tag{I.70}\label{eq:ch05:I70}
+\end{equation}
+\end{resultbox}
+\noindent This is Eq.~\eqI{70} of the paper, identical to the printed equation.
+
+% -------------------------------------------------------------------
+\subsection[Delta content of (I.70) and consistency with the local contribution]{Delta content of (I.70) and consistency with the local contribution \tD}
+\label{sec:ch05:t11:delta}
+
+Write $f=c_f+(\text{powers of }y)$, where $c_f$ is the constant part of $f$.
+From Task~4, $c_f=k\pihat$ for $I=A$, $c_f=b$ for $I=B$ and $c_f=c$ for $I=C$.
+In general $D$, the $D$-dependent powers do not mix with the integer powers. Therefore the $y^{1-D/2}$ component of $I^2[fA'']$ comes only from $c_f\times\chVlead''$:
+\begin{equation}
+\begin{aligned}
+&I^2[fA'']\supset I^2\big[c_f\,\chVlead''\big]=c_f\,\chVlead\ \ (+\text{linear in }y),\qquad \chVlead=\mathcal N\,\Gamma(\tfrac D2-1)\,(4/y)^{\frac D2-1}\\
+&\Longrightarrow\quad\gamma_{I^2[fA'']}=c_f .
+\end{aligned}
+\label{eq:ch05:t11:gamma}
+\end{equation}
+Moreover, $I[f'A']$ contains no $y^{-D/2}$ component. Its product with the $\order{\delta}$ singular part of $\partial_0\partial'_0y$ therefore gives no delta function either.
+(Editorial gloss: by the scaling \eqref{eq:ch05:t11:scaling}, a finite $\delta^D$ from $\delta\cdot y^{s'}$ requires $s'=-D/2$. The powers present in $I[f'A']$ are non-negative integer powers, $y^{n-D/2}$ with $n\geq1$, and $y^{m-D}$ with $m\geq1$.)
+From this:
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{Naive reading.} Both sides of \eqref{eq:ch05:I70} hold with naive derivatives. The left-hand side is the normal contribution of \eqI{53}.
+\item \textbf{Distributional reading.} If the full $\partial\partial'A$ is taken on the left, a term $f(y)\cdot\frac{i}{a^{D-2}}\delta^D=c_f\,\frac{i}{a^{D-2}}\delta^D$ is added.
+This uses $f(y)\delta^D=f(0)\delta^D=c_f\delta^D$, which holds in dimensional regularization.
+By \eqref{eq:ch05:t11:distr} and \eqref{eq:ch05:t11:gamma}, exactly the same term is added on the right. So \eqref{eq:ch05:I70} also holds in the distributional sense.
+\end{itemize}
+\begin{discbox}[Conclusion: naive inner derivatives in the normal contributions]
+The distributional $\partial\partial'I^2[fA'']$ contains the \emph{whole} local contribution \eqI{54}--\eqI{58} of Task~9.
+For $I=A$ this is \eqI{54}, which carries the $k\pihat$ pole.
+Since the local contribution has been computed separately, $\partial\partial'I^2[fA'']$ must be taken naively in the normal contributions.
+Suppose that in later steps $\square$ were applied as a distribution to the $c_f\chVlead$ part of $I^2[fA'']$ (for example by using the fact that $\square(4/y)^{D/2-1}$ produces a $\delta^D$ term).
+The local term would then be counted twice.
+The statement ``never produces a delta function'' in \eqI{69} is consistent with this naive reading.
+When Tables~IV--VI are derived, it must be checked whether this rule is respected.
+\end{discbox}
+
+% -------------------------------------------------------------------
+\subsection[Eqs. (I.71)--(I.73): the mixed second derivative of y]{Eqs.~(I.71)--(I.73): the mixed second derivative of $y$ \tD}
+
+Take the regular part ($\delta\to0$), $y=aa'H^2\big(\|\Delta\vec x\|^2-\Delta\eta^2\big)$, and use $\partial_0a=Ha^2$:
+\begin{equation}
+\partial_0y=Ha\,y+2aa'H^2\Delta x_0,\qquad \partial'_0y=Ha'\,y-2aa'H^2\Delta x_0,\qquad \partial_iy=2aa'H^2\Delta x_i=-\partial'_iy .
+\label{eq:ch05:t11:dy}
+\end{equation}
+The components are:
+\begin{equation*}
+\begin{aligned}
+\partial_0\partial'_0y&=\partial_0\big(Ha'y-2aa'H^2\Delta x_0\big)=Ha'\big(Hay+2aa'H^2\Delta x_0\big)-2H^3a^2a'\Delta x_0+2aa'H^2\\
+&=H^2aa'\big\{y-2aH\Delta x_0+2a'H\Delta x_0+2\big\},\\
+\partial_0\partial'_jy&=H^2aa'\{-2aH\Delta x_j\},\qquad \partial_i\partial'_0y=H^2aa'\{2a'H\Delta x_i\},\qquad \partial_i\partial'_jy=H^2aa'\{-2\eta_{ij}\}.
+\end{aligned}
+\end{equation*}
+The first line uses $\partial_0\Delta x_0=-1$. All components combine into a single expression:
+\begin{resultbox}
+\begin{equation}
+\frac{\partial^2y}{\partial x^\rho\partial x'^\sigma}=H^2aa'\big\{y\,\delta^0_\rho\delta^0_\sigma-2a\,\delta^0_\rho H\Delta x_\sigma+2a'H\Delta x_\rho\delta^0_\sigma-2\eta_{\rho\sigma}\big\}.
+\tag{I.71}\label{eq:ch05:I71}
+\end{equation}
+\end{resultbox}
+\noindent This is Eq.~\eqI{71} of the paper. The lower-index convention $\Delta x_\sigma=\eta_{\sigma\nu}\Delta x^\nu$ is needed; the paper does not state it explicitly.
+
+For the $\rho=\sigma=0$ component, use $y=aa'H^2\|\Delta\vec x\|^2-aa'H^2\Delta\eta^2$ and $-2H(a-a')\Delta x_0=2H^2aa'\Delta\eta^2$
+(the latter from $H(a-a')=H^2aa'\Delta\eta$, Eq.~\eqref{eq:ch05:t12:aux} below). Then $y+2+2H^2aa'\Delta\eta^2=2-y+2aa'H^2\|\Delta\vec x\|^2$, and
+\begin{equation}
+\begin{aligned}
+&\frac{\partial^2y}{\partial x^0\partial x'^0}=H^2aa'\big[2-y+2aa'H^2\|\Delta\vec x\|^2\big],\qquad
+\frac{\partial^2y}{\partial x^0\partial x'^j}=H^2aa'\times-2aH\Delta x_j,\\
+&\frac{\partial^2y}{\partial x^i\partial x'^0}=H^2aa'\times2a'H\Delta x_i,\qquad
+\frac{\partial^2y}{\partial x^i\partial x'^j}=H^2aa'\times-2\eta_{ij}.
+\end{aligned}
+\tag{I.72--73}\label{eq:ch05:I72}
+\end{equation}
+These are \eqI{72}--\eqI{73}. They also agree with the table \eqref{eq:ch3-yder} of Task~8.
+\eqref{eq:ch05:I72} is the regular part. The $\order{\delta}$ singular part of $\partial_0\partial'_0y$ was treated in Sections~\ref{sec:ch05:t11:69} and~\ref{sec:ch05:t11:delta}.
+
+% -------------------------------------------------------------------
+\subsection[Eq. (I.74)]{Eq.~(I.74) \tD}
+
+For $F=I^2[f]$, Eqs.~\eqref{eq:ch05:I69} and \eqref{eq:ch05:t11:dy} give $\partial_iy\,\partial'_iy=-4(aa'H^2)^2(\Delta x_i)^2$ (no sum) and $\sum_i\partial_i\partial'_iy=-2(D-1)aa'H^2$. Hence
+\begin{equation*}
+\chVdd\,I^2[f]=f\sum_i\partial_iy\,\partial'_iy+I[f]\sum_i\partial_i\partial'_iy=-4(aa'H^2)^2\|\Delta\vec x\|^2f-2(D-1)aa'H^2\,I[f].
+\end{equation*}
+Divide by $-4aa'H^2$. Since $aa'$ is constant in space, it commutes with $\chVdd$:
+\begin{resultbox}
+\begin{equation}
+aa'H^2\|\Delta\vec x\|^2f(y)=-\tfrac12(D-1)\,I[f](y)-\frac{\chVdd}{4aa'H^2}\,I^2[f](y).
+\tag{I.74}\label{eq:ch05:I74}
+\end{equation}
+\end{resultbox}
+\noindent This is \eqI{74}. The change $I^2[f]\to I^2[f]+c_1y$ produces $+\frac12(D-1)c_1$ on the right-hand side. This cancels against $I[f]\to I[f]+c_1$.
+
+% -------------------------------------------------------------------
+\subsection[Eqs. (I.75)--(I.78)]{Eqs.~(I.75)--(I.78) \tD}
+
+All four are individual components of \eqref{eq:ch05:I70}, with $\partial\partial'y$ taken from \eqref{eq:ch05:I72}.
+
+\paragraph{\eqI{75}, $\rho=\sigma=0$.}
+Write $\partial_0\partial'_0y=H^2aa'(2-y)+2H^2aa'\cdot aa'H^2\|\Delta\vec x\|^2$.
+The second piece multiplies $g\equiv I[f'A']$ and is converted by applying \eqref{eq:ch05:I74} to $g$:
+\begin{equation*}
+2H^2aa'\Big[-\tfrac12(D-1)I^2[f'A']-\frac{\chVdd}{4aa'H^2}I^3[f'A']\Big]=-(D-1)H^2aa'\,I^2[f'A']-\tfrac12\chVdd\,I^3[f'A'].
+\end{equation*}
+Therefore
+\begin{resultbox}
+\begin{equation}
+f\,\partial_0\partial'_0A=\partial_0\partial'_0I^2[fA'']-\tfrac12\chVdd\,I^3[f'A']+H^2aa'\big\{(2-y)\,I[f'A']-(D-1)\,I^2[f'A']\big\}.
+\tag{I.75}\label{eq:ch05:I75}
+\end{equation}
+\end{resultbox}
+
+\paragraph{\eqI{76}, $\rho=0$, $\sigma=j$.}
+Since $\partial'_jI^2[f'A']=I[f'A']\,\partial'_jy=-2aa'H^2\Delta x_j\,I[f'A']$, one has
+\begin{equation*}
+\partial_0\partial'_jy\;I[f'A']=-2H^3a^2a'\Delta x_j\,I[f'A']=Ha\,\partial'_jI^2[f'A'],
+\end{equation*}
+and therefore
+\begin{equation}
+f\,\partial_0\partial'_jA=\partial_0\partial'_jI^2[fA'']+Ha\,\partial'_jI^2[f'A'] .
+\tag{I.76}\label{eq:ch05:I76}
+\end{equation}
+
+\paragraph{\eqI{77}, $\rho=i$, $\sigma=0$.}
+In the same way, $\partial_iI^2[f'A']=2aa'H^2\Delta x_i\,I[f'A']$ gives $\partial_i\partial'_0y\;I[f'A']=Ha'\,\partial_iI^2[f'A']$:
+\begin{equation}
+f\,\partial_i\partial'_0A=\partial_i\partial'_0I^2[fA'']+Ha'\,\partial_iI^2[f'A'] .
+\tag{I.77}\label{eq:ch05:I77}
+\end{equation}
+
+\paragraph{\eqI{78}, $\rho=i$, $\sigma=j$.}
+\begin{equation}
+f\,\partial_i\partial'_jA=\partial_i\partial'_jI^2[fA'']-2H^2aa'\eta_{ij}\,I[f'A'] .
+\tag{I.78}\label{eq:ch05:I78}
+\end{equation}
+
+All four identities coincide with \eqI{75}--\eqI{78} of the paper. The footnote to \eqI{75} (naive derivative) is fully consistent with Section~\ref{sec:ch05:t11:delta}.
+
+% -------------------------------------------------------------------
+\subsection[Eqs. (I.79)--(I.80): normal part of the first term of (I.47)]{Eqs.~(I.79)--(I.80): the normal part of the first term of (I.47) \tD}
+
+Take $f=A$ and the trace of \eqref{eq:ch05:I78}: $\sum_i\eta_{ii}=D-1$ and $f'A'=A'^2$. Thus
+\begin{equation*}
+A\,\chVdd A=\chVdd\,I^2[AA'']-2(D-1)H^2aa'\,I[A'^2].
+\end{equation*}
+The outer $\chVdd$ passes through $(aa')^{D-2}$, which is constant in space:
+\begin{resultbox}
+\begin{align}
+\chVdd\big[(aa')^{D-2}A\,\chVdd A\big]
+&=(aa')^{D-2}(\chVdd)^2\,I^2[AA'']-2(D-1)H^2(aa')^{D-1}\,\chVdd\,I[A'^2]
+\tag{I.79}\label{eq:ch05:I79}\\
+&=(aa')^{D-2}\nabla^4I^2[AA''](y)+2(D-1)H^2(aa')^{D-1}\nabla^2I[A'^2](y).
+\tag{I.80}\label{eq:ch05:I80}
+\end{align}
+\end{resultbox}
+\noindent The second line uses homogeneity: $\chVdd F(y)=-\nabla^2F(y)$, and $(\chVdd)^2=\nabla^4$.
+\eqref{eq:ch05:I79} and \eqref{eq:ch05:I80} are \eqI{79} and \eqI{80} of the paper.
+This is the square bracket without the factor $\kappa^2$.
+In the re-derived \eqI{47} the coefficient of this term is $-\kappa^2$, while the paper prints $+\kappa^2$ (Task~7). This sign is carried over to Table~IV.
+
+\subsubsection[The divergence claim after (I.80)]{The divergence claim after (I.80) \tC}
+\label{sec:ch05:t11:power}
+
+$y^s\sim\Delta x^{2s}$ is locally integrable in $D$ dimensions if and only if $s>-\frac D2$; at $D=4$ this means $s>-2$.
+The powers in $A$ are $y^{1-D/2}$, $y^{2-D/2}$, a constant, and $y^n$. This gives:
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Function & Powers & Not locally integrable at $D=4$\\
+\midrule
+$I^2[AA'']$ & $y^{2-D},\ y^{3-D},\ y^{4-D},\ y^{1-D/2},\ y^{2-D/2},\ y^{3-D/2},\ldots$ & only $y^{2-D}$ ($s=-2$, marginal)\\
+$I[A'^2]$ & $y^{1-D},\ y^{2-D},\ y^{3-D},\ y^{1-D/2},\ y^{2-D/2},\ldots$ & $y^{1-D}$ ($s=-3$) and $y^{2-D}$ ($s=-2$)\\
+\bottomrule
+\end{tabular}
+\end{center}
+This confirms the paper's statement that only the first term (respectively the first two terms) can diverge.
+\paragraph{A caveat.} In $I^2[AA'']$ the coefficients of the $y^{1-D/2}$ and $y^{3-D}$ terms each carry a pole ($c_f=k\pihat$ and $c_1$, respectively).
+Combined, however, they are finite as $D\to4$, just like the $\ln y$ in \eqI{62}.
+The statement ``one may set $D=4$ in the higher terms'' therefore means that these two terms are taken together, i.e.\ in the form of \eqI{62}.
+
+% -------------------------------------------------------------------
+\subsection{Comparison with the paper}
+\label{sec:ch05:t11:comp}
+
+\begin{center}
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.42\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}@{}}
+\toprule
+Equation & Derived here & Paper & Status\\
+\midrule
+\eqI{68} & definition \eqref{eq:ch05:I68}; constant ambiguity harmless & same & \chVyes\\
+\eqI{69} & naive derivative: \eqref{eq:ch05:I69}; distributional derivative: extra $\gamma_F\delta^D$ term, \eqref{eq:ch05:t11:distr} & ``never a delta function'' & \chVyes{} (naive reading)\\
+\eqI{70} & \eqref{eq:ch05:I70} & same & \chVyes\\
+\eqI{71} & \eqref{eq:ch05:I71}, with lower-index $\Delta x_\sigma$ & same & \chVyes\\
+\eqI{72}--\eqI{73} & \eqref{eq:ch05:I72} & same & \chVyes\\
+\eqI{74} & \eqref{eq:ch05:I74} & same & \chVyes\\
+\eqI{75}--\eqI{78} & \eqref{eq:ch05:I75}--\eqref{eq:ch05:I78} & same & \chVyes\\
+\eqI{79}--\eqI{80} & \eqref{eq:ch05:I79}--\eqref{eq:ch05:I80} & same & \chVyes\\
+divergence count & Section~\ref{sec:ch05:t11:power} & same & \chVyes\\
+\bottomrule
+\end{tabular}
+\end{center}
+No error in the paper was found in this part.
+Since \eqI{68}--\eqI{80} do not depend on the sign convention, the overall sign question of \eqI{47} does not enter here.
+
+\paragraph{Accumulated findings (Tasks 2--11).}
+Identifiers in parentheses (S$n$, B$n$, C$n$) refer to the classified list of findings in Chapter~\ref{ch:summary}.
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.33\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}@{}}
+\toprule
+Location & Finding & Effect\\
+\midrule
+\eqI{7}, \eqI{14}, Table~II, \eqI{39}, the phrase ``4th term'' & typographical errors (C3--C7) & none\\
+\eqI{40}, \eqI{59} & finite local errors (B1, B2) & absorbable into $\Delta\alpha_{2,3}$\\
+\eqI{32}--\eqI{33}, \eqI{47}--\eqI{49} and beyond & 4-point and 3-point contributions reversed together (S1) & bare $M^2=-$(definition)\\
+\eqI{60}--\eqI{67} & local cancellation against \eqI{44} verified & ---\\
+\eqI{68}--\eqI{80} & agreement; naive-derivative qualification of \eqI{69} & \textbf{to be followed up:} is the $c_f\chVlead$ part differentiated naively in Tables~IV--VI?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% -------------------------------------------------------------------
+\subsection[Code checks]{Code checks \tC}
+\label{sec:ch05:t11:code}
+
+Script: \texttt{code/05\_normal\_terms\_tableIII/check\_68\_80.py} (SymPy; about 16--18\,s). It was actually run; its output is in \texttt{expected\_output/check\_68\_80.txt}.
+It does not replace the analytic derivation above.
+\paragraph{Method.} The functions are $f=y^\alpha$ and $A=y^\beta$ with generic exponents, so no integration constants arise. The script uses explicit conformal coordinates and the true $y(x;x')$.
+The two sides are compared at random rational points ($\alpha=3/7$, $\beta=-5/3$) to 25 significant digits.
+\begin{center}
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.62\textwidth}l@{}}
+\toprule
+Check & What & Result\\
+\midrule
+(A) & \eqI{70}: all 16 components at $D=4$; also the consistency $I[fA'']=fA'-I[f'A']$ & \texttt{True}\\
+(B) & \eqI{71} (all components, exact symbolic, lower-index $\Delta x_\sigma$) and the $(0,0)$ component of \eqI{72} & \texttt{True}\\
+(C) & \eqI{74} at $D=4$ and $D=5$ & \texttt{True}\\
+(D) & \eqI{75}--\eqI{78} (naive derivatives) at $D=4$ and $D=5$; \eqI{78} for both $i=j$ and $i\neq j$ & \texttt{True}\\
+(E) & \eqI{79}--\eqI{80} at $D=4$ and $D=5$, with the left-hand side differentiated by brute force & \texttt{True}\\
+(F) & \eqref{eq:ch05:t11:gamma}: with the model $f=c+d(4/y)^{D/2-1}+e(4/y)^{D/2-2}$ and $A=\mathcal N[c_0(4/y)^{D/2-1}+c_1(4/y)^{D/2-2}]$, the $y^{1-D/2}$ component of $I^2[fA'']$ is exactly $c\,\mathcal Nc_0\,4^{D/2-1}y^{1-D/2}=c_f\chVlead$ & \texttt{True}\\
+(G) & power lists of Section~\ref{sec:ch05:t11:power}, generated with symbolic $D$, with the $D=4$ integrability criterion applied & as in the table\\
+\bottomrule
+\end{tabular}
+\end{center}
+Output of checks (F) and (G), lightly wrapped:
+{\footnotesize
+\begin{verbatim}
+== (F) delta content: the y^{1-D/2} part of I^2[f A''] is c_f * A_lead
+   (c_f = constant part of f) ==
+  y^{1-D/2} part of I^2[fA''] : 2**(D - 2)*N*Y**(1 - D/2)*c*c0
+     expected c*N*c0*4^(D/2-1)*Y^(1-D/2): True
+  powers present in I^2[fA''] (exponent of Y): [1 - D/2, 2 - D, 2 - D/2, 3 - D, 4 - D]
+== (G) power counting after (80), D=4: y^s is locally integrable in D dims iff s > -D/2 ==
+  I^2[AA'']: [(2 - D, 'DIVERGENT'), (1 - D/2, 'finite'), (3 - D, 'finite'),
+              (2 - D/2, 'finite'), (4 - D, 'finite'), (3 - D/2, 'finite')]
+  I[A'^2]  : [(1 - D, 'DIVERGENT'), (2 - D, 'DIVERGENT'), (1 - D/2, 'finite'),
+              (3 - D, 'finite'), (2 - D/2, 'finite'), (1, 'finite')]
+\end{verbatim}
+}
+\noindent The rerun reproduces the original output in the Task~11 log. The only difference is the order of the two entries $y^{4-D}$ and $y^{2-D/2}$ in line (G).
+Both have exponent $0$ at $D=4$, and their order was originally left to Python's set ordering; it is now fixed by a secondary sort key.
+
+% -------------------------------------------------------------------
+\subsection{Calculation record}
+\begin{itemize}[leftmargin=14pt,itemsep=1pt]
+\item \textbf{Derived:} \eqI{68} and its constant ambiguity; \eqI{69} in the naive form \eqref{eq:ch05:I69} and in the distributional form \eqref{eq:ch05:t11:distr};
+\eqI{70} \eqref{eq:ch05:I70}, and the identity of its delta content with the local contribution \eqref{eq:ch05:t11:gamma};
+\eqI{71}--\eqI{73} \eqref{eq:ch05:I71}--\eqref{eq:ch05:I72}; \eqI{74} \eqref{eq:ch05:I74}; \eqI{75}--\eqI{78} \eqref{eq:ch05:I75}--\eqref{eq:ch05:I78};
+\eqI{79}--\eqI{80} \eqref{eq:ch05:I79}--\eqref{eq:ch05:I80}; the divergence count (Section~\ref{sec:ch05:t11:power}).
+\item \textbf{Checks passed:} SymPy checks (A)--(G), actually run.
+\item \textbf{Discrepancies with the paper:} none.
+\item \textbf{To be followed up:} in the normal contributions $\partial\partial'I^2[fA'']$ must be taken naively. Taken as a distribution, it would count the local contribution of \eqI{54}--\eqI{58} twice (with a pole for $I=A$).
+This is to be checked when Tables~IV--VI are derived.
+\end{itemize}
+
+% ===================================================================
+\section[Task 12: Eqs. (I.81)--(I.93) and Table III]{Task 12: time-derivative identities, Table III and the covariant d'Alembertian, Eqs.~(I.81)--(I.93)}
+\label{sec:ch05:t12}
+
+\begin{discbox}[Summary of findings (Task 12)]
+\begin{itemize}[leftmargin=12pt,itemsep=2pt]
+\item \textbf{\eqI{81}--\eqI{88}, \eqI{90}, \eqI{91}--\eqI{92} and \eqI{93}} are identities that do not depend on the sign convention. All were derived and checked.
+\item \textbf{\eqI{89}}: obtained by applying \eqI{88} to the nonlocal term of the re-derived \eqI{67}. The derived \eqI{89} is $-1$ times the printed one.
+This difference is inherited from \eqI{47} (Tasks~7 and 10).
+In addition, the second term of the printed \eqI{89} is \textbf{missing a factor $H^2$}: it should read $-4H^2(aa')^2(a+a')^2\nabla^2(yA')$ instead of $-4(aa')^2(a+a')^2\nabla^2(yA')$.
+Dimensional analysis and a numerical check confirm this. Table~III gives this row correctly, with $H^2$; the error is only in the printing of \eqI{89}.
+\item \textbf{Table~III}: the coefficients of all three rows were derived. The derived table is exactly $-1$ times the printed one (inherited sign). The row structure and the magnitudes agree exactly.
+In the paper convention the derived table coincides with the printed one.
+\item \textbf{Distributional remark.} In \eqI{91}--\eqI{92} the inner derivatives are the mixed $(0,j)$ components, which contain no delta function.
+\eqI{92} therefore also holds in the distributional sense, and the $\square$ in it is a \emph{distributional} operator.
+\eqI{93}, by contrast, is a pointwise identity: acting as a distribution on the $y^{1-D/2}$ component, $\square$ produces $\delta^D$, whereas \eqI{93} does not.
+If $\square I^2[AA'']$ in \eqI{92} is evaluated pointwise with \eqI{93}, a legitimate local term $-ic_f\,a^{D-2}\nabla^2\delta^D$ (with a pole for $I=A$, $c_f=k\pihat$) is lost.
+This is to be checked in Tables~IV--VI.
+\end{itemize}
+\end{discbox}
+
+\paragraph{Notation specific to this section.}
+$x\equiv y/4$ is used only in Table~III. $h\equiv H^2/16\pi^2$. $I[f]$ is the indefinite integral \eqref{eq:ch05:I68}.
+\paragraph{Input principle.} Only results \emph{derived} in earlier tasks are used:
+\eqI{67} from Task~10 (Eqs.~\eqref{eq:ch04:67D} and \eqref{eq:ch04:67}), \eqI{62} from Task~10 (Eq.~\eqref{eq:ch04:62}), and \eqI{74} from Task~11, Eq.~\eqref{eq:ch05:I74}.
+
+% -------------------------------------------------------------------
+\subsection{Goal, inputs and scope}
+
+\paragraph{Targets \tP.}
+The targets are \eqI{81}--\eqI{89} (p.~124005-8, left column), and \eqI{90}--\eqI{93} and Table~III (p.~124005-8, right column).
+The printed equations were not used as input. They enter only in the comparison, Section~\ref{sec:ch05:t12:comp}.
+Where the printed form differs from ours, it is retyped there.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=14pt]
+\item[(G1)] \tP\ \eqI{11}: $y=aa'H^2\{\|\Delta\vec x\|^2-\Delta\eta^2\}$ (regular part, $\delta\to0$).
+\item[(G2)] \tD\ The re-derived \eqI{67} (Task~10, Eqs.~\eqref{eq:ch04:67D} and \eqref{eq:ch04:67}), in the \emph{definition sign}. Its nonlocal logarithm term in general $D$ is
+\begin{equation}
+\begin{aligned}
+-iM^2_{\rm 3pt,log}&\supset\kappa^2k\,\frac{2}{D-3}\,H(aa')^{D-2}\big(a\partial_0+a'\partial'_0\big)\nabla^2A(y)\\
+&\xrightarrow{D=4}\;\frac{\kappa^2H^2}{8\pi^2}\,2H(aa')^2\big(a\partial_0+a'\partial'_0\big)\nabla^2A(y).
+\end{aligned}
+\label{eq:ch05:t12:G2}
+\end{equation}
+In the paper's \eqI{67} this term appears as $-2H(\ldots)$ (paper convention).
+\item[(G3)] \tD\ \eqI{62}: $A(y)=h\big\{4/y-2\ln(y/4)-1+\order{D-4}\big\}$.
+\item[(G4)] \tD\ \eqI{74}: $aa'H^2\|\Delta\vec x\|^2f=-\tfrac12(D-1)I[f]-\dfrac{\chVdd}{4aa'H^2}I^2[f]$, Eq.~\eqref{eq:ch05:I74}.
+\item[(G5)] \tP\ \eqI{42}: $a^D\square=\partial_\mu\big(a^{D-2}\eta^{\mu\nu}\partial_\nu\big)$; and \tD\ \eqI{76} (Task~11, Eq.~\eqref{eq:ch05:I76}).
+\end{itemize}
+
+\paragraph{Scope.}
+\eqI{94}--\eqI{96} and Tables~IV--V are not treated in this task.
+The identities are derived in general $D$. Table~III is given at $D=4$, as in the paper; the justification is in Task~10, Sec.~\ref{sec:ch04:Dto4}.
+There, every term of the logarithm contribution is either $\delta^D$-local with a finite coefficient, or a smooth function times derivatives of a \emph{single} propagator.
+Derivatives of a single propagator are well-defined distributions, analytic near $D=4$.
+
+% -------------------------------------------------------------------
+\subsection[Eq. (I.81)]{Eq.~(I.81) \tD}
+
+$y$ depends on $\vec x$ and $\vec x'$ only through $\Delta\vec x$. Hence
+\begin{equation}
+\partial'_if(y)=f'(y)\,\partial'_iy=-f'(y)\,\partial_iy=-\partial_if(y).
+\tag{I.81}\label{eq:ch05:I81}
+\end{equation}
+
+% -------------------------------------------------------------------
+\subsection[Eqs. (I.82)--(I.83)]{Eqs.~(I.82)--(I.83) \tD}
+
+\paragraph{An auxiliary identity.} Since $a=-1/(H\eta)$, we have $\frac1a-\frac1{a'}=-H\eta+H\eta'=-H\Delta\eta$. Hence
+\begin{equation}
+H\Delta\eta=\frac{a-a'}{aa'},\qquad a'H\Delta\eta=1-\frac{a'}a,\qquad aH\Delta\eta=\frac a{a'}-1 .
+\label{eq:ch05:t12:aux}
+\end{equation}
+Using $\partial_0(aa'H^2)=Ha\cdot aa'H^2$ and $\partial_0\big(\|\Delta\vec x\|^2-\Delta\eta^2\big)=-2\Delta\eta$:
+\begin{equation}
+\frac{\partial y}{\partial x^0}=Ha\,y-2aa'H^2\Delta\eta=Ha\big(y-2a'H\Delta\eta\big)\overset{\eqref{eq:ch05:t12:aux}}{=}Ha\Big(y-2+2\frac{a'}a\Big).
+\tag{I.82}\label{eq:ch05:I82}
+\end{equation}
+Similarly, with $\partial'_0(\ldots)=+2\Delta\eta$:
+\begin{equation}
+\frac{\partial y}{\partial x'^0}=Ha'\,y+2aa'H^2\Delta\eta=Ha'\big(y+2aH\Delta\eta\big)\overset{\eqref{eq:ch05:t12:aux}}{=}Ha'\Big(y-2+2\frac a{a'}\Big).
+\tag{I.83}\label{eq:ch05:I83}
+\end{equation}
+\eqref{eq:ch05:I82} and \eqref{eq:ch05:I83} are \eqI{82}--\eqI{83} of the paper.
+
+% -------------------------------------------------------------------
+\subsection[Eqs. (I.84)--(I.88)]{Eqs.~(I.84)--(I.88) \tD}
+
+\paragraph{\eqI{84}.}
+\begin{equation}
+\begin{aligned}
+(\partial_0+\partial'_0)f&=f'\big[\partial_0y+\partial'_0y\big]=f'\big[Hay-2aa'H^2\Delta\eta+Ha'y+2aa'H^2\Delta\eta\big]\\
+&=H(a+a')\,y\,f'(y).
+\end{aligned}
+\tag{I.84}\label{eq:ch05:I84}
+\end{equation}
+
+\paragraph{\eqI{85}.}
+\begin{equation*}
+(a'\partial_0+a\partial'_0)f=f'\big[a'(Hay-2aa'H^2\Delta\eta)+a(Ha'y+2aa'H^2\Delta\eta)\big]=f'\,Haa'\big[2y+2H\Delta\eta\,(a-a')\big].
+\end{equation*}
+By \eqref{eq:ch05:t12:aux}, $H(a-a')=H^2aa'\Delta\eta$, so $2H\Delta\eta(a-a')=2H^2aa'\Delta\eta^2$.
+The square bracket becomes $2aa'H^2\big(\|\Delta\vec x\|^2-\Delta\eta^2\big)+2aa'H^2\Delta\eta^2=2aa'H^2\|\Delta\vec x\|^2$:
+\begin{equation}
+(a'\partial_0+a\partial'_0)f(y)=2Haa'\times aa'H^2\|\Delta\vec x\|^2f'(y).
+\tag{I.85}\label{eq:ch05:I85}
+\end{equation}
+
+\paragraph{\eqI{86}.}
+Apply (G4) with $f\to f'$, writing $I[f']=f+c$ and $I^2[f']=I[f]+cy+c'$:
+\begin{equation*}
+aa'H^2\|\Delta\vec x\|^2f'=-\tfrac12(D-1)(f+c)-\frac{\chVdd}{4aa'H^2}\big(I[f]+cy\big)=-\tfrac12(D-1)f-\frac{\chVdd}{4aa'H^2}I[f].
+\end{equation*}
+The $c$ terms cancel because $\chVdd y=\sum_i\partial_i\partial'_iy=-2(D-1)aa'H^2$.
+Insert this into \eqref{eq:ch05:I85} and use $\chVdd F(y)=-\nabla^2F(y)$:
+\begin{resultbox}
+\begin{equation}
+(a'\partial_0+a\partial'_0)f(y)=-(D-1)Haa'f(y)+\frac{\nabla^2}{2H}\,I[f](y).
+\tag{I.86}\label{eq:ch05:I86}
+\end{equation}
+\end{resultbox}
+
+\paragraph{\eqI{87}--\eqI{88}.}
+$(a+a')(\partial_0+\partial'_0)-(a'\partial_0+a\partial'_0)=a\partial_0+a'\partial'_0$ is an operator identity; this is \eqI{87}. With \eqref{eq:ch05:I84} and \eqref{eq:ch05:I86}:
+\begin{resultbox}
+\begin{equation}
+(a\partial_0+a'\partial'_0)f(y)=H(a+a')^2y\,f'(y)+(D-1)Haa'f(y)-\frac{\nabla^2}{2H}\,I[f](y).
+\tag{I.88}\label{eq:ch05:I88}
+\end{equation}
+\end{resultbox}
+\noindent \eqref{eq:ch05:I84}--\eqref{eq:ch05:I88} are \eqI{84}--\eqI{88} of the paper. All hold in general $D$ and do not depend on the integration constant.
+
+% -------------------------------------------------------------------
+\subsection[Eq. (I.89)]{Eq.~(I.89) \tD}
+\label{sec:ch05:t12:89}
+
+Since $a$ and $a'$ depend only on time, $(a\partial_0+a'\partial'_0)$ commutes with $\nabla^2$.
+Apply \eqref{eq:ch05:I88} with $f=A$ to (G2). In general $D$ (definition sign):
+\begin{equation}
+\kappa^2k\,\frac{2}{D-3}\,H(aa')^{D-2}\,\nabla^2\Big[H(a+a')^2yA'+(D-1)Haa'A-\frac{\nabla^2}{2H}I[A]\Big].
+\label{eq:ch05:t12:89D}
+\end{equation}
+At $D=4$ ($k\to2h=H^2/8\pi^2$, $\frac2{D-3}\to2$, $D-1\to3$):
+\begin{equation*}
+\frac{\kappa^2H^2}{8\pi^2}\Big\{2H^2(aa')^2(a+a')^2\nabla^2(yA')+6H^2(aa')^3\nabla^2A-(aa')^2\nabla^4I[A]\Big\},
+\end{equation*}
+that is,
+\begin{resultbox}[Derived (I.89), definition sign]
+\begin{equation}
+\begin{aligned}
+&\frac{\kappa^2H^2}{8\pi^2}\,2H(aa')^2\big(a\partial_0+a'\partial'_0\big)\nabla^2A\\
+&\qquad=\frac{\kappa^2H^2}{16\pi^2}\Big\{+12(aa')^3H^2\nabla^2A+4H^2(aa')^2(a+a')^2\nabla^2(yA')-2(aa')^2\nabla^4I[A]\Big\}.
+\end{aligned}
+\tag{I.89$'$}\label{eq:ch05:I89}
+\end{equation}
+\end{resultbox}
+
+\begin{discbox}[Comparison with the printed (I.89)]
+\PI{} prints (paper convention):
+\begin{equation*}
+\begin{aligned}
+&\frac{\kappa^2H^2}{8\pi^2}\,\big(-2H\big)(aa')^2\big(a\partial_0+a'\partial'_0\big)\nabla^2A(y)\\
+&\qquad=\frac{\kappa^2H^2}{16\pi^2}\Big\{-12(aa')^3H^2\nabla^2A-4(aa')^2(a+a')^2\nabla^2(yA')+2(aa')^2\nabla^4I[A]\Big\}.
+\end{aligned}
+\end{equation*}
+\begin{itemize}[leftmargin=12pt]
+\item \textbf{Overall sign.} The overall sign is reversed. The left-hand side of the paper is $-2H(\ldots)$; this is the sign of \eqI{67} inherited from \eqI{47}.
+In the paper convention our result coincides with the printed coefficients $-12$, $-4H^2$, $+2$.
+\item \textbf{Missing $H^2$ in the second term.} In conformal coordinates $x^\mu$ has dimensions of length and $H$ of inverse length; $a$ and $y$ are dimensionless.
+The terms $H^2\nabla^2A$ and $\nabla^4I[A]$ have dimension $L^{-4}A$, whereas the printed $(a+a')^2\nabla^2(yA')$ has dimension $L^{-2}A$.
+The correct term is $-4H^2(aa')^2(a+a')^2\nabla^2(yA')$, and the second row of Table~III does contain $H^2$.
+Numerical check (Section~\ref{sec:ch05:t12:code}, item (f)): with $H^2$ the identity \eqI{89} holds at every point tested; without $H^2$ it fails for $H\neq1$.
+\end{itemize}
+\end{discbox}
+
+% -------------------------------------------------------------------
+\subsection[Table III]{Table III \tD}
+\label{sec:ch05:t12:tab3}
+
+\paragraph{Normalization.}
+The prefactor of \eqref{eq:ch05:I89} is $\frac{\kappa^2H^2}{16\pi^2}$. Write $A=h\cdot\chVAh$ with $\chVAh\equiv4/y-2\ln(y/4)-1$. Then
+\begin{equation*}
+\frac{\kappa^2H^2}{16\pi^2}\cdot h=\frac{\kappa^2H^4}{256\pi^4}=\frac{\kappa^2H^4}{(4\pi)^4}.
+\end{equation*}
+So the coefficients of Table~III are read off from the brace of \eqref{eq:ch05:I89} with $A\to\chVAh$.
+
+\paragraph{The three rows.}
+Terms are dropped as follows. Constants vanish under $\nabla^2$ or $\nabla^4$.
+Moreover, $\nabla^2y=2(D-1)aa'H^2$ is constant in space, so $\nabla^4y=0$. This is what the paper means by ``terms which eventually vanish such as $\nabla^4y$''.
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{Row 1}, $(aa')^3H^2\nabla^2$: $12\chVAh=12\big(\tfrac1x-2\ln x-1\big)\to\dfrac{12}{x}-24\ln x$. The constant $-12$ is dropped; $4/y=1/x$ and $\ln(y/4)=\ln x$.
+\item \textbf{Row 2}, $(aa')^2(a+a')^2H^2\nabla^2$: $\chVAh'=-\tfrac4{y^2}-\tfrac2y$, so $y\chVAh'=-\tfrac4y-2$.
+Hence $4y\chVAh'=-\tfrac{16}{y}-8\to-\dfrac4x$.
+\item \textbf{Row 3}, $(aa')^2\nabla^4$: $I[\chVAh]=4\ln y-2y\ln\tfrac y4+y$, using $\int\ln\tfrac y4\,dy=y\ln\tfrac y4-y$.
+Then $4\ln y=4\ln x+4\ln4$, and with $y=4x$ one finds $-2I[\chVAh]=-8\ln x-8\ln4+16x\ln x-8x\to-8\ln x+16x\ln x$. The constant and the term linear in $y$ are dropped.
+\end{itemize}
+
+\begin{center}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+External operator & Derived, definition sign & Derived, paper conv. & \PI{} prints (Table~III)\\
+& $\big(\times\frac{\kappa^2H^4}{(4\pi)^4}\big)$ & $\big(\times\frac{\kappa^2H^4}{(4\pi)^4}\big)$ & $\big(\times\frac{\kappa^2H^4}{(4\pi)^4}\big)$\\
+\midrule
+$(aa')^3H^2\nabla^2$ & $+\frac{12}{x}-24\ln x$ & $-\frac{12}{x}+24\ln x$ & $-\frac{12}{x}+24\ln x$\\[2pt]
+$(aa')^2(a+a')^2H^2\nabla^2$ & $-\frac4x$ & $\frac4x$ & $\frac4x$\\[2pt]
+$(aa')^2\nabla^4$ & $-8\ln x+16x\ln x$ & $8\ln x-16x\ln x$ & $8\ln x-16x\ln x$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Relative to the printed table, every derived entry has the opposite sign (definition sign versus paper convention). This is the inherited overall sign, not a new error.
+The same computation starting from the paper's own \eqI{89}, with $H^2$ restored, reproduces the paper's Table~III exactly.
+The table is thus the correct processing of the paper's own \eqI{89}; the only difference is the overall sign inherited from \eqI{47}.
+
+\paragraph{Meaning of the external operators.}
+$1/x$, $\ln x$ and $x\ln x$ are locally integrable at $D=4$. The external operators act as distributions, i.e.\ by integration by parts onto the test function.
+At fixed $\delta>0$ these functions are smooth in space. So $\nabla^2$ and $\nabla^4$, which contain only spatial derivatives, produce no $\delta^D$ term.
+Table~III has no local part, and the word ``nonlocal'' in its caption is correct in this sense.
+
+% -------------------------------------------------------------------
+\subsection[Eq. (I.90)]{Eq.~(I.90) \tD}
+
+From \eqI{42}, $a^D\square=-\partial_0\big(a^{D-2}\partial_0\big)+a^{D-2}\nabla^2$. With $\partial_0a^{D-2}=(D-2)Ha^{D-1}$:
+\begin{equation}
+\square=-\frac1{a^2}\partial_0^2-\frac{(D-2)H}{a}\partial_0+\frac1{a^2}\nabla^2 .
+\tag{I.90}\label{eq:ch05:I90}
+\end{equation}
+
+% -------------------------------------------------------------------
+\subsection[Eqs. (I.91)--(I.92)]{Eqs.~(I.91)--(I.92) \tD}
+\label{sec:ch05:t12:91}
+
+\paragraph{\eqI{91}.} Use \eqref{eq:ch05:I76} with $f=A$, summed over $j$ ($f'A'=A'^2$):
+\begin{equation*}
+A\,\partial_0\partial'_jA=\partial_0\partial'_jI^2[AA'']+Ha\,\partial'_jI^2[A'^2].
+\end{equation*}
+$\partial'_j$ commutes with the time-dependent factor $(aa')^{D-2}$ and with $\partial_0$. It can therefore be moved outside, where it combines with the inner $\partial'_j$ into $\nabla'^2$:
+\begin{equation}
+\begin{aligned}
+\partial_0\partial'_i\big[(aa')^{D-2}A\,\partial_0\partial'_iA\big]={}&\nabla'^2\partial_0\big[(aa')^{D-2}\partial_0I^2[AA'']\big]\\
+&+H\nabla'^2\partial_0\big[a^{D-1}a'^{D-2}I^2[A'^2]\big].
+\end{aligned}
+\tag{I.91}\label{eq:ch05:I91}
+\end{equation}
+
+\paragraph{\eqI{92}.} By homogeneity, $\nabla'^2=\nabla^2$. Define $G\equiv I^2[AA'']$ and $K\equiv I^2[A'^2]$.
+\begin{itemize}[leftmargin=14pt]
+\item In the first term, \eqI{42} gives $\partial_0\big(a^{D-2}\partial_0G\big)=-a^D\square G+a^{D-2}\nabla^2G$.
+\item In the second term, $\partial_0\big(a^{D-1}K\big)=(D-1)Ha^DK+a^{D-1}\partial_0K$.
+\end{itemize}
+\begin{resultbox}
+\begin{equation}
+\begin{aligned}
+={}&-a^Da'^{D-2}\nabla^2\square I^2[AA'']+(aa')^{D-2}\nabla^4I^2[AA'']\\
+&+Ha^{D-1}a'^{D-2}\nabla^2\partial_0I^2[A'^2]+(D-1)H^2a^Da'^{D-2}\nabla^2I^2[A'^2].
+\end{aligned}
+\tag{I.92}\label{eq:ch05:I92}
+\end{equation}
+\end{resultbox}
+\noindent \eqref{eq:ch05:I91} and \eqref{eq:ch05:I92} are \eqI{91}--\eqI{92} of the paper.
+
+\subsubsection[Distributional meaning]{Distributional meaning \tA}
+\begin{itemize}[leftmargin=14pt]
+\item The left-hand side of \eqref{eq:ch05:I91} is the normal part of the fourth term of \eqI{47}.
+Its inner pair of derivatives, $\partial_0\partial'_i$, is mixed and contains no delta function even for the full $i\Delta_A$ (Task~8).
+So the naive and distributional readings coincide, and \eqref{eq:ch05:I76} holds here in both senses.
+\item The outer derivatives are always distributional. Distributional derivatives commute, so the step \eqref{eq:ch05:I91}$\to$\eqref{eq:ch05:I92} is exact in the distributional sense.
+The $\square$ in \eqref{eq:ch05:I92} is a \textbf{distributional} operator.
+\item $G=I^2[AA'']$ contains the component $c_f\chVlead$ (Task~11, Eq.~\eqref{eq:ch05:t11:gamma}). Here $c_f=k\pihat$, which has a pole.
+From the propagator equation, $a^D\square\chVlead\supset i\delta^D$ (Task~8, route B, Eq.~\eqref{eq:ch3-routeB2}). Hence
+\begin{equation}
+-a^Da'^{D-2}\nabla^2\square I^2[AA'']\supset-i\,c_f\,a^{D-2}\nabla^2\delta^D(x-x')=-ik\pihat\,a^{D-2}\nabla^2\delta^D .
+\label{eq:ch05:t12:loc}
+\end{equation}
+This term is legitimate. It is the exact counterpart of the local term $-ia^{D-2}kL\nabla^2\delta^D$ of $\mathcal V_4$ in Task~10, where the outer function is $kL$ instead of $c_f$.
+\eqI{54}--\eqI{59} contain only the inner $(0,0)$ terms, so \eqref{eq:ch05:t12:loc} was not counted there.
+\end{itemize}
+
+% -------------------------------------------------------------------
+\subsection[Eq. (I.93)]{Eq.~(I.93) \tD}
+\label{sec:ch05:t12:93}
+
+By \eqI{42}, $\square f(y)=f''(y)\,a^{-2}\eta^{\mu\nu}\partial_\mu y\,\partial_\nu y+f'(y)\,\square y$. Two quantities are needed.
+\begin{itemize}[leftmargin=14pt]
+\item With \eqref{eq:ch05:I82} and $\partial_iy=2aa'H^2\Delta x^i$:
+\begin{equation*}
+\begin{aligned}
+\eta^{\mu\nu}\partial_\mu y\,\partial_\nu y&=-\big(Hay-2aa'H^2\Delta\eta\big)^2+4a^2a'^2H^4\|\Delta\vec x\|^2\\
+&=-H^2a^2y^2+4H^3a^2a'y\Delta\eta+4aa'H^2y .
+\end{aligned}
+\end{equation*}
+(The last step uses $4a^2a'^2H^4(\|\Delta\vec x\|^2-\Delta\eta^2)=4aa'H^2y$.)
+Divide by $a^2$ and use $a'H\Delta\eta=1-a'/a$ from \eqref{eq:ch05:t12:aux}:
+$-H^2y^2+4H^2y\,(1-a'/a)+4H^2y\,a'/a=H^2(4y-y^2)$.
+\item $\nabla^2y=2(D-1)aa'H^2$ and $\partial_0^2y=2H^2a^2y-4H^3a^2a'\Delta\eta-2aa'H^2$. With \eqref{eq:ch05:I90}:
+\begin{equation*}
+\square y=-DH^2y+2DH^2\big(a'H\Delta\eta+a'/a\big)=DH^2(2-y).
+\end{equation*}
+(The $y$ terms are $-2H^2y-(D-2)H^2y$; the $\Delta\eta$ terms are $[4+2(D-2)]H^3a'\Delta\eta$; the $a'/a$ terms are $[2+2(D-1)]H^2a'/a$.)
+\end{itemize}
+\begin{resultbox}
+\begin{equation}
+\square f(y)=H^2\big[(4y-y^2)f''(y)+D(2-y)f'(y)\big]=\square'f(y).
+\tag{I.93}\label{eq:ch05:I93}
+\end{equation}
+\end{resultbox}
+\noindent The equality with $\square'$ follows from the symmetry $y(x;x')=y(x';x)$. This is \eqI{93} of the paper.
+
+\paragraph{Remark.} \eqref{eq:ch05:I93} is pointwise.
+The Task~12 report states that for $f=y^{1-D/2}$ the right-hand side vanishes identically (indicial equation), whereas as a distribution $\square y^{1-D/2}$ contains $\delta^D$.
+\begin{notebox}[Editorial note added while preparing these notes]
+Strictly, only the leading (indicial) power cancels for $f=y^{1-D/2}$, namely the coefficient of $y^{-D/2}$, which is $4s(s-1)+2Ds=0$ for $s=1-\frac D2$.
+The next power survives. Pointwise,
+$\square\,y^{1-D/2}=\tfrac{D(D-2)}{4}\,H^2\,y^{1-D/2}$, a locally integrable function with no delta function (we confirmed this with a one-line SymPy check).
+The conclusion of the remark is unaffected: the pointwise formula \eqref{eq:ch05:I93} never produces $\delta^D$, while the distributional $\square$ acting on $y^{1-D/2}$ does.
+\end{notebox}
+\noindent Therefore, if $\square I^2[AA'']$ in \eqref{eq:ch05:I92} is evaluated pointwise with \eqref{eq:ch05:I93}, the legitimate local term \eqref{eq:ch05:t12:loc} is lost.
+Conversely, the inner $(0,0)$ term in \eqref{eq:ch05:I75} was defined naively, and its local part was counted separately in \eqI{54}.
+If it combines there with outer derivatives into a distributional $\square$, an extra delta function appears.
+The consistent rule is: the outer operators are distributional, and $c_f\,\frac{i}{a^{D-2}}\delta^D$ is subtracted from the inner $(0,0)$ derivative, because it was already counted in \eqI{54}--\eqI{58}.
+Whether this rule is respected in Tables~IV--VI is to be checked there.
+
+% -------------------------------------------------------------------
+\subsection{Comparison with the paper}
+\label{sec:ch05:t12:comp}
+
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.22\textwidth}>{\raggedright\arraybackslash}p{0.20\textwidth}@{}}
+\toprule
+Item & Derived here & Paper & Status\\
+\midrule
+\eqI{81} & \eqref{eq:ch05:I81} & same & \chVyes\\
+\eqI{82}--\eqI{83} & \eqref{eq:ch05:I82}--\eqref{eq:ch05:I83} & same & \chVyes\\
+\eqI{84}--\eqI{88} & \eqref{eq:ch05:I84}--\eqref{eq:ch05:I88}, general $D$ & same & \chVyes\\
+\eqI{89}: overall sign & $+12,\ +4H^2,\ -2$ (definition sign) & $-12,\ -4,\ +2$ & \chVno{} (sign, inherited)\\
+\eqI{89}: $H^2$ in 2nd term & present & absent & \chVno{} (typo)\\
+Table~III & Section~\ref{sec:ch05:t12:tab3} & all three rows with opposite sign & \chVno{} (sign, inherited)\\
+\eqI{90} & \eqref{eq:ch05:I90} & same & \chVyes\\
+\eqI{91}--\eqI{92} & \eqref{eq:ch05:I91}--\eqref{eq:ch05:I92} & same & \chVyes\\
+\eqI{93} & \eqref{eq:ch05:I93}, pointwise & same & \chVyes\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Accumulated findings (Tasks 2--12).}
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}@{}}
+\toprule
+Location & Finding & Effect\\
+\midrule
+\eqI{7}, \eqI{14}, Table~II, \eqI{39}, the phrase ``4th term'' & typographical errors (C3--C7) & none\\
+\textbf{\eqI{89}} & $H^2$ missing in the second term (C8) & none (Table~III is correct)\\
+\eqI{40}, \eqI{59} & finite local errors (B1, B2) & absorbable into $\Delta\alpha_{2,3}$\\
+\eqI{32}--\eqI{33}, \eqI{47}--\eqI{49} and beyond & 4-point and 3-point contributions reversed together, Table~III included (S1) & bare $M^2=-$(definition)\\
+\eqI{60}--\eqI{67} & local cancellation against \eqI{44} verified & ---\\
+\eqI{68}--\eqI{80}, \eqI{81}--\eqI{93} & agreement & ---\\
+\eqI{92}--\eqI{93} & is $\square$ distributional or pointwise? & \textbf{to be followed up:} is the local term \eqref{eq:ch05:t12:loc} present in Tables~IV--VI?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% -------------------------------------------------------------------
+\subsection[Code checks]{Code checks \tC}
+\label{sec:ch05:t12:code}
+
+Script: \texttt{code/05\_normal\_terms\_tableIII/check\_81\_93.py} (SymPy; about 20\,s). It was actually run; its output is in \texttt{expected\_output/check\_81\_93.txt}.
+It does not replace the analytic derivation. The script uses explicit coordinates and the true $y(x;x')$.
+\begin{center}
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.66\textwidth}l@{}}
+\toprule
+Check & What & Result\\
+\midrule
+(a) & \eqI{81}--\eqI{83}, exact symbolic & \texttt{True}\\
+(b) & \eqI{84}, \eqI{85}, \eqI{87} symbolic with a generic function $f(y)$; \eqI{86}, \eqI{88} with $f=y^\alpha$ at a random point, 25 digits & \texttt{True}\\
+(c) & \eqI{90} in general $D$, from the definition \eqI{42}, on a test function $g(\eta,\vec x)$ & \texttt{True}\\
+(d) & \eqI{91}--\eqI{92} with $A=y^\beta$ at $D=4,5$; left side by brute-force differentiation, $\square$ applied in coordinates via \eqI{42} & \texttt{True}\\
+(e) & \eqI{93}: $\square$ and $\square'$ at $D=4,5$ & \texttt{True}\\
+(f) & \eqI{89} and Table~III at $D=4$ with the true $A(y)$ of \eqI{62}, at three test points with $H\neq1$ & see below\\
+\bottomrule
+\end{tabular}
+\end{center}
+Results of check (f):
+\begin{itemize}[leftmargin=14pt]
+\item The derived nonlocal term of \eqI{67} plus the printed Table~III gives exactly $0$ at all three points. So derived $=-$paper.
+\item \eqI{89} with $H^2$ restored equals $-1$ times the derived term at every point. The printed \eqI{89} (without $H^2$) does not at any point.
+\item The sources of the table coefficients ($-12\chVAh$, $-4y\chVAh'$, $2I[\chVAh]$, paper convention) were expanded separately.
+\end{itemize}
+Output of block (f):
+{\footnotesize
+\begin{verbatim}
+== (89) and Table III: pointwise, D=4, actual A(y) of (62) ==
+  point 0: derived(67)_nonlocal + Table III(paper) = 0.0
+           | derived - Table III(paper) = 0.0000509  (scale 0.0000254)
+           (89) with H^2 restored == -derived : True
+           (89) as printed (no H^2) == -derived : False
+  point 1: derived(67)_nonlocal + Table III(paper) = 0.0
+           | derived - Table III(paper) = 0.000202  (scale 0.000101)
+           (89) with H^2 restored == -derived : True
+           (89) as printed (no H^2) == -derived : False
+  point 2: derived(67)_nonlocal + Table III(paper) = 0.0
+           | derived - Table III(paper) = 0.000303  (scale 0.000152)
+           (89) with H^2 restored == -derived : True
+           (89) as printed (no H^2) == -derived : False
+  Table III coefficients from A(y) (dropping terms killed by Lap / Lap^2):
+    -12*A/h        = 24*log(x) + 12 - 12/x
+    -4*y A'/h      = 8 + 4/x
+    2*I[A]/h       = -16*x*log(x) + 8*x + 8*log(x) + 16*log(2)
+\end{verbatim}
+}
+\paragraph{A note on the test points.}
+In the first run recorded in the Task~12 log, $H$ was drawn as a random integer in $[5,20]$ divided by 10. It came out as $H=1$ at points 0 and 2.
+There the printed \eqI{89} (without $H^2$) passed by accident (\texttt{True}).
+The script was then changed to draw $H$ from $\{7/10,13/10,3/2,17/10\}$. The output above is from this final version, and our rerun reproduces it line by line.
+At fixed $(\eta,\eta',\vec x,\vec x')$ the derived term and Table~III do not depend on $H$, which is why the printed scales are the same in both runs.
+
+% -------------------------------------------------------------------
+\subsection{Calculation record}
+\begin{itemize}[leftmargin=14pt,itemsep=1pt]
+\item \textbf{Derived:} \eqI{81} \eqref{eq:ch05:I81}; \eqI{82}--\eqI{83} \eqref{eq:ch05:I82}--\eqref{eq:ch05:I83};
+\eqI{84}--\eqI{88} \eqref{eq:ch05:I84}--\eqref{eq:ch05:I88}, in general $D$ and independent of the integration constant;
+\eqI{89} in general $D$ \eqref{eq:ch05:t12:89D} and at $D=4$ \eqref{eq:ch05:I89}; Table~III (Section~\ref{sec:ch05:t12:tab3});
+\eqI{90} \eqref{eq:ch05:I90}; \eqI{91}--\eqI{92} \eqref{eq:ch05:I91}--\eqref{eq:ch05:I92} and their distributional meaning \eqref{eq:ch05:t12:loc}; \eqI{93} \eqref{eq:ch05:I93}.
+\item \textbf{Checks passed:} SymPy checks (a)--(f), actually run.
+\item \textbf{Discrepancies with the paper:}
+the overall sign of \eqI{89} and Table~III is reversed. This is inherited from \eqI{47} and is not a new error.
+The second term of \eqI{89} is missing $H^2$. This is a typographical error; Table~III is correct.
+\item \textbf{To be followed up:} the $\square$ in \eqI{92} is distributional, while \eqI{93} is pointwise.
+It must be checked whether the local term \eqref{eq:ch05:t12:loc}, which has a pole, is present in Tables~IV--VI.
+\end{itemize}
+
+% -------------------------------------------------------------------
+\begin{notebox}[Forward note (results of later tasks, not part of Tasks 11--12)]
+\begin{itemize}[leftmargin=12pt,itemsep=1pt]
+\item \textbf{Naive inner derivatives.} Task~13 adopts naive inner derivatives in the normal contributions, following the paper's appendix text and the footnote to \eqI{75}.
+Task~16 (Sec.~\ref{sec:ch08-distr}) finds that the possible double counting identified here and in Task~13 has exactly the form $c\,(a^D\square-a^{D-2}\nabla^2)\delta^D$, with $c=c(D)$ a constant and no $\ln a$.
+This is the form of the counterterms, so it is absorbed completely into $\alpha_2$ and $\alpha_3$ and does not change the renormalized result.
+The general question remains open beyond pointwise checks: does the external-operator reduction of the appendix produce no \emph{other} local differences? Task~16 records this point as only partially closed.
+\item \textbf{Table~III in Table~X.} Task~17 rebuilds Table~X from Tables~III, V and VII and Eq.~\eqI{159}.
+It finds that the paper added the first two rows of Table~III to the corresponding rows of Table~X, but omitted the third row, $8\ln x-16x\ln x$ (paper convention), from the $(aa')^2\nabla^4$ row.
+The corrected row is $\frac{34}{3}\ln x-40x\ln x+24x^2\ln x-36x^2$, where the paper prints $\frac{10}{3}\ln x-24x\ln x+24x^2\ln x-36x^2$.
+This is discussed in the chapter on renormalization and Table~X.
+\end{itemize}
+\end{notebox}
+% (hypertexnames is left false: notes.tex sets it globally, and switching it back on here
+%  would create duplicate equation anchors in the following chapters.)

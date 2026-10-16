@@ -1,0 +1,1053 @@
+% ===================================================================================
+% Chapter 8 (Tasks 16 and 17): Renormalization and the final self-mass.
+% Paper I, Eqs. (I.146)-(I.167), Tables VI-X.
+% Source: Turkish working reports task16_report.html, task17_report.html and the
+% command logs task16_log.txt, task17_log.txt.  Code: code/08_renormalization_tableX/
+% ===================================================================================
+\providecommand{\chEres}{\operatorname{Res}}
+\providecommand{\chEok}{\ensuremath{\checkmark}}
+\providecommand{\chEbad}{\ensuremath{\boldsymbol{\times}}}
+\providecommand{\chECd}{C_{\delta}}
+
+\chapter{Renormalization and the final self-mass: Tables VI--X, Eqs.~(I.146)--(I.167)}
+\label{ch:ch08}
+
+This chapter covers the last stage of the computation in \PI. It has two parts.
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+\item \textbf{Task 16} (Sec.~\ref{sec:ch08-t16}). The ``normal'' 3-point contributions of Table~IV contain the powers
+$(4/y)^{D-1}$ and $(4/y)^{D-2}$, which are not integrable in $D=4$. They are rewritten as local divergent terms
+proportional to $\delta^D(x-x')$ plus finite nonlocal terms. This is Eqs.~\eqI{146}--\eqI{159} and Tables~VI--IX.
+\item \textbf{Task 17} (Sec.~\ref{sec:ch08-t17}). All local terms are collected into three coefficients $\beta_1,\beta_2,\beta_3$, which the counterterms absorb.
+All finite nonlocal terms are collected into Table~X. Together they give the renormalized self-mass-squared \eqI{167}.
+Task~17 also contains an independent global pointwise test of Table~X.
+\end{enumerate}
+
+\begin{notebox}[Conventions used in this chapter]
+\tP\ given in the paper; \tD\ derived here; \tA\ assumption or convention; \tC\ check by code.
+Unless stated otherwise, all tables and coefficients are in the \textbf{paper's convention}, i.e.\ the sign of the printed
+\eqI{47}--\eqI{49} (the parts $P_1$--$P_7$ of the normal contribution).
+The \textbf{definition sign} is the sign fixed by \PI's own definition \eqI{168}. Values in the definition sign are $-1$ times the values in the paper's convention.
+This result is inherited from Tasks~3--13. All consistency checks of Task~16 are linear and homogeneous, so they do not depend on this sign.
+\end{notebox}
+
+\begin{resultbox}[Summary of the chapter]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \eqI{146}--\eqI{159} and Tables~VI--IX are derived and agree with the paper.
+Tables~VI--IX use the \emph{corrected} ($+$) sign of the $\gamma_2$ entry of Table~IV, so the printed Table~IV sign is a typo.
+Shift symmetry confirms this independently: with the printed sign, Table~IX would contain a forbidden divergence ($-16/3\neq0$ at $D=4$).
+The factor $i$ in the header of Table~VII is a typo.
+\item $\beta_1=0$, and $\beta_2$, $\beta_3$ of \eqI{161}--\eqI{165} are reproduced exactly. In \eqI{160} and \eqI{167} a factor $H^2$ is missing next to $\beta_2,\beta_3$ and $\Delta\alpha_2,\Delta\alpha_3$ (typo).
+\item The errors in \eqI{40} and in the arithmetic of \eqI{59} only shift finite parts: $\beta_2:-\tfrac{61}{3}\to-\tfrac{49}{3}$ and $\beta_3:\tfrac{58}{3}\to\tfrac{52}{3}$ (paper convention).
+These are absorbed into $\Delta\alpha_{2,3}$. The pole $-4/(D-4)$ of $\beta_3$ is unchanged.
+\item Table~X: 12 of the 13 operator rows follow from Tables~III, V, VII and \eqI{159}.
+In the $(aa')^2\nabla^4$ row the Table~III contribution $8\ln x-16x\ln x$ is missing. This term is non-analytic and physical.
+One row is printed twice (typo). In the global pointwise test, Table~X matches the direct sum of the normal contributions only when this correction \emph{and} the $72\gamma_2$ correction of Task~13 are applied together.
+\item In the definition sign, the physical nonlocal part of the renormalized self-mass-squared is $-$(corrected Table~X).
+\end{itemize}
+\end{resultbox}
+
+% ===================================================================================
+\section{Task 16: separating the divergences of the normal contributions, Eqs. (I.146)--(I.159) and Tables VI--IX}
+\label{sec:ch08-t16}
+
+\subsection{Goal and inputs}
+
+\paragraph{Goal.} Derive \eqI{146}--\eqI{159} and Tables~VI--IX of \PI\ (printed pages 124005-12 to 124005-14) from Table~IV.
+The paper's material is located as follows:
+\begin{itemize}[itemsep=0pt]
+\item \eqI{146}--\eqI{149}: page 124005-12, right column;
+\item \eqI{150}--\eqI{153} and Table~VI: page 124005-13, left column;
+\item Table~VII, \eqI{154}--\eqI{155} and Table~VIII: page 124005-13, right column;
+\item Table~IX and \eqI{156}--\eqI{159}: page 124005-14, left column.
+\end{itemize}
+
+\paragraph{Notation.}
+\begin{gather*}
+z\equiv\frac4y,\qquad x\equiv\frac y4,\qquad \mathcal N\equiv\frac{H^{D-2}}{(4\pi)^{D/2}},\\
+\mathcal L[f]\equiv(4y-y^2)f''+D(2-y)f',\qquad \chECd\equiv\frac{(4\pi)^{D/2}H^{-D}}{\Gamma(\frac D2-1)} .
+\end{gather*}
+Thus the pointwise part of \eqI{93} reads $\square f=H^2\mathcal L[f]$. We abbreviate $\delta^D\equiv\delta^D(x-x')$.
+The combination $\delta^D/a^D$ is a distribution, and $a^{-D}(x)\,\delta^D=a^{-D}(x')\,\delta^D$.
+
+\paragraph{External operators.} \tP\ These are the ten operators of \PI, \eqI{104}--\eqI{113}, as used in Task~13. They are written here for general $D$:
+\begin{equation*}
+\begin{aligned}
+&\alpha=(aa')^D\square^2, && \beta=(aa')^{D-1}(a^2+a'^2)H^2\square, && \gamma_1=(aa')^DH^4,\\
+&\gamma_2=(aa')^{D-1}(a^2+a'^2)H^4, && \gamma_3=(aa')^{D-1}(a+a')^2H^4, && \delta=(aa')^{D-2}(a^2+a'^2)\nabla^2\square,\\
+&\epsilon_1=(aa')^{D-1}H^2\nabla^2, && \epsilon_2=(aa')^{D-2}(a^2+a'^2)H^2\nabla^2, && \epsilon_3=(aa')^{D-2}(a+a')^2H^2\nabla^2,\\
+&\zeta=(aa')^{D-2}\nabla^4 .
+\end{aligned}
+\end{equation*}
+Since $(a+a')^2=(a^2+a'^2)+2aa'$, the redundant operators satisfy $\gamma_3=2\gamma_1+\gamma_2$ and $\epsilon_3=2\epsilon_1+\epsilon_2$.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item[(G1)] \tD\ Table~IV (Task~13), with the second column of the $\gamma_2$ row corrected to $+\frac{D^3-3D^2-4D+8}{4(D-1)}$
+(the printed sign is $-$). Units: $\frac{\kappa^2H^{2D-4}}{(4\pi)^D}\Gamma^2(\tfrac D2)$, with no factor $i$.
+We write $c_1$ for the coefficient of $z^{D-1}$ and $c_2$ for the coefficient of $z^{D-2}$ (Table~\ref{tab:ch08-T4}).
+\item[(G2)] \tD\ The pointwise part of \eqI{93} (Task~12): $\square f(y)=H^2\mathcal L[f]$.
+\item[(G3)] \tP\tD\ The propagator equation \eqI{12} and the leading term (Task~8): $a^D\square\,i\Delta_A=i\delta^D$, with
+$i\Delta_A\supset A_{\rm lead}=\mathcal N\,\Gamma(\tfrac D2-1)\,z^{D/2-1}$.
+\item[(G4)] \tD\ The delta-content rule (Tasks~8 and 11). In distributional derivatives, $\delta^D$ arises only from the component of $F(y)$ that is exactly $y^{1-D/2}$.
+All other powers give zero, by analytic continuation of $\delta^{D+2s-2}$.
+\item[(G5)] \tD\ $\square=a^{-2}\big[-\partial_0^2-(D-2)Ha\,\partial_0+\nabla^2\big]$ \eqI{90}, and $\partial_0a=Ha^2$.
+\end{itemize}
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{lll}
+\toprule
+Op. & $c_1$ [coefficient of $z^{D-1}$] & $c_2$ [coefficient of $z^{D-2}$] \\
+\midrule
+$\alpha$ & $0$ & $\frac{D}{(D-1)(D-2)^2}$ \\
+$\beta$ & $-\frac{D}{4(D-1)}$ & $-\frac{q}{4(D-1)(D-2)}$ \\
+$\gamma_1$ & $-\frac{D(D-2)}{4}$ & $-\frac{q}{4}$ \\
+$\gamma_2$ & $\frac D4$ & $+\frac{q}{4(D-1)}$ \quad(printed: $-\frac{q}{4(D-1)}$) \\
+$\gamma_3$ & $-\frac D4$ & $0$ \\
+$\delta$ & $0$ & $0$ \\
+$\epsilon_1$ & $0$ & $\frac{D^2-6D+4}{2(D-1)(D-2)}$ \\
+$\epsilon_2$ & $0$ & $\frac{1-2D}{(D-1)(D-2)}$ \\
+$\epsilon_3$, $\zeta$ & $0$ & $0$ \\
+\bottomrule
+\end{tabular}
+\caption{Input (G1): Table~IV as derived in Task~13, with $q\equiv D^3-3D^2-4D+8$.
+Units: $\frac{\kappa^2H^{2D-4}}{(4\pi)^D}\Gamma^2(\frac D2)$, multiplying $(4/y)^{D-1}$ and $(4/y)^{D-2}$ respectively.}
+\label{tab:ch08-T4}
+\end{table}
+
+% -----------------------------------------------------------------------------------
+\subsection{Eq. (I.146): the non-integrable powers}
+\tD\ In $D$ dimensions, $y^s\sim(\Delta x)^{2s}$ is locally integrable only if $s>-\tfrac D2$. Hence:
+\begin{itemize}[itemsep=1pt]
+\item $z^{D-1}$, i.e.\ $s=1-D$: integrability requires $D<2$. At $D=4$ the divergence is quadratic.
+\item $z^{D-2}$, i.e.\ $s=2-D$: integrability requires $D<4$. At $D=4$ the divergence is logarithmic.
+\end{itemize}
+These are exactly the two columns of Table~IV \chEok:
+\begin{equation}
+\Big(\frac4y\Big)^{D-1}\qquad\text{and}\qquad\Big(\frac4y\Big)^{D-2}.
+\tag{I.146}
+\end{equation}
+
+% -----------------------------------------------------------------------------------
+\subsection{Eq. (I.147): the distributional form of $\square f(y)$}
+\tD\ The pointwise part is \eqI{93}. By (G4), the delta function comes only from the $y^{1-D/2}$ component.
+From (G3), $a^D\square A_{\rm lead}\supset i\delta^D$, so
+\begin{equation}
+\square z^{\frac D2-1}\supset\frac{i\,\delta^D}{\mathcal N\,\Gamma(\frac D2-1)\,a^D}
+=\frac{(4\pi)^{D/2}H^{2-D}}{\Gamma(\frac D2-1)}\,\frac{i}{a^D}\,\delta^D .
+\label{eq:ch08-boxlead}
+\end{equation}
+Let $f\supset c\,y^{1-D/2}=c\,4^{1-D/2}z^{D/2-1}$. For generic $D$ different powers do not mix.
+Therefore the coefficient of $1/y$ in $y^{D/2-2}f$ is exactly $c$, i.e.\ $c=\chEres\big[y^{D/2-2}f\big]$. This gives
+\begin{equation}
+\square f(y)=H^2\mathcal L[f]+\chEres\Big[y^{\frac D2-2}f\Big]\,\frac{4\pi^{D/2}H^{2-D}}{\Gamma(\frac D2-1)}\,\frac{i}{\sqrt{-\hat g}}\,\delta^D(x-x') ,
+\tag{I.147}
+\end{equation}
+where we used $4^{1-D/2}(4\pi)^{D/2}=4\pi^{D/2}$ and $\sqrt{-\hat g}=a^D$.
+This is the paper's \eqI{147} \chEok. The paper writes $\sqrt{-g}$, which is the determinant of the background metric.
+
+% -----------------------------------------------------------------------------------
+\subsection{Eqs. (I.148)--(I.150)}
+\tD\ For $f=z^q=4^qy^{-q}$ we have $f'=-qf/y$ and $f''=q(q+1)f/y^2$. This gives the general formula
+\begin{equation}
+\mathcal L[z^q]=q\Big[\frac{4(q+1)-2D}{y}+(D-q-1)\Big]z^q,\qquad \frac{z^q}{y}=\frac14\,z^{q+1}.
+\label{eq:ch08-Lzq}
+\end{equation}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item $q=D-2$: $\mathcal L=(D-2)\big[\tfrac{2(D-2)}{y}+1\big]z^{D-2}=\tfrac12(D-2)^2z^{D-1}+(D-2)z^{D-2}$. Solving for $z^{D-1}$ gives
+\begin{equation}
+\Big(\frac4y\Big)^{D-1}=\frac{2}{(D-2)^2}\frac{\square}{H^2}\Big(\frac4y\Big)^{D-2}-\frac{2}{D-2}\Big(\frac4y\Big)^{D-2}.
+\tag{I.148}
+\end{equation}
+\item $q=D-3$: $\mathcal L=(D-3)\big[\tfrac{2(D-4)}{y}+2\big]z^{D-3}=\tfrac12(D-3)(D-4)z^{D-2}+2(D-3)z^{D-3}$. Solving for $z^{D-2}$ gives
+\begin{equation}
+\Big(\frac4y\Big)^{D-2}=\frac{2}{(D-3)(D-4)}\frac{\square}{H^2}\Big(\frac4y\Big)^{D-3}-\frac{4}{D-4}\Big(\frac4y\Big)^{D-3}.
+\tag{I.149}
+\end{equation}
+\item $q=\tfrac D2-1$: here $4(q+1)-2D=0$, so the indicial equation is satisfied and
+$\mathcal L=q(D-q-1)z^q=\tfrac D2\big(\tfrac D2-1\big)z^{D/2-1}$.
+\end{itemize}
+
+\paragraph{Residues.}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item $y^{D/2-2}z^{D-2}\propto y^{1-D/2}$ and $y^{D/2-2}z^{D-3}\propto y^{2-D/2}$. For generic $D$ neither is $1/y$, so the residue is zero.
+\eqI{148} and \eqI{149} therefore contain no delta function.
+\item $y^{D/2-2}z^{D/2-1}=4^{D/2-1}/y$, with residue $4^{D/2-1}$. By \eqI{147} the delta coefficient is
+$4^{D/2-1}\cdot4\pi^{D/2}H^{2-D}/\Gamma(\tfrac D2-1)\cdot i/a^D=\chECd\,H^2\,i/a^D$. Dividing by $H^2$:
+\end{itemize}
+\begin{equation}
+0=\frac{\square}{H^2}\Big(\frac4y\Big)^{\frac D2-1}-\frac D2\Big(\frac D2-1\Big)\Big(\frac4y\Big)^{\frac D2-1}
+-\frac{(4\pi)^{D/2}H^{-D}}{\Gamma(\frac D2-1)}\,\frac{i}{a^D}\,\delta^D(x-x') .
+\tag{I.150}
+\end{equation}
+All three agree with the paper \chEok.
+
+% -----------------------------------------------------------------------------------
+\subsection{Eq. (I.151): adding zero}
+\tD\ Subtract $\frac{2}{(D-3)(D-4)}\times\big[\text{\eqI{150}}=0\big]$ from \eqI{149}:
+\begin{equation}
+\begin{aligned}
+\Big(\frac4y\Big)^{D-2}={}&\frac{2}{(D-3)(D-4)}\Big\{\chECd\,\frac{i\,\delta^D}{a^D}
++\frac{\square}{H^2}\Big[\Big(\frac4y\Big)^{D-3}-\Big(\frac4y\Big)^{\frac D2-1}\Big]\Big\}\\
+&-\frac{4}{D-4}\Big\{\Big(\frac4y\Big)^{D-3}-\frac{D(D-2)}{8(D-3)}\Big(\frac4y\Big)^{\frac D2-1}\Big\}.
+\end{aligned}
+\tag{I.151}
+\end{equation}
+The coefficient of $z^{D/2-1}$ in the last bracket comes from
+$\frac{2}{(D-3)(D-4)}\cdot\frac D2\big(\frac D2-1\big)=\frac{D(D-2)}{2(D-3)(D-4)}=\frac{4}{D-4}\cdot\frac{D(D-2)}{8(D-3)}$ \chEok.
+
+\paragraph{Purpose.} At $D=4$, $z^{D-3}$ and $z^{D/2-1}$ are the same function, $4/y$. Their difference is $O(D-4)$.
+Multiplied by $1/(D-4)$ it gives a finite logarithm. In this way the pole is moved entirely into the explicit delta-function term.
+
+% -----------------------------------------------------------------------------------
+\subsection{Eqs. (I.152) and (I.153)}
+\tD\ \textbf{Delta coefficient (exact in $D$).} Using $1/\Gamma(\tfrac D2-1)=(\tfrac D2-1)/\Gamma(\tfrac D2)$,
+\begin{equation}
+\frac{2\chECd}{(D-3)(D-4)}=\frac{(4\pi)^{D/2}H^{-D}}{(D-3)(D-4)\,\Gamma(\frac D2)}\,(D-2) .
+\label{eq:ch08-deltacoef}
+\end{equation}
+
+\textbf{Nonlocal parts.} Write $D=4+\epsilon$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item $\frac{2}{(1+\epsilon)\epsilon}\big[z^{1+\epsilon}-z^{1+\epsilon/2}\big]\to z\ln z=-\frac4y\ln\frac y4$.
+\item Since $\frac{D(D-2)}{8(D-3)}=1-\frac\epsilon4+O(\epsilon^2)$, we get
+$-\frac4\epsilon\{\ldots\}=-\frac4\epsilon\,z\big[\frac\epsilon2\ln z+\frac\epsilon4\big]=2\,\frac4y\ln\frac y4-\frac4y$.
+\end{itemize}
+Hence
+\begin{equation}
+\begin{aligned}
+\Big(\frac4y\Big)^{D-2}={}&\frac{iH^{-D}(4\pi)^{D/2}}{(D-3)(D-4)\Gamma(\frac D2)}\,(D-2)\,\frac{\delta^D(x-x')}{a^D}\\
+&-\frac{\square}{H^2}\Big\{\frac4y\ln\Big(\frac y4\Big)\Big\}+2\Big(\frac4y\Big)\ln\Big(\frac y4\Big)-\Big(\frac4y\Big)+O(D-4).
+\end{aligned}
+\tag{I.152}
+\end{equation}
+
+\textbf{Eq. (I.153).} Insert \eqI{152} into \eqI{148}. For the local part:
+\begin{itemize}[itemsep=0pt]
+\item the $\square/H^2$ term gives $\frac{2}{(D-2)^2}\cdot(D-2)=\frac{2}{D-2}$;
+\item the other term gives $-\frac{2}{D-2}(D-2)=-2$.
+\end{itemize}
+For the nonlocal part we take $D=4$ in the prefactors, i.e.\ $\tfrac12\frac{\square}{H^2}N-N$, where $N$ is the nonlocal part of \eqI{152}:
+\begin{equation}
+\begin{aligned}
+\Big(\frac4y\Big)^{D-1}={}&\frac{iH^{-D}(4\pi)^{D/2}}{(D-3)(D-4)\Gamma(\frac D2)}\Big\{\frac{2}{D-2}\frac{\square}{H^2}-2\Big\}\frac{\delta^D(x-x')}{a^D}
+-\frac12\frac{\square^2}{H^4}\Big\{\frac4y\ln\Big(\frac y4\Big)\Big\}\\
+&+\frac{\square}{H^2}\Big\{2\Big(\frac4y\Big)\ln\Big(\frac y4\Big)-\frac12\Big(\frac4y\Big)\Big\}-2\Big(\frac4y\Big)\ln\Big(\frac y4\Big)+\Big(\frac4y\Big)+O(D-4).
+\end{aligned}
+\tag{I.153}
+\end{equation}
+Both agree with the paper \chEok.
+
+\subsubsection{Meaning of the equalities}
+\tA\ The equalities \eqI{152}--\eqI{153} are understood as follows.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \eqI{152} and \eqI{153} are equalities of distributions. The operators $\square$ act as distributions, i.e.\ through integration by parts onto a test function.
+\item $[z^{D-3}-z^{D/2-1}]/(D-4)$ is locally integrable near $D=4$ and converges to $\tfrac12z\ln z$ in the $L^1_{\rm loc}$ sense.
+Distributional derivatives commute with this limit. Hence $\square\{\frac4y\ln\frac y4\}$ is the well-defined distributional derivative of a function that is integrable at $D=4$.
+\item The hidden poles balance. The pointwise part of $\square z^{D-3}$ contains $\tfrac12(D-3)(D-4)z^{D-2}$, and $(D-4)z^{D-2}$ gives a finite delta function as $D\to4$.
+\end{itemize}
+
+\subsubsection{Flat Euclidean analogue: an exact check in $D$}
+\label{sec:ch08-flat}
+\tC\ In Euclidean $\mathbb R^D$,
+\[
+\nabla^2r^{-2p}=2p(2p+2-D)\,r^{-2p-2},\qquad \nabla^2r^{2-D}=-(D-2)\,\Omega_D\,\delta^D,\qquad \Omega_D=\frac{2\pi^{D/2}}{\Gamma(\frac D2)} .
+\]
+With $p=D-3$ the first formula gives $\nabla^2r^{-2(D-3)}=2(D-3)(D-4)r^{-2(D-2)}$. The flat analogue of \eqI{149}--\eqI{151} is therefore
+\begin{equation}
+r^{-2(D-2)}=\frac{\nabla^2\big(r^{-2(D-3)}-r^{2-D}\big)-(D-2)\,\Omega_D\,\delta^D}{2(D-3)(D-4)} .
+\label{eq:ch08-flat}
+\end{equation}
+For the test function $\phi=e^{-r^2}$, both sides are computed exactly in terms of Gamma functions, using $\nabla^2e^{-r^2}=(4r^2-2D)e^{-r^2}$.
+They are identical for all $D$ (check (C) of Sec.~\ref{sec:ch08-t16-code}).
+The left-hand side has a simple pole at $D=4$, $\pi^2\{-2/(D-4)+\ldots\}$, and on the right-hand side this pole sits entirely in the delta-function term.
+
+% -----------------------------------------------------------------------------------
+\subsection{Table VI: local divergent contributions}
+\tD\ \textbf{Rule.} Take $c_1z^{D-1}+c_2z^{D-2}$ in the units of Table~IV and keep the local parts of \eqI{152}--\eqI{153}. The overall factor becomes
+\begin{equation*}
+\frac{\kappa^2H^{2D-4}\Gamma^2(\frac D2)}{(4\pi)^D}\times\frac{iH^{-D}(4\pi)^{D/2}}{(D-3)(D-4)\Gamma(\frac D2)}
+=\frac{i\kappa^2H^{D-4}}{(4\pi)^{D/2}}\,\frac{\Gamma(\frac D2)}{(D-3)(D-4)} ,
+\end{equation*}
+which is the unit of Table~VI, multiplying $\delta^D(x-x')/a^D$. The coefficient is
+\begin{equation}
+\text{Table VI coefficient}=c_1\Big\{\frac{2}{D-2}\frac{\square}{H^2}-2\Big\}+c_2\,(D-2) .
+\label{eq:ch08-T6rule}
+\end{equation}
+First the redundant operators are eliminated using $\gamma_3=2\gamma_1+\gamma_2$ and $\epsilon_3=2\epsilon_1+\epsilon_2$:
+\[
+(c_1,c_2)_{\gamma_1}\to(c_1,c_2)_{\gamma_1}+2(c_1,c_2)_{\gamma_3},\qquad (c_1,c_2)_{\gamma_2}\to(c_1,c_2)_{\gamma_2}+(c_1,c_2)_{\gamma_3},
+\]
+and the entries of $\epsilon_3$ are zero. Since $\gamma_3=(-\frac D4,0)$ in Table~IV,
+\[
+\gamma_1:\ c_1=-\frac{D(D-2)}4-\frac D2=-\frac{D^2}{4},\qquad \gamma_2:\ c_1=\frac D4-\frac D4=0 .
+\]
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{llll}
+\toprule
+Op. & $(c_1,c_2)$ after elimination & Eq.~\eqref{eq:ch08-T6rule} & vs.\ paper \\
+\midrule
+$\alpha$ & $\big(0,\frac{D}{(D-1)(D-2)^2}\big)$ & $\frac{D}{(D-1)(D-2)}$ & \chEok \\
+$\beta$ & $\big(-\frac D{4(D-1)},-\frac{q}{4(D-1)(D-2)}\big)$ & $-\frac{D}{2(D-1)(D-2)}\frac{\square}{H^2}-\frac{(D+2)(D-4)}{4}$ & \chEok \\
+$\gamma_1$ & $\big(-\frac{D^2}4,-\frac q4\big)$ & $-\frac{D^2}{2(D-2)}\frac{\square}{H^2}-\frac{D^4-5D^3+16D-16}{4}$ & \chEok \\
+$\gamma_2$ & $\big(0,+\frac{q}{4(D-1)}\big)$ & $+\frac{(D-2)q}{4(D-1)}$ & \chEok\ (with corrected sign) \\
+$\delta$, $\zeta$ & $(0,0)$ & $0$ & \chEok \\
+$\epsilon_1$ & $\big(0,\frac{D^2-6D+4}{2(D-1)(D-2)}\big)$ & $\frac{D^2-6D+4}{2(D-1)}$ & \chEok \\
+$\epsilon_2$ & $\big(0,\frac{1-2D}{(D-1)(D-2)}\big)$ & $\frac{1-2D}{D-1}$ & \chEok \\
+\bottomrule
+\end{tabular}
+\caption{Table~VI derived from Table~IV, with $q\equiv D^3-3D^2-4D+8$. Units:
+$\frac{i\kappa^2H^{D-4}}{(4\pi)^{D/2}}\frac{\Gamma(D/2)}{(D-3)(D-4)}\times\frac{\delta^D(x-x')}{a^D}$.}
+\label{tab:ch08-T6}
+\end{table}
+
+Intermediate steps:
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item $\beta$: $-2c_1+(D-2)c_2=\frac{2D-q}{4(D-1)}=-\frac{(D-1)(D-4)(D+2)}{4(D-1)}$, because $D^3-3D^2-6D+8=(D-1)(D-4)(D+2)$.
+\item $\gamma_1$: $\frac{D^2}2-\frac{(D-2)q}4=-\frac{D^4-5D^3+16D-16}{4}$, using $(D-2)q=D^4-5D^3+2D^2+16D-16$.
+\end{itemize}
+
+\begin{discbox}[The $\gamma_2$ row and the sign of Table IV]
+The $\gamma_2$ row of the paper's Table~VI is $+\frac{(D-2)q}{4(D-1)}$. It follows from the value $c_2=+\frac{q}{4(D-1)}$ derived in Task~13.
+With the sign printed in Table~IV one would obtain $-\frac{(D-2)q}{4(D-1)}$.
+So the paper used the correct sign in its calculation, and the $-$ in Table~IV is only a typo.
+\end{discbox}
+
+% -----------------------------------------------------------------------------------
+\subsection{Table VII: finite nonlocal contributions at $D=4$}
+\tD\ With $x=y/4$ we have $4/y=1/x$ and $\ln(y/4)=\ln x$. At $D=4$ we compute $c_1N_{153}+c_2N_{152}$, where
+\begin{equation}
+\begin{aligned}
+N_{152}&=-\frac{\square}{H^2}\Big[\frac{\ln x}{x}\Big]+\frac{2\ln x}{x}-\frac1x,\\
+N_{153}&=-\frac12\frac{\square^2}{H^4}\Big[\frac{\ln x}{x}\Big]+\frac{\square}{H^2}\Big[\frac{2\ln x}{x}-\frac1{2x}\Big]-\frac{2\ln x}{x}+\frac1x
+\end{aligned}
+\label{eq:ch08-N}
+\end{equation}
+are the nonlocal parts of \eqI{152} and \eqI{153}.
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{lll}
+\toprule
+Op. & $(c_1,c_2)_{D=4}$ & Result $\big(\times\frac{\kappa^2H^4}{(4\pi)^4}\big)$ \\
+\midrule
+$\alpha$ & $(0,\tfrac13)$ & $\frac{\square}{H^2}\big[-\frac{\ln x}{3x}\big]+\frac{2\ln x}{3x}-\frac1{3x}$ \hfill\chEok \\
+$\beta$ & $(-\tfrac13,-\tfrac13)$ & $\frac{\square^2}{H^4}\big[\frac{\ln x}{6x}\big]+\frac{\square}{H^2}\big[-\frac{\ln x}{3x}+\frac1{6x}\big]$ (the constant part cancels) \hfill\chEok \\
+$\gamma_1$ & $(-4,-2)$ & $\frac{\square^2}{H^4}\big[\frac{2\ln x}{x}\big]+\frac{\square}{H^2}\big[-\frac{6\ln x}{x}+\frac2x\big]+\frac{4\ln x}{x}-\frac2x$ \hfill\chEok \\
+$\gamma_2$ & $(0,+\tfrac23)$ & $\frac{\square}{H^2}\big[-\frac{2\ln x}{3x}\big]+\frac{4\ln x}{3x}-\frac2{3x}$ \hfill\chEok\ (with corrected sign) \\
+$\epsilon_1$ & $(0,-\tfrac13)$ & $\frac{\square}{H^2}\big[\frac{\ln x}{3x}\big]-\frac{2\ln x}{3x}+\frac1{3x}$ \hfill\chEok \\
+$\epsilon_2$ & $(0,-\tfrac76)$ & $\frac{\square}{H^2}\big[\frac{7\ln x}{6x}\big]-\frac{7\ln x}{3x}+\frac7{6x}$ \hfill\chEok \\
+$\delta$, $\zeta$ & $(0,0)$ & $0$ \hfill\chEok \\
+\bottomrule
+\end{tabular}
+\caption{Table~VII derived from the $(c_1,c_2)$ of Table~\ref{tab:ch08-T6} (after elimination of $\gamma_3,\epsilon_3$) at $D=4$ and Eq.~\eqref{eq:ch08-N}. All rows agree with the paper.}
+\label{tab:ch08-T7}
+\end{table}
+
+\begin{discbox}[The factor $i$ in the header of Table VII]
+The paper's Table~VII header reads ``Coefficient of $\frac{i\kappa^2H^4}{(4\pi)^4}$''.
+The units of Table~IV contain no $i$, and the nonlocal parts of \eqI{152}--\eqI{153} are real.
+Physically, the 3-point contribution is a product of two $i\Delta$ functions.
+The correct unit is $\kappa^2H^4/(4\pi)^4$. This also agrees with the header of Table~X, which contains Table~VII.
+The $i$ in the header of Table~VII is a typo.
+\end{discbox}
+
+% -----------------------------------------------------------------------------------
+\subsection{Converting $a'$ into $a$: Eqs. (I.154), (I.155) and the other conversions}
+\tD\ \textbf{Kernel rule.} Consider an external operator $a^pa'^q\square^n$ acting on $a^{-D}\delta^D(x-x')$, integrated against a test function $\phi(x')$:
+\begin{equation}
+\int d^Dx'\,a^p(x)\,a^q(x')\,\square_x^n\big[a^{-D}(x)\,\delta^D(x-x')\big]\phi(x')=a^p\,\square^n\big[a^{q-D}\phi\big](x).
+\label{eq:ch08-kernel}
+\end{equation}
+Here $\square_x$ commutes with $\int dx'$. The factor $a'^q$ turns into $a^q$ through the delta function, but it ends up \emph{inside} the $\square$. The simple cases are:
+\begin{itemize}[itemsep=0pt]
+\item $\alpha=(aa')^D\square^2\ \to\ a^D\square^2$;
+\item $\gamma_1\frac{\square}{H^2}=(aa')^DH^2\square\ \to\ a^DH^2\square$;
+\item $\gamma_1\ \to\ a^DH^4$;
+\item $\gamma_2\ \to\ 2a^DH^4$;
+\item $\epsilon_1\ \to\ a^{D-2}H^2\nabla^2$;
+\item $\epsilon_2\ \to\ 2a^{D-2}H^2\nabla^2$, because $\nabla^2$ commutes with time-dependent factors.
+\end{itemize}
+
+\paragraph{Eq. (I.155).} For $\beta=(aa')^{D-1}(a^2+a'^2)H^2\square$, Eq.~\eqref{eq:ch08-kernel} gives $a^{D-1}H^2\big[a^2\square(\phi/a)+\square(a\phi)\big]$.
+With \eqI{90} and $\hat g^{\mu\nu}=a^{-2}\eta^{\mu\nu}$:
+\begin{itemize}[itemsep=0pt]
+\item $\square a=-DH^2a$ and $\hat g^{\mu\nu}\partial_\mu a\,\partial_\nu\phi=-H\partial_0\phi$;
+\item $\square(1/a)=(D-2)H^2/a$ and $\hat g^{\mu\nu}\partial_\mu(1/a)\,\partial_\nu\phi=H\partial_0\phi/a^2$.
+\end{itemize}
+Hence
+\begin{equation*}
+\square(a\phi)=a\square\phi-DH^2a\phi-2H\partial_0\phi,\qquad
+\square\Big(\frac\phi a\Big)=\frac{\square\phi}{a}+(D-2)H^2\frac\phi a+\frac{2H\partial_0\phi}{a^2},
+\end{equation*}
+and
+\begin{align}
+&a^2\square(\phi/a)+\square(a\phi)=2a\square\phi-2H^2a\phi \notag\\
+&\Longrightarrow\quad
+(aa')^{D-1}(a^2+a'^2)H^2\square\big[a^{-D}\delta^D\big]=2a^D\big(H^2\square-H^4\big)\delta^D .
+\tag{I.155}
+\end{align}
+The $\partial_0\phi$ terms cancel \chEok.
+
+\paragraph{Eq. (I.154).} The same two rules are applied twice, together with the commutator
+\begin{equation*}
+[\partial_0,\square]=-\frac{2H}{a}\big(-\partial_0^2+\nabla^2\big)+(D-2)H^2\partial_0 .
+\end{equation*}
+The result is
+\begin{equation}
+\begin{aligned}
+(aa')^{D-1}(a^2+a'^2)\square^2\big[a^{-D}\delta^D\big]=\big[&2a^D\square^2-12H^2a^D\square+8a^{D-2}H^2\nabla^2\\
+&+2(D^2-2D+2)H^4a^D\big]\delta^D .
+\end{aligned}
+\tag{I.154}
+\end{equation}
+It was verified symbolically for general $D$ (check (F)). The term $8a^{D-2}H^2\nabla^2$ has the form of the de Sitter-breaking counterterm \eqI{145}.
+Both identities agree with the paper \chEok.
+
+% -----------------------------------------------------------------------------------
+\subsection{Table VIII}
+\tD\ Each row of Table~VI is converted with the rules of the previous subsection. The units are those of Table~VI, $\frac{i\kappa^2H^{D-4}}{(4\pi)^{D/2}}\frac{\Gamma(D/2)}{(D-3)(D-4)}$.
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{lcccc}
+\toprule
+Source & $a^D\square^2\delta^D$ & $a^DH^2\square\delta^D$ & $a^{D-2}H^2\nabla^2\delta^D$ & \\
+\midrule
+$\alpha$ & $\frac{D}{(D-1)(D-2)}$ & $0$ & $0$ & \chEok \\
+$\beta\frac{\square}{H^2}$ [\eqI{154}$\times\big(-\frac{D}{2(D-1)(D-2)}\big)$] & $-\frac{D}{(D-1)(D-2)}$ & $\frac{6D}{(D-1)(D-2)}$ & $-\frac{4D}{(D-1)(D-2)}$ & \chEok \\
+$\beta$ [\eqI{155}$\times\big(-\frac{(D+2)(D-4)}4\big)$] & $0$ & $-\frac{(D+2)(D-4)}{2}$ & $0$ & \chEok \\
+$\gamma_1\frac{\square}{H^2}$ & $0$ & $-\frac{D^2}{2(D-2)}$ & $0$ & \chEok \\
+$\epsilon_1$ & $0$ & $0$ & $\frac{D^2-6D+4}{2(D-1)}$ & \chEok \\
+$\epsilon_2$ ($\times2$) & $0$ & $0$ & $\frac{2-4D}{D-1}$ & \chEok \\
+\midrule
+\textbf{Total} & $\mathbf{0}$ & $\frac{(D-4)(-D^3+D-4)}{2(D-1)(D-2)}$ & $\frac{D^3-16D^2+28D-16}{2(D-1)(D-2)}$ & \chEok \\
+\bottomrule
+\end{tabular}
+\caption{Table~VIII, derived. All rows and totals agree with the paper.}
+\label{tab:ch08-T8}
+\end{table}
+
+Intermediate steps for the totals, with common denominator $2(D-1)(D-2)$:
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item Second column: the numerator is $12D-(D+2)(D-4)(D-1)(D-2)-D^2(D-1)=-D^4+4D^3+D^2-8D+16=(D-4)(-D^3+D-4)$.
+\item Third column: $-8D+(D^2-6D+4)(D-2)+2(2-4D)(D-2)=D^3-16D^2+28D-16$.
+\end{itemize}
+
+\subsubsection{Why the $a^D\square^2$ total vanishes: an independent argument}
+\label{sec:ch08-flatbox2}
+\tC\ The paper justifies this by saying that ``this counterterm happens to be zero in flat space''. We checked this independently.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item For $H\to0$ (with the comoving time held fixed), the only $H$-independent column is $a^D\square^2$. Its coefficient must therefore equal the divergence of the flat-space one-loop self-energy.
+\item In flat space the 4-point contribution vanishes, because the coincident massless propagator vanishes in dimensional regularization.
+\item The 3-point contribution has the vertex $V^{\alpha\beta}\propto p^{(\alpha}k^{\beta)}-\frac12\eta^{\alpha\beta}p\cdot k$ (Table~I) and the de Donder numerator tensor
+$P=\frac12(\eta\eta+\eta\eta)-\frac{1}{D-2}\eta\eta$. Then
+\begin{equation}
+V\!\cdot\!P\!\cdot\!V=\Big[\tfrac12\big(p^2k^2+(p\cdot k)^2\big)-(p\cdot k)^2+\tfrac D4(p\cdot k)^2\Big]-\frac{(1-\frac D2)^2(p\cdot k)^2}{D-2}=\tfrac12\,p^2k^2 .
+\label{eq:ch08-VPV}
+\end{equation}
+\item The self-energy is therefore proportional to $\frac12p^2\!\int d^Dk\,\frac{k^2}{k^2(p-k)^2}=\frac12p^2\!\int\frac{d^Dk}{(p-k)^2}=0$, a scaleless integral.
+\end{itemize}
+The flat-space divergence is zero, so the $a^D\square^2$ total must vanish \chEok. Eq.~\eqref{eq:ch08-VPV} was verified for $D=4,5,6$ (check (I)).
+
+% -----------------------------------------------------------------------------------
+\subsection{Table IX and Eqs. (I.156)--(I.159)}
+\tD\ The $a^DH^4\delta^D$ terms collected from Table~VI are listed in Table~\ref{tab:ch08-T9}, in the units of Table~VI.
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{llll}
+\toprule
+Source & Coefficient of $a^DH^4\delta^D$ & Origin & \\
+\midrule
+$\beta\frac{\square}{H^2}$ & $-\frac{D(D^2-2D+2)}{(D-1)(D-2)}$ & $H^4$ term of \eqI{154} $\times\big(-\frac{D}{2(D-1)(D-2)}\big)$ & \chEok \\
+$\beta$ & $\frac{(D+2)(D-4)}{2}$ & $-2H^4$ term of \eqI{155} & \chEok \\
+$\gamma_1$ & $-\frac{D^4-5D^3+16D-16}{4}$ & $\times1$ & \chEok \\
+$\gamma_2$ & $\frac{(D-2)q}{2(D-1)}$ & $\times2$ & \chEok \\
+\midrule
+\textbf{Total} & $\frac{(D-4)(-D^4+5D^3-16D+16)}{4(D-2)}$ & factor $(D-4)$ $\Rightarrow$ finite & \chEok \\
+\bottomrule
+\end{tabular}
+\caption{Table~IX, derived; $q\equiv D^3-3D^2-4D+8$. All rows and the total agree with the paper.}
+\label{tab:ch08-T9}
+\end{table}
+
+\begin{discbox}[Shift-symmetry check of the $\gamma_2$ sign]
+The symmetry $\phi\to\phi+\text{const}$ of the bare Lagrangian forbids a counterterm of the form $H^4a^D\phi^2$.
+Therefore the total of Table~IX must have no pole at $D=4$. The $D=4$ values of the four rows are
+\[
+-\tfrac{20}{3}+0+4+\tfrac83=0\quad\chEok .
+\]
+With the $\gamma_2$ sign printed in Table~IV the sum would be $-\tfrac{20}3+4-\tfrac83=-\tfrac{16}3\neq0$, a forbidden divergence.
+This confirms the $\gamma_2$ sign \emph{independently} of the direct calculation of Task~13.
+\end{discbox}
+
+\paragraph{Eqs. (I.157)--(I.158).} Including the factor $1/((D-3)(D-4))$ of the unit:
+\begin{equation}
+\begin{aligned}
+\text{Table IX}&=\frac{i\kappa^2H^{D-4}}{(4\pi)^{D/2}}\,\frac{(-D^4+5D^3-16D+16)\,\Gamma(\frac D2)}{4(D-2)(D-3)}\,a^DH^4\delta^D(x-x')\\
+&\xrightarrow{D=4}\;\frac{i\kappa^2H^4}{16\pi^2}\cdot\frac{16}{8}\,a^4\delta^4(x-x')=\frac{\kappa^2H^4}{8\pi^2}\,ia^4\delta^4(x-x') .
+\end{aligned}
+\tag{I.157--158}
+\end{equation}
+
+\paragraph{Eq. (I.156).} Combine $a^D\square\,i\Delta_A=i\delta^D$, $i\Delta_A=A+k\ln(aa')$ and $\square\ln a=-(D-1)H^2$ (Task~5). This gives $a^D[\square A-(D-1)kH^2]=i\delta^D$.
+The bracket vanishes for $x\neq x'$ and is supported at coincidence. Multiplying it by $a^D$ is therefore equivalent to multiplying it by $(aa')^D$:
+\begin{equation}
+ia^D\delta^D(x-x')=(aa')^D\big\{\square A(y)-(D-1)kH^2\big\}.
+\tag{I.156}
+\end{equation}
+Here $\square A$ is understood in the distributional sense.
+
+\paragraph{Eq. (I.159).} At $D=4$, $k=H^2/8\pi^2$ and $A=\frac{H^2}{16\pi^2}\big\{\frac4y-2\ln\frac y4-1\big\}$. The constant drops out under $\square$. This gives
+\begin{equation}
+\frac{\kappa^2H^4}{8\pi^2}\,ia^4\delta^4(x-x')=\frac{\kappa^2H^4}{(4\pi)^4}\Big\{(aa')^4H^2\square\Big[2\times\frac4y-4\ln\Big(\frac y4\Big)\Big]-(aa')^4H^4\times12\Big\}.
+\tag{I.159}
+\end{equation}
+Coefficient check: $\frac{H^4}{8\pi^2}\cdot\frac{H^2}{16\pi^2}=\frac{2H^6}{(4\pi)^4}$ and $\frac{H^4}{8\pi^2}\cdot3kH^2=\frac{12H^8}{(4\pi)^4}$ \chEok.
+In this way a finite local term is rewritten in nonlocal form.
+
+% -----------------------------------------------------------------------------------
+\subsection{Sign convention}
+\tA\ Tables~VI--IX carry the sign of the printed \eqI{47}--\eqI{49}. In the definition sign their values are $-1$ times these.
+The counterterm coefficients $\alpha_i$ change sign by the same amount. The structure, the consistency checks and the finiteness are unchanged.
+
+% -----------------------------------------------------------------------------------
+\subsection{Status of the distributional concern of Tasks 11--13}
+\label{sec:ch08-distr}
+\tA\ Task~13 (Sec.~\ref{ch6:physics}, paragraph ``Distributional content of the external operators'') noted a possible problem. The function multiplying $\alpha$, $I^2[(A+\Delta C)A'']$, contains a component $c_F\,A_{\rm lead}$, and $c_F$ is the same as the local coefficient of \eqI{54}$+$\eqI{58}.
+If the outer $\square$ is applied as a distribution, this component could produce \eqI{54}$+$\eqI{58} a second time.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \textbf{Finding of this task.} In the paper, divergent local terms come only from Table~IV, via \eqI{152}--\eqI{153}.
+In the finite functions of Table~V the $c_F A_{\rm lead}$ component has combined with the pole-carrying $z^{D-3}$ terms into finite logarithms. This is the $L^1_{\rm loc}$ mechanism described above.
+From these functions the outer operators produce only finite local terms.
+\item \textbf{Physical consequence.} The possible double counting is a constant $c=c(D)$ times $(a^D\square-a^{D-2}\nabla^2)\delta^D$.
+It contains no $\ln a$, because the logarithm has been split off in the normal contributions.
+This is exactly the form of the counterterms \eqI{131} and \eqI{145}, with the same powers $a^D$ and $a^{D-2}$, including both the pole and the finite part of $c(D)$.
+It is therefore absorbed completely into $\alpha_2$ and $\alpha_3$, and it changes the renormalized result \eqI{167} only through the arbitrary $\Delta\alpha_i$.
+\item \textbf{Open general point.} One would also need to show that the outer-operator reduction of the Appendix, Eqs.~(A35)--(A38), produces no \emph{other} local differences at coincidence, for example a finite $H^4a^D\delta^D$.
+That requires a full distributional analysis, beyond pointwise checks.
+The two consistency checks passed here, the vanishing $a^D\square^2$ total and the finiteness of Table~IX, give partial support.
+\end{itemize}
+
+% -----------------------------------------------------------------------------------
+\subsection{Comparison with the paper}
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lll}
+\toprule
+Item & Result & \\
+\midrule
+\eqI{146}--\eqI{150} & derived & \chEok \\
+\eqI{151}--\eqI{153} & derived; flat analogue checked exactly in $D$ & \chEok \\
+Table VI & exact agreement (with the corrected $\gamma_2$ sign) & \chEok \\
+Table VII & exact agreement; the $i$ in the header is a typo & \chEok\ (note) \\
+\eqI{154}--\eqI{155} & derived & \chEok \\
+Table VIII & exact agreement; $a^D\square^2$ total $=0$ (independent argument) & \chEok \\
+Table IX, \eqI{156}--\eqI{159} & exact agreement; finiteness confirms the $\gamma_2$ sign & \chEok \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Accumulated findings (Tasks 2--16), as recorded in the Task~16 report.}
+Identifiers in parentheses (S$n$, B$n$, C$n$) refer to the classified list of findings in Chapter~\ref{ch:summary}.
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.46\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}}
+\toprule
+Location & Finding & Effect \\
+\midrule
+\eqI{7}, \eqI{14}, Table~II, \eqI{39}, ``4th term'', $H^2$ in \eqI{89}, five places in the Appendix, two missing terms in \eqI{128} (C3--C14) & typo / omission & none \\
+\textbf{Table IV, $\gamma_2$} (C15) & typo only; Tables VI--IX use the correct sign (this task) & \textbf{none} (open point closed) \\
+\textbf{Table VII header} (C16) & extra $i$ & none \\
+\eqI{40}, \eqI{59} (B1, B2) & finite local errors & absorbable into $\Delta\alpha_{2,3}$ \\
+Table V, $72\gamma_2$ (S3) & analytic term & drops out of the retarded kernel \\
+4-point and 3-point contributions both reversed (S1) & overall sign & bare $M^2=-$(definition) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% -----------------------------------------------------------------------------------
+\subsection{Code checks}
+\label{sec:ch08-t16-code}
+\tC\ All checks are in the script \texttt{check\_146\_IX.py} of the folder \texttt{code/08\_renormalization\_tableX/} (SymPy, exact arithmetic, about 2\,s). They were actually run.
+The re-run output is identical to the original output in the Task~16 log.
+\begin{itemize}[leftmargin=*,itemsep=3pt]
+\item[(A)] Pointwise parts of \eqI{148}--\eqI{150} with symbolic $D$: \texttt{True}.
+Residues: $y\cdot y^{D/2-2}(4/y)^{D/2-1}=2^{D-2}$ (constant, so the residue is $4^{D/2-1}$), while $y\cdot y^{D/2-2}(4/y)^{D-2}=2^{2D-4}y^{1-D/2}$ and $y\cdot y^{D/2-2}(4/y)^{D-3}=2^{2D-6}y^{2-D/2}$ depend on $y$ (no residue).
+The delta coefficient of \eqI{147} for $(4/y)^{D/2-1}$, divided by $H^2$, equals $\chECd$, consistent with $a^D\square A_{\rm lead}=i\delta^D$: \texttt{True}.
+\item[(B)] \eqI{151} $=$ \eqI{149} $-\frac{2}{(D-3)(D-4)}\times[\eqI{150}=0]$: \texttt{True}. The delta coefficient Eq.~\eqref{eq:ch08-deltacoef}: \texttt{True}.
+The $D\to4$ expansions give $z\ln z$ and $z(-2\ln z-1)$, i.e.\ $-\frac4y\ln\frac y4$ and $2\frac4y\ln\frac y4-\frac4y$.
+In \eqI{153} the coefficients of $\square N$ and $N$ at $D=4$ are $\tfrac12$ and $-1$.
+\item[(C)] Flat Euclidean analogue Eq.~\eqref{eq:ch08-flat} with $\phi=e^{-r^2}$, exact in $D$ (Gamma functions): \texttt{True} for all $D$.
+Pole structure: $\langle r^{-2(D-2)},\phi\rangle=\pi^2\big[(D-4)(1-2\gamma_E-\ln\pi)-2\big]/(D-4)$, a simple pole at $D=4$.
+\emph{Record:} the first version of this check used numerical quadrature at $D=3.5,\,3.8,\,3.95$. It agreed at $D=3.5$ (difference $2\times10^{-16}$) but lost accuracy as $D\to4$ (differences $1.3\times10^{-5}$ and $7.5$), because the integrand approaches non-integrability.
+It was replaced by the exact evaluation above, which is the check the report relies on.
+\item[(D)] The eight rows of Table~VI for general $D$ agree with the paper (\texttt{True} for each row).
+With the printed Table~IV sign, the $\gamma_2$ row would be $-(D-2)(D^3-3D^2-4D+8)/(4(D-1))$.
+\item[(E)] All rows of Table~VII at $D=4$ agree with the paper (\texttt{True} for each row). The values $(c_1,c_2)|_{D=4}$ are as in Table~\ref{tab:ch08-T7}.
+\item[(F)] \eqI{154}, \eqI{155} and the six simple conversions, acting on an arbitrary test function $\phi(\eta,\vec x)$ with $a=-1/(H\eta)$ for general $D$: all \texttt{True}.
+\item[(G)] Rows and totals of Tables~VIII and IX. The totals in the four columns $a^D\square^2$, $a^DH^2\square$, $a^{D-2}H^2\nabla^2$, $a^DH^4$ are
+\[
+\Big[0,\ -\frac{(D-4)(D^3-D+4)}{2(D-2)(D-1)},\ \frac{D^3-16D^2+28D-16}{2(D-2)(D-1)},\ -\frac{(D-4)(D^4-5D^3+16D-16)}{4(D-2)}\Big],
+\]
+all matching the paper. With the printed $\gamma_2$ sign the Table~IX total would be
+\[
+-\frac{D^6-6D^5+D^4+44D^3-48D^2-48D+64}{4(D-2)(D-1)},
+\]
+which equals $-16/3$ at $D=4$.
+\item[(H)] $\square\ln a=-(D-1)H^2$: \texttt{True}. The \eqI{157} coefficient, in units of $\Gamma(\frac D2)\,i\kappa^2H^{D-4}/(4\pi)^{D/2}$, is $-\frac{D^4-5D^3+16D-16}{4(D-3)(D-2)}$; including the factor $\Gamma(\frac D2)/(4\pi)^{D/2}$, its $D\to4$ limit is $1/(8\pi^2)$, as in \eqI{158}.
+Both parts of \eqI{159} check: \texttt{True}.
+\item[(I)] $V\!\cdot\!P\!\cdot\!V-\frac12p^2k^2=0$ for $D=4,5,6$, with random rational momenta.
+\end{itemize}
+\emph{Script history (from the log).} Two intermediate runs failed because of three script errors, all fixed before the final run.
+The first run stopped at check (E) with the first error below; the second run (after the numerical version of (C) had been replaced by the exact one) gave the spurious results caused by the other two:
+\begin{itemize}[itemsep=0pt]
+\item an integer had no \texttt{.subs} method;
+\item $H$ was not declared positive, so $(-1/(H\eta))^D$ was not simplified. This gave spurious \texttt{False} for (F) and $\square\ln a$;
+\item a coefficient was read from a factored instead of an expanded expression, which gave spurious mismatches of the Table~VIII/IX totals.
+\end{itemize}
+The final output is the one quoted above.
+
+% -----------------------------------------------------------------------------------
+\subsection{Calculation record}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \textbf{Derived:}
+\begin{itemize}[itemsep=0pt]
+\item \eqI{146}; \eqI{147} [Eq.~\eqref{eq:ch08-boxlead}]; \eqI{148}--\eqI{150} [Eq.~\eqref{eq:ch08-Lzq}]; \eqI{151}; \eqI{152}--\eqI{153};
+\item the flat analogue [Eq.~\eqref{eq:ch08-flat}]; Table~VI [Eq.~\eqref{eq:ch08-T6rule}]; Table~VII;
+\item the kernel rule [Eq.~\eqref{eq:ch08-kernel}], \eqI{154}, \eqI{155}; Table~VIII; the flat-space numerator [Eq.~\eqref{eq:ch08-VPV}];
+\item Table~IX and \eqI{156}--\eqI{159}.
+\end{itemize}
+\item \textbf{Checks passed:} (A)--(I) of Sec.~\ref{sec:ch08-t16-code}, actually run.
+\item \textbf{Discrepancies:} none, except the extra $i$ in the header of Table~VII.
+\item \textbf{Closed point:} the $\gamma_2$ sign. Tables~VI--IX use the correct sign, and shift symmetry confirms it independently.
+\item \textbf{Partially closed point:} the distributional concern (Sec.~\ref{sec:ch08-distr}).
+\end{itemize}
+
+% ===================================================================================
+\section{Task 17: the renormalized self-mass, Eqs. (I.160)--(I.167) and Table X}
+\label{sec:ch08-t17}
+
+\subsection{Goal and inputs}
+
+\paragraph{Goal.} Derive \eqI{160}--\eqI{167} and Table~X of \PI\ (printed page 124005-14: Table~X in the left column, \eqI{160}--\eqI{167} in the right column).
+Check Table~X globally and pointwise, and state the result in the definition sign.
+
+\paragraph{Notation.}
+\[
+x\equiv\frac y4,\qquad k\equiv\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(\frac D2)},\qquad \pihat\equiv-\pi\cot\Big(\frac{\pi D}{2}\Big),\qquad
+h\equiv\frac{H^2}{16\pi^2},\qquad L\equiv\ln(aa') .
+\]
+In particular $\kappa^2H^4/(4\pi)^4=\kappa^2h^2$. The external operators are written in their $D=4$ form, e.g.\ $\alpha=(aa')^4\square^2$ and $\gamma_2=(aa')^3(a^2+a'^2)H^4$.
+\emph{Sign:} the paper's convention unless stated otherwise. Definition-sign values are $-1$ times these (Sec.~\ref{sec:ch08-defsign}).
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item[(G1)] Table~III \tD\ (Task~12), Table~V \tP\ (audited in Task~13), Table~VII \tD\ (Task~16) and \eqI{159} \tD\ (Task~16), all in the paper's convention.
+Tables~III and V are listed in Table~\ref{tab:ch08-inputs17}.
+\item[(G2)] Local parts: \eqI{44} \tD\ (Task~5), \eqI{59} \tD\ (Task~9), the local part of \eqI{67} \tD\ (Task~10) and Table~VIII \tD\ (Task~16).
+\item[(G3)] The counterterm vertices \eqI{130}, \eqI{131}, \eqI{145} \tD\ (Tasks~14--15):
+\[
+i\alpha_1\kappa^2a^D\square^2\delta^D,\qquad i\alpha_2\kappa^2H^2a^D\square\delta^D,\qquad i\alpha_3\kappa^2H^2a^{D-2}\nabla^2\delta^D .
+\]
+\end{itemize}
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lll}
+\toprule
+& Operator & Coefficient $\big(\times\frac{\kappa^2H^4}{(4\pi)^4}\big)$ \\
+\midrule
+Table III & $(aa')^3H^2\nabla^2$ & $-\frac{12}{x}+24\ln x$ \\
+& $(aa')^2(a+a')^2H^2\nabla^2\ (=\epsilon_3)$ & $\frac4x$ \\
+& $(aa')^2\nabla^4\ (=\zeta)$ & $8\ln x-16x\ln x$ \\
+\midrule
+Table V & $\alpha$ & $\frac{6\ln x}{x}+\frac{13}{x}-6\ln^2x-18\ln x$ \\
+& $\beta$ & $\frac5x-18\ln x$ \\
+& $\gamma_1$ & $\frac{30}{x}-108\ln x-36$ \\
+& $\gamma_2$ & $-\frac5x-18$ \\
+& $\gamma_3$ & $-\frac5x-36$ \\
+& $\delta$ & $-\frac{4\ln x}{x}-\frac{49}{6x}+4\ln^2x+10\ln x+12x\ln x$ \\
+& $\epsilon_1$ & $-\frac{26}{3x}+60\ln x-120x\ln x+72x$ \\
+& $\epsilon_2$ & $\frac{13}{6x}-12\ln x+12x\ln x$ \\
+& $\epsilon_3$ & $-\frac{11}{6x}+36x\ln x+12x$ \\
+& $\zeta$ & $\frac{10}{3}\ln x-24x\ln x+24x^2\ln x-36x^2$ \\
+\bottomrule
+\end{tabular}
+\caption{Inputs (G1) in the paper's convention. Table~III is as printed; Task~12 derived the same entries with the opposite overall sign, inherited from \eqI{47}.
+Table~V is as printed. Its non-analytic terms were confirmed in Task~13, which also found the global $72\gamma_2$ inconsistency.}
+\label{tab:ch08-inputs17}
+\end{table}
+
+% -----------------------------------------------------------------------------------
+\subsection{Structure of the sum}
+\tD\ We have $-iM^2_{\rm reg}=-iM^2_{\rm 4pt}+(-iM^2_{\rm 3pt})$. The 3-point contribution splits into local, logarithm and normal parts (Task~8). The pieces go to the following places:
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}>{\raggedright\arraybackslash}p{0.32\textwidth}}
+\toprule
+Part & Local divergent/finite ($\to\beta_i$) & Finite nonlocal ($\to$ Table X) \\
+\midrule
+4-point \eqI{44} & terms with $\pihat$; the $\mp2$ coming from \eqI{40}; $3L$, $-4L$, $9H^2$ & --- \\
+3-point local \eqI{59} & terms with $\pihat$ and finite constants & --- \\
+3-point logarithm \eqI{67} & local terms with $L$ and $9H^2$ & $2H(aa')^2(a\partial_0+a'\partial'_0)\nabla^2A$ $\to$ Table III \\
+3-point normal, Table IV & Table VI $\to$ VIII; Table IX $\to$ \eqI{159} & Table VII; \eqI{159} \\
+3-point normal, Table V & --- & Table V \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Local $L$ and $9H^2$ terms.} Task~10 (Eq.~\eqref{eq:ch04:cancel}) showed that the terms $3L\,a^D\square$, $-4L\,a^{D-2}\nabla^2$ and $9H^2a^D$ of \eqI{44} cancel against the local part of \eqI{67}, for general $D$, up to an $O(D-4)$ remainder.
+In the paper both carry the opposite sign, so the cancellation holds in the paper as well. Only structures of counterterm form remain:
+\begin{equation}
+-iM^2_{\rm reg}(x;x')=i\kappa^2a^D\Big(\beta_1\square^2+\beta_2H^2\square+\beta_3H^2\frac{\nabla^2}{a^2}\Big)\delta^D(x-x')+\text{Table X}+O(D-4).
+\tag{I.160$'$}
+\end{equation}
+
+\begin{discbox}[The factor $H^2$ in (I.160) and (I.167)]
+\PI\ prints
+\[
+-iM^2_{\rm reg}(x;x')=i\kappa^2a^D\Big(\beta_1\square^2+\beta_2\square+\beta_3\frac{\nabla^2}{a^2}\Big)\delta^D(x-x')+\text{Table 10}+O(D-4).
+\]
+However, $\beta_{2,3}$ as given in \eqI{162} and \eqI{164} have the same dimension as $\beta_1$, namely $H^{D-4}/(4\pi)^{D/2}$.
+In addition, the counterterms \eqI{131} and \eqI{145} explicitly carry $H^2$, and \eqI{166} requires $\alpha_i=-\beta_i$.
+The correct form is therefore $\beta_2H^2\square+\beta_3H^2\nabla^2/a^2$. The same applies to \eqI{167} (typo).
+\end{discbox}
+
+% -----------------------------------------------------------------------------------
+\subsection{$\beta_1$, $\beta_2$, $\beta_3$: Eqs. (I.161)--(I.165)}
+\tD\ \textbf{(I.161).} The $\square^2$ structure appears only in the first column of Table~VIII, and its total is $0$. The flat-space reason is given in Sec.~\ref{sec:ch08-flatbox2}. Hence
+\begin{equation}
+\beta_1=0 .
+\tag{I.161}
+\end{equation}
+
+\textbf{(I.162).} We need the coefficient of $i\kappa^2H^2a^D\square\delta^D$ in the paper's convention. Below, $k$ enters divided by $H^2$, i.e.\ through the factor $\Gamma(D-1)/\Gamma(\frac D2)$ once $H^{D-4}/(4\pi)^{D/2}$ is pulled out. The contributions are:
+\begin{itemize}[itemsep=1pt]
+\item \eqI{44}: $k\big[\tfrac14D(D-1)\pihat-2\big]$;
+\item \eqI{59}: $k\big[-\tfrac{D-1}{D-3}\pihat+2\big]$;
+\item Table~VIII: $\frac{H^{D-4}}{(4\pi)^{D/2}}\frac{\Gamma(\frac D2)}{(D-3)(D-4)}\cdot\frac{(D-4)(-D^3+D-4)}{2(D-1)(D-2)}$.
+\end{itemize}
+The $\pihat$ terms combine to $k\pihat(D-1)\big[\tfrac D4-\tfrac1{D-3}\big]=k\pihat\frac{(D-1)(D-4)(D+1)}{4(D-3)}$, and the constants $\mp2$ cancel.
+With $(D-1)\Gamma(D-1)=\Gamma(D)$ and $\Gamma(\tfrac D2)/(D-2)=\tfrac12\Gamma(\tfrac D2-1)$:
+\begin{equation}
+\beta_2=\frac{H^{D-4}}{(4\pi)^{D/2}}\Big\{\frac{(-D^3+D-4)\,\Gamma(\frac D2-1)}{4(D-1)(D-3)}-\frac{(D+1)(D-4)\,\Gamma(D)\,\pi\cot(\frac\pi2D)}{4(D-3)\,\Gamma(\frac D2)}\Big\}.
+\tag{I.162}
+\end{equation}
+As $D\to4$, $(D-4)\pi\cot(\tfrac\pi2D)\to2$. The second term becomes $-\tfrac{5\cdot6\cdot2}{4}=-15$ and the first $-\tfrac{64}{12}=-\tfrac{16}3$. In total:
+\begin{equation}
+\beta_2=\frac{H^{D-4}}{(4\pi)^{D/2}}\Big\{-\frac{61}3+O(D-4)\Big\}\qquad\text{(no pole)}.
+\tag{I.163}
+\end{equation}
+
+\textbf{(I.164).} For the coefficient of $i\kappa^2H^2a^{D-2}\nabla^2\delta^D$ the contributions are:
+\begin{itemize}[itemsep=1pt]
+\item \eqI{44}: $k\big[-D\pihat+2\big]$;
+\item \eqI{59}: $k\big[\tfrac{D-1}{D-3}\pihat-\tfrac72\big]$;
+\item Table~VIII: $\frac{H^{D-4}}{(4\pi)^{D/2}}\frac{\Gamma(\frac D2)\,(D^3-16D^2+28D-16)}{2(D-1)(D-2)(D-3)(D-4)}$.
+\end{itemize}
+The $\pihat$ terms combine to $-k\pihat\frac{D^2-4D+1}{D-3}$.
+The constants give $k(2-\tfrac72)=-\tfrac32k\to-3$, since $k\to2H^{D-2}/(4\pi)^{D/2}$ at $D=4$.
+The paper writes this constant by its $D=4$ value. That is legitimate, because it is not multiplied by a pole. The result is
+\begin{equation}
+\beta_3=\frac{H^{D-4}}{(4\pi)^{D/2}}\Big\{\frac{(D^3-16D^2+28D-16)\,\Gamma(\frac D2)}{2(D-1)(D-2)(D-3)(D-4)}+\frac{(D^2-4D+1)\,\Gamma(D-1)\,\pi\cot(\frac\pi2D)}{(D-3)\,\Gamma(\frac D2)}-3\Big\},
+\tag{I.164}
+\end{equation}
+\begin{equation}
+\beta_3=\frac{H^{D-4}}{(4\pi)^{D/2}}\Big\{-\frac{4}{D-4}+\frac{58}{3}+2\gamma+O(D-4)\Big\}.
+\tag{I.165}
+\end{equation}
+The Euler constant $\gamma$ comes from the expansions of $\Gamma(\tfrac D2)$ and $\Gamma(D-1)$ around $D=4$, with $\psi(2)=1-\gamma$ and $\psi(3)=\tfrac32-\gamma$.
+\eqI{162}--\eqI{165} were verified symbolically (check (C) of Sec.~\ref{sec:ch08-t17-code}), and all agree with the paper \chEok.
+
+\paragraph{Structure.} $\beta_1=0$ and $\beta_2$ is finite. The only divergence is in the de Sitter-breaking coefficient $\beta_3$.
+It multiplies $H^2\nabla^2/a^2$, so it disappears in the flat-space limit.
+This agrees with the residual-symmetry analysis of Tasks~14--15: the only non-invariant counterterm needed to absorb the divergence is \eqI{145}.
+
+% -----------------------------------------------------------------------------------
+\subsection{Effect of the earlier corrections on the $\beta$'s}
+\label{sec:ch08-betacorr}
+\tD\ Two corrections found in earlier tasks change the local coefficients.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \textbf{The error in \eqI{40}} (Tasks~4--5). With the correct \eqI{40}, \eqI{44} contains no $\mp2$.
+Therefore $\beta_2$ receives $+2\cdot\frac{k}{H^{D-2}/(4\pi)^{D/2}}=+4$ and $\beta_3$ receives $-4$.
+\item \textbf{The arithmetic of \eqI{59}} (Task~9). The constant of the $\nabla^2$ term is $-\tfrac52$, not $-\tfrac72$. This adds $+2$ to $\beta_3$.
+\end{itemize}
+\begin{equation}
+\text{paper's convention, corrected:}\quad \beta_2=-\frac{49}3,\qquad \beta_3=-\frac4{D-4}+\frac{52}3+2\gamma\qquad\Big(\times\frac{H^{D-4}}{(4\pi)^{D/2}}\Big).
+\label{eq:ch08-betacorr}
+\end{equation}
+Only the finite parts change, and they are absorbed into $\Delta\alpha_{2,3}$. The pole is unchanged.
+
+% -----------------------------------------------------------------------------------
+\subsection{Assembly of Table X}
+\tD\ \textbf{Rule.} First the redundant operators are eliminated with $\gamma_3=2\gamma_1+\gamma_2$ and $\epsilon_3=2\epsilon_1+\epsilon_2$. The row $(aa')^2(a+a')^2H^2\nabla^2$ of Table~III is $\epsilon_3$.
+In Table~VII, the combined operators $\mathcal O\times(\square/H^2)^n$ are read at $D=4$. For example:
+\begin{itemize}[itemsep=0pt]
+\item $\alpha\,\square/H^2=(aa')^4\square^3/H^2$;
+\item $\beta\,\square/H^2=(aa')^3(a^2+a'^2)\square^2$;
+\item $\gamma_1\square/H^2=(aa')^4H^2\square$.
+\end{itemize}
+Table~\ref{tab:ch08-TXassembly} lists the result row by row. ``VII $\alpha$'' denotes the $\alpha$ row of Table~VII, ``V $\alpha$'' the $\alpha$ row of Table~V, and so on.
+All entries are in the units $\kappa^2H^4/(4\pi)^4$.
+
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{longtable}{l>{\raggedright\arraybackslash}p{0.28\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.075\textwidth}}
+\caption{Assembly of Table~X from Tables~III, V, VII and \eqI{159} (paper's convention). The last column compares with the printed Table~X.}\label{tab:ch08-TXassembly}\\
+\toprule
+Row of Table X & Contributions & Total & \\
+\midrule
+\endfirsthead
+\toprule
+Row of Table X & Contributions & Total & \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+$(aa')^4\square^3/H^2$ & VII $\alpha$ & $-\frac{\ln x}{3x}$ & \chEok \\
+$(aa')^4\square^2$ & VII $\alpha$: $\frac{2\ln x}{3x}-\frac1{3x}$; VII $\gamma_1\frac{\square^2}{H^4}$: $\frac{2\ln x}{x}$; V $\alpha$ & $\frac{26\ln x}{3x}+\frac{38}{3x}-6\ln^2x-18\ln x$ & \chEok \\
+$(aa')^4H^2\square$ & VII $\gamma_1\frac{\square}{H^2}$; \eqI{159}: $\frac2x-4\ln x$ & $-\frac{6\ln x}{x}+\frac4x-4\ln x$ & \chEok \\
+$(aa')^4H^4$ & VII $\gamma_1$; V $\gamma_1$; V $\gamma_3\times2$: $-\frac{10}x-72$; \eqI{159}: $-12$ & $\frac{4\ln x}{x}+\frac{18}x-120-108\ln x$ & \chEok \\
+$(aa')^3(a^2+a'^2)\square^3/H^2$ & VII $\beta$ & $\frac{\ln x}{6x}$ & \chEok \\
+$(aa')^3(a^2+a'^2)\square^2$ & VII $\beta$ & $-\frac{\ln x}{3x}+\frac1{6x}$ & \chEok \\
+$(aa')^3(a^2+a'^2)H^2\square$ & VII $\gamma_2\frac{\square}{H^2}$; V $\beta$ & $-\frac{2\ln x}{3x}+\frac5x-18\ln x$ & \chEok \\
+$(aa')^3(a^2+a'^2)H^4$ & VII $\gamma_2$; V $\gamma_2$: $-\frac5x-18$; V $\gamma_3$: $-\frac5x-36$ & $\frac{4\ln x}{3x}-\frac{32}{3x}-54$ & \chEok\ (as printed) \\
+$(aa')^3H^2\nabla^2$ & VII $\epsilon_1$; V $\epsilon_1$; V $\epsilon_3\times2$; III: $-\frac{12}x+24\ln x$; III $\epsilon_3\times2$: $\frac8x$ & $-\frac{2\ln x}{3x}-\frac{16}x+84\ln x-48x\ln x+96x$ & \chEok \\
+$(aa')^3\nabla^2\square$ & VII $\epsilon_1\frac{\square}{H^2}$ & $\frac{\ln x}{3x}$ & \chEok \\
+$(aa')^2(a^2+a'^2)H^2\nabla^2$ & VII $\epsilon_2$; V $\epsilon_2$; V $\epsilon_3$; III $\epsilon_3$: $\frac4x$ & $-\frac{7\ln x}{3x}+\frac{11}{2x}-12\ln x+48x\ln x+12x$ & \chEok \\
+$(aa')^2(a^2+a'^2)\nabla^2\square$ & VII $\epsilon_2\frac{\square}{H^2}$: $\frac{7\ln x}{6x}$; V $\delta$ & $-\frac{17\ln x}{6x}-\frac{49}{6x}+4\ln^2x+10\ln x+12x\ln x$ & \chEok\ (printed twice) \\
+$(aa')^2\nabla^4$ & V $\zeta$; \textbf{III: $8\ln x-16x\ln x$} & $\frac{34}3\ln x-40x\ln x+24x^2\ln x-36x^2$ & \chEbad\ (III omitted) \\
+\end{longtable}
+}
+
+The paper added the first two rows of Table~III to the $\epsilon_1$ and $\epsilon_2$ rows. For example, $84\ln x=60+24$ and $-\frac{16}x=\frac13-\frac{26}3-\frac{11}3-12+8$.
+It omitted the third row, the one belonging to $\zeta$, although the text says that ``Table X includes this with the similarly finite results of Tables III, V, and VII''.
+Twelve of the thirteen operator rows therefore follow from the inputs exactly, and the $(aa')^2\nabla^4$ row does not.
+The $(aa')^3(a^2+a'^2)H^4$ row agrees with the printed Table~X when Table~V is used as printed. It is corrected in Sec.~\ref{sec:ch08-TXcorr} because of the $72\gamma_2$ inconsistency of Table~V.
+
+\begin{discbox}[Table X: the $(aa')^2\nabla^4$ row]
+Paper I prints
+\[
+(aa')^2\nabla^4:\qquad \frac{10}{3}\ln x-24x\ln x+24x^2\ln x-36x^2 .
+\]
+We obtain
+\[
+(aa')^2\nabla^4:\qquad \frac{34}{3}\ln x-40x\ln x+24x^2\ln x-36x^2 .
+\]
+The difference is the Table~III contribution $8\ln x-16x\ln x$. It is non-analytic and affects the physical result.
+In addition, the row $(aa')^2(a^2+a'^2)\nabla^2\square$ is printed twice in Table~X (typo).
+\end{discbox}
+
+% -----------------------------------------------------------------------------------
+\subsection{Corrected Table X (paper's convention)}
+\label{sec:ch08-TXcorr}
+\tD\tC\ The global pointwise test of Sec.~\ref{sec:ch08-global} compares Table~X with the direct sum of the normal contributions. It reproduces that sum exactly only after two changes:
+\begin{itemize}[itemsep=0pt]
+\item the $\zeta$-row correction derived above;
+\item the $72\gamma_2$ correction, i.e.\ the Table~V inconsistency found in Task~13.
+\end{itemize}
+In Table~X the second change appears as the constant of the $(aa')^3(a^2+a'^2)H^4$ row going from $-54$ to $+18$.
+Equivalently, one may add $-12x$ to the $\delta$ row, since $\delta(-12x)=72\gamma_2$.
+This follows from $\nabla^2\square x=-6aa'H^4$ (Task~13). The full corrected table is given in Table~\ref{tab:ch08-TXcorr}.
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{lll}
+\toprule
+External operator & Coefficient $\big(\times\frac{\kappa^2H^4}{(4\pi)^4}\big)$ & Change \\
+\midrule
+$(aa')^4\square^3/H^2$ & $-\frac{\ln x}{3x}$ & --- \\
+$(aa')^4\square^2$ & $\frac{26\ln x}{3x}+\frac{38}{3x}-6\ln^2x-18\ln x$ & --- \\
+$(aa')^4H^2\square$ & $-\frac{6\ln x}{x}+\frac4x-4\ln x$ & --- \\
+$(aa')^4H^4$ & $\frac{4\ln x}{x}+\frac{18}x-120-108\ln x$ & --- \\
+$(aa')^3(a^2+a'^2)\square^3/H^2$ & $\frac{\ln x}{6x}$ & --- \\
+$(aa')^3(a^2+a'^2)\square^2$ & $-\frac{\ln x}{3x}+\frac1{6x}$ & --- \\
+$(aa')^3(a^2+a'^2)H^2\square$ & $-\frac{2\ln x}{3x}+\frac5x-18\ln x$ & --- \\
+$(aa')^3(a^2+a'^2)H^4$ & $\frac{4\ln x}{3x}-\frac{32}{3x}+18$ & $-54\to+18$ (analytic) \\
+$(aa')^3H^2\nabla^2$ & $-\frac{2\ln x}{3x}-\frac{16}x+84\ln x-48x\ln x+96x$ & --- \\
+$(aa')^3\nabla^2\square$ & $\frac{\ln x}{3x}$ & --- \\
+$(aa')^2(a^2+a'^2)H^2\nabla^2$ & $-\frac{7\ln x}{3x}+\frac{11}{2x}-12\ln x+48x\ln x+12x$ & --- \\
+$(aa')^2(a^2+a'^2)\nabla^2\square$ & $-\frac{17\ln x}{6x}-\frac{49}{6x}+4\ln^2x+10\ln x+12x\ln x$ & duplicate row removed \\
+$(aa')^2\nabla^4$ & $\frac{34}3\ln x-40x\ln x+24x^2\ln x-36x^2$ & $+8\ln x-16x\ln x$ (non-analytic) \\
+\bottomrule
+\end{tabular}
+\caption{Corrected Table~X in the paper's sign convention ($x=y/4$). Rows marked ``---'' are as printed. In the definition sign every entry is multiplied by $-1$.}
+\label{tab:ch08-TXcorr}
+\end{table}
+
+\paragraph{Physical significance.} \tA
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item The constant $72\gamma_2$ does not depend on $y$. In the Schwinger--Keldysh formalism it is the same in the $++$ and $+-$ kernels, so it drops out of the retarded self-mass-squared.
+\item $(aa')^2\nabla^4(8\ln x-16x\ln x)$, on the other hand, is non-analytic through $\ln x$. It contributes to the retarded kernel and hence affects the correction to the mode function.
+(Chapter~\ref{ch:sk} shows that it contributes only falling terms, so it has no late-time effect on the mode function.)
+\end{itemize}
+
+% -----------------------------------------------------------------------------------
+\subsection{Renormalization, Eqs. (I.166)--(I.167), and the definition sign}
+\label{sec:ch08-defsign}
+\tD\ The counterterm vertices (G3) add to $-iM^2$, so
+\[
+-iM^2_{\rm reg}+\text{counterterms}=i\kappa^2a^D\Big[(\alpha_1+\beta_1)\square^2+(\alpha_2+\beta_2)H^2\square+(\alpha_3+\beta_3)H^2\frac{\nabla^2}{a^2}\Big]\delta^D+\ldots .
+\]
+The choice
+\begin{equation}
+\alpha_i=-\beta_i+\Delta\alpha_i
+\tag{I.166}
+\end{equation}
+removes the divergence and leaves arbitrary finite constants $\Delta\alpha_i$. Then we set $D=4$:
+\begin{equation}
+-iM^2_{\rm ren}(x;x')=i\kappa^2a^4\Big(\Delta\alpha_1\square^2+\Delta\alpha_2H^2\square+\Delta\alpha_3H^2\frac{\nabla^2}{a^2}\Big)\delta^4(x-x')+\text{Table X}.
+\tag{I.167$'$}
+\end{equation}
+Paper~I prints this without the two factors of $H^2$ and with ``Table 10''. Like \eqI{160}, \eqI{167} has to be read with the $H^2$ factors.
+
+\paragraph{$a^D$ versus $a^4$.} The counterterm $\alpha_ia^D$ cancels $\beta_ia^D$ exactly. Therefore expanding $a^D=a^4[1+(D-4)\ln a+\ldots]$ leaves no $\ln a$ term behind.
+
+\subsubsection{The result in the definition sign}
+By Tasks~3--13, the paper's bare $-iM^2$ is $-1$ times the quantity defined by \eqI{168}.
+In the definition sign, and with the corrections of Sec.~\ref{sec:ch08-betacorr}, the quantities are
+\begin{equation}
+\begin{aligned}
+&\beta_1^{\rm corr}=0,\qquad \beta_2^{\rm corr}=\frac{H^{D-4}}{(4\pi)^{D/2}}\Big\{\frac{49}3+O(D-4)\Big\},\\
+&\beta_3^{\rm corr}=\frac{H^{D-4}}{(4\pi)^{D/2}}\Big\{\frac{4}{D-4}-\frac{52}3-2\gamma+O(D-4)\Big\},
+\end{aligned}
+\label{eq:ch08-betadef}
+\end{equation}
+\begin{resultbox}[Renormalized self-mass-squared, definition sign]
+\begin{equation}
+-iM^2_{\rm ren}(x;x')=i\kappa^2a^4\Big(\Delta\alpha_1\square^2+\Delta\alpha_2H^2\square+\Delta\alpha_3H^2\frac{\nabla^2}{a^2}\Big)\delta^4(x-x')\;-\;\big[\text{corrected Table X}\big],
+\label{eq:ch08-final}
+\end{equation}
+with the corrected Table~X of Table~\ref{tab:ch08-TXcorr} (paper's convention).
+\end{resultbox}
+Formula \eqI{166}, $\alpha_i=-\beta_i$, does not depend on the convention. Since the $\Delta\alpha_i$ are arbitrary, the sign of the local part is not physical.
+\textbf{The physically meaningful difference is the overall sign of the nonlocal Table~X}: in the definition sign it is opposite to the paper's.
+This reverses the sign of the mode-function correction computed with the effective field equation \eqI{168} in Ref.~[30] of \PI\ (arXiv:0710.5282, i.e.\ \PII).
+Chapter~\ref{ch:sk} shows, however, that at late times the non-falling total of that correction is zero, so only decaying terms change sign and the
+late-time conclusion of \PII{} is unchanged.
+
+% -----------------------------------------------------------------------------------
+\subsection{Comparison with the paper and accumulated findings}
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.62\textwidth}l}
+\toprule
+Item & Result & \\
+\midrule
+\eqI{160} & structure correct; $H^2$ missing next to $\beta_{2,3}$ (typo) & \chEok\ (note) \\
+\eqI{161}--\eqI{165} & exact agreement & \chEok \\
+\eqI{166} & correct & \chEok \\
+\eqI{167} & $H^2$ missing (typo); Table X must be corrected & \chEok\ (note) \\
+Table X & 12/13 rows correct; Table III contribution missing in the $\zeta$ row; one row duplicated; $72\gamma_2$ (inherited from Table V) & \chEbad \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.56\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}}
+\toprule
+Accumulated findings (Tasks 2--17) & Effect \\
+\midrule
+typos: \eqI{7}, \eqI{14}, Table~II, \eqI{39}, ``4th term'', \eqI{89}, five places in the Appendix, \eqI{128}, Table~IV $\gamma_2$, Table~VII header, $H^2$ in \eqI{160}/\eqI{167}, duplicated row in Table~X (C3--C19) & none \\
+\eqI{40}, \eqI{59} (B1--B4) & finite parts of $\beta_{2,3}$; absorbed into $\Delta\alpha$ \\
+Table V / X: $72\gamma_2$ (S3) & analytic; drops out of the retarded kernel \\
+\textbf{Table X: $8\ln x-16x\ln x$ missing in the $\zeta$ row} (S2) & \textbf{non-analytic; affects the physical result} (at late times only falling terms, Chapter~\ref{ch:sk}) \\
+\textbf{overall sign} (4-point and 3-point contributions both reversed) (S1) & \textbf{the sign of Table X is reversed; sign of the mode-function correction} (at late times only decaying terms, Chapter~\ref{ch:sk}) \\
+\bottomrule
+\end{tabular}
+\end{center}
+This table follows the Task~17 report. The complete classified list, with the identifiers S1--S4 (substantive), B1--B6 (absorbable) and
+C1--C23 (typographical), including \eqI{1} and the items first noticed during the write-up, is in Chapter~\ref{ch:summary}.
+
+% -----------------------------------------------------------------------------------
+\subsection{Code checks}
+\label{sec:ch08-t17-code}
+\tC\ The scripts are in the folder \texttt{code/08\_renormalization\_tableX/}:
+\begin{itemize}[itemsep=0pt]
+\item \texttt{check\_160\_167.py} (about 2\,s);
+\item \texttt{check\_tableX\_global.py} (about 17\,s). It imports the function \texttt{run} from the Task~13 helper \texttt{check\_global.py}, which is copied into the folder.
+\end{itemize}
+All were actually run. The re-run outputs are identical to the original outputs in the Task~17 log.
+\begin{itemize}[leftmargin=*,itemsep=3pt]
+\item[(A)] The 13 rows of Table~X were assembled symbolically from Tables~III, V, VII and \eqI{159}.
+\begin{itemize}[itemsep=0pt]
+\item ``assembled $-$ paper'' $=0$ for all 13 operators. Here the $\zeta$ row is assembled \emph{without} the Table~III term, which reproduces the paper.
+\item The script then prints the Table~III $\zeta$ contribution not contained in the paper's row: $-16x\ln x+8\ln x$.
+\end{itemize}
+\item[(B)] At $D=4$ the nonlocal parts of \eqI{152}--\eqI{153} reproduce $(4/y)^2$ and $(4/y)^3$ exactly, pointwise ($N_{152}-(4/y)^2=0$, $N_{153}-(4/y)^3=0$).
+\eqI{159} vanishes pointwise: $\mathcal L[8/y-4\ln(y/4)]-12=0$.
+\item[(C)] The $\beta$ coefficients:
+\begin{itemize}[itemsep=0pt]
+\item $\beta_1=0$;
+\item $\beta_2$ and $\beta_3$ built from \eqI{44}, \eqI{59} and Table~VIII are identical to \eqI{162} and \eqI{164} for general $D$ (\texttt{True}), where the constant $-3$ of \eqI{164} is written exactly as $-\frac32\Gamma(D-1)/\Gamma(\frac D2)$;
+\item \eqI{163} gives $-61/3$, and \eqI{165} gives $-4/(D-4)+58/3+2\gamma$;
+\item the corrected values (paper's convention) are $-49/3$ and $-4/(D-4)+52/3+2\gamma$, and in the definition sign $49/3$ and $4/(D-4)-52/3-2\gamma$;
+\item $\beta_2$ has no pole, and the residue of the pole of $\beta_3$ is $-4$.
+\end{itemize}
+\item[(D)] The global pointwise test (described below): the printed table fails, while the table with the $\zeta$ and $72\gamma_2$ corrections agrees exactly.
+\end{itemize}
+
+\subsubsection{Global pointwise test of Table X}
+\label{sec:ch08-global}
+\tC\ At $D=4$ and $x\neq x'$ the test compares two sides.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \textbf{Left-hand side:} the direct sum $\sum P_k$ of the normal contributions plus the nonlocal term of \eqI{67}, $-\frac{\kappa^2H^2}{8\pi^2}\,2H(aa')^2(a\partial_0+a'\partial'_0)\nabla^2A$.
+The sum uses naive inner derivatives and the actual propagator functions $A=h\{4/y-2\ln(y/4)-1\}$, $B=C=4h/y$ and $\Delta C=4(C-A)$.
+Both parts are in the paper's convention, and neither depends on the outer-operator reduction.
+\item \textbf{Right-hand side:} the 13 operators of Table~X applied pointwise to their coefficient functions.
+\end{itemize}
+The two terms of \eqI{159} cancel pointwise, because $\mathcal L[8/y-4\ln(y/4)]=12$, so \eqI{159} does not enter the test.
+At $D=4$ the nonlocal parts of \eqI{152}--\eqI{153} give $(4/y)^2$ and $(4/y)^3$ exactly, pointwise (check (B)).
+
+The three points are random rational spacelike-separated pairs (seed 29), and the arithmetic uses 30 digits:
+\begin{center}\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccc}
+\toprule
+Version of Table X & point 0 & point 1 & point 2 \\
+\midrule
+as printed & $-11.52$ & $64.14$ & $-3.526$ \\
+$+$ $8\ln x-16x\ln x$ in the $\zeta$ row & $1.182$ & $65.28$ & $0.0161$ \\
+$+$ $\zeta$ correction $+$ $72\gamma_2$ (Task 13) & $\mathbf{4\times10^{-31}}$ & $\mathbf{0}$ & $\mathbf{-3\times10^{-31}}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Each entry is LHS minus the operator sum. For scale, $|{\rm LHS}|$ is $7.10$, $0.107$ and $8.60$ at the three points.
+With both corrections the agreement is exact to 30 digits, while neither correction alone is enough.
+Here $72\gamma_2$ is the Table~V inconsistency of Task~13, equivalent to the $-54\to+18$ change in Table~X.
+
+% -----------------------------------------------------------------------------------
+\subsection{Calculation record}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \textbf{Derived:}
+\begin{itemize}[itemsep=0pt]
+\item the structure of the sum and the $L$/$9H^2$ cancellation; \eqI{160} (with $H^2$); \eqI{161}--\eqI{165};
+\item the effect of the corrections on the $\beta$'s [Eq.~\eqref{eq:ch08-betacorr}];
+\item the row-by-row assembly of Table~X and the corrected Table~X;
+\item \eqI{166}--\eqI{167} and the definition-sign result [Eqs.~\eqref{eq:ch08-betadef}--\eqref{eq:ch08-final}].
+\end{itemize}
+\item \textbf{Checks passed:} (A)--(D), actually run. In particular, (D) checks Table~X against a sum that does not depend on the outer-operator reduction.
+\item \textbf{Discrepancies:}
+\begin{itemize}[itemsep=0pt]
+\item the Table~III contribution is missing in the $\zeta$ row of Table~X (physical);
+\item $72\gamma_2$ (analytic);
+\item the $H^2$ typo in \eqI{160} and \eqI{167};
+\item the duplicated row in Table~X;
+\item the overall sign (inherited).
+\end{itemize}
+\end{itemize}

@@ -1,0 +1,4 @@
+== (E) global pointwise check of Tables IV(D=4)+V against the direct normal contribution, D=4 ==
+  point 0: direct = -1.26640166984,  Tables IV+V = 0.893758671558,  direct + tables = -0.373,  direct - tables = -2.16
+  point 1: direct = 0.0189424187218,  Tables IV+V = -0.893296577647,  direct + tables = -0.874,  direct - tables = 0.912
+  point 2: direct = 0.000241338543333,  Tables IV+V = -0.00541935945134,  direct + tables = -0.00518,  direct - tables = 0.00566

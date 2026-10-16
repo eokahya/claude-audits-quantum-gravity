@@ -1,0 +1,36 @@
+K=3 1/x   : derived = (1 - L_a)/a
+            paper - derived = 0
+            next order: -1/a**2
+K=3 lnx/x : derived = (-L_a**2/2 + 2*L_a - 3 + pi**2/3)/a
+            paper - derived = 0
+            next order: -L_a/a**2 - 1/a**2
+K=3 lnx   : derived = (-6*L_a + 2*a + 3)/(12*a)
+            paper - derived = 0
+            next order: -1/(2*a**2)
+K=3 ln2x  : derived = (-18*L_a**2 + 72*L_a + 4*a*(3*L_a - 11) - 81 + 12*pi**2)/(36*a)
+            paper - derived = 0
+            next order: -L_a/a**2
+K=4 1/x   : derived = -1/2
+            paper - derived = 0
+            next order: 1/a
+K=4 lnx/x : derived = 3/4
+            paper - derived = 0
+            next order: L_a/a - 1/a
+K=4 lnx   : derived = L_a/6 - 11/36
+            paper - derived = 0
+            next order: 1/(2*a)
+K=4 ln2x  : derived = L_a**2/6 - 8*L_a/9 - pi**2/9 + 7/4
+            paper - derived = 0
+            next order: L_a/a - 1/a
+K=5 1/x   : derived = -a/6
+            paper - derived = 0
+            next order: 1/(2*a)
+K=5 lnx/x : derived = 17*a/36
+            paper - derived = 0
+            next order: L_a/(2*a) - 3/(4*a)
+K=5 lnx   : derived = a/24 - 1/6
+            paper - derived = 0
+            next order: 1/(4*a)
+K=5 ln2x  : derived = -L_a/3 - 13*a/144 + 5/9
+            paper - derived = 0
+            next order: L_a/(2*a) - 3/(4*a)

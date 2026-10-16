@@ -1,0 +1,14 @@
+q=3 ln2  nu=0 m=0 j=0 a=  50: exact-expansion= 1.044668871077e-01  quadrature= 1.044668871077e-01  diff= 8.55e-20
+q=3 ln2  nu=0 m=0 j=0 a= 400: exact-expansion= 7.625801334629e-01  quadrature= 7.625801334629e-01  diff=-1.86e-22
+q=5 ln2  nu=0 m=0 j=0 a=  50: exact-expansion=-5.238650049936e+00  quadrature=-5.238650049936e+00  diff= 7.03e-20
+q=5 ln2  nu=0 m=0 j=0 a= 400: exact-expansion=-3.754710715781e+01  quadrature=-3.754710715781e+01  diff=-1.17e-20
+q=4 ln   nu=0 m=0 j=0 a=  50: exact-expansion= 3.563487231269e-01  quadrature= 3.563487231269e-01  diff= 1.32e-22
+q=4 ln   nu=0 m=0 j=0 a= 400: exact-expansion= 6.942703073305e-01  quadrature= 6.942703073305e-01  diff=-2.14e-22
+q=2 xj   nu=0 m=0 j=2 a=  50: exact-expansion= 1.233789926420e+00  quadrature= 1.233789926420e+00  diff= 4.51e-22
+q=2 xj   nu=0 m=0 j=2 a= 400: exact-expansion= 9.304066793408e+01  quadrature= 9.304066793408e+01  diff= 3.12e-20
+q=4 xj   nu=0 m=0 j=1 a=  50: exact-expansion=-5.943089724365e-01  quadrature=-5.943089724365e-01  diff=-1.40e-22
+q=4 xj   nu=0 m=0 j=1 a= 400: exact-expansion=-6.257239585918e+00  quadrature=-6.257239585918e+00  diff=-4.72e-24
+q=3 ln2  nu=2 m=1 j=0 a=  50: exact-expansion= 2.119909445756e-02  quadrature= 2.119909445756e-02  diff= 1.02e-19
+q=3 ln2  nu=2 m=1 j=0 a= 400: exact-expansion= 1.070846521197e-01  quadrature= 1.070846521197e-01  diff= 4.96e-24
+q=5 ln   nu=0 m=1 j=0 a=  50: exact-expansion= 7.131707669239e-02  quadrature= 7.131707669239e-02  diff= 1.26e-23
+q=5 ln   nu=0 m=1 j=0 a= 400: exact-expansion= 9.385859378877e-02  quadrature= 9.385859378877e-02  diff=-3.80e-23

@@ -1,0 +1,21 @@
+== (1) Gauss theorem on the hypergeometric forms (29)-(30): 2F1(a,b;c;1) = G(c)G(c-a-b)/(G(c-a)G(c-b)), Re(c-a-b)=1-D/2>0 ==
+  iDelta_B(x;x) via (29) == -N G(D-1)/((D-2) G(D/2)) : True
+  iDelta_C(x;x) via (30) ==  N G(D-1)/((D-2)(D-3) G(D/2)): True
+== (2) numerical coincidence limits at D = 0.6 (Re D < 2: the limit exists literally), H = 1 ==
+  series vs hypergeometric at y=0.5:  B: -9.8608e-32   C: -1.2326e-31
+  y= 1e-2:  A(y)-(34) =     0.04504   B(y)-(35) =    -0.02527   C(y)-(36) =    -0.02306
+  y= 1e-4:  A(y)-(34) =    0.001735   B(y)-(35) =   -0.001153   C(y)-(36) =   -0.001132
+  y= 1e-6:  A(y)-(34) =    6.851e-5   B(y)-(35) =   -4.733e-5   C(y)-(36) =   -4.713e-5
+  y= 1e-8:  A(y)-(34) =    2.721e-6   B(y)-(35) =   -1.899e-6   C(y)-(36) =   -1.897e-6
+  (differences scale like (y/4)^(1-D/2) = (y/4)^0.7 -> 0)
+== (3) explicit-component contractions of T^A, T^B, T^C, D = 4,5,6,7 ==
+  D=4: pair/within-pair symmetric True; (37) True; (38) True; (39) True; (40) True; trace(40)=(38) True; eta.(39)=(37) True
+  D=5: pair/within-pair symmetric True; (37) True; (38) True; (39) True; (40) True; trace(40)=(38) True; eta.(39)=(37) True
+  D=6: pair/within-pair symmetric True; (37) True; (38) True; (39) True; (40) True; trace(40)=(38) True; eta.(39)=(37) True
+  D=7: pair/within-pair symmetric True; (37) True; (38) True; (39) True; (40) True; trace(40)=(38) True; eta.(39)=(37) True
+== (4) D = 4 reduction of the finite (B,C) parts, h = H^2/(16 pi^2): iDB -> -h, iDC -> +h ==
+  (37) finite: 4 * h      paper: +4 h
+  (38) finite: -2 * h      paper: -2 h
+  (39) finite [rho,sigma]=(0,0),(1,1),(0,1): [2, 2, 0] * h   paper: [2, 2, 0]
+  (40) finite [alpha,sigma]=(0,0),(1,1),(0,1): [-2, 0, 0] * h   paper: [+2, 0, 0]
+  trace of paper's (40) finite part = +2h, but paper's (38) finite part = -2h  -> paper's (40) inconsistent with its (38)

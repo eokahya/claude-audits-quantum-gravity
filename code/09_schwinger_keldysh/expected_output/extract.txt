@@ -1,0 +1,40 @@
+=== per-row non-falling coefficients, TRUE sign (= - Table-X convention) ===
+0 (aa')^4 \Box^3/H^2 k^0: 0 | k^2: 0 | k^3: 0 | k^4: 0 | k^6: 0
+1 (aa')^4 \Box^2 k^0: 18 | k^2: 0 | k^3: 0 | k^4: 0 | k^6: 0
+2 (aa')^4 H^2\Box k^0: -2 | k^2: 0 | k^3: 0 | k^4: 0 | k^6: 0
+3 (aa')^4 H^4 k^0: 18 \ln a - 27 | k^2: \frac{18}{5} | k^3: 2 i | k^4: - \frac{27}{35} | k^6: \frac{4}{63}
+4 (aa')^3(a^2+a'^2)\Box^3/H^2 k^0: \frac{2 \ln a^{2}}{3} - \frac{14 \ln a}{3} - \frac{4 \pi^{2}}{9} + \frac{325}{27} | k^2: \frac{2 \ln a}{9} - \frac{22}{27} | k^3: \frac{2 i \left(6 \ln a - 23\right)}{81} | k^4: \frac{239}{900} - \frac{\ln a}{15} | k^6: \frac{4 \ln a}{567} - \frac{593}{19845}
+5 (aa')^3(a^2+a'^2)\Box^2 k^0: - \frac{2 \ln a^{2}}{3} + \frac{14 \ln a}{3} - \frac{109}{27} + \frac{4 \pi^{2}}{9} | k^2: \frac{22}{27} - \frac{2 \ln a}{9} | k^3: \frac{2 i \left(23 - 6 \ln a\right)}{81} | k^4: \frac{\ln a}{15} - \frac{239}{900} | k^6: \frac{593}{19845} - \frac{4 \ln a}{567}
+6 (aa')^3(a^2+a'^2)H^2\Box k^0: - \frac{2 \ln a^{2}}{3} - \frac{14 \ln a}{3} - \frac{250}{27} + \frac{4 \pi^{2}}{9} | k^2: - \frac{2 \ln a}{9} - \frac{20}{27} | k^3: \frac{2 i \left(- 6 \ln a - 19\right)}{81} | k^4: \frac{\ln a}{15} + \frac{181}{900} | k^6: - \frac{4 \ln a}{567} - \frac{43}{2205}
+7 (aa')^3(a^2+a'^2)H^4 k^0: \frac{2 \ln a^{2}}{3} - \frac{40 \ln a}{3} - \frac{4 \pi^{2}}{9} + \frac{331}{27} | k^2: \frac{2 \ln a}{9} - \frac{61}{27} | k^3: \frac{4 i \left(3 \ln a - 31\right)}{81} | k^4: \frac{629}{900} - \frac{\ln a}{15} | k^6: \frac{4 \ln a}{567} - \frac{167}{2205}
+8 (aa')^3 H^2\nabla^2 k^0: 0 | k^2: \frac{2}{5} | k^3: 0 | k^4: \frac{3}{35} | k^6: - \frac{4}{189}
+9 (aa')^3 \nabla^2\Box k^0: 0 | k^2: 0 | k^3: 0 | k^4: 0 | k^6: 0
+10 (aa')^2(a^2+a'^2)H^2\nabla^2 k^0: 0 | k^2: 1 - \frac{4 a}{15} | k^3: 0 | k^4: \frac{1}{5} - \frac{12 a}{175} | k^6: \frac{8 a}{441} - \frac{2}{35}
+11 (aa')^2(a^2+a'^2)\nabla^2\Box k^0: 0 | k^2: \frac{4 a}{15} - 2 | k^3: 0 | k^4: \frac{12 a}{175} - \frac{2}{5} | k^6: \frac{4}{35} - \frac{8 a}{441}
+12 (aa')^2\nabla^4 k^0: 0 | k^2: 0 | k^3: 0 | k^4: - \frac{1}{70} | k^6: - \frac{4}{945}
+totals non-falling k^0..k^10: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+=== TRUE-sign falling a^-2 coefficient of corrected total, k^0..k^10 ===
+  k^0: a^-2: 12   a^-3: 0
+  k^1: a^-2: 0   a^-3: 0
+  k^2: a^-2: - 8 \ln a - \frac{103}{3}   a^-3: 0
+  k^3: a^-2: - 8 i   a^-3: - 12 i
+  k^4: a^-2: \frac{8}{3}   a^-3: 0
+  k^5: a^-2: \frac{32 i}{45}   a^-3: 0
+  k^6: a^-2: - \frac{2}{15}   a^-3: 0
+  k^7: a^-2: - \frac{16 i}{1575}   a^-3: 0
+  k^8: a^-2: - \frac{4}{945}   a^-3: 0
+  k^9: a^-2: - \frac{16 i}{6615}   a^-3: 0
+  k^10: a^-2: \frac{11}{14175}   a^-3: 0
+printed: non-falling [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+printed minus corrected, TRUE sign, a^-1 coefficient per k^n:
+  k^0: a^-1: 0  a^-3: 0  a^-2: 0
+  k^1: a^-1: 0  a^-3: 0  a^-2: 0
+  k^2: a^-1: 0  a^-3: 0  a^-2: 0
+  k^3: a^-1: 0  a^-3: 0  a^-2: 0
+  k^4: a^-1: \frac{4}{45}  a^-3: - \frac{4}{3}  a^-2: 0
+  k^5: a^-1: 0  a^-3: 0  a^-2: 0
+  k^6: a^-1: \frac{4}{175}  a^-3: - \frac{2}{15}  a^-2: 0
+  k^7: a^-1: \frac{2 i}{135}  a^-3: - \frac{i}{9}  a^-2: 0
+  k^8: a^-1: - \frac{8}{1323}  a^-3: \frac{2}{35}  a^-2: 0
+  k^9: a^-1: - \frac{i}{525}  a^-3: \frac{i}{45}  a^-2: 0
+  k^10: a^-1: \frac{4}{8019}  a^-3: - \frac{4}{567}  a^-2: 0

@@ -1,0 +1,65 @@
+== (136)-(137) ==
+  (136) a^-2 d0^2 phi = -Box phi - (D-2)(H/a) d0 phi + a^-2 Lap phi : True
+  (137) (d0 phi)^2/a^2 = -g^mn d phi d phi + a^-2 grad phi^2         : True
+== (138)-(140): H a^{D-1} d0phi Box phi ==
+  (138) T0 - [rhs] = d_m (H a^{D-3} d0phi d^m phi)                : True
+  (139) exact equality                                            : True
+  (140) (139) - [rhs] = d0(-1/2 H a^{D-3} eta^mn dphi dphi)        : True
+== (141)-(143): H a^{D-3} d0phi Lap phi ==
+  (141) U0 - [rhs] = d_i(H a^{D-3} d0phi d_i phi)                 : True
+  (142) exact                                                     : True
+  (143) (142) - [rhs] = d0(-1/2 H a^{D-3} grad phi^2)              : True
+== completeness: Euler-Lagrange operators of all admissible monomials lie in span{B1..B5} (D = 4, 5, 6) ==
+  D=4: basis EL operators linearly independent: True
+    (a^-2 d0^2 phi)^2                  -> c(B1..B5) = [1, 2, -2, 1, -2]
+    (a^-2 d0^2)(a^-2 Lap)              -> c(B1..B5) = [0, 0, -1, 1, -1]
+    (a^-2 Lap phi)^2                   -> c(B1..B5) = [0, 0, 0, 1, 0]
+    a^-4 (d0 d_i phi)^2                -> c(B1..B5) = [0, 0, -1, 1, -1]
+    a^-4 (d_i d_j phi)^2               -> c(B1..B5) = [0, 0, 0, 1, 0]
+    a^-4 d0phi d0^3 phi                -> c(B1..B5) = [-1, -2, 2, -1, 2]
+    a^-4 d0phi d0 Lap phi              -> c(B1..B5) = [0, 0, 1, -1, 1]
+    a^-4 d_i phi d_i d0^2 phi          -> c(B1..B5) = [0, 0, 1, -1, 1]
+    a^-4 d_i phi d_i Lap phi           -> c(B1..B5) = [0, 0, 0, -1, 0]
+    a^D (a^-1 d0 (a^-1 d0 phi))^2      -> c(B1..B5) = [1, 0, -2, 1, 0]
+    H a^{D-3} d0phi d0^2 phi           -> c(B1..B5) = [0, 1/2, 0, 0, -1/2]
+    H a^{D-3} d0phi Lap phi            -> c(B1..B5) = [0, 0, 0, 0, 1/2]
+    H a^{D-3} d_i phi d0 d_i phi       -> c(B1..B5) = [0, 0, 0, 0, -1/2]
+    H a^{D-1} d0phi Box phi            -> c(B1..B5) = [0, 3/2, 0, 0, -1]
+    H^2 a^{D-2} (d0 phi)^2             -> c(B1..B5) = [0, -1, 0, 0, 1]
+  D=5: basis EL operators linearly independent: True
+    (a^-2 d0^2 phi)^2                  -> c(B1..B5) = [1, 3, -2, 1, -3]
+    (a^-2 d0^2)(a^-2 Lap)              -> c(B1..B5) = [0, 0, -1, 1, -3]
+    (a^-2 Lap phi)^2                   -> c(B1..B5) = [0, 0, 0, 1, 0]
+    a^-4 (d0 d_i phi)^2                -> c(B1..B5) = [0, 0, -1, 1, -2]
+    a^-4 (d_i d_j phi)^2               -> c(B1..B5) = [0, 0, 0, 1, 0]
+    a^-4 d0phi d0^3 phi                -> c(B1..B5) = [-1, -4, 2, -1, 4]
+    a^-4 d0phi d0 Lap phi              -> c(B1..B5) = [0, 0, 1, -1, 2]
+    a^-4 d_i phi d_i d0^2 phi          -> c(B1..B5) = [0, 0, 1, -1, 3]
+    a^-4 d_i phi d_i Lap phi           -> c(B1..B5) = [0, 0, 0, -1, 0]
+    a^D (a^-1 d0 (a^-1 d0 phi))^2      -> c(B1..B5) = [1, 0, -2, 1, 0]
+    H a^{D-3} d0phi d0^2 phi           -> c(B1..B5) = [0, 1, 0, 0, -1]
+    H a^{D-3} d0phi Lap phi            -> c(B1..B5) = [0, 0, 0, 0, 1]
+    H a^{D-3} d_i phi d0 d_i phi       -> c(B1..B5) = [0, 0, 0, 0, -1]
+    H a^{D-1} d0phi Box phi            -> c(B1..B5) = [0, 2, 0, 0, -1]
+    H^2 a^{D-2} (d0 phi)^2             -> c(B1..B5) = [0, -1, 0, 0, 1]
+  D=6: basis EL operators linearly independent: True
+    (a^-2 d0^2 phi)^2                  -> c(B1..B5) = [1, 4, -2, 1, -4]
+    (a^-2 d0^2)(a^-2 Lap)              -> c(B1..B5) = [0, 0, -1, 1, -6]
+    (a^-2 Lap phi)^2                   -> c(B1..B5) = [0, 0, 0, 1, 0]
+    a^-4 (d0 d_i phi)^2                -> c(B1..B5) = [0, 0, -1, 1, -3]
+    a^-4 (d_i d_j phi)^2               -> c(B1..B5) = [0, 0, 0, 1, 0]
+    a^-4 d0phi d0^3 phi                -> c(B1..B5) = [-1, -7, 2, -1, 7]
+    a^-4 d0phi d0 Lap phi              -> c(B1..B5) = [0, 0, 1, -1, 3]
+    a^-4 d_i phi d_i d0^2 phi          -> c(B1..B5) = [0, 0, 1, -1, 6]
+    a^-4 d_i phi d_i Lap phi           -> c(B1..B5) = [0, 0, 0, -1, 0]
+    a^D (a^-1 d0 (a^-1 d0 phi))^2      -> c(B1..B5) = [1, 0, -2, 1, 0]
+    H a^{D-3} d0phi d0^2 phi           -> c(B1..B5) = [0, 3/2, 0, 0, -3/2]
+    H a^{D-3} d0phi Lap phi            -> c(B1..B5) = [0, 0, 0, 0, 3/2]
+    H a^{D-3} d_i phi d0 d_i phi       -> c(B1..B5) = [0, 0, 0, 0, -3/2]
+    H a^{D-1} d0phi Box phi            -> c(B1..B5) = [0, 5/2, 0, 0, -1]
+    H^2 a^{D-2} (d0 phi)^2             -> c(B1..B5) = [0, -1, 0, 0, 1]
+== (145): vertex of -1/2 alpha3 kappa^2 H^2 a^{D-2} grad phi^2 ==
+  E-L operator (= delta^2 S acting on phi) == alpha3 kappa^2 H^2 a^{D-2} Lap phi : True
+  equivalently -1/2 alpha3 kappa^2 H^2 a^D (grad/a phi)^2 : True
+== remark after (145): S = int c(eta) d0phi Lap phi gives no d0 in its vertex ==
+  E-L of c d0phi Lap phi == -c' Lap phi : True

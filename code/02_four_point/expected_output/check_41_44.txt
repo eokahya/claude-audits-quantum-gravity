@@ -1,0 +1,17 @@
+== (A) symbolic-D bookkeeping of (33) in the basis P[g]=d_0(g d_0 delta), S[g]=g Lap delta ==
+  derived: coeff of P[a^{D-2}Lam] = I*D*(D - 1)/4  ; S[a^{D-2}Lam] = -I*D*(D - 5)/4
+           [expected  +i D(D-1)/4  and  -i D(D-1)/4 + i D, i.e. -i{D(D-1)/4 d^mu(.d_mu) - D Lap}]
+  derived: finite part  P[a^{D-2}] = -I*D*b*(D - 4)/(2*(D - 3))  ; S[a^{D-2}] = -I*b*(D - 4)*(D - 2)/(2*(D - 3))    (both O(D-4))
+  paper chain (33)+printed(40), D=4: finite part P[a^2] = 4*I*h  ; S[a^2] = 0    -> (i kappa^2 H^2/4pi^2){-d^mu(a^2 d_mu) + a^2 Lap} = 4 i kappa^2 h P[a^2]
+  paper signs + derived (40), D=4: finite part P = 0  ; S = 0
+== (B) explicit D=4 tensors and functions: derived kernel vs derived (41) on a test function ==
+  kernel(X with Lam, b, c=-b) == -i kappa^2 {3 d^mu(a^2 Lam d_mu) - 4 a^2 Lam Lap} f : True
+  B/C finite part alone (Lam=0, c=-b) gives zero kernel: True
+== (C) Eq. (43) as an identity of kernels acting on test functions ==
+  D=4: d^mu(a^(D-2) ln a d_mu delta) == (1/2)ln(aa') a^D Box delta + (D-1)/2 H^2 a^D delta : True   | with ln(a^2) instead: False
+  general D: d^mu(a^(D-2) ln a d_mu delta) == (1/2)ln(aa') a^D Box delta + (D-1)/2 H^2 a^D delta : True   | with ln(a^2) instead: False
+  Box ln a = -(D-1) H^2 : True
+== (D) (41) -> (44) on a test function, D=4 (pihat, k kept symbolic) ==
+  derived (41) == derived (44)  [sign -, no -2/+2]: True
+  paper   (41) == paper   (44)  [sign +, with -2/+2]: True
+  (k -> H^2/8pi^2 at D=4 makes 2k = H^2/4pi^2, the prefactor of the finite bracket in (41))

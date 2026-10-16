@@ -1,0 +1,32 @@
+== (a) ln(aa') drops out of mixed derivatives ==
+  d_0 d'_0 ln(a a') = 0
+== (b) jump lemma: d_0 d'_0 (|deta| - i delta)^2 = -2 + 4 i delta DiracDelta(deta) ==
+  result: 4*I*delta*DiracDelta(u - v) - 2
+== (c) flat check: eta^{rs}[F'' d_r X d'_s X + F' (d_r d'_s X)_reg] = 0 for F = X^(1-D/2), delta>0, on both sides of deta=0 ==
+  side s=+1: eta^rs d_r X d'_s X + 4X = 0;  (d_r d'_r X)_reg = [2, -2, -2, -2];  contracted chain part (general D) = 0
+  side s=-1: eta^rs d_r X d'_s X + 4X = 0;  (d_r d'_r X)_reg = [2, -2, -2, -2];  contracted chain part (general D) = 0
+== (d) nascent delta: delta (r^2+delta^2)^(-D/2) -> pi^(D/2)/Gamma(D/2) * delta^{D-1}(x) ==
+  D=3: Omega_(D-2) * int s^(D-2)(1+s^2)^(-D/2) ds = 2*pi   vs  pi^(D/2)/Gamma(D/2) = 2*pi
+  D=4: Omega_(D-2) * int s^(D-2)(1+s^2)^(-D/2) ds = pi**2   vs  pi^(D/2)/Gamma(D/2) = pi**2
+  D=5: Omega_(D-2) * int s^(D-2)(1+s^2)^(-D/2) ds = 4*pi**2/3   vs  pi^(D/2)/Gamma(D/2) = 4*pi**2/3
+  D=6: Omega_(D-2) * int s^(D-2)(1+s^2)^(-D/2) ds = pi**3/2   vs  pi^(D/2)/Gamma(D/2) = pi**3/2
+  general D (Beta function): True
+  numeric D=4, delta=1e-2: int d^3x e^(-r^2) delta/(r^2+delta^2)^2 = 9.64980271   (pi^2 = 9.869604401)
+  numeric D=4, delta=1e-3: int d^3x e^(-r^2) delta/(r^2+delta^2)^2 = 9.847360668   (pi^2 = 9.869604401)
+  numeric D=4, delta=1e-4: int d^3x e^(-r^2) delta/(r^2+delta^2)^2 = 9.867377366   (pi^2 = 9.869604401)
+== (e) coefficient of the local term ==
+  leading term = i Delta_cf (26):  coefficient = I*a**(2 - D)   [expected i a^(2-D)] True
+  leading term as printed in (14): coefficient = 2*I*a**(2 - D)/(D - 2)  = i a^(2-D) * 2/(D-2)
+== (f) ODE recursion fixes the leading coefficient of A(y) from its second term ==
+  indicial (coefficient of y^(-D/2) from y^(1-D/2)) : 0
+  c0 required by c1 = Gamma(D/2+1)/(D/2-2): gamma(D/2 - 1)   == Gamma(D/2-1)? True   == printed Gamma(D/2-1)/(D/2-1)? False
+== (g) Box f(y) = H^2[(4y-y^2) f'' + D(2-y) f'] in explicit coordinates (D=4,5) ==
+  D=4: True
+  D=5: True
+== (h) table of first and mixed second derivatives of y (delta -> 0), D=4 ==
+  d0 y   = H a y - 2 a a' H^2 deta                : True
+  d'0 y  = H a' y + 2 a a' H^2 deta               : True
+  d0 d'0 y = a a' H^2 [y + 2 + 2 H^2 a a' deta^2] : True
+  d0 d'j y = -2 H^3 a^2 a' dx_j                   : True
+  di d'0 y = 2 H^3 a a'^2 dx_i                    : True
+  di d'j y = -2 a a' H^2 delta_ij                 : True

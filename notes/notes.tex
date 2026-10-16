@@ -1,0 +1,67 @@
+\documentclass[11pt]{report}
+\usepackage[a4paper,margin=24mm]{geometry}
+\input{macros.tex}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black,hypertexnames=false]{hyperref}
+\numberwithin{equation}{chapter}
+\setcounter{tocdepth}{1}
+\makeatletter % room for three-digit page numbers in the table of contents
+\renewcommand\@pnumwidth{2.2em}\renewcommand\@tocrmarg{3.2em}
+\makeatother
+\title{\textbf{Checking a Quantum Gravity Calculation with Claude}\\[6pt]
+\large Step-by-step derivation notes for the one-loop scalar self-mass during inflation\\
+and the late-time scalar mode functions}
+\author{Emre Onur Kahya\\[2pt]\small (calculations carried out and checked with Claude Opus 5.5, Anthropic)}
+\date{October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+These notes record, step by step, an independent re-derivation of the calculations of
+E.\,O.~Kahya and R.\,P.~Woodard, \emph{Quantum gravity corrections to the one loop scalar self-mass during inflation},
+Phys.\ Rev.\ D \textbf{76}, 124005 (2007) [\PI], and of the late-time analysis of
+E.\,O.~Kahya and R.\,P.~Woodard, \emph{Scalar field equations from quantum gravity during inflation}, arXiv:0710.5282 [\PII].
+The equations and tables of the main text of \PI, and the Schwinger--Keldysh analysis of \PII{} (its Tables~2--5 and the late-time mode equation),
+were re-derived from their inputs without using the targets as input, keeping the spacetime dimension $D$ general wherever
+the papers do; the appendix of \PI{} (``Extracting derivatives''), whose totals feed Tables~IV and~V, was audited through worked examples and a global pointwise test rather than redone from scratch.
+The derivations were cross-checked with independent symbolic or numerical code, kept separate from the analytic steps.
+The notes classify each discrepancy with the printed papers (four substantive findings, six finite ones absorbable into counterterms,
+and 23 typographical errors), present the corrected renormalized self-mass-squared, and use it to redo the Schwinger--Keldysh late-time analysis without the
+simplifying approximation of \PII. The main physical conclusion of \PII{} survives: the one-loop correction does not change the
+scalar mode function significantly at late times.
+\end{abstract}
+\tableofcontents
+
+\chapter*{How to read these notes}
+\addcontentsline{toc}{chapter}{How to read these notes}
+\section*{Conventions}
+\begin{itemize}[leftmargin=14pt]
+\item \PI{} $=$ Phys.\ Rev.\ D \textbf{76}, 124005 (2007); \PII{} $=$ arXiv:0710.5282. An equation $(n)$ of \PI{} is written \eqI{n}, of \PII{} \eqII{n}.
+When we display our own derivation of a numbered equation of the papers we tag it with the same number; a prime, e.g.\ (I.40$'$), marks a result that differs from the printed one.
+\item Notation follows \PI: conformal coordinates $ds^2=a^2(\eta)(-d\eta^2+d\vec x^{\,2})$ with $a=-1/(H\eta)$; $g_{\mu\nu}=a^2(\eta_{\mu\nu}+\kappa h_{\mu\nu})$, indices on $h_{\mu\nu}$ raised with $\eta^{\mu\nu}$, $\kappa^2=16\pi G$;
+dimensional regularization in $D$ dimensions; the de Sitter length function $y(x;x')=aa'H^2\big[\|\vec x-\vec x'\|^2-(|\eta-\eta'|-i\delta)^2\big]$.
+\item Labels: \tP{} given in the paper; \tD{} derived here; \tA{} assumption or convention; \tC{} independent cross-check (by symbolic or numerical code unless the text says it is a hand check). Code checks are always kept separate from the analytic derivation.
+\item \textbf{Two sign conventions.} The \emph{paper convention} is the sign of the self-mass-squared as printed in \PI. The \emph{definition sign} is the one fixed by \PI's own definition \eqI{168},
+\[
+\partial_\mu\big(\sqrt{-g}\,g^{\mu\nu}\partial_\nu\Phi\big)-\int d^Dx'\,M^2(x;x')\,\Phi(x')=0 ,
+\]
+with $-iM^2(x;x')$ the 1PI two-point function, $-iM^2=\delta^2(i\Gamma)/\delta\Phi(x)\delta\Phi(x')$.
+We find that the printed $-iM^2$ is $-1$ times the definition: the 4-point part is reversed by the derivative rule of \eqI{32} (Chapter~\ref{ch:fourpoint}),
+the 3-point part by the step \eqI{46}$\to$\eqI{47}--\eqI{49} (Chapter~\ref{ch:three-point-setup}), and \PI{} carries the printed 3-point signs through the rest of the
+calculation (Chapter~\ref{ch:ch04}), so the relative sign of the two parts is consistent. In the definition sign the physical nonlocal part of the renormalized
+self-mass-squared is $-$(corrected Table~X) (Chapter~\ref{ch:ch08}). Every equation states which convention it uses.
+\item \textbf{One-loop mode function} (\PII). We write $\Phi=u+\kappa^2\Phi_1$, with $u$ the tree-order mode function and $\Phi_1$ sourced by the one-loop
+self-mass-squared with the factor $\kappa^2$ stripped off, so that $\kappa^2$ is counted once (Chapter~\ref{ch:sk}). The source $\mathcal R_1$ of the
+equation for $\Phi_1$ and the entries of \PII's Table~5 are quoted in units of $H^4u(0,k)/16\pi^2$, and the late-time result reads
+$\Phi\to u(0,k)\{1+\frac{\kappa^2H^2}{16\pi^2}[\tilde C+\order{\ln a/a^2}]\}$.
+\end{itemize}
+\section*{Where the code is}
+Each chapter has a folder \texttt{code/NN\_\ldots/} in the repository with standalone Python scripts (sympy, mpmath) and their expected output.
+Each task section ends with a ``Calculation record'' summarizing what was derived, what was checked, and how it compares with the paper.
+\section*{Where the findings are}
+Chapters~\ref{ch:feynman-rules}--\ref{ch:sk} follow the papers in order, one section per task (Tasks~1--17 for \PI, Task~18 for \PII).
+Chapter~\ref{ch:summary} collects all findings with fixed identifiers: four substantive findings (S1--S4), six absorbable ones (B1--B6),
+23 typographical errors (C1--C23), the results confirmed as printed (D1--D31) and the late-time results (E1--E10). It also lists the limitations of
+the checks and points to the sections where each item is derived. The same identifiers are used in the documentation pages of the repository.
+
+\input{notes_chapters.tex}
+\input{summary_chapter.tex}
+\end{document}

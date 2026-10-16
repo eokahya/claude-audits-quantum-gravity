@@ -1,0 +1,11 @@
+op      derived col1 (4/y)^(D-1)         derived col2 (4/y)^(D-2)                        paper-match
+alpha   0                                D/((D - 2)**2*(D - 1))                          True True
+beta    -D/(4*(D - 1))                   -(D**3 - 3*D**2 - 4*D + 8)/(4*(D - 2)*(D - 1))  True True
+gamma1  -D*(D - 2)/4                     -(D**3 - 3*D**2 - 4*D + 8)/4                    True True
+gamma2  D/4                              (D**3 - 3*D**2 - 4*D + 8)/(4*(D - 1))           True False
+gamma3  -D/4                             0                                               True True
+delta   0                                0                                               True True
+eps1    0                                (D**2 - 6*D + 4)/(2*(D - 2)*(D - 1))            True True
+eps2    0                                -(2*D - 1)/((D - 2)*(D - 1))                    True True
+eps3    0                                0                                               True True
+zeta    0                                0                                               True True

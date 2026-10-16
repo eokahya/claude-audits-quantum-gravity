@@ -1,0 +1,21 @@
+entry (Table-X convention) vs paper Table 5
+  (aa')^4 \Box^3/H^2                 -1/3*lnx/x    derived: 0                                             paper-derived: 0
+  (aa')^4 \Box^2                     26/3*lnx/x    derived: 0                                             paper-derived: 0
+  (aa')^4 \Box^2                     38/3*1/x      derived: 0                                             paper-derived: 0
+  (aa')^4 \Box^2                     -6*ln2x       derived: -18                                           paper-derived: 0
+  (aa')^4 \Box^2                     -18*lnx       derived: 0                                             paper-derived: 0
+  (aa')^4 H^2\Box                    -6*lnx/x      derived: 0                                             paper-derived: 0
+  (aa')^4 H^2\Box                    4*1/x         derived: 0                                             paper-derived: 0
+  (aa')^4 H^2\Box                    -4*lnx        derived: 2                                             paper-derived: 0
+  (aa')^4 H^4                        4*lnx/x       derived: 3                                             paper-derived: 0
+  (aa')^4 H^4                        18*1/x        derived: -9                                            paper-derived: 0
+  (aa')^4 H^4                        -108*lnx      derived: 33 - 18*L_a                                   paper-derived: 0
+  (aa')^3(a^2+a'^2)\Box^3/H^2        1/6*lnx/x     derived: -2*L_a**2/3 + 14*L_a/3 - 325/27 + 4*pi**2/9   paper-derived: 0
+  (aa')^3(a^2+a'^2)\Box^2            -1/3*lnx/x    derived: 2*L_a**2/3 - 4*L_a - 4*pi**2/9 + 85/27        paper-derived: 0
+  (aa')^3(a^2+a'^2)\Box^2            1/6*1/x       derived: 8/9 - 2*L_a/3                                 paper-derived: 0
+  (aa')^3(a^2+a'^2)H^2\Box           -2/3*lnx/x    derived: 2*L_a**2/3 - 10*L_a/3 - 4*pi**2/9 + 160/27    paper-derived: 0
+  (aa')^3(a^2+a'^2)H^2\Box           5*1/x         derived: 55/3 - 10*L_a                                 paper-derived: 0
+  (aa')^3(a^2+a'^2)H^2\Box           -18*lnx       derived: 18*L_a - 15                                   paper-derived: 0
+  (aa')^3(a^2+a'^2)H^4               4/3*lnx/x     derived: -2*L_a**2/3 + 8*L_a/3 - 91/27 + 4*pi**2/9     paper-derived: 0
+  (aa')^3(a^2+a'^2)H^4               -32/3*1/x     derived: 32*L_a/3 - 80/9                               paper-derived: 0
+  TOTAL (non-falling): 0

@@ -1,0 +1,18 @@
+D=4: (46)-route == (45)-route                         : True
+       (46)-route == derived (47)-(49) + antisym. pair      : True
+       antisym. pair vanishes when d'_i = -d_i on iDelta_A  : True
+       (46)-route == paper's (47)-(49)  (after d'_i=-d_i)   : False
+       (46)-route == -(paper's (47)-(49)) (after d'_i=-d_i) : True
+D=5: (46)-route == (45)-route                         : True
+       (46)-route == derived (47)-(49) + antisym. pair      : True
+       antisym. pair vanishes when d'_i = -d_i on iDelta_A  : True
+       (46)-route == paper's (47)-(49)  (after d'_i=-d_i)   : False
+       (46)-route == -(paper's (47)-(49)) (after d'_i=-d_i) : True
+D=6: (46)-route == (45)-route                         : True
+       (46)-route == derived (47)-(49) + antisym. pair      : True
+       antisym. pair vanishes when d'_i = -d_i on iDelta_A  : True
+       (46)-route == paper's (47)-(49)  (after d'_i=-d_i)   : False
+       (46)-route == -(paper's (47)-(49)) (after d'_i=-d_i) : True
+== homogeneity of iDelta_A: d'_i F = -d_i F and d_i d'_j F symmetric, F = A(y) + k ln(a a') ==
+  d'_i F + d_i F = 0           : True
+  d_i d'_j F - d_j d'_i F = 0  : True

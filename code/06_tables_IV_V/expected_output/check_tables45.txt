@@ -1,0 +1,18 @@
+== (F4c) actual D=4 propagators (units H^2/16pi^2), linked antiderivatives ==
+  [D=4 actual] point 0: sum P_k = -0.0021677839715372   sum ops x appendix totals = -0.0021677839715372   diff = 0.0
+  [D=4 actual] point 1: sum P_k = 0.14514821135740   sum ops x appendix totals = 0.14514821135740   diff = 0.0
+  [D=4 actual] point 2: sum P_k = -0.020846448788554   sum ops x appendix totals = -0.020846448788554   diff = 0.0
+== per-operator: my D=4 total minus paper's Table IV(D=4)+V, written in x = y/4 ==
+  al: -36*log(2) + 24*log(2)**2
+  be: -36*log(2) - 6
+  g1: -216*log(2)
+  g2: 4/(3*x**2)
+  g3: 0
+  de: -12*x + 24*x*log(2) - 16*log(2)**2 + 20*log(2)
+  e1: -240*x*log(2) + 20 + 120*log(2)
+  e2: 24*x*log(2) - 24*log(2) - 2
+  e3: 72*x*log(2) - 8
+  ze: 48*x**2*log(2) - 48*x*log(2) + 24*x + 20*log(2)/3
+  point 0: sum P_k = -0.00216778397154  Tables IV+V = -0.0377690573892  diff = 0.03560
+  point 1: sum P_k = 0.145148211357  Tables IV+V = -16.9033807152  diff = 17.05
+  point 2: sum P_k = -0.0208464487886  Tables IV+V = -0.627934446688  diff = 0.6071

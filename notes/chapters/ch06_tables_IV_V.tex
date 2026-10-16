@@ -1,0 +1,829 @@
+% Chapter 6 -- Tables IV and V: Eqs. (I.94)-(I.125)   (Task 13)
+\makeatletter
+\providecommand{\chsixcaptionof}[2]{\def\@captype{#1}\caption{#2}}
+\makeatother
+\chapter{Tables IV and V: Eqs.~(I.94)--(I.125)}
+\label{ch:tablesIVV}
+
+This chapter records Task~13: the reduction of the \emph{normal} part of the 3-point contribution to ten
+\emph{external operators} acting on functions of the de~Sitter length function $y$, and the separation of the
+result into its divergent part (Table~IV of \PI) and its finite part (Table~V of \PI). The printed material
+is on pages 124005-8 to 124005-10 of \PI. Tables~IV and~V rest on the appendix of \PI{} (``Extracting
+derivatives'', pages 124005-16 to 124005-19): the seven parts (A1)--(A7) and the ten Tables XI--XX.
+The appendix was therefore audited as well, to the extent described in Sec.~\ref{ch6:appendix}.
+
+\section{Task 13: the normal terms reduced to external operators, Eqs.~(I.94)--(I.125), Tables IV and V}
+\label{ch6:task13}
+
+\subsection{Summary of findings}
+
+\begin{resultbox}[Task 13 in brief]
+\begin{itemize}[leftmargin=12pt,itemsep=2pt]
+\item \textbf{Identities.} Eqs.~\eqI{94}--\eqI{103}, \eqI{108}, \eqI{112} and the expansions \eqI{116}--\eqI{123}
+were derived and agree with the paper. Eqs.~\eqI{124}--\eqI{125} are also correct; the only difference is a constant, which is
+annihilated by $\alpha=(aa')^D\square^2$.
+\item \textbf{Appendix Tables XI--XX:} their totals are exact once five typographical errors are corrected. Check: the ten external operators acting on
+the table totals reproduce the direct sum of the seven parts $P_1$--$P_7$. This holds for generic power functions at $D=4$ and $D=5$ and for the
+actual $D=4$ propagators (pointwise, at random points).
+\item \textbf{Table IV.} 19 of the 20 entries agree in general $D$. \textbf{The second-column entry of the $\gamma_2$ row has the wrong sign}:
+we obtain $+\frac{D^3-3D^2-4D+8}{4(D-1)}$; the paper prints $-\frac{D^3-3D^2-4D+8}{4(D-1)}$.
+\item \textbf{Table V.} All logarithmic and inverse-power terms ($1/x$, $\ln x/x$, $\ln x$, $\ln^2x$, $x\ln x$, $x^2\ln x$) agree. The polynomial terms
+depend on the convention for integration constants, but the printed set corresponds to \emph{no} consistent convention: globally there is a finite
+difference equivalent to $72\,\gamma_2$ (acting on a constant). It is most naturally read as a term $-12x$ dropped from the $\delta$ row, since
+$\nabla^2\square x\neq0$. With the two corrections ($\gamma_2$ sign and $72\gamma_2$) Tables IV$+$V reproduce the direct sum at three random points.
+\item \textbf{Overall sign.} The paper's tables carry the sign of $P_1$--$P_7$, i.e.\ of the printed \eqI{47}--\eqI{49}. The tables derived with
+the definition sign are $-1$ times the paper's corrected tables (inherited from Tasks 7--12).
+\item \textbf{Point to follow.} If the $\square$ in $\alpha$ and $\delta$ is applied outside the integral as a distribution, the local contribution
+\eqI{54}$+$\eqI{58} may be counted a second time (Sec.~\ref{ch6:physics}).
+\end{itemize}
+\end{resultbox}
+
+\begin{notebox}[Later resolution (added in this write-up; from Tasks 16 and 17)]
+The $\gamma_2$ sign in Table IV was flagged in Task~13 as a point to follow in Section IV of \PI. In Task~16 (Chapter~8) it was found that the paper's
+Table VI uses the corrected ($+$) sign, and that shift symmetry independently requires it; the printed $-$ in Table IV is therefore a
+\emph{typographical} error. The finite $72\gamma_2$ term reappears in Task~17 (Chapter~8) in the constant of the row
+$(aa')^3(a^2+a'^2)H^4$ of Table X ($-54\to+18$); it is analytic in $y$ and drops out of the retarded kernel.
+\end{notebox}
+
+\subsection{Goal, inputs, notation and scope}
+
+\paragraph{Goal \tP.} Derive Eqs.~\eqI{94}--\eqI{125}, Table IV (general $D$) and Table V ($D=4$) of \PI{} from their inputs and compare
+with the printed equations at the end of each step. In \PI, \eqI{94}--\eqI{96} are on page 124005-8, \eqI{97}--\eqI{116} on page 124005-9, and
+\eqI{117}--\eqI{125} with Tables IV and V on page 124005-10. Tables IV and V are computed from the totals of the appendix Tables XI--XX; these
+totals were taken as printed (with the corrections of Table~\ref{ch6:tab:apptypos}) after they had been checked against the direct sum of the
+seven parts $P_1$--$P_7$ (Sec.~\ref{ch6:appendix}).
+
+\paragraph{Notation.} $z\equiv4/y$, $x\equiv y/4$, $p\equiv D-2$, $\mathcal N\equiv H^{D-2}/(4\pi)^{D/2}$, $h\equiv H^2/16\pi^2$.
+$I^n$ is the $n$-fold indefinite integral with respect to $y$ of \eqI{68} (Task 11). We abbreviate
+\begin{equation}
+G\equiv I^2[AA''],\qquad K\equiv I^2[A'^2].
+\end{equation}
+Primes on $A,B,C,f$ denote $d/dy$; primes on $a$, $\partial$, $\square$ refer to the point $x'$. We use $\partial_0a=Ha^2$, and on functions
+of $y$ alone $\partial'_i=-\partial_i$ and $\nabla'^2=\nabla^2$ \eqI{81}.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=14pt]
+\item[(G1)] Identities derived in Tasks 11--12 \tD{} (Chapter 5): \eqI{70}--\eqI{78}, \eqI{84}--\eqI{88}, \eqI{92}, \eqI{93} and the definition of
+$\square$, \eqI{42}/\eqI{90}. The ones used explicitly below are
+\begin{align}
+a^D\square f&=-\partial_0\big(a^{D-2}\partial_0f\big)+a^{D-2}\nabla^2f, \qquad
+\square=-\frac{1}{a^2}\partial_0^2-\frac{(D-2)H}{a}\partial_0+\frac1{a^2}\nabla^2, \label{ch6:box}\\
+f\,\partial_0\partial'_jA&=\partial_0\partial'_jI^2[fA'']+Ha\,\partial'_jI^2[f'A'], \qquad
+f\,\partial_i\partial'_0A=\partial_i\partial'_0I^2[fA'']+Ha'\,\partial_iI^2[f'A'], \label{ch6:76-77}\\
+(\partial_0+\partial'_0)f(y)&=H(a+a')\,y f'(y), \label{ch6:84}\\
+(a'\partial_0+a\partial'_0)f(y)&=-(D-1)Haa'f(y)+\frac{\nabla^2}{2H}\,I[f](y), \label{ch6:86}\\
+(a\partial_0+a'\partial'_0)f(y)&=H(a+a')^2y f'(y)+(D-1)Haa'f(y)-\frac{\nabla^2}{2H}\,I[f](y), \label{ch6:88}\\
+\square f(y)&=H^2\big[(4y-y^2)f''(y)+D(2-y)f'(y)\big]=\square'f(y). \label{ch6:93}
+\end{align}
+These are \eqI{42}, \eqI{90}, \eqI{76}, \eqI{77}, \eqI{84}, \eqI{86}, \eqI{88} and \eqI{93}. Eq.~\eqref{ch6:93} is a pointwise identity.
+\item[(G2)] The propagator series \eqI{14}, \eqI{27}, \eqI{28} \tP; the first coefficient of \eqI{14} is taken as $\Gamma(\frac D2-1)$ (Task 8).
+\item[(G3)] Closed forms at $D=4$ \tD: $A=h\{4/y-2\ln(y/4)-1\}$ \eqI{62}; $B=C=4h/y$, because every series term of \eqI{27}--\eqI{28}
+vanishes at $D=4$ (Sec.~\ref{ch6:expansions}).
+\item[(G4)] In the normal contribution the inner derivatives are naive (without delta function) \tP{} (appendix text of \PI{} and the footnote to
+\eqI{75}; Task 11).
+\end{itemize}
+
+\paragraph{Scope.} Section IV of \PI{} and Tables VI--X are not treated here. The identities are derived in general $D$, Table V at $D=4$.
+The functions in Table V are locally integrable at $D=4$; the distributional content of the external operators is discussed in
+Sec.~\ref{ch6:physics}.
+
+%-----------------------------------------------------------------------------
+\subsection{Eqs.~(I.94)--(I.96): the second mixed \texorpdfstring{$A$}{A} term \texorpdfstring{\tD}{}}
+\label{ch6:94-96}
+
+Apply the second identity of \eqref{ch6:76-77} (i.e.\ \eqI{77}) with $f=A$, summed over $i$; then $f'A'=A'^2$ and
+\begin{equation}
+A\,\partial_i\partial'_0A=\partial_i\partial'_0G+Ha'\,\partial_iK .
+\end{equation}
+The outer $\partial_i$ commutes with the time-dependent factor $(aa')^{D-2}$ and with $\partial'_0$, and it combines with the inner $\partial_i$
+into $\nabla^2$:
+\begin{equation}
+\partial_i\partial'_0\big[(aa')^{D-2}A\,\partial_i\partial'_0A\big]
+=\nabla^2\partial'_0\big[(aa')^{D-2}\partial'_0G\big]+H\nabla^2\partial'_0\big[a^{D-2}a'^{D-1}K\big]. \tag{I.94}
+\end{equation}
+
+\paragraph{Eq.~(I.95).} The primed version of \eqref{ch6:box} gives $\partial'_0(a'^{D-2}\partial'_0G)=-a'^D\square'G+a'^{D-2}\nabla'^2G$, and
+$\partial'_0(a'^{D-1}K)=(D-1)Ha'^DK+a'^{D-1}\partial'_0K$; moreover $\nabla'^2=\nabla^2$. Hence
+\begin{equation}
+\begin{split}
+={}&-a^{D-2}a'^D\nabla^2\square'G+(aa')^{D-2}\nabla^4G\\
+&+Ha^{D-2}a'^{D-1}\nabla^2\partial'_0K+(D-1)H^2a^{D-2}a'^D\nabla^2K .
+\end{split}\tag{I.95}
+\end{equation}
+
+\paragraph{Eq.~(I.96).} By \eqref{ch6:93}, $\square'G=\square G$. From \eqref{ch6:86} with $f=K$,
+\begin{equation}
+a\,\partial'_0K=-a'\partial_0K-(D-1)Haa'K+\frac{\nabla^2}{2H}I[K],
+\end{equation}
+which we multiply by $Ha^{D-3}a'^{D-1}\nabla^2$. The term $-(D-1)H^2a^{D-2}a'^D\nabla^2K$ produced in this way cancels the last term of \eqI{95},
+and $I[K]=I^3[A'^2]$:
+\begin{equation}
+\begin{split}
+={}&-a^{D-2}a'^D\nabla^2\square G+(aa')^{D-2}\nabla^4G\\
+&-Ha^{D-3}a'^D\nabla^2\partial_0K+\tfrac12a^{D-3}a'^{D-1}\nabla^4I^3[A'^2] .
+\end{split}\tag{I.96}
+\end{equation}
+Eqs.~\eqI{94}--\eqI{96} as derived are identical with the printed equations.
+
+\paragraph{The symmetric form of $P_2$, Eqs.~(A8)--(A9).} The appendix part $P_2$ is defined in (A2) as the sum of the two mixed $A$ terms,
+$\partial_i\partial'_0[(aa')^{D-2}A\partial_i\partial'_0A]+\partial_0\partial'_i[(aa')^{D-2}A\partial_0\partial'_iA]$. The first is \eqI{95}; the second
+is \eqI{92} (Task 12),
+\begin{equation}
+-a^Da'^{D-2}\nabla^2\square G+(aa')^{D-2}\nabla^4G+Ha^{D-1}a'^{D-2}\nabla^2\partial_0K+(D-1)H^2a^Da'^{D-2}\nabla^2K .
+\end{equation}
+In the sum, $-(a^Da'^{D-2}+a^{D-2}a'^D)\nabla^2\square G=-\delta\,G$, the two $\nabla^4G$ terms give $2\zeta G$, the two $(D-1)H^2$ terms give
+$(D-1)\epsilon_2K$, and the two $H\,\partial_0K$, $H\,\partial'_0K$ terms combine into $H(aa')^{D-2}(a\partial_0+a'\partial'_0)\nabla^2K$
+(the operators $\delta,\zeta,\epsilon_{1,2,3}$ are defined in \eqI{109}--\eqI{113} below):
+\begin{equation}
+P_2=(-\delta+2\zeta)I^2[AA'']+(D-1)\epsilon_2I^2[A'^2]+H(aa')^{D-2}(a\partial_0+a'\partial'_0)\nabla^2I^2[A'^2] .\tag{I.A8}
+\end{equation}
+Applying \eqref{ch6:88} to $f=K$ (with $K'=I[A'^2]$ and $I[K]=I^3[A'^2]$),
+\begin{equation}
+P_2=(-\delta+2\zeta)I^2[AA'']+(D-1)\epsilon_2I^2[A'^2]+\epsilon_3\,yI[A'^2]+(D-1)\epsilon_1I^2[A'^2]-\tfrac12\zeta\,I^3[A'^2],\tag{I.A9}
+\end{equation}
+in agreement with the printed (A8)--(A9).
+
+%-----------------------------------------------------------------------------
+\subsection{Eqs.~(I.97)--(I.101): the ubiquitous reduction \texorpdfstring{\tD}{}}
+\label{ch6:97-101}
+
+\paragraph{Eqs.~(I.97)--(I.98).} The factor $a'$ passes through $\partial_0$, and \eqref{ch6:box} gives
+\begin{equation}
+\partial_0\big[(aa')^{D-2}\partial_0f(y)\big]=a'^{D-2}\big(-a^D\square f+a^{D-2}\nabla^2f\big)
+=-a^Da'^{D-2}\square f(y)+(aa')^{D-2}\nabla^2f(y) .\tag{I.97}
+\end{equation}
+Eq.~\eqI{98} is the primed counterpart; with $\square'f=\square f$ from \eqref{ch6:93} and $\nabla'^2=\nabla^2$,
+\begin{equation}
+\partial'_0\big[(aa')^{D-2}\partial'_0f(y)\big]=-a^{D-2}a'^D\square f(y)+(aa')^{D-2}\nabla^2f(y) .\tag{I.98}
+\end{equation}
+
+\paragraph{Eq.~(I.99)} is the operator identity $(\partial_0+\partial'_0)^2=\partial_0^2+2\partial_0\partial'_0+\partial_0'^2$, i.e.
+$\partial_0\partial'_0=\frac12(\partial_0+\partial'_0)^2-\frac12\partial_0^2-\frac12\partial_0'^2$.
+
+\paragraph{Eq.~(I.100).} With $\partial_0a^p=pHa^{p+1}$ and the product rule,
+\begin{equation}
+\partial_0\partial'_0\big[(aa')^pf\big]=(aa')^p\partial_0\partial'_0f+pH(aa')^p(a'\partial_0+a\partial'_0)f+p^2H^2(aa')^{p+1}f .\tag{I.100}
+\end{equation}
+
+\paragraph{Eq.~(I.101).} The pieces of \eqI{99} are computed separately.
+\begin{itemize}[leftmargin=14pt]
+\item Applying \eqref{ch6:84} twice, and using $(\partial_0+\partial'_0)(a+a')=H(a^2+a'^2)$ and $(\partial_0+\partial'_0)(yf')=H(a+a')(yf'+y^2f'')$:
+\begin{equation}
+(\partial_0+\partial'_0)^2f=H^2(a^2+a'^2)\,yf'+H^2(a+a')^2\big(yf'+y^2f''\big).
+\end{equation}
+\item From \eqref{ch6:box}: $\partial_0^2f=-a^2\square f-pHa\,\partial_0f+\nabla^2f$, and similarly for $\partial_0'^2f$ (with $\square'f=\square f$). Hence
+\begin{equation}
+-\tfrac12\big(\partial_0^2+\partial_0'^2\big)f=\tfrac12(a^2+a'^2)\square f+\tfrac12pH(a\partial_0+a'\partial'_0)f-\nabla^2f .
+\end{equation}
+\item Insert \eqref{ch6:88} for $(a\partial_0+a'\partial'_0)f$ and \eqref{ch6:86} for $(a'\partial_0+a\partial'_0)f$, and substitute everything into \eqI{100}.
+\end{itemize}
+The terms collect as follows (all multiplied by $(aa')^{D-2}$):
+\begin{itemize}[leftmargin=14pt]
+\item $(a^2+a'^2)$: \ $\frac12(a^2+a'^2)\big[\square f+H^2yf'\big]$;
+\item $(a+a')^2$: \ $\frac12H^2(a+a')^2\big[yf'+y^2f''\big]+\frac12pH^2(a+a')^2yf'=\frac12H^2(a+a')^2\big[(D-1)yf'+y^2f''\big]$;
+\item $aa'f$: \ $pH^2aa'f\big[\frac12(D-1)-(D-1)+p\big]=\frac12(D-2)(D-3)H^2aa'f$;
+\item $\nabla^2I[f]$: \ $-\frac14p+\frac12p=\frac14(D-2)$;
+\item $-\nabla^2f$.
+\end{itemize}
+Therefore
+\begin{equation}
+\begin{split}
+\partial_0\partial'_0\big[(aa')^{D-2}f(y)\big]={}&\tfrac12(aa')^{D-2}(a^2+a'^2)\big[\square f(y)+H^2yf'(y)\big]-(aa')^{D-2}\nabla^2f(y)\\
+&+\tfrac14(D-2)(aa')^{D-2}\nabla^2I[f](y)+\tfrac12(D-2)(D-3)H^2(aa')^{D-1}f(y)\\
+&+\tfrac12H^2(a+a')^2(aa')^{D-2}\big[(D-1)yf'(y)+y^2f''(y)\big],
+\end{split}\tag{I.101}
+\end{equation}
+which is the printed \eqI{101}.
+
+%-----------------------------------------------------------------------------
+\subsection{Eqs.~(I.102)--(I.103): the two \texorpdfstring{$B$}{B} terms \texorpdfstring{\tD}{}}
+\label{ch6:102-103}
+
+\paragraph{Eq.~(I.102).} Write $X\equiv(aa')^{D-2}B(y)$. Expanding $\partial_i(\partial_0+\partial'_0)\big[X(\partial_0+\partial'_0)\partial'_iA\big]$
+gives four terms. The two terms $\partial_i\partial_0[X\partial_0\partial'_iA]$ and $\partial_i\partial'_0[X\partial'_0\partial'_iA]$ are subtracted
+explicitly. The term $\partial_i\partial'_0[X\partial_0\partial'_iA]$ is the first term on the left of \eqI{102}. In the remaining term
+$\partial_i\partial_0[X\partial'_0\partial'_iA]$ we use, on the $y$-dependent expressions, the inner replacement $\partial'_i\to-\partial_i$ and the outer
+replacement $\partial_i\to-\partial'_i$; the two signs cancel and we obtain $\partial_0\partial'_i[X\partial_i\partial'_0A]$, the second term on the left of
+\eqI{102}. Thus
+\begin{equation}
+\begin{split}
+&\partial_i\partial'_0\big[(aa')^{D-2}B\,\partial_0\partial'_iA\big]+\partial_0\partial'_i\big[(aa')^{D-2}B\,\partial_i\partial'_0A\big]\\
+&\quad=\partial_i(\partial_0+\partial'_0)\big[(aa')^{D-2}B(\partial_0+\partial'_0)\partial'_iA\big]
+-\partial_i\partial_0\big[(aa')^{D-2}B\,\partial_0\partial'_iA\big]-\partial_i\partial'_0\big[(aa')^{D-2}B\,\partial'_0\partial'_iA\big],
+\end{split}\tag{I.102}
+\end{equation}
+as printed.
+
+\paragraph{Eq.~(I.103).} The three pieces are reduced separately.
+
+\emph{First piece.} By \eqref{ch6:84}, $(\partial_0+\partial'_0)\partial'_iA=\partial'_i[H(a+a')yA']=H(a+a')\partial'_i(yA')$, and
+\begin{equation}
+B\,\partial'_i(yA')=B(A'+yA'')\,\partial'_iy=\partial'_iF,\qquad F\equiv I[A'B+yA''B].
+\end{equation}
+Then $X(\partial_0+\partial'_0)\partial'_iA=H(a+a')(aa')^{D-2}\partial'_iF$. Using
+\begin{gather}
+(\partial_0+\partial'_0)\big[H(a+a')(aa')^{D-2}\big]=H^2\big[(a^2+a'^2)+(D-2)(a+a')^2\big](aa')^{D-2},\nonumber\\
+(\partial_0+\partial'_0)\partial'_iF=\partial'_i\big[H(a+a')yF'\big],
+\end{gather}
+and finally $\partial_i\partial'_i\to-\nabla^2$ on functions of $y$, the first piece becomes
+\begin{equation}
+\begin{split}
+&-H^2(a^2+a'^2)(aa')^{D-2}\nabla^2I[A'B+yA''B]\\
+&-H^2(a+a')^2(aa')^{D-2}\nabla^2\big\{(D-2)I[A'B+yA''B]+yA'B+y^2A''B\big\},
+\end{split}
+\end{equation}
+where $yF'=yA'B+y^2A''B$.
+
+\emph{Second and third pieces.} The first identity of \eqref{ch6:76-77} with $f=B$ gives
+$B\,\partial_0\partial'_jA=\partial_0\partial'_jI^2[BA'']+Ha\,\partial'_jI^2[A'B']$; the primed mirror image (obtained with $\partial'_i A=-\partial_iA$ and
+\eqI{77}) is $B\,\partial'_0\partial'_jA=\partial'_0\partial'_jI^2[BA'']+Ha'\,\partial'_jI^2[A'B']$. With $\partial_i\partial'_i\to-\nabla^2$ the two
+subtracted terms become
+\begin{equation}
+\begin{split}
+&\nabla^2\Big\{\partial_0\big[(aa')^{D-2}\partial_0I^2[BA'']\big]+\partial'_0\big[(aa')^{D-2}\partial'_0I^2[BA'']\big]\Big\}\\
+&+H\nabla^2\Big\{\partial_0\big[a^{D-1}a'^{D-2}I^2[A'B']\big]+\partial'_0\big[a^{D-2}a'^{D-1}I^2[A'B']\big]\Big\}.
+\end{split}
+\end{equation}
+Eqs.~\eqI{97}--\eqI{98} turn the first line into $-(a^2+a'^2)(aa')^{D-2}\nabla^2\square I^2[A''B]+2(aa')^{D-2}\nabla^4I^2[A''B]$. The second line
+equals $(D-1)H^2(a^2+a'^2)(aa')^{D-2}\nabla^2I^2[A'B']+H(aa')^{D-2}\nabla^2(a\partial_0+a'\partial'_0)I^2[A'B']$, and the last term is reduced with
+\eqref{ch6:88}:
+\begin{equation}
+\begin{split}
+H(aa')^{D-2}\nabla^2(a\partial_0+a'\partial'_0)I^2[A'B']={}&H^2(a+a')^2(aa')^{D-2}\nabla^2\,yI[A'B']\\
+&+(D-1)H^2(aa')^{D-1}\nabla^2I^2[A'B']-\tfrac12(aa')^{D-2}\nabla^4I^3[A'B'] .
+\end{split}
+\end{equation}
+
+\emph{Sum.} Collecting all pieces:
+\begin{itemize}[leftmargin=14pt]
+\item the coefficient of $(D-1)H^2(aa')^{D-2}\nabla^2I^2[A'B']$ is $(a^2+a'^2)$ from the time derivatives of the scale factors in the second line
+above plus $aa'$ from \eqref{ch6:88}, i.e.\
+$(a^2+aa'+a'^2)$;
+\item $(aa')^{D-2}\nabla^4\{2I^2[A''B]-\frac12I^3[A'B']\}$;
+\item $-(a^2+a'^2)(aa')^{D-2}\nabla^2\{\square I^2[A''B]+H^2I[A'B+yA''B]\}$;
+\item the $(a+a')^2$ bracket $\{(D-2)I[A'B+yA''B]+yA'B+y^2A''B-yI[A'B']\}$.
+\end{itemize}
+Hence
+\begin{equation}
+\begin{split}
+={}&-(a^2+a'^2)(aa')^{D-2}\nabla^2\big\{\square I^2[A''B]+H^2I[A'B+yA''B]\big\}\\
+&+(aa')^{D-2}\nabla^4\big\{2I^2[A''B]-\tfrac12I^3[A'B']\big\}\\
+&-H^2(a+a')^2(aa')^{D-2}\nabla^2\big\{(D-2)I[A'B+yA''B]+yA'B+y^2A''B-yI[A'B']\big\}\\
+&+(D-1)H^2(a^2+aa'+a'^2)(aa')^{D-2}\nabla^2I^2[A'B'],
+\end{split}\tag{I.103}
+\end{equation}
+which agrees term by term with the printed \eqI{103}.
+
+%-----------------------------------------------------------------------------
+\subsection{The external operators, Eqs.~(I.104)--(I.115) \texorpdfstring{\tD\ \tA}{}}
+\label{ch6:operators}
+
+Eqs.~\eqI{104}--\eqI{113} are definitions:
+\begin{equation}
+\begin{aligned}
+\alpha&\equiv(aa')^D\square^2, & \beta&\equiv(aa')^{D-1}(a^2+a'^2)H^2\square,\\
+\gamma_1&\equiv(aa')^DH^4, & \gamma_2&\equiv(aa')^{D-1}(a^2+a'^2)H^4,\\
+\gamma_3&\equiv(aa')^{D-1}(a+a')^2H^4=2\gamma_1+\gamma_2, & \delta&\equiv(aa')^{D-2}(a^2+a'^2)\nabla^2\square,\\
+\epsilon_1&\equiv(aa')^{D-1}H^2\nabla^2, & \epsilon_2&\equiv(aa')^{D-2}(a^2+a'^2)H^2\nabla^2,\\
+\epsilon_3&\equiv(aa')^{D-2}(a+a')^2H^2\nabla^2=2\epsilon_1+\epsilon_2,\qquad & \zeta&\equiv(aa')^{D-2}\nabla^4 .
+\end{aligned}
+\end{equation}
+The relations in \eqI{108} and \eqI{112} follow from $(a+a')^2=a^2+a'^2+2aa'$.
+
+\paragraph{Weight counting.} Under $\eta\to\lambda\eta$, $\vec x\to\lambda\vec x$ one has $a\to a/\lambda$ and $\nabla^2\to\nabla^2/\lambda^2$, while
+$H$, $y$ and $\square$ are invariant. All ten operators have weight $\lambda^{-2D}$; e.g.\ $\epsilon_1=(aa')^{D-1}H^2\nabla^2\to\lambda^{-2D+2-2}$.
+The header of the appendix Table XII prints $\beta=(aa')^{D-2}(a^2+a'^2)H^2\square$, which has weight $\lambda^{-2D+2}$. The correct factor is
+$(aa')^{D-1}$, as in \eqI{105}; this is also confirmed by the global check (Sec.~\ref{ch6:appendix}).
+
+\paragraph{The differences $\Delta B$, $\Delta C$ (I.114).} \PI{} introduces
+\begin{equation}
+\Delta B\equiv B-A,\qquad \Delta C\equiv2\Big(\frac{D-2}{D-3}\Big)(C-A). \tag{I.114}
+\end{equation}
+The reason for this choice of $\Delta C$: the $\partial_0\partial'_0$ terms of \eqI{47} combine as
+\begin{equation}
+-\frac{D-1}{D-3}A+\frac{2(D-2)}{D-3}C=A+\Delta C,
+\end{equation}
+which produces the structure $P_3+P_7$ of the appendix. The eight products listed in \eqI{115},
+\begin{equation}
+A'^2,\quad AA'',\quad A'B',\quad A''B,\quad A'\Delta B',\quad A''\Delta B,\quad A'\Delta C',\quad A''\Delta C, \tag{I.115}
+\end{equation}
+are the complete list of products appearing in the appendix totals.
+
+%-----------------------------------------------------------------------------
+\subsection{The expansions (I.116)--(I.123) \texorpdfstring{\tD}{}}
+\label{ch6:expansions}
+
+\paragraph{Leading coefficients in exact $D$.} Only the two leading terms of the propagator functions, $z^{D/2-1}$ and $z^{D/2-2}$, reach the
+powers $z^D$ and $z^{D-1}$ of the products; all other terms have exponents $\le0$. We write
+\begin{equation}
+A\simeq\mathcal N\big[c_0z^{p/2}+a_1z^{p/2-1}\big],\qquad B\simeq\mathcal N\big[c_0z^{p/2}+b_1z^{p/2-1}\big],\qquad
+C\simeq\mathcal N\big[c_0z^{p/2}+c_1z^{p/2-1}\big],
+\end{equation}
+with
+\begin{equation}
+c_0=\Gamma\big(\tfrac D2-1\big),\qquad a_1=\frac{\Gamma(\frac D2+1)}{\frac D2-2},\qquad b_1=\Gamma\big(\tfrac D2\big),\qquad
+c_1=-\big(3-\tfrac D2\big)\Gamma\big(\tfrac D2-1\big),
+\end{equation}
+and use $\frac{d}{dy}z^q=-\frac q4z^{q+1}$. The natural unit of the products is $\mathcal N^2\Gamma^2(\frac D2)/16=\frac{\Gamma^2(D/2)}{16}\frac{H^{2D-4}}{(4\pi)^D}$,
+the prefactor of \eqI{116}--\eqI{123}. For example, with $q\equiv\frac D2-1$ the coefficient of $z^{D-1}$ in $A'B'$ is, in this unit,
+\begin{equation}
+\frac{(q-1)(a_1+b_1)}{\Gamma(q+1)}=(q+1)+(q-1)=D-2 ,
+\end{equation}
+since $a_1=\Gamma(q+2)/(q-1)$ and $b_1=\Gamma(q+1)$. The results for all eight products are collected in Table~\ref{ch6:tab:products}.
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccll}
+\toprule
+Product & $z^D$ (exact $D$) & $z^{D-1}$ (exact $D$) & $D=4$ closed form $\times\frac{h^2}{16}$ & Paper\\
+\midrule
+$A'^2$ & $1$ & $D$ & $z^4+4z^3+4z^2$ & \checkmark\\
+$AA''$ & $\frac{D}{D-2}$ & pole$^{*}$: $\frac{D(D-2)}{D-4}$ & $2z^4-4z^3L-4z^2L-2z^2$ & \checkmark\\
+$A'B'$ & $1$ & $D-2$ & $z^4+2z^3$ & \checkmark\\
+$A''B$ & $\frac{D}{D-2}$ & $D$ & $2z^4+2z^3$ & \checkmark\\
+$A'\Delta B'$ & $0$ & $-2$ & $-2z^3-4z^2$ & \checkmark\\
+$A''\Delta B$ & $0$ & pole$^{*}$: $-\frac{2D}{D-4}$ & $4z^3L+2z^3+4z^2L+2z^2$ & \checkmark\\
+$A'\Delta C'$ & $0$ & $-8$ & $-8z^3-16z^2$ & \checkmark\\
+$A''\Delta C$ & $0$ & pole$^{*}$: $-\frac{8D}{D-4}$ & $16z^3L+8z^3+16z^2L+8z^2$ & \checkmark\\
+\bottomrule
+\end{tabular}
+\caption{Leading coefficients of the eight products \eqI{115}, in units of $\frac{\Gamma^2(D/2)}{16}\frac{H^{2D-4}}{(4\pi)^D}$, and their $D=4$ closed forms,
+$L\equiv\ln(y/4)$, $z=4/y$. $^*$Pole: the $z^{D-1}$ coefficient (value from \texttt{check\_94\_125.py}, two leading terms) carries $1/(D-4)$; it combines with the
+constant $-\pi\cot(\pi D/2)$ term into the logarithm $z^3L$ at $D=4$. These products enter Table IV only through their $z^D$ powers, because
+$I^2[z^{D-1}]\sim z^{D-3}$ is not divergent. The $D=4$ closed forms were verified exactly from \eqI{62} and $B=C=4h/y$ (Sec.~\ref{ch6:code}).}
+\label{ch6:tab:products}
+\end{table}
+
+\paragraph{Consistency note.} Eq.~\eqI{116} writes $4z^3$ for $A'^2$; this is the $D=4$ value of $Dz^{D-1}$. In the appendix totals $A'^2$ appears
+only in the forms $yI[\cdot]$, $y^2\,\cdot$ and $I^2[\cdot]$. In these, $z^{D-1}\to z^{D-3}$, which is not divergent, so setting $D=4$ there is
+legitimate. The products $A'B'$, $A'\Delta B'$ and $A'\Delta C'$ appear with a single integration, so their exact-$D$ coefficients of $z^{D-1}$ are
+needed; the paper gives them exactly ($(D-2)$, $-2$, $-8$).
+
+\begin{notebox}[Remark added in this write-up]
+For $A''B$ the exact-$D$ coefficient of $z^{D-1}$ is $D$, while the $D=4$ closed form has $2z^3$ (and \eqI{119} prints $2(4/y)^3$). The two
+numbers are not in conflict: at $D=4$ the $n=0$ term of the series \eqI{27} vanishes identically, so its constant part
+$-\Gamma(D-2)/\Gamma(D/2)$, which multiplies the leading term of $A''\propto z^{D/2+1}$, also reaches $z^3$ at $D=4$ and contributes $-2$.
+Since $A''B$ is always shielded by at least two powers of $y$, only the $D=4$ value is needed.
+\end{notebox}
+
+%-----------------------------------------------------------------------------
+\subsection{Eqs.~(I.124)--(I.125): the \texorpdfstring{$\alpha$}{alpha} example \texorpdfstring{\tD}{}}
+\label{ch6:124-125}
+
+The total of Table XI (operator $\alpha$) is $I^2[AA'']+I^2[\Delta C A'']$. The sum of the brackets of \eqI{117} and \eqI{123} is
+\begin{equation}
+\kappa^2\big\{I^2[AA'']+I^2[A''\Delta C]\big\}=\frac{\Gamma^2(\frac D2)}{16}\frac{\kappa^2H^{2D-4}}{(4\pi)^D}\,
+I^2\Big[\frac{D}{D-2}z^D+12z^3L+8z^3+12z^2L+6z^2+\order{\tfrac{D-4}{y^3}}\Big], \tag{I.124}
+\end{equation}
+as printed. For the exact-$D$ term, $I[z^D]=-\frac{4}{D-1}z^{D-1}$ and $I^2[z^D]=\frac{16}{(D-1)(D-2)}z^{D-2}$, so
+\begin{equation}
+\frac1{16}I^2\Big[\frac{D}{D-2}z^D\Big]=\frac{D}{(D-1)(D-2)^2}\,z^{D-2}.
+\end{equation}
+Integrating the remaining part twice at $D=4$ (with the antiderivatives produced by SymPy) reproduces the finite bracket of \eqI{125} up to a
+constant only,
+\begin{equation}
+\frac1{16}I^2\big[12z^3L+8z^3+12z^2L+6z^2\big]-\Big[6zL+13z-6L^2-18L\Big]=(24\ln2-36)\ln2 ,
+\end{equation}
+and this constant is annihilated by $\alpha=(aa')^D\square^2$. Hence
+\begin{equation}
+\begin{split}
+=\frac{\kappa^2H^{2D-4}}{(4\pi)^D}\Gamma^2\Big(\frac D2\Big)\Big\{&\frac{D}{(D-1)(D-2)^2}\Big(\frac4y\Big)^{D-2}
++6\Big(\frac4y\Big)\ln\Big(\frac y4\Big)+13\Big(\frac4y\Big)\\
+&-6\ln^2\Big(\frac y4\Big)-18\ln\Big(\frac y4\Big)+\order{\tfrac{D-4}{y}}\Big\}
+\end{split}\tag{I.125}
+\end{equation}
+agrees with the printed equation (up to the constant, which is immaterial under $\alpha$).
+
+%-----------------------------------------------------------------------------
+\subsection{The appendix decomposition: Tables XI--XX \texorpdfstring{\tD\ \tC}{}}
+\label{ch6:appendix}
+
+\paragraph{Method.} The normal contribution is split into seven parts, (A1)--(A7) of \PI:
+\begin{equation}
+\begin{aligned}
+P_1&\equiv\nabla\!\cdot\!\nabla'\big[(aa')^{D-2}A\,\nabla\!\cdot\!\nabla'A\big],\\
+P_2&\equiv\partial_i\partial'_0\big[(aa')^{D-2}A\,\partial_i\partial'_0A\big]+\partial_0\partial'_i\big[(aa')^{D-2}A\,\partial_0\partial'_iA\big],\\
+P_3&\equiv\partial_0\partial'_0\big[(aa')^{D-2}A\,\partial_0\partial'_0A\big],\qquad
+P_4\equiv-\partial_0\partial'_0\big[(aa')^{D-2}B\,\nabla\!\cdot\!\nabla'A\big],\\
+P_5&\equiv-\partial_i\partial'_0\big[(aa')^{D-2}B\,\partial_0\partial'_iA\big]-\partial_0\partial'_i\big[(aa')^{D-2}B\,\partial_i\partial'_0A\big],\\
+P_6&\equiv-\nabla\!\cdot\!\nabla'\big[(aa')^{D-2}B\,\partial_0\partial'_0A\big],\qquad
+P_7\equiv\partial_0\partial'_0\big[(aa')^{D-2}\Delta C\,\partial_0\partial'_0A\big],
+\end{aligned}
+\end{equation}
+with naive inner derivatives and the factors $\kappa^2$ suppressed. Their sum is the normal part of the \emph{printed} \eqI{47}--\eqI{49}, because
+$-\frac{D-1}{D-3}P_3+\frac{2(D-2)}{D-3}\partial_0\partial'_0[(aa')^{D-2}C\,\partial_0\partial'_0A]=P_3+P_7$. The tools used by the appendix are
+(A17)--(A18), i.e.\ \eqI{75} and \eqI{78}; the generic reductions (A35)--(A38); and (A9) and (A15) for $P_2$ and $P_5$. Each pair
+(part, operator) gives one row of a table. As an example of a generic reduction, (A36) reads
+\begin{equation}
+\begin{split}
+\partial_0\partial'_0\big[(aa')^{D-1}H^2f(y)\big]=\Big\{&\frac\beta2+\frac12(D-1)(D-2)\gamma_1+\frac{\gamma_2}{2}y\frac{\partial}{\partial y}\\
+&+\frac{\gamma_3}{2}\Big[(D-1)y\frac{\partial}{\partial y}+y^2\frac{\partial^2}{\partial y^2}\Big]+\epsilon_1\Big[-1+\frac D4I\Big]\Big\}f(y).
+\end{split}
+\end{equation}
+
+\paragraph{Row check.} Example (part $P_{3c}$, operator $\gamma_3$): $P_{3c}$ contains $f=-(D-1)K-yI[A'^2]$ under
+$\partial_0\partial'_0[(aa')^{D-1}H^2\,\cdot\,]$, so by (A36) its $\gamma_3$ row is $\frac12[(D-1)yf'+y^2f'']$. With
+$f'=-DI[A'^2]-yA'^2$ and $f''=-(D+1)A'^2-y(A'^2)'$,
+\begin{equation}
+\tfrac12\big[(D-1)yf'+y^2f''\big]=-\tfrac12D(D-1)\,yI[A'^2]-D\,y^2A'^2-\tfrac12y^3(A'^2)' ,
+\end{equation}
+which is the $P_{3c}$ row of Table XV. The total of a table was recomputed from its rows; e.g.\ for $\beta$ (and $\gamma_1$, whose total is
+$(D-1)(D-2)$ times that of $\beta$) the rows $P_{3b}$ and $P_{4b}$ give $I[A'^2]+(D-1)I[A'B']=DI[A'B']-I[A'\Delta B']$, using
+$\Delta B=B-A$.
+
+\begin{discbox}[Scope of the appendix audit (honesty note)]
+The original Task 13 report states that \emph{every} row of Tables XI--XX was reproduced by hand from the corresponding generic reduction.
+The command log of the task documents only the worked examples above and the global test below, and a later review concluded that this
+statement was an overstatement. What is established is: (i) the example rows and totals shown here were checked by hand; (ii) the ten table
+totals, as printed (after the five corrections listed below), reproduce the direct sum $\sum_kP_k$ pointwise. The appendix ``Extracting
+derivatives'' was \emph{not} redone from scratch row by row. The report also records which appendix material was read directly from the printed
+pages: the definitions (A1)--(A7), the reduction (A8)--(A9), and Tables XII ($\beta$) and XIV ($\gamma_2$). The other tables (XI, XIII,
+XV--XX) were used through their totals, which were coded line by line in the script \texttt{check\_global.py}.
+\end{discbox}
+
+\paragraph{The ten totals.} The totals of Tables XI--XX, as coded in \texttt{check\_global.py} (printed totals, with the corrections below), are
+\begin{align}
+\Tab_\alpha={}&I^2[AA'']+I^2[\Delta C A''],\nonumber\\
+\Tab_\beta={}&DI[A'B']-I[A'\Delta B']-\tfrac12yI[A'^2]-\tfrac{D-1}{2}I^2[A'^2]+I[A'\Delta C']-\tfrac12yI[A'\Delta C']-\tfrac{D-1}{2}I^2[A'\Delta C'],\nonumber\\
+\Tab_{\gamma_1}={}&(D-1)(D-2)\,\Tab_\beta,\nonumber\\
+\Tab_{\gamma_2}={}&DyA'B'-yA'\Delta B'-\tfrac12y^2A'^2-\tfrac D2yI[A'^2]+yA'\Delta C'-\tfrac D2yI[A'\Delta C']-\tfrac12y^2A'\Delta C',\nonumber\\
+\Tab_{\gamma_3}={}&(D-1)D\,yA'B'+Dy^2(A'B')'-(D-1)yA'\Delta B'-y^2(A'\Delta B')'-Dy^2A'^2-\tfrac12y^3(A'^2)'\nonumber\\
+&-\tfrac12(D-1)D\,yI[A'^2]+(D-1)yA'\Delta C'+y^2(A'\Delta C')'-Dy^2A'\Delta C'-\tfrac12y^3(A'\Delta C')'\nonumber\\
+&-\tfrac12(D-1)D\,yI[A'\Delta C'],\nonumber\\
+\Tab_\delta={}&2I^2[\Delta BA'']+\tfrac14I^3[A'^2]-I^2[\Delta CA'']+\tfrac14I^3[A'\Delta C'],\label{ch6:totals}\\
+\Tab_{\epsilon_1}={}&-2(D-2)I[A'\Delta B']-yI[A'\Delta B']-\tfrac{5D-4}{2}I^2[A'\Delta B']+\tfrac{D^2}{2}I^2[A'B']-\tfrac D4yI^2[A'^2]\nonumber\\
+&+(D-2)^2I^2[BA'']-\tfrac34(D-2)I^3[A'^2]-2I[A'\Delta C']+yI[A'\Delta C']+\tfrac{3D-2}{2}I^2[A'\Delta C']\nonumber\\
+&-\tfrac D4yI^2[A'\Delta C']-\tfrac34(D-2)I^3[A'\Delta C'],\nonumber\\
+\Tab_{\epsilon_2}={}&2yI[BA'']+I^2[A'B']-(D-1)I^2[A'\Delta B']+\tfrac14yI^2[A'^2]+\tfrac14yI^2[A'\Delta C'],\nonumber\\
+\Tab_{\epsilon_3}={}&2y^2BA''+2(D-1)yI[BA'']+(D-2)I^2[A'B']+yI[A'^2]+\tfrac{D-1}{4}yI^2[A'^2]+\tfrac14y^2I[A'^2]\nonumber\\
+&+\tfrac{D-1}{4}yI^2[A'\Delta C']+\tfrac14y^2I[A'\Delta C'],\nonumber\\
+\Tab_\zeta={}&-4I^2[\Delta BA'']+I^3[A'\Delta B']+\tfrac{D-2}{8}I^4[A'^2]+I^2[\Delta CA'']-\tfrac12I^3[A'\Delta C']+\tfrac{D-2}{8}I^4[A'\Delta C'],\nonumber
+\end{align}
+and the statement of the appendix is
+\begin{equation}
+\sum_{k=1}^7P_k=\alpha\,\Tab_\alpha+\beta\,\Tab_\beta+\sum_{i=1}^3\gamma_i\,\Tab_{\gamma_i}+\delta\,\Tab_\delta+\sum_{i=1}^3\epsilon_i\,\Tab_{\epsilon_i}+\zeta\,\Tab_\zeta .
+\label{ch6:decomp}
+\end{equation}
+
+\paragraph{Global check \tC.} The ten operators were applied to all table totals and compared pointwise with the direct sum of $P_1$--$P_7$
+(naive inner derivatives):
+\begin{itemize}[leftmargin=14pt]
+\item with the generic powers $A=y^{-7/3}$, $B=y^{-5/4}$, $\Delta C=y^{2/7}$ at $D=5$ and at $D=4$ (two random space-like points each);
+\item with the actual $D=4$ propagators (three random points). In this case the constants of the first integrals must be linked:
+$I[fA'']=fA'-I[f'A']$.
+\end{itemize}
+In every case the difference vanishes (to the 30-digit working precision). This result requires the following typographical corrections:
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{4.1cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{3.0cm}}
+\toprule
+Location & Printed & Correct & Reason\\
+\midrule
+Table XII header & $\beta=(aa')^{D-2}(a^2+a'^2)H^2\square$ & $(aa')^{D-1}(a^2+a'^2)H^2\square$, as in \eqI{105} & weight counting; global check\\
+(A18) & $-2(D-1)aa'H^2I[f'A]$ & $-2(D-1)aa'H^2I[f'A']$ & trace of \eqI{78}\\
+Table XIII, row $P_{7c}$ & repeats part of the total & $-\frac12(D-1)(D-2)yI[A'\Delta C']-\frac12(D-1)^2(D-2)I^2[A'\Delta C']$ & typesetting; total correct\\
+Table XV, row $P_{4b}$ & $(D-1)y'(A'B')'$ & $(D-1)y^2(A'B')'$ & (A36), $\gamma_3$ term\\
+Table XVIII total & $\frac14yI^2[A'^2\Delta C']$ & $\frac14yI^2[A'\Delta C']$ & row $P_{7d}$\\
+\bottomrule
+\end{tabular}
+\caption{The five typographical errors in the appendix of \PI{} found in Task 13.}
+\label{ch6:tab:apptypos}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\subsection{Table IV in general \texorpdfstring{$D$}{D} \texorpdfstring{\tD}{}}
+\label{ch6:tableIV}
+
+\paragraph{Rule.} The coefficients of $z^{D-1}$ and $z^{D-2}$ in the total of an operator follow from the leading coefficients of
+Table~\ref{ch6:tab:products} by the operations
+\begin{equation}
+I[z^q]=-\frac{4\,z^{q-1}}{q-1},\qquad y\,z^q=4z^{q-1},\qquad \frac{d}{dy}z^q=-\frac q4z^{q+1}.
+\label{ch6:rules}
+\end{equation}
+The unit of Table IV is $\Gamma^2(\frac D2)\kappa^2H^{2D-4}/(4\pi)^D$; the factor $1/16$ of the products is therefore divided out at the end.
+
+\paragraph{Example: $\beta$.} The total is $\Tab_\beta$ of \eqref{ch6:totals}. The terms that reach $z^{D-1}$ or $z^{D-2}$ contribute:
+\begin{itemize}[leftmargin=14pt]
+\item $DI[A'B']$: \ $I[z^D+(D-2)z^{D-1}]=-\frac{4}{D-1}z^{D-1}-4z^{D-2}$, so $\to-\frac{4D}{D-1}z^{D-1}-4Dz^{D-2}$;
+\item $-I[A'\Delta B']$: \ $-I[-2z^{D-1}]\to-\frac{8}{D-2}z^{D-2}$;
+\item $-\frac12yI[A'^2]$: \ $-\frac12\,y\,\big(-\frac{4}{D-1}z^{D-1}\big)\to+\frac{8}{D-1}z^{D-2}$;
+\item $-\frac{D-1}{2}I^2[A'^2]$: \ $-\frac{D-1}{2}\cdot\frac{16}{(D-1)(D-2)}z^{D-2}=-\frac{8}{D-2}z^{D-2}$;
+\item $I[A'\Delta C']$: \ $I[-8z^{D-1}]\to+\frac{32}{D-2}z^{D-2}$;
+\end{itemize}
+the remaining terms of $\Tab_\beta$ give $z^{D-3}$ or lower. Summing and dividing by 16:
+\begin{equation}
+z^{D-1}:\ -\frac{D}{4(D-1)},\qquad
+z^{D-2}:\ \frac1{16}\Big[-4D+\frac{16}{D-2}+\frac{8}{D-1}\Big]=-\frac{D^3-3D^2-4D+8}{4(D-1)(D-2)},
+\end{equation}
+in agreement with the printed $\beta$ row. Since $\Tab_{\gamma_1}=(D-1)(D-2)\Tab_\beta$, the $\gamma_1$ row follows directly.
+
+\paragraph{Example: $\gamma_2$.} The total is $\Tab_{\gamma_2}$. The contributions are
+\begin{itemize}[leftmargin=14pt]
+\item $DyA'B'$: \ $\to4Dz^{D-1}+4D(D-2)z^{D-2}$;
+\item $-yA'\Delta B'$: \ $\to+8z^{D-2}$;
+\item $-\frac12y^2A'^2$: \ $\to-8z^{D-2}$;
+\item $-\frac D2yI[A'^2]$: \ $\to+\frac{8D}{D-1}z^{D-2}$;
+\item $yA'\Delta C'$: \ $\to-32z^{D-2}$;
+\end{itemize}
+while $-\frac D2yI[A'\Delta C']$ and $-\frac12y^2A'\Delta C'$ start at $z^{D-3}$. The first column is $4D/16=D/4$, as printed. The second column is
+\begin{equation}
+\boxed{\;\frac1{16}\Big[4D(D-2)+\frac{8D}{D-1}-32\Big]=\frac{D(D-2)(D-1)+2D-8(D-1)}{4(D-1)}=+\frac{D^3-3D^2-4D+8}{4(D-1)}\;}
+\label{ch6:gamma2}
+\end{equation}
+The paper prints $-\frac{D^3-3D^2-4D+8}{4(D-1)}$.
+
+The other rows ($\gamma_3$, $\delta$, $\epsilon_{1,2,3}$, $\zeta$) were obtained mechanically with the same rules \eqref{ch6:rules} applied to the
+totals \eqref{ch6:totals} (script \texttt{check\_table4.py}); the $\alpha$ row was also obtained by hand in Sec.~\ref{ch6:124-125}. The result is
+Table~\ref{ch6:tab:IV}.
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{lccl}
+\toprule
+Op. & derived col.~1: coef.\ of $(\frac4y)^{D-1}$ & derived col.~2: coef.\ of $(\frac4y)^{D-2}$ & printed\\
+\midrule
+$\alpha$ & $0$ & $\frac{D}{(D-1)(D-2)^2}$ & \checkmark\ \checkmark\\
+$\beta$ & $-\frac{D}{4(D-1)}$ & $-\frac{D^3-3D^2-4D+8}{4(D-1)(D-2)}$ & \checkmark\ \checkmark\\
+$\gamma_1$ & $-\frac{D(D-2)}{4}$ & $-\frac{D^3-3D^2-4D+8}{4}$ & \checkmark\ \checkmark\\
+$\gamma_2$ & $\frac D4$ & $+\frac{D^3-3D^2-4D+8}{4(D-1)}$ & \checkmark\ $\times$ (prints $-\frac{D^3-3D^2-4D+8}{4(D-1)}$)\\
+$\gamma_3$ & $-\frac D4$ & $0$ & \checkmark\ \checkmark\\
+$\delta$ & $0$ & $0$ & \checkmark\ \checkmark\\
+$\epsilon_1$ & $0$ & $\frac{D^2-6D+4}{2(D-1)(D-2)}$ & \checkmark\ \checkmark\\
+$\epsilon_2$ & $0$ & $\frac{1-2D}{(D-1)(D-2)}$ & \checkmark\ \checkmark\\
+$\epsilon_3$ & $0$ & $0$ & \checkmark\ \checkmark\\
+$\zeta$ & $0$ & $0$ & \checkmark\ \checkmark\\
+\bottomrule
+\end{tabular}
+\caption{Table IV (divergent normal contributions) derived in general $D$, in units of $\Gamma^2(\frac D2)\,\kappa^2H^{2D-4}/(4\pi)^D$, compared with
+the printed table (one mark per column). Values are in the paper's sign convention (signs of $P_1$--$P_7$).}
+\label{ch6:tab:IV}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\subsection{Table V at \texorpdfstring{$D=4$}{D=4} and global consistency \texorpdfstring{\tD\ \tC}{}}
+\label{ch6:tableV}
+
+\paragraph{Operator functions at $D=4$.} The appendix totals \eqref{ch6:totals} were evaluated exactly at $D=4$ with \eqI{62} and $B=C=4h/y$
+(linked first integrals, higher integrals as sympy antiderivatives, $\ln y=\ln x+\ln4$). In units of $\kappa^2H^4/(4\pi)^4$ and in the paper's sign
+convention, the derived functions are listed in Table~\ref{ch6:tab:D4totals}. Their $1/x^3$ and $1/x^2$ terms are Table IV at $D=4$ (with the derived
+$\gamma_2$ sign, $+\frac23$); the rest is to be compared with Table V.
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{ll}
+\toprule
+Op. & derived $D=4$ function (coefficient of $\kappa^2H^4/(4\pi)^4$), integration constants as produced\\
+\midrule
+$\alpha$ & $\frac{1}{3x^2}+\frac{13}{x}+\frac{6\ln x}{x}-6\ln^2x-18\ln x+24\ln^22-36\ln2$\\
+$\beta$ & $-\frac{1}{3x^3}-\frac{1}{3x^2}+\frac5x-18\ln x-6-36\ln2$\\
+$\gamma_1$ & $-\frac{2}{x^3}-\frac{2}{x^2}+\frac{30}{x}-108\ln x-36-216\ln2$\\
+$\gamma_2$ & $\frac{1}{x^3}+\frac{2}{3x^2}-\frac5x-18$\\
+$\gamma_3$ & $-\frac{1}{x^3}-\frac5x-36$\\
+$\delta$ & $-\frac{4\ln x}{x}-\frac{49}{6x}+4\ln^2x+10\ln x+12x\ln x-12x+24x\ln2-16\ln^22+20\ln2$\\
+$\epsilon_1$ & $-\frac{1}{3x^2}-\frac{26}{3x}+60\ln x-120x\ln x+72x+20+120\ln2-240x\ln2$\\
+$\epsilon_2$ & $-\frac{7}{6x^2}+\frac{13}{6x}-12\ln x+12x\ln x-2-24\ln2+24x\ln2$\\
+$\epsilon_3$ & $-\frac{11}{6x}+36x\ln x+12x-8+72x\ln2$\\
+$\zeta$ & $\frac{10}{3}\ln x-24x\ln x+24x^2\ln x-36x^2+24x+48x^2\ln2-48x\ln2+\frac{20}{3}\ln2$\\
+\bottomrule
+\end{tabular}
+\caption{Derived operator functions at $D=4$ (output of \texttt{check\_tables45b.py}), $x=y/4$. Polynomial terms (constants, $x$, $x^2$, and the
+$\ln2$ terms) depend on the integration-constant convention.}
+\label{ch6:tab:D4totals}
+\end{table}
+
+\paragraph{The printed Table V} (coefficient of $\kappa^2H^4/(4\pi)^4$), retyped:
+\begin{equation*}
+\begin{aligned}
+\alpha&:\ \tfrac{6\ln x}{x}+\tfrac{13}{x}-6\ln^2x-18\ln x, &
+\beta&:\ \tfrac5x-18\ln x,\\
+\gamma_1&:\ \tfrac{30}{x}-108\ln x-36, &
+\gamma_2&:\ -\tfrac5x-18,\qquad
+\gamma_3:\ -\tfrac5x-36, \\
+\delta&:\ -\tfrac{4\ln x}{x}-\tfrac{49}{6x}+4\ln^2x+10\ln x+12x\ln x, &
+\epsilon_1&:\ -\tfrac{26}{3x}+60\ln x-120x\ln x+72x, \\
+\epsilon_2&:\ \tfrac{13}{6x}-12\ln x+12x\ln x, &
+\epsilon_3&:\ -\tfrac{11}{6x}+36x\ln x+12x,\\
+\zeta&:\ \tfrac{10\ln x}{3}-24x\ln x+24x^2\ln x-36x^2 .
+\end{aligned}
+\end{equation*}
+
+\paragraph{Comparison operator by operator.} Table~\ref{ch6:tab:Vdiff} lists the derived function minus [printed Table IV at $D=4$ $+$ printed Table V].
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{lll}
+\toprule
+Op. & derived $-$ [Table IV($D=4$) $+$ Table V] & Effect\\
+\midrule
+$\alpha$ & $24\ln^22-36\ln2$ & constant: annihilated by $\square^2$\\
+$\beta$ & $-36\ln2-6$ & constant: annihilated by $\square$\\
+$\gamma_1$ & $-216\ln2$ & convention; balanced by $\epsilon_1$, $\zeta$, $\epsilon_3$ (via $\gamma_3=2\gamma_1+\gamma_2$)\\
+$\gamma_2$ & $\frac{4}{3x^2}$ & \textbf{genuine difference:} Table IV sign \eqref{ch6:gamma2}\\
+$\gamma_3$ & $0$ & ---\\
+$\delta$ & $-12x+24x\ln2-16\ln^22+20\ln2$ & $\nabla^2\square x=-6aa'H^4\neq0$: \ $-12x\to+72\gamma_2$\\
+$\epsilon_1$ & $-240x\ln2+20+120\ln2$ & $\ln2$ part: convention\\
+$\epsilon_2$ & $24x\ln2-24\ln2-2$ & $\ln2$ part: convention\\
+$\epsilon_3$ & $72x\ln2-8$ & $\ln2$ part: convention\\
+$\zeta$ & $48x^2\ln2-48x\ln2+24x+\frac{20}{3}\ln2$ & $\nabla^4x=0$; $x^2\ln2$: convention\\
+\bottomrule
+\end{tabular}
+\caption{Per-operator differences at $D=4$ (output of \texttt{check\_tables45.py}), paper's sign convention.}
+\label{ch6:tab:Vdiff}
+\end{table}
+
+All logarithmic and inverse-power terms agree. To see the effect of the polynomial differences under the operators we need, at $D=4$,
+\begin{gather}
+\nabla^2x=\tfrac32aa'H^2,\qquad \nabla^4x=0,\qquad \nabla^4x^2=\tfrac{15}{2}(aa'H^2)^2,\nonumber\\
+\square x=H^2(2-4x)\ \Rightarrow\ \nabla^2\square x=-6aa'H^4,
+\end{gather}
+the last from \eqref{ch6:93} with $D=4$. Then:
+\begin{itemize}[leftmargin=14pt]
+\item constants are annihilated by $\square$, $\nabla^2$ and $\nabla^4$;
+\item all $\ln2$ contributions cancel globally (in units of $\ln2$, using $\gamma_3=2\gamma_1+\gamma_2$): for $\gamma_1$,
+$-216$ (from $\gamma_1$) $-360$ (from $\epsilon_1$: $-240\cdot\frac32$) $+360$ (from $\zeta$: $48\cdot\frac{15}2$) $+216$ (from $\epsilon_3$: $2\cdot108$) $=0$;
+for $\gamma_2$, $-144$ (from $\delta$: $24\cdot(-6)$) $+36$ (from $\epsilon_2$: $24\cdot\frac32$) $+108$ (from $\epsilon_3$: $72\cdot\frac32$) $=0$;
+\item what remains is only $+72\gamma_2$ from the $-12x$ term of $\delta$:
+$\delta[-12x]=(aa')^2(a^2+a'^2)(-12)\nabla^2\square x=72(aa')^3(a^2+a'^2)H^4=72\,\gamma_2[1]$.
+\end{itemize}
+
+\paragraph{Global test \tC.} The direct sum $\sum_kP_k$ (actual $D=4$ propagators) was compared at three random space-like points with several
+versions of Tables IV$+$V acted on by the ten operators:
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ll}
+\toprule
+Version of Tables IV$+$V & $\sum_kP_k-\sum_{\rm op}$ at three points\\
+\midrule
+as printed & $0.0356,\ 17.05,\ 0.607$\\
+only the $\gamma_2$ sign corrected & $0.0351,\ 16.97,\ 0.602$\\
+$\gamma_2$ sign $+$ a term $-12x$ in the $\delta$ row & $\mathbf{0,\ 0,\ 0}$\\
+$\gamma_2$ sign $+$ $\gamma_2$ constant $-18\to+54$ (equivalent) & $\mathbf{0,\ 0,\ 0}$\\
+only $-12x$ in the $\delta$ row & $5\times10^{-4},\ 0.074,\ 0.0047$\\
+\bottomrule
+\end{tabular}
+\caption{Hypothesis tests (\texttt{check\_tables45b.py}). ``0'' means zero to the 30-digit working precision.}
+\label{ch6:tab:hyp}
+\end{table}
+
+\paragraph{Conclusion.} The choice of integration constants does not change the sum (every consistent convention gives exact identities), so the
+remaining difference is independent of convention. The printed Tables IV$+$V give the correct sum only with two corrections:
+\begin{enumerate}[leftmargin=18pt]
+\item the sign of the second column of the $\gamma_2$ row of Table IV;
+\item a finite term equivalent to $72\,\gamma_2$ (acting on a constant). It is most naturally read as a term $-12x$ dropped from the $\delta$ row of
+Table V; the paper may have assumed that $\nabla^2\square x$ vanishes.
+\end{enumerate}
+
+\begin{resultbox}[Corrected Tables IV--V (paper's sign convention)]
+Table IV, row $\gamma_2$: \quad $\Big(\dfrac D4,\ +\dfrac{D^3-3D^2-4D+8}{4(D-1)}\Big)$.\\[4pt]
+Table V: either the $\delta$ row becomes $-\frac{4\ln x}{x}-\frac{49}{6x}+4\ln^2x+10\ln x+12x\ln x-12x$, or, equivalently,
+the $\gamma_2$ row becomes $-\frac5x+54$. All other entries of Tables IV and V stand as printed.
+\end{resultbox}
+
+%-----------------------------------------------------------------------------
+\subsection{Sign convention \texorpdfstring{\tD}{}}
+\label{ch6:sign}
+
+The paper's tables carry the sign of the printed \eqI{47}--\eqI{49}, i.e.\ of $P_1$--$P_7$. The step from \eqI{46} to
+\eqI{47}--\eqI{49}, as derived in Task~7, gives the opposite sign. Therefore, in the definition-sign convention,
+\begin{equation}
+\text{Tables IV--V}_{\rm derived}=-\big(\text{Tables IV--V}_{\rm paper,\ corrected}\big).
+\end{equation}
+This difference is not new: it is the same inheritance as for the local, logarithm and Table III contributions of Tasks 9--12.
+
+%-----------------------------------------------------------------------------
+\subsection{Physical significance and points to follow \texorpdfstring{\tA}{}}
+\label{ch6:physics}
+
+\paragraph{Significance of the two corrections.}
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{$72\gamma_2$.} This term is a function independent of $y$ (analytic). In the Schwinger--Keldysh formalism it is the same in the
+$++$ and $+-$ kernels, so it cancels in the retarded self-mass-squared. It is therefore not expected to affect the correction to the mode function.
+The same argument applies to all polynomial (integration-constant) ambiguities of Table V.
+\item \textbf{The second-column sign of $\gamma_2$.} $(4/y)^{D-2}$ is not analytic and is logarithmically divergent at $D=4$. By partial integration
+it produces a local divergence of the type $H^4a^D\delta^D$ and finite nonlocal terms. At coincidence $\gamma_1$, $\gamma_2$ and $\gamma_3$ give
+$a^{2D}$, $2a^{2D}$ and $4a^{2D}$ respectively. Hence the sign of $\gamma_2$ changes the coefficient of the $H^4a^D$-type divergence. This was to be
+followed in Section IV of \PI{} (Tables VII--IX and the matching with the counterterms). [It was resolved in Task 16; see the note at the
+beginning of this section.]
+\end{itemize}
+
+\paragraph{Distributional content of the external operators.} By Task 11, Eq.~\eqref{eq:ch05:t11:gamma} (Chapter~\ref{ch:05}), $I^2[fA'']\supset c_f\,A_{\rm lead}$, where
+$c_f$ is the constant part of $f$ and $A_{\rm lead}=\mathcal N\Gamma(\frac D2-1)(4/y)^{D/2-1}$. Since the function of $\alpha$ is $I^2[(A+\Delta C)A'']$,
+\begin{equation}
+c_{A+\Delta C}=k\pihat+\frac{2(D-2)}{D-3}\big(c-k\pihat\big)=-\frac{D-1}{D-3}k\pihat+\frac{2(D-2)}{D-3}c ,
+\end{equation}
+with $k\equiv\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(D/2)}$, $\pihat\equiv-\pi\cot\frac{\pi D}{2}$, $c\equiv i\Delta_C(x;x)=\frac{k}{(D-2)(D-3)}$
+(Tasks 4 and 9). This is exactly the combination in the local contribution \eqI{54}$+$\eqI{58}. (A35) is correct pointwise. However, if the
+$\square$ in $\alpha=(aa')^D\square^2$ and in $\delta$ is applied outside the integral, i.e.\ as a distribution, as the paper says, then
+$\square A_{\rm lead}\supset i\delta^D/a^D$ reproduces \eqI{54}$+$\eqI{58} a second time. In the $D=4$ tables this content sits in the $1/x$ and
+$\ln x/x$ terms of $\alpha$, $\beta$ and $\delta$. How the paper treats these terms in Section IV has to be checked. [This point was revisited in
+Task 16 and is only partially resolved; see Chapter 8.]
+
+%-----------------------------------------------------------------------------
+\subsection{Comparison with the paper}
+\label{ch6:comparison}
+
+Table~\ref{ch6:tab:comp} summarizes the comparison of this task with \PI; Table~\ref{ch6:tab:accum} lists the findings accumulated up to this
+task, as recorded in the Task 13 report. Identifiers in parentheses (S$n$, B$n$, C$n$) refer to the classified list of findings in Chapter~\ref{ch:summary}.
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{8.4cm}>{\raggedright\arraybackslash}p{2.8cm}}
+\toprule
+Item & Result & Status\\
+\midrule
+\eqI{94}--\eqI{103} & derived; identical with the printed equations; also (A8)--(A9) & \checkmark\\
+\eqI{104}--\eqI{115} & definitions; \eqI{108}, \eqI{112} correct; weight counting consistent & \checkmark\\
+\eqI{116}--\eqI{123} & exact-$D$ leading coefficients and $D=4$ forms correct & \checkmark\\
+\eqI{124}--\eqI{125} & correct (up to a constant annihilated by $\alpha$) & \checkmark\\
+Appendix, Tables XI--XX & totals exact; five typographical errors (Table~\ref{ch6:tab:apptypos}) & \checkmark{} (with corrections)\\
+Table IV & 19/20; sign of the $\gamma_2$ second column reversed & $\times$ (typo, see note)\\
+Table V & all non-analytic terms correct; globally a finite term $72\gamma_2$ missing & $\times$ (no physical effect expected)\\
+Overall sign & derived $=-$(paper); inherited & $\times$ (inherited)\\
+\bottomrule
+\end{tabular}
+\chsixcaptionof{table}{Task 13 compared with \PI.}
+\label{ch6:tab:comp}
+\end{center}
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{8.2cm}>{\raggedright\arraybackslash}p{6.2cm}}
+\toprule
+Accumulated findings (Tasks 2--13) & Effect\\
+\midrule
+typographical: \eqI{7}, \eqI{14}, Table II, \eqI{39}, the phrase ``4th term'', $H^2$ in \eqI{89}, five places in the appendix (C3--C13) & none\\
+\eqI{40}, \eqI{59} (B1, B2) & absorbable into $\Delta\alpha_{2,3}$\\
+4-point and 3-point contributions both reversed (including Tables III--V) (S1) & bare $M^2=-$(definition)\\
+\textbf{Table IV, $\gamma_2$ second column} & \textbf{$H^4a^D$-type divergence; to be followed in Section IV} (later: typo, C15)\\
+Table V, $72\gamma_2$ (S3) & analytic term; drops out of the retarded kernel\\
+distributional content of the outer $\square$ (Sec.~\ref{ch6:physics}) & possible double counting; to be followed in Section IV\\
+\bottomrule
+\end{tabular}
+\chsixcaptionof{table}{Findings accumulated up to Task 13, as recorded in the Task 13 report.}
+\label{ch6:tab:accum}
+\end{center}
+
+%-----------------------------------------------------------------------------
+\subsection{Code checks \texorpdfstring{\tC}{}}
+\label{ch6:code}
+
+The scripts are in \texttt{code/06\_tables\_IV\_V/} of the repository (SymPy; they do not replace the analytic derivation above). All were re-run
+for this write-up; their outputs agree line by line with the outputs recorded in the Task 13 command log.
+
+\begin{itemize}[leftmargin=14pt]
+\item[(A)] \texttt{check\_94\_125.py}, part (A): Eqs.~\eqI{94}, \eqI{95}, \eqI{96}, \eqI{97}, \eqI{98}, \eqI{100}, \eqI{101} and \eqI{102}--\eqI{103} are
+correct in explicit coordinates at $D=4$ and $D=5$, with $A=y^\beta$, $B=y^\gamma$, $f=y^\alpha$ ($\beta=-\frac53$, $\gamma=\frac29$, $\alpha=\frac37$),
+at one random rational point per $D$, 30-digit arithmetic.
+\item[(B)] part (B): \eqI{99}, \eqI{108}, \eqI{112} correct.
+\item[(C)] part (C): the exact-$D$ leading coefficients of the eight products and the $D=4$ closed forms agree with \eqI{116}--\eqI{123}; every series
+term of \eqI{27}--\eqI{28} vanishes identically at $D=4$.
+\item[(D)] part (D): \eqI{124}--\eqI{125}: the exact-$D$ term is correct at $D=5,6,7,\frac92$; the finite part agrees up to the constant
+$(24\ln2-36)\ln2$.
+\item[(F4)] \texttt{check\_global.py} and \texttt{check\_tables45.py}: global check $\sum_kP_k=\sum_{\rm op}\text{op}[\Tab_{\rm op}]$, with generic powers at
+$D=5$ and $D=4$ and with the actual $D=4$ propagators; the difference is zero at all points (30-digit precision).
+\item[(T4)] \texttt{check\_table4.py}: the ten rows of Table IV derived mechanically in general $D$: 19/20 agreement, $\gamma_2$ second column reversed.
+\item[(T5)] \texttt{check\_tables45.py}, \texttt{check\_tables45b.py}: Table V, per-operator differences (Table~\ref{ch6:tab:Vdiff}) and the hypothesis tests
+of Table~\ref{ch6:tab:hyp}.
+\end{itemize}
+
+\paragraph{Superseded and diagnostic runs (from the command log).}
+\begin{itemize}[leftmargin=14pt]
+\item A first version of \texttt{check\_94\_125.py} contained a global test (E): the printed Tables IV($D=4$)$+$V under the ten operators against the
+direct normal contribution written with the \emph{derived} signs of Task 7 (i.e.\ $-\sum_kP_k$). Neither ``direct $+$ tables'' nor
+``direct $-$ tables'' vanished (e.g.\ $-0.373$ and $-2.16$ at the first point). The test was removed and replaced by the structured checks (F4), (T5),
+which locate the two defects of the printed tables. It is reproduced by \texttt{superseded\_test\_E.py}.
+\item The same first version extracted the $z^{D-1}$ coefficients from the full series by exponent matching and printed incorrect coefficients for
+$AA''$, $A''\Delta B$, $A'\Delta C'$ and $A''\Delta C$ (e.g.\ a quartic rational function for $A'\Delta C'$); the values for $A'^2$, $A'B'$,
+$A''B$ and $A'\Delta B'$ were already correct. A diagnostic run (\texttt{diag\_leading\_pair.py}) showed that the six
+individual terms of exponent $D-1$ in $A'(C-A)'$ sum to $-4(D-3)/(D-2)$, i.e.\ to $-8$ after the factor $2(D-2)/(D-3)$, which is the leading-pair value
+and \eqI{122}. Part (C) was then rewritten to use the two leading terms only (exact, since only they reach $z^D$ and $z^{D-1}$).
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\subsection{Calculation record}
+
+{\raggedright
+\begin{itemize}[leftmargin=14pt]
+\item \textbf{Derived:} \eqI{94}--\eqI{96} and (A8)--(A9) [Sec.~\ref{ch6:94-96}]; \eqI{97}--\eqI{101} [Sec.~\ref{ch6:97-101}]; \eqI{102}--\eqI{103}
+[Sec.~\ref{ch6:102-103}]; weight counting of the external operators [Sec.~\ref{ch6:operators}]; exact-$D$ leading coefficients of \eqI{116}--\eqI{123}
+[Sec.~\ref{ch6:expansions}]; \eqI{124}--\eqI{125} [Sec.~\ref{ch6:124-125}]; example rows and totals of the appendix decomposition
+[Sec.~\ref{ch6:appendix}]; Table IV in general $D$ [Sec.~\ref{ch6:tableIV}, Eq.~\eqref{ch6:gamma2}]; Table V at $D=4$ and the global
+consistency test [Sec.~\ref{ch6:tableV}].
+\item \textbf{Checks passed:} (A)--(D), (F4), (T4), (T5); all actually run (and re-run for this write-up with identical output).
+\item \textbf{Discrepancies:} the sign of the $\gamma_2$ second column in Table IV (later identified as a typo, Task 16); a finite term
+equivalent to $72\gamma_2$ missing globally from Table V ($-12x$ in the $\delta$ row); five typographical errors in the appendix; the overall sign
+(inherited).
+\item \textbf{Points to follow:} the effect of the $\gamma_2$ sign and of the distributional content of the outer $\square$ on the divergence
+separation of Section IV (Tables VI--IX).
+\item \textbf{Caveat:} the appendix was audited through example rows and the global pointwise test, not re-derived row by row
+(Sec.~\ref{ch6:appendix}).
+\end{itemize}
+\par}

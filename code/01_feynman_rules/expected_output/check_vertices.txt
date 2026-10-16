@@ -1,0 +1,16 @@
+== (A) full vertices from Eq. (6) by polarization, distinct legs p1,p2,h3,h4 ==
+D=3: i*coeff[phi1 phi2 h3] of kappa L^(1)  == Table I : True
+D=3: U[3,4]+U[4,3] - i*coeff[phi1 phi2 h3 h4], derived (U2=+i/4): 0
+D=3: U[3,4]+U[4,3] - i*coeff[phi1 phi2 h3 h4], paper   (U2=-i/4): I*(p0*q0 - p1*q1 - p2*q2)*(a00*b00 - 2*a01*b01 - 2*a02*b02 + a11*b11 + 2*a12*b12 + a22*b22)
+D=4: i*coeff[phi1 phi2 h3] of kappa L^(1)  == Table I : True
+D=4: U[3,4]+U[4,3] - i*coeff[phi1 phi2 h3 h4], derived (U2=+i/4): 0
+D=4: U[3,4]+U[4,3] - i*coeff[phi1 phi2 h3 h4], paper   (U2=-i/4): I*(p0*q0 - p1*q1 - p2*q2 - p3*q3)*(a00*b00 - 2*a01*b01 - 2*a02*b02 - 2*a03*b03 + a11*b11 + 2*a12*b12 + 2*a13*b13 + a22*b22 + 2*a23*b23 + a33*b33)
+== (B) tables vs EXACT metric (no Eq. (6) input), coincident legs ==
+D=2 (symbolic h): L^(1) == (1/2i)V[h]: True;  L^(2) == (1/2i)U[h,h] derived: True;  paper - exact = (p0 - p1)*(p0 + p1)*(h00**2 - 2*h01**2 + h11**2)/4
+D=3 (symbolic h): L^(1) == (1/2i)V[h]: True;  L^(2) == (1/2i)U[h,h] derived: True;  paper - exact = (p0**2 - p1**2 - p2**2)*(h00**2 - 2*h01**2 - 2*h02**2 + h11**2 + 2*h12**2 + h22**2)/4
+D=4 (random rational h): L^(1) == (1/2i)V[h]: True;  L^(2) == (1/2i)U[h,h] derived: True;  paper - exact = -77563*(p0**2 - p1**2 - p2**2 - p3**2)/1600
+D=5 (random rational h): L^(1) == (1/2i)V[h]: True;  L^(2) == (1/2i)U[h,h] derived: True;  paper - exact = -1373629*(p0**2 - p1**2 - p2**2 - p3**2 - p4**2)/44100
+== (C) determine the table coefficients from the exact metric alone ==
+solution: [{u1: -1/8, u2: 1/4, u3: 1/2, u4: -1, x: 1, y: -1/2}]
+   (Table I : x=1 -> V1 = i kappa d1^a d2^b ; y=-1/2 -> V2 = -(i/2) kappa eta^{ab} d1.d2)
+   (Table II: U_I = i kappa^2 a^{D-2} u_I x structure_I)

@@ -1,0 +1,17 @@
+== (a) Lemma A with explicit test functions, D=2, eta=diag(-1,1) ==
+  A  = d2F/de1de2           = 97*sqrt(6)*pi*exp(-1/2)/54 ~ 8.38409578627033
+  B_ours  (kernel -d[K_s d delta]) = 8.38409578627033  equal to A: True
+  B_paper (kernel +d[K_s d delta]) = -8.38409578627033  equal to -A: True
+== (b) lattice Hessian, 1D periodic, N=7 ==
+  Hessian == -D^-(2c D^+)  [lattice version of -d(2c d delta)]: True
+  Hessian == +D^-(2c D^+)  [lattice version of +d(2c d delta)]: False
+  eigenvalues for c=1 (must be >= 0 for a sum of squares): [0.0, 1.506041, 4.890084, 7.603875]
+== (c) operator-level check of (33), D=3, generic pair-symmetric coincident propagator ==
+  K~_4 symmetric (pair symmetry of X): True
+  derived kernel == derived (33)  [+i/8, -i/4, -i/2, +i]: True
+  derived kernel == -(paper's 33) [-i/8, +i/4, +i/2, -i]: True
+  paper's rule + derived U2(+i/4) reproduces paper's (33): True
+  paper's rule + printed U2(-i/4) reproduces paper's (33): False
+== (d) calibration with the paper's counterterm vertex (131), D=3 ==
+  i*delta^2 S (Lemma A) == paper's (131): True
+  paper's 4-pt rule applied to (131) == paper's (131): False

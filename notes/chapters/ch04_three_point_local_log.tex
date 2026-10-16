@@ -1,0 +1,920 @@
+% =====================================================================
+% Chapter 4: 3-point local and logarithm terms, Eqs. (I.54)-(I.67)
+% Tasks 9 and 10 of the re-derivation of Paper I.
+% =====================================================================
+\providecommand{\chIVloc}{\mathrm{loc}}
+\providecommand{\chIVlog}{\mathrm{log}}
+\providecommand{\chIVok}{\ensuremath{\checkmark}}
+\providecommand{\chIVno}{\ensuremath{\times}}
+
+\chapter{3-point local and logarithm terms: Eqs. (I.54)--(I.67)}
+\label{ch:ch04}
+
+This chapter covers two consecutive tasks of the re-derivation of \PI.
+Paper~I splits the 3-point contribution to the scalar self-mass into three parts:
+\emph{local} contributions, which come from the delta-function term of $\partial_0\partial'_0 i\Delta_A$;
+\emph{logarithm} contributions, which come from the de Sitter breaking factor $k\ln(aa')$ of the outer propagator $i\Delta_A$;
+and \emph{normal} contributions, which contain everything else.
+Task~9 (Section~\ref{sec:ch04:task9}) re-derives the local part, Eqs.~\eqI{54}--\eqI{59}.
+Task~10 (Section~\ref{sec:ch04:task10}) re-derives the logarithm part, Eqs.~\eqI{60}--\eqI{67}.
+The normal contributions, \eqI{68} and later, are treated in later chapters.
+
+\begin{notebox}[Notation and conventions used in this chapter]
+\begin{itemize}[leftmargin=1.2em,itemsep=1pt]
+\item $k\equiv\dfrac{H^{D-2}}{(4\pi)^{D/2}}\dfrac{\Gamma(D-1)}{\Gamma(\frac D2)}$ (Paper~I, Eq.~\eqI{13}); as $D\to4$, $k\to\dfrac{H^2}{8\pi^2}$.
+\item $\pihat\equiv-\pi\cot\big(\tfrac{\pi D}{2}\big)=-\dfrac{2}{D-4}+\order{D-4}$.
+\item $p\equiv D-2$; $\;l\equiv\ln a(\eta)$, $\;l'\equiv\ln a(\eta')$, $\;L\equiv\ln(aa')=l+l'$.
+Since $a=-1/(H\eta)$, we have $\partial_0a=Ha^2$ and therefore $\partial_0 l=Ha$.
+\item Labels: \tP\ given in the paper, \tD\ derived here, \tA\ assumption or convention, \tC\ check by code.
+\item \textbf{Sign convention.} Every expression \emph{derived} in this chapter is in the \emph{definition sign}.
+This is the sign fixed by Paper~I's own definition \eqI{168}, $\partial_\mu(\sqrt{-g}\,g^{\mu\nu}\partial_\nu\Phi)-\int M^2\Phi=0$ with $-iM^2=\delta^2 i\Gamma$.
+It is the sign obtained from the derived \eqI{47}--\eqI{49} of Task~7.
+Every self-mass contribution \emph{printed} in Paper~I is in the \emph{paper's convention}, which is $-1$ times the definition sign.
+(Identities that do not involve the self-mass, such as \eqI{55}--\eqI{56} and \eqI{60}--\eqI{62}, are convention-independent.)
+\item \textbf{Input principle.} We use only results \emph{derived} in earlier tasks:
+\eqI{47}--\eqI{49} (Task~7), the local term of \eqI{52} (Task~8), the coincidence limits (Task~4),
+and the distributional lemma and the full-$D$ form of \eqI{44} (Task~5).
+\end{itemize}
+\end{notebox}
+
+% =====================================================================
+\section{Task 9: the local 3-point contributions, Eqs. (I.54)--(I.59)}
+\label{sec:ch04:task9}
+% =====================================================================
+
+Task~9 derives the local 3-point contributions with the corrected sign and normalizations and compares them with the paper (printed page 124005-6).
+
+\begin{discbox}[Summary of findings (Task 9)]
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item The derived \eqI{54}, \eqI{57} and \eqI{58} are exactly $-1$ times the printed ones.
+On each line, the paper's right-hand side is a correct evaluation of its own left-hand side.
+The left-hand sides, however, carry the signs of the \emph{printed} \eqI{47}--\eqI{49}.
+So the paper carried the sign error of the step \eqI{46}$\to$\eqI{47}--\eqI{49} into the rest of the calculation.
+This answers the question left open in Task~7: there it was undecided whether the later steps of the paper used the printed signs of \eqI{47}--\eqI{49} or the signs implied by \eqI{46}.
+The first possibility holds.
+\item \textbf{Arithmetic error in \eqI{59}.} Adding the paper's own \eqI{54}, \eqI{57} and \eqI{58} gives the finite coefficient $-\tfrac52$ for $a^{D-2}\nabla^2$.
+The paper prints $-\tfrac72$.
+The difference has the form of the counterterm \eqI{145} and can be absorbed with $\Delta\alpha_3=-\tfrac{1}{8\pi^2}$.
+\item \textbf{Typo in the text.} The paper refers to ``the 4th term of (47)''.
+As the left-hand side of \eqI{54} shows, the term meant is the 2nd term of \eqI{47}.
+\item \textbf{Important correction (of Task~6).} In the paper, the 4-point and 3-point contributions are consistent with each other: both have the opposite sign relative to the definitions \eqI{168} and \eqI{131}.
+Hence the paper's bare $M^2$ is $-1$ times the one defined by \eqI{168}.
+\end{itemize}
+\end{discbox}
+
+% ---------------------------------------------------------------------
+\subsection{Goal, inputs and scope}
+% ---------------------------------------------------------------------
+
+\paragraph{Target equations \tP.}
+Paper~I (p.~124005-6, left column) prints the following.
+It introduces \eqI{54} as the local contribution from ``the 4th term of (47)'' without the logarithm:
+\begin{align*}
+&-\kappa^2\Big(\frac{D-1}{D-3}\Big)\partial_0\partial'_0\Big[(aa')^{D-2}A(y)\,\frac{i}{a^{D-2}}\,\delta^D(x-x')\Big]\\
+&\qquad=\frac{i\kappa^2H^{D-2}}{(4\pi)^{D/2}}\,\frac{\Gamma(D)}{(D-3)\Gamma(\frac D2)}\Big(-\pi\cot\big(\tfrac D2\pi\big)\Big)
+\times\big\{-a^D\square\delta^D(x-x')+a^{D-2}\nabla^2\delta^D(x-x')\big\},
+\tag{I.54}\\[4pt]
+&-\partial_0\big(a^{D-2}\partial'_0\delta^D(x-x')\big)=-\partial^\mu\big(a^{D-2}\partial_\mu\delta^D(x-x')\big)+a^{D-2}\nabla^2\delta^D(x-x')
+\tag{I.55}\\
+&\phantom{-\partial_0\big(a^{D-2}\partial'_0\delta^D(x-x')\big)}\equiv-a^D\square\delta^D(x-x')+a^{D-2}\nabla^2\delta^D(x-x'),
+\tag{I.56}\\[4pt]
+&-\kappa^2\nabla\!\cdot\!\nabla'\Big[(aa')^{D-2}B(y)\times\frac{i}{a^{D-2}}\,\delta^D(x-x')\Big]
+=-\frac{i\kappa^2H^2}{16\pi^2}\times a^2\nabla^2\delta^4(x-x')+\order{D-4},
+\tag{I.57}\\[4pt]
+&2\kappa^2\Big(\frac{D-2}{D-3}\Big)\partial_0\partial'_0\Big[(aa')^{D-2}C(y)\times\frac{i}{a^{D-2}}\,\delta^D(x-x')\Big]\\
+&\qquad=\frac{i\kappa^2H^2}{4\pi^2}\big\{a^4\square\delta^4(x-x')-a^2\nabla^2\delta^4(x-x')\big\}+\order{D-4},
+\tag{I.58}\\[4pt]
+&-iM^2_{\rm 3pt,\,loc}(x;x')=\frac{i\kappa^2H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(\frac D2)}
+\times\Big\{\Big[\Big(\frac{D-1}{D-3}\Big)\pi\cot\big(\tfrac\pi2D\big)+2\Big]a^D\square\notag\\
+&\qquad\qquad+\Big[-\Big(\frac{D-1}{D-3}\Big)\pi\cot\big(\tfrac\pi2D\big)-\frac72\Big]a^{D-2}\nabla^2+\order{D-4}\Big\}\delta^D(x-x').
+\tag{I.59}
+\end{align*}
+In \eqI{54} the factor $-\pi\cot(\frac D2\pi)$ is printed after the fraction without parentheses; it multiplies the fraction.
+None of these printed expressions was used as an input. They enter only the comparison in Section~\ref{sec:ch04:t9comp}.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=1.2em,itemsep=3pt]
+\item[(G1)] The derived \eqI{47}--\eqI{49} \tD\ (Task~7).
+Only three of the nine terms have the inner derivative pair $\partial_0\partial'_0$, and only these give a local contribution (Task~8):
+\begin{equation}
+\begin{aligned}
+\Tab_{AA}&=+\kappa^2\,\frac{D-1}{D-3}\,\partial_0\partial'_0\Big[(aa')^{D-2}\,i\Delta_A\,\partial_0\partial'_0\,i\Delta_A\Big],\\
+\Tab_{AB}&=+\kappa^2\,\nabla\!\cdot\!\nabla'\Big[(aa')^{D-2}\,i\Delta_B\,\partial_0\partial'_0\,i\Delta_A\Big],\\
+\Tab_{AC}&=-2\kappa^2\,\frac{D-2}{D-3}\,\partial_0\partial'_0\Big[(aa')^{D-2}\,i\Delta_C\,\partial_0\partial'_0\,i\Delta_A\Big].
+\end{aligned}
+\label{eq:ch04:G1t9}
+\end{equation}
+In each term the outer derivatives (in front of the square bracket) act on everything inside the bracket.
+The inner derivatives act only on the second propagator, $i\Delta_A$.
+In the paper's \eqI{47}--\eqI{49} these three terms appear with the opposite signs.
+\item[(G2)] The local part of \eqI{52} \tD\ (Task~8):
+\begin{equation}
+\partial_0\partial'_0\,i\Delta_A(x;x')\supset\frac{i}{a^{D-2}}\,\delta^D(x-x').
+\label{eq:ch04:G2t9}
+\end{equation}
+\item[(G3)] Coincidence limits \tD\ (Task~4):
+\begin{equation}
+A(x;x)=k\pihat,\qquad b\equiv i\Delta_B(x;x)=-\frac{k}{D-2},\qquad c\equiv i\Delta_C(x;x)=\frac{k}{(D-2)(D-3)}.
+\label{eq:ch04:G3t9}
+\end{equation}
+\item[(G4)] Separation convention \tP.
+For $I=A$, the paper uses only $A(y)$ in the local contribution.
+The piece $k\ln(aa')\times\delta^D$ goes to the logarithm contributions \eqI{60}--\eqI{67}.
+In Task~8 we had put this piece on the local side instead.
+Both separations are complete; for the comparison we adopt the paper's separation.
+\end{itemize}
+
+\paragraph{Scope.}
+The logarithm and normal contributions are not treated in this task.
+$D$ is kept general.
+Coefficients multiplying a pole are kept at exact $D$; $D=4$ is set only in finite parts that are not multiplied by a pole.
+
+% ---------------------------------------------------------------------
+\subsection{Rules \texorpdfstring{\tD}{}}
+% ---------------------------------------------------------------------
+
+\paragraph{(R1) Products with the delta function.}
+For a smooth function $g$, the identity $g(x,x')\,\delta^D(x-x')=g(x,x)\,\delta^D(x-x')$ holds as a distribution.
+Derivatives are taken \emph{after} this identity has been applied.
+The equality $A(y)\,\delta^D(x-x')=k\pihat\,\delta^D(x-x')$ is an assumption of dimensional regularization \tA.
+For $\mathrm{Re}\,D<2$, $A$ is continuous at coincidence and all powers of $y$ vanish there.
+The result is then carried to general $D$ by analytic continuation.
+With \eqref{eq:ch04:G2t9} this gives, for $I=A$ (without its logarithm), $B$ and $C$:
+\begin{equation}
+(aa')^{D-2}\,i\Delta_I(x;x')\,\frac{i}{a^{D-2}}\,\delta^D(x-x')=i\,\Lambda_I\,a^{D-2}\,\delta^D(x-x'),
+\qquad \Lambda_A=k\pihat,\quad \Lambda_B=b,\quad \Lambda_C=c .
+\label{eq:ch04:R1}
+\end{equation}
+Here $(aa')^{D-2}/a^{D-2}=a'^{D-2}$ becomes $a^{D-2}$ on the support of the delta function.
+
+\paragraph{(R2) Outer derivatives.}
+We act with the kernel on a test function $g$.
+Since $a^{D-2}=a(\eta)^{D-2}$ depends only on $x$, the primed derivative acts only on the delta function:
+\begin{equation}
+\int d^Dx'\;\partial_\mu\partial'_\nu\big[a^{D-2}\delta^D(x-x')\big]\,g(x')=\partial_\mu\big[a^{D-2}\,(-\partial_\nu g)\big].
+\end{equation}
+By the definition \eqI{42}, $a^D\square=\partial^\mu(a^{D-2}\partial_\mu)$. With $\eta^{00}=-1$ this reads
+$a^D\square f=-\partial_0(a^{D-2}\partial_0f)+a^{D-2}\nabla^2f$. Therefore
+\begin{equation}
+\partial_0\partial'_0\big[a^{D-2}\delta^D\big]=-\partial_0\big(a^{D-2}\partial_0\delta^D\big)=\big(a^D\square-a^{D-2}\nabla^2\big)\delta^D,
+\qquad
+\nabla\!\cdot\!\nabla'\big[a^{D-2}\delta^D\big]=-a^{D-2}\nabla^2\delta^D .
+\label{eq:ch04:R2}
+\end{equation}
+The paper's \eqI{55}--\eqI{56} is the first equality of \eqref{eq:ch04:R2} multiplied by $-1$:
+$-\partial_0(a^{D-2}\partial'_0\delta^D)=-a^D\square\delta^D+a^{D-2}\nabla^2\delta^D$.
+This is correct~\chIVok.
+
+% ---------------------------------------------------------------------
+\subsection{The three local terms \texorpdfstring{\tD}{}}
+% ---------------------------------------------------------------------
+
+\paragraph{Eq.~\eqI{54}: $\Tab_{AA}$.}
+We insert \eqref{eq:ch04:R1} with $\Lambda_A=k\pihat$ and then \eqref{eq:ch04:R2}.
+Using $(D-1)\Gamma(D-1)=\Gamma(D)$:
+\begin{equation*}
+\begin{aligned}
+\Tab_{AA}^{\chIVloc}&=\kappa^2\,\frac{D-1}{D-3}\cdot i\,k\pihat\,\big(a^D\square-a^{D-2}\nabla^2\big)\delta^D\\
+&=\frac{i\kappa^2H^{D-2}}{(4\pi)^{D/2}}\,\frac{\Gamma(D)}{(D-3)\Gamma(\frac D2)}\Big(-\pi\cot\big(\tfrac{\pi D}{2}\big)\Big)
+\big\{+a^D\square-a^{D-2}\nabla^2\big\}\delta^D(x-x').
+\end{aligned}
+\tag{I.54$'$}\label{eq:ch04:54}
+\end{equation*}
+
+\paragraph{Eq.~\eqI{57}: $\Tab_{AB}$.}
+Here the outer pair is $\nabla\!\cdot\!\nabla'$ and $\Lambda_B=b=-k/(D-2)$:
+\begin{equation*}
+\Tab_{AB}^{\chIVloc}=\kappa^2\cdot i\,b\cdot\big(-a^{D-2}\nabla^2\big)\delta^D
+=+\frac{i\kappa^2k}{D-2}\,a^{D-2}\nabla^2\delta^D
+=+\frac{i\kappa^2H^2}{16\pi^2}\,a^2\nabla^2\delta^4(x-x')+\order{D-4}.
+\tag{I.57$'$}\label{eq:ch04:57}
+\end{equation*}
+
+\paragraph{Eq.~\eqI{58}: $\Tab_{AC}$.}
+With $\Lambda_C=c=k/[(D-2)(D-3)]$:
+\begin{equation*}
+\begin{aligned}
+\Tab_{AC}^{\chIVloc}&=-2\kappa^2\,\frac{D-2}{D-3}\cdot i\,c\,\big(a^D\square-a^{D-2}\nabla^2\big)\delta^D
+=-\frac{2i\kappa^2k}{(D-3)^2}\big(a^D\square-a^{D-2}\nabla^2\big)\delta^D\\
+&=-\frac{i\kappa^2H^2}{4\pi^2}\big\{a^4\square-a^2\nabla^2\big\}\delta^4(x-x')+\order{D-4}.
+\end{aligned}
+\tag{I.58$'$}\label{eq:ch04:58}
+\end{equation*}
+
+In \eqref{eq:ch04:57} and \eqref{eq:ch04:58}, $b$ and $c$ are finite and are not multiplied by a pole.
+Setting $D=4$ there therefore changes only terms of order $D-4$.
+The pole coefficients in \eqref{eq:ch04:54} are kept at exact $D$.
+
+% ---------------------------------------------------------------------
+\subsection{Eq.~(I.59): the sum \texorpdfstring{\tD}{}}
+% ---------------------------------------------------------------------
+
+Adding \eqref{eq:ch04:54}, \eqref{eq:ch04:57} and \eqref{eq:ch04:58} gives, in units of $i\kappa^2k$ and at exact $D$,
+\begin{equation}
+\begin{aligned}
+-iM^2_{\rm 3pt,\,loc}=i\kappa^2k\,\Big\{&\Big[\frac{D-1}{D-3}\,\pihat-\frac{2}{(D-3)^2}\Big]a^D\square\\
+&+\Big[-\frac{D-1}{D-3}\,\pihat+\frac{1}{D-2}+\frac{2}{(D-3)^2}\Big]a^{D-2}\nabla^2\Big\}\delta^D(x-x').
+\end{aligned}
+\label{eq:ch04:59exact}
+\end{equation}
+Now we set $D=4$ in the finite parts: $\frac{2}{(D-3)^2}\to2$ and $\frac{1}{D-2}\to\frac12$.
+The constant $k=\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(D/2)}$ is the same prefactor as in the paper's \eqI{59}.
+\begin{resultbox}[Result of Task 9: local 3-point contribution (definition sign)]
+\begin{equation*}
+\begin{aligned}
+-iM^2_{\rm 3pt,\,loc}(x;x')=i\kappa^2k\,\Big\{&\Big[-\frac{D-1}{D-3}\,\pi\cot\big(\tfrac{\pi}{2}D\big)-2\Big]a^D\square\\
+&+\Big[\frac{D-1}{D-3}\,\pi\cot\big(\tfrac{\pi}{2}D\big)+\frac52\Big]a^{D-2}\nabla^2+\order{D-4}\Big\}\delta^D(x-x').
+\end{aligned}
+\tag{I.59$'$}\label{eq:ch04:59}
+\end{equation*}
+\end{resultbox}
+\noindent
+Multiplying \eqref{eq:ch04:59} by $-1$ gives the paper's convention.
+The brackets then read $\big[\frac{D-1}{D-3}\pi\cot(\frac\pi2D)+2\big]$ and $\big[-\frac{D-1}{D-3}\pi\cot(\frac\pi2D)-\frac52\big]$.
+These differ from the printed \eqI{59} only in the finite constant of the second bracket: $-\frac52$ instead of $-\frac72$.
+
+% ---------------------------------------------------------------------
+\subsection{Comparison with Paper I}
+\label{sec:ch04:t9comp}
+% ---------------------------------------------------------------------
+
+Derived expressions are in the definition sign; the paper's are as printed (paper's convention).
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{4.9cm}>{\raggedright\arraybackslash}p{4.9cm}>{\raggedright\arraybackslash}p{2.0cm}@{}}
+\toprule
+Item & Derived (this task) & Paper I (printed) & Status\\
+\midrule
+\eqI{54} & $\ldots\{+a^D\square-a^{D-2}\nabla^2\}\delta^D$ & $\ldots\{-a^D\square+a^{D-2}\nabla^2\}\delta^D$ & \chIVno\ sign\\
+\eqI{55}--\eqI{56} & \eqref{eq:ch04:R2} & same & \chIVok\\
+\eqI{57} & $+\frac{i\kappa^2H^2}{16\pi^2}\,a^2\nabla^2\delta^4$ & $-\frac{i\kappa^2H^2}{16\pi^2}\,a^2\nabla^2\delta^4$ & \chIVno\ sign\\
+\eqI{58} & $-\frac{i\kappa^2H^2}{4\pi^2}\{a^4\square-a^2\nabla^2\}\delta^4$ & $+\frac{i\kappa^2H^2}{4\pi^2}\{a^4\square-a^2\nabla^2\}\delta^4$ & \chIVno\ sign\\
+\eqI{59}, $a^D\square$ & $-\frac{D-1}{D-3}\pi\cot-2$ & $+\frac{D-1}{D-3}\pi\cot+2$ & \chIVno\ sign\\
+\eqI{59}, $a^{D-2}\nabla^2$ & $+\frac{D-1}{D-3}\pi\cot+\frac52$ & $-\frac{D-1}{D-3}\pi\cot-\frac72$ & \chIVno\ sign and $\frac72\neq\frac52$\\
+text: ``4th term of (47)'' & 2nd term & 4th term & \chIVno\ typo\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Diagnosis.}
+\begin{enumerate}[leftmargin=1.5em,itemsep=2pt]
+\item \textbf{Overall sign.} The left-hand sides of \eqI{54}, \eqI{57} and \eqI{58} carry the signs of the printed \eqI{47}--\eqI{49}.
+The right-hand sides are correct evaluations of these left-hand sides.
+The difference therefore comes entirely from the sign in the step \eqI{46}$\to$\eqI{47}--\eqI{49} (Task~7).
+Consequently, the paper's 3-point contribution has the overall opposite sign relative to the definitions.
+\item \textbf{Arithmetic of \eqI{59}.} The paper's own terms give $-\frac12$ [from \eqI{57}] $-\,2$ [from \eqI{58}] $=-\frac52$ for the finite part of the $a^{D-2}\nabla^2$ coefficient; the printed value is $-\frac72$.
+In the paper's convention, the printed \eqI{59} minus the sum of the paper's own terms is $-\frac{i\kappa^2H^2}{8\pi^2}\,a^2\nabla^2\delta^4(x-x')$.
+This term has the form of the counterterm \eqI{145}, whose vertex Paper~I prints as $i\alpha_3\kappa^2H^2a^{D-2}\nabla^2\delta^D(x-x')$.
+It is absorbed by $\Delta\alpha_3=-\frac{1}{8\pi^2}$.
+The paper treats the finite parts of the counterterms as arbitrary, so this error does not affect the physical result.
+The paper most likely used this value in Section~IV, where it combines \eqI{44}, \eqI{59} and \eqI{67}.
+\end{enumerate}
+
+\paragraph{Effect on the accumulated findings.}
+Task~6 concluded that ``in the paper, the 4-point contribution enters with the opposite sign relative to the 3-point contribution''.
+That conclusion assumed that the paper's 3-point calculation used \eqI{46}.
+The present task shows that the paper used \eqI{47}--\eqI{49} instead. Accordingly:
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item In the paper, the 4-point and 3-point contributions are \textbf{consistent} with each other.
+Both have the opposite sign relative to the definitions \eqI{168} and \eqI{131}.
+\item The paper's bare $M^2$ is $-1$ times the one defined by \eqI{168}.
+The counterterms are chosen to cancel the divergences, so the renormalized result is also $-1$ times the correct one, up to arbitrary finite local terms.
+This affects the sign of the mode-function correction in Ref.~[30] of Paper~I (= Paper~II, arXiv:0710.5282).
+(Chapter~\ref{ch:sk} shows that at late times the non-falling total of that correction vanishes, so only decaying terms change sign and the late-time conclusion of Paper~II is unchanged.)
+\item \textbf{Supporting hint.} After \eqI{67}, the paper states that each local term of \eqI{67} cancels a similar finite local 4-point term in \eqI{44}.
+If the relative sign were inconsistent, this cancellation would not happen.
+The cancellation also covers the $\ln(aa')$ and $9H^2a^D$ terms, which had raised a concern in Task~5 because they are not of counterterm form.
+This remained to be confirmed once \eqI{60}--\eqI{67} were derived.
+(It is confirmed in Task~10, Section~\ref{sec:ch04:cancel}.)
+\end{itemize}
+
+\medskip
+\noindent\begin{minipage}{\linewidth}
+\paragraph{Accumulated findings (Tasks 2--9).}\mbox{}
+Identifiers in parentheses (S$n$, B$n$, C$n$) refer to the classified list of findings in Chapter~\ref{ch:summary}.
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{8.0cm}>{\raggedright\arraybackslash}p{4.0cm}@{}}
+\toprule
+Location & Finding & Effect\\
+\midrule
+\eqI{7}, left-hand side (C3) & $-\frac12\kappa$ printed; correct is $+\frac12\kappa$ & none\\
+\eqI{14}, first coefficient (C4) & $\Gamma(\frac D2-1)/(\frac D2-1)$ printed; correct is $\Gamma(\frac D2-1)$ & none\\
+Table II, $U_2$ (C5) & $-\frac i4$ printed; correct is $+\frac i4$ & none\\
+\eqI{32}--\eqI{33} (S1) & overall sign of the 4-point contribution reversed & overall sign of the bare $M^2$\\
+\eqI{39} (C6) & $\bar\eta_{\rho\sigma}\to\bar\eta^{\rho\sigma}$ & none\\
+\eqI{40} (B1) & finite part $+2$ printed; correct is $-2$ & absorbable in counterterms\\
+\eqI{47}--\eqI{49} (S1) & overall sign reversed in all nine terms & \textbf{carried into the later calculation} (this task)\\
+\eqI{54}--\eqI{59} & overall sign reversed (inherited); in \eqI{59} $-\frac72\to-\frac52$; in the text ``4th''$\to$``2nd'' & sign: inherited (S1); \eqI{59}: absorbable in $\Delta\alpha_3$ (B2); ``4th'': typo (C7)\\
+\textbf{Overall} (S1) & in the paper the 4-point and 3-point contributions are consistent with each other; both are reversed & bare $M^2=-$(definition)\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+% ---------------------------------------------------------------------
+\subsection{Code checks \texorpdfstring{\tC}{}}
+\label{sec:ch04:t9code}
+% ---------------------------------------------------------------------
+
+The script \texttt{code/04\_three\_point\_local\_log/check\_54\_59.py} (SymPy; about 1\,s) checks the following.
+It was actually run.
+It is a check only and does not replace the analytic derivation above.
+\begin{itemize}[leftmargin=1.2em,itemsep=3pt]
+\item[(A)] \textbf{Local part directly from \eqI{45} and Table~I.}
+This check does not use the intermediate step \eqI{47}--\eqI{49}.
+The graviton tensor factors $T^A$, $T^B$, $T^C$ are built as explicit component arrays for $D=4,5,6$.
+Outer derivatives at $x$ and $x'$ are represented by formal vectors $P$, $P'$, and inner derivatives by $Q$, $Q'$.
+Each vertex factor is $i(-P^\alpha)Q^\beta-\frac i2\eta^{\alpha\beta}(-P\!\cdot\!Q)$, since partial integration turns an outer-leg derivative into $-P$.
+The two vertex factors are contracted with $T^Ad_A+T^Bd_B+T^Cd_C$, where $d_A,d_B,d_C$ label the type of the outer propagator.
+The inner derivatives are replaced by the delta-function part of \eqI{52}, i.e.\ $Q_\rho Q'_\sigma\to\delta^0_\rho\delta^0_\sigma$.
+For $D=4,5,6$ the local polynomial comes out as
+$\frac{D-1}{D-3}P_0P'_0\,d_A+(\bar P\!\cdot\!\bar P')\,d_B-\frac{2(D-2)}{D-3}P_0P'_0\,d_C$.
+This is exactly the local part of the three terms in \eqref{eq:ch04:G1t9}~\chIVok.
+\item[(B)] \textbf{Rules \eqref{eq:ch04:R2} and \eqI{55}--\eqI{56}.}
+These are verified on a test function $g(\eta,x_1,x_2,x_3)$ with explicit $a(\eta)=-1/(H\eta)$ and symbolic $D$ in the powers of $a$~\chIVok.
+\item[(C)] \textbf{The sum.}
+The derived finite coefficients are $-2$ for $a^D\square$ and $+\frac52$ for $a^{D-2}\nabla^2$.
+The paper's own terms add up to $-\frac{D-1}{D-3}\pihat+2$ for $a^D\square$ and $\frac{D-1}{D-3}\pihat-\frac52$ for $a^{D-2}\nabla^2$.
+The printed $a^{D-2}\nabla^2$ value is $\frac{D-1}{D-3}\pihat-\frac72$.
+The paper's \eqI{54}, \eqI{57} and \eqI{58} are $-1$ times the derived ones, term by term~\chIVok.
+(For \eqI{54} this is checked at symbolic $D$; for \eqI{57} and \eqI{58}, which the paper prints only at $D=4$, the $D=4$ coefficients are compared.)
+\end{itemize}
+
+\paragraph{Actual output} (Python 3, SymPy 1.14.0; long lines wrapped, marked by \texttt{\textbackslash}).
+The output of the re-run in the code folder is identical to the output in the original log.
+{\scriptsize
+\begin{verbatim}
+== (A) local part extracted directly from (45) + Table I (no use of (47)-(49)) ==
+  D=4: local polynomial == (D-1)/(D-3) P0P0' dA + (P.P')_spatial dB - 2(D-2)/(D-3) P0P0' dC : True
+  D=5: local polynomial == (D-1)/(D-3) P0P0' dA + (P.P')_spatial dB - 2(D-2)/(D-3) P0P0' dC : True
+  D=6: local polynomial == (D-1)/(D-3) P0P0' dA + (P.P')_spatial dB - 2(D-2)/(D-3) P0P0' dC : True
+== (B) outer derivatives on a^{D-2} delta^D(x-x'), acting on a test function g (D=4 coordinates) ==
+  d0 d0'[a^{D-2} delta] == (a^D Box - a^{D-2} Lap) delta : True
+  sum_i d_i d_i'[a^{D-2} delta] == - a^{D-2} Lap delta   : True
+  (55)-(56): -d0(a^{D-2} d0' delta) == -a^D Box + a^{D-2} Lap : True
+== (C) assembling (59): units of i kappa^2 k, k = H^{D-2}/(4pi)^{D/2} Gamma(D-1)/Gamma(D/2) ==
+  derived coeff of a^D Box     : (D**2*pihat - 4*D*pihat + 3*pihat - 2)/(D**2 - 6*D + 9)
+  derived coeff of a^{D-2} Lap : (-D**3*pihat + 6*D**2*pihat + D**2 - 11*D*pihat - 4*D + 6*pihat + 5)\
+                                 /(D**3 - 8*D**2 + 21*D - 18)
+  finite parts at D=4 (pihat-terms kept exact):  Box: -2    Lap: 5/2
+  sum of the paper's own (54)+(57)+(58):  Box: (-D*pihat + 2*D + pihat - 6)/(D - 3)    \
+                                          Lap: (D*pihat - 5*D/2 - pihat + 15/2)/(D - 3)
+  paper's printed (59):                    Box: -(D-1)/(D-3)*pihat + 2   Lap: (D-1)/(D-3)*pihat - 7/2
+  paper's (54),(57),(58) = -(derived) term by term: True True True
+  check k -> H^2/(8 pi^2) at D=4: H**2/(8*pi**2)
+\end{verbatim}
+}
+\noindent
+The two derived coefficients factor as $\frac{(D-1)(D-3)\pihat-2}{(D-3)^2}$ and
+$\frac{-(D-1)(D-2)(D-3)\pihat+(D-3)^2+2(D-2)}{(D-2)(D-3)^2}$, which are the brackets of \eqref{eq:ch04:59exact}.
+(In section (B) the label ``D=4 coordinates'' means three spatial coordinates; the exponent $D-2$ of $a$ is symbolic.)
+
+% ---------------------------------------------------------------------
+\subsection{Calculation record}
+% ---------------------------------------------------------------------
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item \textbf{Derived.} Rules \eqref{eq:ch04:R1}--\eqref{eq:ch04:R2}; \eqI{55}--\eqI{56} confirmed;
+\eqI{54} [Eq.~\eqref{eq:ch04:54}], \eqI{57} [Eq.~\eqref{eq:ch04:57}], \eqI{58} [Eq.~\eqref{eq:ch04:58}];
+\eqI{59} at exact $D$ [Eq.~\eqref{eq:ch04:59exact}] and at $D=4$ in the finite parts [Eq.~\eqref{eq:ch04:59}].
+\item \textbf{Checks passed.} SymPy (A): local part extracted directly from \eqI{45}; (B): outer-derivative rules; (C): the sum, and an audit of the paper's own arithmetic.
+All were actually run.
+\item \textbf{Discrepancies.} The overall sign is reversed. Its origin is \eqI{47}--\eqI{49}, whose printed signs the paper carried along.
+In \eqI{59} the constant should be $-\frac52$ instead of $-\frac72$.
+In the text, ``2nd term'' should replace ``4th term''.
+\item \textbf{Open point (at the time of Task 9).} The logarithm contributions \eqI{60}--\eqI{67} and the expected cancellation with \eqI{44}.
+Both are settled in Task~10.
+\end{itemize}
+
+% =====================================================================
+\section{Task 10: the logarithm contributions, Eqs. (I.60)--(I.67)}
+\label{sec:ch04:task10}
+% =====================================================================
+
+Task~10 derives the logarithm contributions of the 3-point diagram with the corrected sign and normalizations.
+It then compares them with the paper (printed pages 124005-6 and 124005-7).
+
+\begin{discbox}[Summary of findings (Task 10)]
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item \eqI{60}, \eqI{61} and \eqI{62} are reproduced exactly.
+\eqI{62} was obtained with the corrected first coefficient of \eqI{14}; the printed coefficient gives the same result at $D=4$.
+\item \eqI{63}--\eqI{66} were derived at general $D$. All four are exactly $-1$ times the paper's.
+The paper's left-hand sides carry the signs of the printed \eqI{47}, and its right-hand sides correctly evaluate those left-hand sides.
+This is the same diagnosis as in Task~9.
+\item \eqI{67}: the derived result is $-1$ times the paper's.
+The $\nabla^4A$ terms cancel exactly at $D=4$; at general $D$ the remaining coefficient is $-\frac{2(D-4)}{D-3}$.
+\item \textbf{The cancellation against \eqI{44} is confirmed.}
+In the correct \eqI{44}, the local terms containing $\ln(aa')$ and the $9H^2a^D$ term cancel against the local terms of the correct \eqI{67}.
+At general $D$ they leave only a factor $\frac{(D-4)(D+1)}{4(D-3)}$.
+This removes the concern left open in Task~5, which was that these terms are not of counterterm form.
+It also confirms that the relative sign of the 4-point and 3-point contributions is the one fixed by the definitions.
+In the paper both contributions are reversed, so the cancellation also happens in the paper.
+\end{itemize}
+\end{discbox}
+
+% ---------------------------------------------------------------------
+\subsection{Goal, inputs and scope}
+% ---------------------------------------------------------------------
+
+\paragraph{Target equations \tP.}
+Paper~I states that all logarithm contributions come from \eqI{47} and can be simplified with the propagator equation \eqI{12}.
+It prints (p.~124005-6, right column, and p.~124005-7, left column):
+\begin{align*}
+&\partial_0\big(a^{D-2}\partial_0 i\Delta_A(x;x')\big)=-i\delta^D(x-x')+a^{D-2}\nabla^2A(y),\tag{I.60}\\
+&\partial'_0\big(a'^{D-2}\partial'_0 i\Delta_A(x;x')\big)=-i\delta^D(x-x')+a'^{D-2}\nabla^2A(y),\tag{I.61}\\
+&A(y)=\frac{H^2}{16\pi^2}\Big\{\frac4y-2\ln\Big(\frac y4\Big)-1+\order{D-4}\Big\},\tag{I.62}\\[3pt]
+&\kappa^2\nabla\!\cdot\!\nabla'\big[(aa')^{D-2}k\ln(aa')\nabla\!\cdot\!\nabla' i\Delta_A(x;x')\big]
+=\frac{\kappa^2H^2}{8\pi^2}\ln(aa')(aa')^2\nabla^4A(y)+\order{D-4},\tag{I.63}\\[3pt]
+&-\kappa^2\Big(\frac{D-1}{D-3}\Big)\partial_0\partial'_0\big[(aa')^{D-2}k\ln(aa')\partial_0\partial'_0 i\Delta_A(x;x')\big]\notag\\
+&\qquad=\frac{i3\kappa^2H^2}{8\pi^2}\ln(aa')\{-a^4\square+2a^2\nabla^2\}\delta^4(x-x')\notag\\
+&\qquad-\frac{3\kappa^2H^2}{8\pi^2}\ln(aa')(aa')^2\nabla^4A(y)-\frac{i9\kappa^2H^4}{8\pi^2}a^4\delta^4(x-x')\notag\\
+&\qquad-\frac{3\kappa^2H^3}{8\pi^2}(aa')^2(a\partial_0+a'\partial'_0)\nabla^2A(y)+\order{D-4},\tag{I.64}\\[3pt]
+&\kappa^2\partial_i\partial'_0\big[(aa')^{D-2}k\ln(aa')\partial_i\partial'_0 i\Delta_A(x;x')\big]
+=-\frac{i\kappa^2H^2}{8\pi^2}\ln(aa')a^2\nabla^2\delta^4(x-x')\notag\\
+&\qquad+\frac{\kappa^2H^2}{8\pi^2}\ln(aa')(aa')^2\nabla^4A(y)+\frac{\kappa^2H^3}{8\pi^2}(aa')^2a'\partial'_0\nabla^2A(y)+\order{D-4},\tag{I.65}\\[3pt]
+&\kappa^2\partial_0\partial'_i\big[(aa')^{D-2}k\ln(aa')\partial_0\partial'_i i\Delta_A(x;x')\big]
+=-\frac{i\kappa^2H^2}{8\pi^2}\ln(aa')a^2\nabla^2\delta^4(x-x')\notag\\
+&\qquad+\frac{\kappa^2H^2}{8\pi^2}\ln(aa')(aa')^2\nabla^4A(y)+\frac{\kappa^2H^3}{8\pi^2}(aa')^2a\partial_0\nabla^2A(y)+\order{D-4},\tag{I.66}\\[3pt]
+&-iM^2_{\rm 3pt,\,log}(x;x')=\frac{\kappa^2H^2}{8\pi^2}\Big\{\ln(aa')\big[-3a^4\square+4a^2\nabla^2\big]i\delta^4(x-x')\notag\\
+&\qquad-9H^2a^4i\delta^4(x-x')-2H(aa')^2(a\partial_0+a'\partial'_0)\nabla^2A(y)+\order{D-4}\Big\}.\tag{I.67}
+\end{align*}
+Between \eqI{61} and \eqI{62} the paper states that the limit $D=4$ may be taken because all logarithm contributions are finite.
+None of these printed expressions was used as an input. They enter only the comparison in Section~\ref{sec:ch04:t10comp}.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=1.2em,itemsep=3pt]
+\item[(G1)] The derived \eqI{47} \tD\ (Task~7, the $AA$ terms).
+In the logarithm contribution, the outer $i\Delta_A$ is replaced by $k\ln(aa')$.
+Abbreviation: $\mathcal P\equiv(aa')^{D-2}\,k\,L$. Then
+\begin{equation}
+\begin{aligned}
+\mathcal L_1&=-\kappa^2\,\nabla\!\cdot\!\nabla'\big[\mathcal P\,\nabla\!\cdot\!\nabla' i\Delta_A\big],&
+\mathcal L_2&=+\kappa^2\,\frac{D-1}{D-3}\,\partial_0\partial'_0\big[\mathcal P\,\partial_0\partial'_0 i\Delta_A\big],\\
+\mathcal L_3&=-\kappa^2\,\partial_i\partial'_0\big[\mathcal P\,\partial_i\partial'_0 i\Delta_A\big],&
+\mathcal L_4&=-\kappa^2\,\partial_0\partial'_i\big[\mathcal P\,\partial_0\partial'_i i\Delta_A\big].
+\end{aligned}
+\label{eq:ch04:G1t10}
+\end{equation}
+(Repeated spatial indices $i$ are summed.)
+In the paper's \eqI{47} the signs are $+,-,+,+$ in this order, i.e.\ reversed.
+\item[(G2)] The propagator equation \eqI{12} \tP, together with \eqI{13} and \eqI{14} \tP.
+Following Task~8, the first coefficient of \eqI{14} is taken to be $\Gamma(\frac D2-1)$.
+\item[(G3)] Homogeneity \tD\ (Task~7): $\partial'_i\,i\Delta_A=-\partial_i\,i\Delta_A$.
+Hence $\nabla\!\cdot\!\nabla' i\Delta_A=-\nabla^2A$, and $\nabla'^2=\nabla^2$ on functions of $\vec x-\vec x'$.
+\item[(G4)] Separation convention \tP\ (Task~9, (G4)).
+The logarithm contribution is $k\ln(aa')$ times the \emph{full} $\partial\partial' i\Delta_A$, i.e.\ including the local term of \eqI{52}.
+Together with the local contribution of Task~9, the decomposition is then complete.
+\end{itemize}
+
+\paragraph{Scope.}
+Not treated here: the normal contributions (\eqI{68} and later), and the elimination of time derivatives that the paper performs after \eqI{67}.
+The calculation is done at general $D$; the passage to $D=4$ is justified in Section~\ref{sec:ch04:Dto4}.
+
+% ---------------------------------------------------------------------
+\subsection{Eqs.~(I.60) and (I.61) \texorpdfstring{\tD}{}}
+% ---------------------------------------------------------------------
+
+By \eqI{9}, $\sqrt{-\hat g}\,\hat g^{\mu\nu}=a^{D-2}\eta^{\mu\nu}$, so the propagator equation \eqI{12} reads
+$-\partial_0\big(a^{D-2}\partial_0 i\Delta_A\big)+a^{D-2}\nabla^2 i\Delta_A=i\delta^D(x-x')$.
+Since $\nabla^2[k\ln(aa')]=0$, we have $\nabla^2 i\Delta_A=\nabla^2A$. Hence
+\begin{equation*}
+\boxed{\;\partial_0\big(a^{D-2}\partial_0\,i\Delta_A(x;x')\big)=-i\delta^D(x-x')+a^{D-2}\nabla^2A(y)\;}
+\tag{I.60}\label{eq:ch04:60}
+\end{equation*}
+Because of the symmetry $i\Delta_A(x;x')=i\Delta_A(x';x)$, the same equation holds at $x'$. This is \eqI{61}:
+\begin{equation*}
+\partial'_0\big(a'^{D-2}\partial'_0\,i\Delta_A\big)=-i\delta^D(x-x')+a'^{D-2}\nabla^2A\quad\chIVok
+\tag{I.61}\label{eq:ch04:61}
+\end{equation*}
+
+\paragraph{Corollary.}
+We have $\partial_0\big(a^p\partial_0 l\big)=\partial_0\big(Ha^{D-1}\big)=(D-1)H^2a^D$.
+With $A=i\Delta_A-kL$ and $\partial_0L=\partial_0l$, this gives
+\begin{equation}
+\partial_0\big(a^p\partial_0A\big)=-i\delta^D+a^p\nabla^2A-(D-1)kH^2a^D .
+\end{equation}
+Applying $\nabla^2$ removes the last term:
+\begin{equation}
+\partial_0\big(a^p\partial_0\nabla^2A\big)=-i\nabla^2\delta^D+a^p\nabla^4A .
+\label{eq:ch04:corol}
+\end{equation}
+The primed version, $\partial'_0\big(a'^p\partial'_0\nabla^2A\big)=-i\nabla^2\delta^D+a'^p\nabla^4A$, follows in the same way from \eqref{eq:ch04:61}.
+Both forms are used repeatedly below.
+
+% ---------------------------------------------------------------------
+\subsection{Eq.~(I.62): \texorpdfstring{$A(y)$}{A(y)} at \texorpdfstring{$D=4$}{D=4} \texorpdfstring{\tD}{}}
+% ---------------------------------------------------------------------
+
+Write $D=4+\epsilon$ and $\mathcal N\equiv\frac{H^{D-2}}{(4\pi)^{D/2}}\to\frac{H^2}{16\pi^2}$.
+We expand the terms of \eqI{14} one at a time:
+\begin{equation}
+\begin{aligned}
+&\Gamma\big(\tfrac D2-1\big)\Big(\frac4y\Big)^{\frac D2-1}\to\frac4y,\\
+&\frac{\Gamma(\frac D2+1)}{\frac D2-2}\Big(\frac4y\Big)^{\frac D2-2}=\frac4\epsilon+2\psi(3)+2\ln\frac4y+\order{\epsilon}
+=\frac4\epsilon+3-2\gamma+2\ln\frac4y+\order{\epsilon},\\
+&-\pi\cot\big(\tfrac{\pi D}{2}\big)\frac{\Gamma(D-1)}{\Gamma(\frac D2)}=\Big(-\frac2\epsilon+\order{\epsilon}\Big)\cdot2\Big[1+\epsilon\Big(1-\frac\gamma2\Big)\Big]
+=-\frac4\epsilon-4+2\gamma+\order{\epsilon}.
+\end{aligned}
+\end{equation}
+Here we used $\psi(3)=\frac32-\gamma$ and $\psi(2)=1-\gamma$; the bracket in the last line is
+$\Gamma(3+\epsilon)/\Gamma(2+\frac\epsilon2)=2[1+\epsilon(\psi(3)-\frac12\psi(2))]$.
+The $n$-th term of the series in \eqI{14} vanishes identically at $D=4$: both of its parts equal $\frac{n+2}{n}(y/4)^n$ there.
+The poles cancel exactly, with the same factor $\mathcal N$ in front of both. Therefore
+\begin{equation*}
+\boxed{\;A(y)=\frac{H^2}{16\pi^2}\Big\{\frac4y-2\ln\frac y4-1+\order{D-4}\Big\}\;}
+\tag{I.62}\label{eq:ch04:62}
+\end{equation*}
+This is the paper's \eqI{62}~\chIVok.
+The printed first coefficient $\Gamma(\frac D2-1)/(\frac D2-1)$ also tends to 1 at $D=4$, so it affects \eqI{62} only at order $D-4$.
+
+\emph{Check.} $(4y-y^2)A''+4(2-y)A'=6h=3k$ with $h\equiv H^2/(16\pi^2)$.
+This is $\square A=(D-1)kH^2$ at $D=4$, as expected from $\square\,i\Delta_A=0$ away from coincidence and $\square\,k\ln(aa')=-(D-1)kH^2$.
+
+% ---------------------------------------------------------------------
+\subsection{Distributional tools \texorpdfstring{\tD}{}}
+% ---------------------------------------------------------------------
+
+\begin{itemize}[leftmargin=1.5em,itemsep=4pt]
+\item[(D1)] For a function $f$ of time only (repeating Lemma~B of Task~5):
+\begin{equation}
+f(\eta')\,\partial_0\delta^D=f(\eta)\,\partial_0\delta^D+f'(\eta)\,\delta^D,\qquad
+f(\eta')\,\partial_0^2\delta^D=f\,\partial_0^2\delta^D+2f'\,\partial_0\delta^D+f''\,\delta^D .
+\label{eq:ch04:D1}
+\end{equation}
+(Acting on a test function $h(x')$, the left-hand side of the second identity gives $\partial_0^2(fh)=fh''+2f'h'+f''h$.)
+\item[(D2)] Symmetry of the kernel:
+\begin{equation}
+\partial'_0\big[F(\eta')\,\partial'_0\delta^D(x-x')\big]\equiv\partial_0\big[F(\eta)\,\partial_0\delta^D(x-x')\big].
+\label{eq:ch04:D2}
+\end{equation}
+Both act on a test function $g(x')$ as $\partial_0(F\partial_0g)$ (integrate by parts twice).
+\item[(D3)] $f(\eta,\eta')\,\nabla^2\delta^D(x-x')=f(\eta,\eta)\,\nabla^2\delta^D$, because only spatial derivatives act on the delta function.
+For example, $a'^p\,l\,\nabla^2\delta^D=a^p\,l\,\nabla^2\delta^D$ and $L\,\nabla^2\delta^D=2l\,\nabla^2\delta^D$.
+\item[(D4)] $\partial_0\big(a^p\partial_0\delta^D\big)=-\big(a^D\square-a^{D-2}\nabla^2\big)\delta^D$, from \eqI{42} (Task~9, Eq.~\eqref{eq:ch04:R2}).
+\item[(D5)] \textbf{Lemma.}
+\begin{equation}
+-2i\,\partial_0\big[a^p l\,\partial_0\delta^D\big]=i\,L\,\big(a^D\square-a^{D-2}\nabla^2\big)\delta^D+i(D-1)H^2a^D\delta^D .
+\label{eq:ch04:D5}
+\end{equation}
+\emph{Proof.} First, $\partial_0[a^pl\,\partial_0\delta]=l\,\partial_0(a^p\partial_0\delta)+Ha^{D-1}\partial_0\delta$.
+Next apply (D1) with $f=l(\eta')$, for which $f'=Ha$ and $f''=H^2a^2$, together with $\partial_0a^p=pHa^{D-1}$:
+\begin{equation}
+\begin{aligned}
+l'\,\partial_0(a^p\partial_0\delta)&=l'\big(pHa^{D-1}\partial_0\delta+a^p\partial_0^2\delta\big)\\
+&=pHa^{D-1}\big(l\,\partial_0\delta+Ha\,\delta\big)+a^p\big(l\,\partial_0^2\delta+2Ha\,\partial_0\delta+H^2a^2\delta\big)\\
+&=l\,\partial_0(a^p\partial_0\delta)+2Ha^{D-1}\partial_0\delta+(D-1)H^2a^D\delta .
+\end{aligned}
+\end{equation}
+Therefore $L\,\partial_0(a^p\partial_0\delta)=2\,\partial_0[a^pl\,\partial_0\delta]+(D-1)H^2a^D\delta$.
+Applying (D4) to the left-hand side gives \eqref{eq:ch04:D5}.~$\blacksquare$
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\subsection{The four terms at general \texorpdfstring{$D$}{D} \texorpdfstring{\tD}{}}
+% ---------------------------------------------------------------------
+
+\paragraph{Eq.~\eqI{63}: $\mathcal V_1\equiv\nabla\!\cdot\!\nabla'\big[\mathcal P\,\nabla\!\cdot\!\nabla' i\Delta_A\big]$.}
+By (G3), $\nabla\!\cdot\!\nabla' i\Delta_A=-\nabla^2A$.
+$\mathcal P$ is constant in space, and $\nabla\!\cdot\!\nabla'F(\vec x-\vec x')=-\nabla^2F$. Hence
+\begin{equation*}
+\mathcal V_1=k\,(aa')^{D-2}L\,\nabla^4A,\qquad
+\mathcal L_1=-\kappa^2\mathcal V_1\;\xrightarrow{D=4}\;-\frac{\kappa^2H^2}{8\pi^2}\ln(aa')(aa')^2\nabla^4A(y).
+\tag{I.63$'$}\label{eq:ch04:63}
+\end{equation*}
+This term has no local part, because it contains no time derivatives.
+(In the other three terms the delta functions arise through \eqref{eq:ch04:60}--\eqref{eq:ch04:61} and the corollary \eqref{eq:ch04:corol}, i.e.\ from two time derivatives acting at the same point.)
+
+\paragraph{Eq.~\eqI{64}: $\mathcal W\equiv\partial_0\partial'_0\big[\mathcal P\,\partial_0\partial'_0 i\Delta_A\big]$.}
+Split $L=l+l'$.
+In the $l$ part, $a^pl$ depends only on $\eta$, so $\partial'_0$ passes through it.
+Moreover $a'^p\,\partial_0\partial'_0 i\Delta_A=\partial_0\big(a'^p\partial'_0 i\Delta_A\big)$, because $a'$ does not depend on $\eta$.
+Using the commutativity of the derivatives and \eqref{eq:ch04:61}:
+\begin{equation}
+\partial_0\partial'_0\big[a^pl\cdot a'^p\,\partial_0\partial'_0 i\Delta_A\big]
+=\partial_0\big[a^pl\;\partial_0\,\partial'_0\big(a'^p\partial'_0 i\Delta_A\big)\big]
+=\partial_0\big[a^pl\;\partial_0\big(-i\delta^D+a'^p\nabla^2A\big)\big].
+\end{equation}
+The $l'$ part is the mirror image under $x\leftrightarrow x'$: $\partial'_0\big[a'^pl'\,\partial'_0\big(-i\delta^D+a^p\nabla^2A\big)\big]$.
+\begin{itemize}[leftmargin=1.2em,itemsep=3pt]
+\item \textbf{Local part.} By (D2) and (D5):
+\begin{equation}
+\begin{aligned}
+-i\big\{\partial_0[a^pl\,\partial_0\delta]+\partial'_0[a'^pl'\,\partial'_0\delta]\big\}&=-2i\,\partial_0[a^pl\,\partial_0\delta]\\
+&=iL\big(a^D\square-a^{D-2}\nabla^2\big)\delta^D+i(D-1)H^2a^D\delta^D .
+\end{aligned}
+\end{equation}
+\item \textbf{$A$ part.} By the corollary \eqref{eq:ch04:corol},
+$\partial_0[a^pl\,\partial_0\nabla^2A]=l\big(-i\nabla^2\delta+a^p\nabla^4A\big)+Ha^{D-1}\partial_0\nabla^2A$.
+The mirror term is analogous. With (D3) for the delta terms, and $a'^pa^{D-1}=(aa')^pa$:
+\begin{equation}
+\begin{aligned}
+&a'^p\,\partial_0[a^pl\,\partial_0\nabla^2A]+a^p\,\partial'_0[a'^pl'\,\partial'_0\nabla^2A]\\
+&\qquad=-ia^{D-2}L\,\nabla^2\delta^D+(aa')^{D-2}L\,\nabla^4A+H(aa')^{D-2}\big(a\partial_0+a'\partial'_0\big)\nabla^2A .
+\end{aligned}
+\end{equation}
+\end{itemize}
+Adding both parts:
+\begin{equation}
+\begin{aligned}
+\frac{\mathcal W}{k}={}&iL\big(a^D\square-2a^{D-2}\nabla^2\big)\delta^D+i(D-1)H^2a^D\delta^D\\
+&+(aa')^{D-2}L\,\nabla^4A+H(aa')^{D-2}\big(a\partial_0+a'\partial'_0\big)\nabla^2A .
+\end{aligned}
+\label{eq:ch04:W}
+\end{equation}
+At $D=4$, $\mathcal L_2=+3\kappa^2\mathcal W$ with $k=\frac{H^2}{8\pi^2}$:
+\begin{equation*}
+\begin{aligned}
+\mathcal L_2={}&\frac{3i\kappa^2H^2}{8\pi^2}\ln(aa')\{a^4\square-2a^2\nabla^2\}\delta^4+\frac{3\kappa^2H^2}{8\pi^2}\ln(aa')(aa')^2\nabla^4A\\
+&+\frac{9i\kappa^2H^4}{8\pi^2}a^4\delta^4+\frac{3\kappa^2H^3}{8\pi^2}(aa')^2\big(a\partial_0+a'\partial'_0\big)\nabla^2A .
+\end{aligned}
+\tag{I.64$'$}\label{eq:ch04:64}
+\end{equation*}
+
+\paragraph{Eq.~\eqI{65}: $\mathcal V_3\equiv\partial_i\partial'_0\big[\mathcal P\,\partial_i\partial'_0 i\Delta_A\big]$.}
+The outer $\partial_i$ passes through $\mathcal P$, which is constant in space, and meets the inner $\partial_i$ to form $\nabla^2$:
+\begin{equation}
+\mathcal V_3=k\,\partial'_0\big[(aa')^{D-2}L\,\partial'_0\nabla^2A\big]
+=k\,a^p\Big\{\partial'_0\big[a'^pl'\,\partial'_0\nabla^2A\big]+l\,\partial'_0\big[a'^p\partial'_0\nabla^2A\big]\Big\}.
+\end{equation}
+Applying $\nabla^2$ to \eqref{eq:ch04:61} gives $\partial'_0\big(a'^p\partial'_0\nabla^2A\big)=-i\nabla^2\delta+a'^p\nabla^4A$.
+Also, by the product rule with $\partial'_0l'=Ha'$,
+\begin{equation}
+\partial'_0\big[a'^pl'\,\partial'_0\nabla^2A\big]=l'\,\partial'_0\big(a'^p\partial'_0\nabla^2A\big)+Ha'^{D-1}\partial'_0\nabla^2A .
+\end{equation}
+Hence
+\begin{equation}
+\frac{\mathcal V_3}{k}=-ia^{D-2}L\,\nabla^2\delta^D+(aa')^{D-2}L\,\nabla^4A+H(aa')^{D-2}a'\partial'_0\nabla^2A .
+\label{eq:ch04:V3}
+\end{equation}
+
+\paragraph{Eq.~\eqI{66}: $\mathcal V_4\equiv\partial_0\partial'_i\big[\mathcal P\,\partial_0\partial'_i i\Delta_A\big]$.}
+Using $\nabla'^2=\nabla^2$, we obtain the mirror image of \eqref{eq:ch04:V3}:
+\begin{equation}
+\frac{\mathcal V_4}{k}=-ia^{D-2}L\,\nabla^2\delta^D+(aa')^{D-2}L\,\nabla^4A+H(aa')^{D-2}a\,\partial_0\nabla^2A .
+\label{eq:ch04:V4}
+\end{equation}
+With the derived signs, $\mathcal L_3=-\kappa^2\mathcal V_3$ and $\mathcal L_4=-\kappa^2\mathcal V_4$. At $D=4$:
+\begin{equation*}
+\begin{aligned}
+\mathcal L_3={}&+\frac{i\kappa^2H^2}{8\pi^2}\ln(aa')a^2\nabla^2\delta^4-\frac{\kappa^2H^2}{8\pi^2}\ln(aa')(aa')^2\nabla^4A\\
+&-\frac{\kappa^2H^3}{8\pi^2}(aa')^2a'\partial'_0\nabla^2A,
+\end{aligned}
+\tag{I.65$'$}\label{eq:ch04:65}
+\end{equation*}
+and $\mathcal L_4$ is the same except that $a'\partial'_0$ is replaced by $a\partial_0$ in the last term:
+\begin{equation*}
+\begin{aligned}
+\mathcal L_4={}&+\frac{i\kappa^2H^2}{8\pi^2}\ln(aa')a^2\nabla^2\delta^4-\frac{\kappa^2H^2}{8\pi^2}\ln(aa')(aa')^2\nabla^4A\\
+&-\frac{\kappa^2H^3}{8\pi^2}(aa')^2a\,\partial_0\nabla^2A .
+\end{aligned}
+\tag{I.66$'$}\label{eq:ch04:66}
+\end{equation*}
+
+% ---------------------------------------------------------------------
+\subsection{The sum at general \texorpdfstring{$D$}{D} \texorpdfstring{\tD}{}}
+% ---------------------------------------------------------------------
+
+The logarithm contribution is
+\begin{equation}
+-iM^2_{\rm 3pt,\,log}=\kappa^2\Big[-\mathcal V_1+\frac{D-1}{D-3}\,\mathcal W-\mathcal V_3-\mathcal V_4\Big].
+\end{equation}
+The following table collects the coefficient of each structure, in units of $\kappa^2k$, from \eqref{eq:ch04:63}, \eqref{eq:ch04:W}, \eqref{eq:ch04:V3} and \eqref{eq:ch04:V4}.
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Structure $/\kappa^2k$ & $-\mathcal V_1$ & $\frac{D-1}{D-3}\mathcal W$ & $-\mathcal V_3$ & $-\mathcal V_4$ & Total & $D=4$\\
+\midrule
+$L\,a^D\square\,i\delta^D$ & --- & $\frac{D-1}{D-3}$ & --- & --- & $\frac{D-1}{D-3}$ & $3$\\
+$L\,a^{D-2}\nabla^2\,i\delta^D$ & --- & $-\frac{2(D-1)}{D-3}$ & $+1$ & $+1$ & $-\frac{4}{D-3}$ & $-4$\\
+$H^2a^D\,i\delta^D$ & --- & $\frac{(D-1)^2}{D-3}$ & --- & --- & $\frac{(D-1)^2}{D-3}$ & $9$\\
+$(aa')^{D-2}L\,\nabla^4A$ & $-1$ & $\frac{D-1}{D-3}$ & $-1$ & $-1$ & $-\frac{2(D-4)}{D-3}$ & $0$\\
+$H(aa')^{D-2}a\partial_0\nabla^2A$ (+ mirror) & --- & $\frac{D-1}{D-3}$ & $-1$ & $-1$ & $\frac{2}{D-3}$ & $2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+In the last row, $-\mathcal V_4$ contributes to the $a\partial_0$ term and $-\mathcal V_3$ to its mirror, the $a'\partial'_0$ term.
+So each of the two terms receives $\frac{D-1}{D-3}-1=\frac{2}{D-3}$.
+The arithmetic of the other totals is:
+$-\frac{2(D-1)}{D-3}+2=-\frac{4}{D-3}$ and $\frac{D-1}{D-3}-3=\frac{8-2D}{D-3}=-\frac{2(D-4)}{D-3}$.
+Altogether:
+\begin{equation}
+\begin{aligned}
+-iM^2_{\rm 3pt,\,log}=\kappa^2k\,\Big\{&\ln(aa')\Big[\frac{D-1}{D-3}\,a^D\square-\frac{4}{D-3}\,a^{D-2}\nabla^2\Big]i\delta^D+\frac{(D-1)^2}{D-3}\,H^2a^D\,i\delta^D\\
+&-\frac{2(D-4)}{D-3}\,(aa')^{D-2}\ln(aa')\,\nabla^4A+\frac{2}{D-3}\,H(aa')^{D-2}\big(a\partial_0+a'\partial'_0\big)\nabla^2A\Big\}.
+\end{aligned}
+\label{eq:ch04:67D}
+\end{equation}
+
+% ---------------------------------------------------------------------
+\subsection{Passage to \texorpdfstring{$D=4$}{D=4} and its justification \texorpdfstring{\tA}{}}
+\label{sec:ch04:Dto4}
+% ---------------------------------------------------------------------
+
+Every term in \eqref{eq:ch04:67D} is of one of two kinds:
+\begin{enumerate}[leftmargin=1.5em,itemsep=1pt]
+\item a $\delta^D$-local term whose coefficient is finite and has no pole;
+\item a smooth function (such as $(aa')^{D-2}\ln(aa')$) times derivatives of a \emph{single} propagator.
+\end{enumerate}
+$A(y)\sim y^{1-D/2}\sim\Delta x^{2-D}$ is locally integrable in $D$ dimensions.
+Its derivatives are therefore well-defined distributions; they are analytic near $D=4$ and carry no pole.
+This is not the case for \emph{products of two propagators}, such as the $y^{2-D}$ that occurs in the normal contributions.
+Consequently, the $\nabla^4A$ term with coefficient of order $D-4$ vanishes as $D\to4$.
+Setting $D=4$ in the other coefficients changes them only at order $D-4$.
+This confirms the paper's statement that all logarithm contributions are finite. The result is:
+\begin{resultbox}[Result of Task 10: logarithm 3-point contribution (definition sign)]
+\begin{equation*}
+\begin{aligned}
+-iM^2_{\rm 3pt,\,log}(x;x')=\frac{\kappa^2H^2}{8\pi^2}\Big\{&\ln(aa')\big[3a^4\square-4a^2\nabla^2\big]i\delta^4(x-x')+9H^2a^4\,i\delta^4(x-x')\\
+&+2H(aa')^2\big(a\partial_0+a'\partial'_0\big)\nabla^2A(y)+\order{D-4}\Big\}
+\end{aligned}
+\tag{I.67$'$}\label{eq:ch04:67}
+\end{equation*}
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\subsection{Cancellation against (I.44) at general \texorpdfstring{$D$}{D} \texorpdfstring{\tD}{}}
+\label{sec:ch04:cancel}
+% ---------------------------------------------------------------------
+
+The full-$D$ form of the correct \eqI{44} was derived in Task~5. It is
+\begin{equation}
+\begin{aligned}
+-iM^2_{\rm 4pt}=-i\kappa^2k\Big\{&\tfrac14D(D-1)\big[\pihat+\ln(aa')\big]a^D\square-D\big[\pihat+\ln(aa')\big]a^{D-2}\nabla^2\\
+&+\tfrac14D(D-1)^2H^2a^D\Big\}\delta^D+\order{D-4}.
+\end{aligned}
+\end{equation}
+Its local terms containing $\ln(aa')$, together with its $H^2$ term, are
+\begin{equation}
+-iM^2_{\rm 4pt}\supset-i\kappa^2k\Big\{\tfrac14D(D-1)\ln(aa')\,a^D\square-D\ln(aa')\,a^{D-2}\nabla^2+\tfrac14D(D-1)^2H^2a^D\Big\}\delta^D .
+\end{equation}
+Adding the local terms of \eqref{eq:ch04:67D} gives
+\begin{equation}
+-i\kappa^2k\,\frac{(D-4)(D+1)}{4(D-3)}\Big\{(D-1)\ln(aa')\,a^D\square-4\ln(aa')\,a^{D-2}\nabla^2+(D-1)^2H^2a^D\Big\}\delta^D\;\xrightarrow{D\to4}\;0 .
+\label{eq:ch04:cancel}
+\end{equation}
+The identities used are
+\begin{equation}
+\frac{1}{D-3}-\frac D4=-\frac{(D-4)(D+1)}{4(D-3)},\qquad D-\frac{4}{D-3}=\frac{(D-4)(D+1)}{D-3}.
+\end{equation}
+(For example, the $\ln(aa')\,a^D\square$ coefficient is $(D-1)\big[\frac{1}{D-3}-\frac D4\big]$ in units of $i\kappa^2k$, and $D^2-3D-4=(D-4)(D+1)$.)
+The expression \eqref{eq:ch04:cancel} is not multiplied by a pole, so it vanishes as $D\to4$. Thus:
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item The terms $3\ln(aa')a^D\square$, $-4\ln(aa')a^{D-2}\nabla^2$ and $9H^2a^D$ cancel exactly.
+In Task~5 these terms had raised a concern because they are not of counterterm form.
+\item The cancellation confirms that the relative sign of the 4-point and 3-point contributions is the one fixed by the definitions.
+With the other relative sign, these terms would add instead of cancelling.
+\item In the paper both contributions are reversed.
+So the paper's statement after \eqI{67}, that each local term of \eqI{67} cancels a similar finite local 4-point term in \eqI{44}, is also correct in the paper's own convention.
+\item The only local 4-point remainder that is not cancelled consists of the $\mp2$ terms coming from the error in \eqI{40} (Task~5).
+These are of counterterm form.
+(They are present in the paper's \eqI{44} and absent from the derived one; see Task~5. The statement concerns the finite local terms: the divergent terms $\propto\pihat$ of \eqI{44} do not take part in this cancellation.)
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\subsection{Comparison with Paper I}
+\label{sec:ch04:t10comp}
+% ---------------------------------------------------------------------
+
+Derived expressions are in the definition sign; the paper's are as printed (paper's convention).
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{5.4cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{1.8cm}@{}}
+\toprule
+Item & Derived (this task) & Paper I (printed) & Status\\
+\midrule
+\eqI{60}, \eqI{61} & \eqref{eq:ch04:60}, \eqref{eq:ch04:61} & same & \chIVok\\
+\eqI{62} & \eqref{eq:ch04:62} & same & \chIVok\\
+\eqI{63} & $-\frac{\kappa^2H^2}{8\pi^2}L(aa')^2\nabla^4A$ & $+\frac{\kappa^2H^2}{8\pi^2}L(aa')^2\nabla^4A$ & \chIVno\ sign\\
+\eqI{64} & \eqref{eq:ch04:64} & all four terms reversed & \chIVno\ sign\\
+\eqI{65} & $-\kappa^2\mathcal V_3$ & $+\kappa^2\mathcal V_3$ & \chIVno\ sign\\
+\eqI{66} & $-\kappa^2\mathcal V_4$ & $+\kappa^2\mathcal V_4$ & \chIVno\ sign\\
+\eqI{67} & $\{L[3a^4\square-4a^2\nabla^2]i\delta+9H^2a^4i\delta$\newline\hspace*{1em}$+2H(\ldots)\nabla^2A\}$ & $\{L[-3a^4\square+4a^2\nabla^2]i\delta$\newline\hspace*{1em}$-9H^2a^4i\delta-2H(\ldots)\nabla^2A\}$ & \chIVno\ sign\\
+cancellation of $\nabla^4A$; coefficients 3, 4, 9, 2 & same & same & \chIVok\\
+local cancellation with \eqI{44} & yes, \eqref{eq:ch04:cancel} & yes (text) & \chIVok\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{notebox}[Diagnosis]
+The left-hand sides of the paper's \eqI{63}--\eqI{66} carry the signs of the printed \eqI{47}, and the right-hand sides are correct evaluations of them.
+The paper's \eqI{67} is the correct sum of its own \eqI{63}--\eqI{66}.
+The difference comes entirely from the sign in the step \eqI{46}$\to$\eqI{47} (Task~7).
+No new error was found in this task.
+\end{notebox}
+
+\medskip
+\noindent\begin{minipage}{\linewidth}
+\paragraph{Accumulated findings (Tasks 2--10).}\mbox{}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{8.0cm}>{\raggedright\arraybackslash}p{4.0cm}@{}}
+\toprule
+Location & Finding & Effect\\
+\midrule
+\eqI{7}, left-hand side (C3) & $-\frac12\kappa$ printed; correct is $+\frac12\kappa$ & none\\
+\eqI{14}, first coefficient (C4) & $\Gamma(\frac D2-1)/(\frac D2-1)$ printed; correct is $\Gamma(\frac D2-1)$ & none\\
+Table II, $U_2$ (C5) & $-\frac i4$ printed; correct is $+\frac i4$ & none\\
+\eqI{32}--\eqI{33} (S1) & overall sign of the 4-point contribution reversed & overall sign of the bare $M^2$\\
+\eqI{39} (C6) & $\bar\eta_{\rho\sigma}\to\bar\eta^{\rho\sigma}$ & none\\
+\eqI{40} (B1) & finite part $+2$ printed; correct is $-2$ & absorbable in counterterms\\
+\eqI{47}--\eqI{49} (S1) & overall sign reversed in all nine terms & carried into the later calculation\\
+\eqI{54}--\eqI{59} & sign reversed (inherited); in \eqI{59} $-\frac72\to-\frac52$; in the text ``4th''$\to$``2nd'' & sign: inherited (S1); \eqI{59}: absorbable in $\Delta\alpha_3$ (B2); ``4th'': typo (C7)\\
+\eqI{60}--\eqI{62} & agreement & ---\\
+\eqI{63}--\eqI{67} & sign reversed (inherited); no new error & ---\\
+\textbf{Overall} (S1) & in the paper the 4-point and 3-point contributions are consistent with each other, both reversed; the local cancellation \eqI{44}--\eqI{67} holds in both conventions & bare $M^2=-$(definition)\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+% ---------------------------------------------------------------------
+\subsection{Code checks \texorpdfstring{\tC}{}}
+\label{sec:ch04:t10code}
+% ---------------------------------------------------------------------
+
+The script \texttt{code/04\_three\_point\_local\_log/check\_60\_67.py} (SymPy; about 8\,s) checks the following.
+It was actually run.
+It is a check only and does not replace the analytic derivation above.
+\begin{itemize}[leftmargin=1.2em,itemsep=3pt]
+\item[(a)] \textbf{\eqI{62}.} The first three terms of \eqI{14}, expanded at $D=4+\epsilon$, give $\frac{H^2}{16\pi^2}\{4/y-2\ln(y/4)-1\}$.
+The $n$-th series term vanishes identically at $D=4$.
+The printed $c_0$ makes a difference only at order $D-4$.
+\item[(b)] \eqI{62} satisfies $(4y-y^2)A''+4(2-y)A'=3k$, with $k=2h$.
+\item[(c)] \textbf{Lemma (D5)}, verified on a test function with general $D$.
+In the script, $\ln(aa')\times[\text{distribution}]$ acting on $g$ is represented as $l\,\mathcal O(g)+\mathcal O(l\,g)$, since $l'=\ln a(\eta')$ multiplies $g(x')$ inside the integral.
+In addition, (D3) and $\partial_0\big(a^p\partial_0\ln a\big)=(D-1)H^2a^D$ were verified.
+\item[(d)] \textbf{Pointwise check of the non-local parts.}
+At $D=4$, $\mathcal V_1$, $\mathcal W$, $\mathcal V_3$ and $\mathcal V_4$ were differentiated by brute force.
+This used explicit coordinates, $i\Delta_A=A+k\ln(aa')$, and the actual $A(y)$ of \eqI{62}.
+At non-coincident points the delta-function terms vanish.
+The results agree exactly with the non-local parts of \eqref{eq:ch04:63}--\eqref{eq:ch04:V4} at three random points, with 30-digit precision.
+\item[(e)] \textbf{General-$D$ sum.} The coefficients are $\frac{D-1}{D-3}$, $-\frac4{D-3}$, $\frac{(D-1)^2}{D-3}$, $-\frac{2(D-4)}{D-3}$ and $\frac2{D-3}$.
+Together with \eqI{44}, the sum is $-\frac{(D-4)(D+1)}{4(D-3)}[\ldots]$.
+\item[(f)] The paper's \eqI{63}--\eqI{66} are $-1$ times the derived terms, term by term, and their sum gives the paper's \eqI{67}.
+\end{itemize}
+
+\paragraph{Actual output} (Python 3, SymPy 1.14.0; long lines wrapped, marked by \texttt{\textbackslash}).
+The output of the re-run in the code folder is identical to the output in the original log.
+In section (e) the symbols mean (in units of $\kappa^2k$):
+\texttt{LB}~$=L\,a^D\square\,i\delta^D$, \texttt{LL}~$=L\,a^{D-2}\nabla^2i\delta^D$, \texttt{M}~$=H^2a^Di\delta^D$,
+\texttt{Q4}~$=(aa')^{D-2}L\nabla^4A$, \texttt{T}~$=H(aa')^{D-2}a\partial_0\nabla^2A$, \texttt{Tp}~$=H(aa')^{D-2}a'\partial'_0\nabla^2A$.
+In section (f) the same symbols are in units of $\kappa^2H^2/(8\pi^2)$ at $D=4$.
+{\scriptsize
+\begin{verbatim}
+== (a) Eq. (62): A(y) at D = 4 + eps from (14) with c0 = Gamma(D/2-1) ==
+  first three terms -> H^2/(16 pi^2){4/y - 2 ln(y/4) - 1} : True
+  n-th series term at D=4 vanishes identically             : True
+  printed c0 changes A only at O(D-4)                      : True
+== (b) A(y) of (62) solves (4y-y^2)A'' + 4(2-y)A' = 3k with k = 2h  (Box A = (D-1) k H^2) ==
+   True
+== (c) delta identities on a test function g, general D (l = ln a, p = D-2) ==
+  -2i d0[a^p l d0 delta] == i ln(aa')(a^D Box - a^{D-2}Lap) delta + i(D-1)H^2 a^D delta : True
+  ln(aa') Lap delta acting on g == 2 l Lap g (time-only factor)        : True
+  d0(a^p d0 ln a) = (D-1) H^2 a^D                                      : True
+== (d) pointwise check of the non-local parts, D = 4, actual A(y) of (62), k = 2h ==
+  point 0: |V1-R1|,|W-RW|,|V3-R3|,|V4-R4| = [0.0, 0.0, 0.0, 0.0]  \
+           (scales [0.0553, 0.0515, 0.0639, 0.0428] )
+  point 1: |V1-R1|,|W-RW|,|V3-R3|,|V4-R4| = [0.0, 0.0, 0.0, 0.0]  \
+           (scales [0.00320, 0.00321, 0.00353, 0.00289] )
+  point 2: |V1-R1|,|W-RW|,|V3-R3|,|V4-R4| = [0.0, 0.0, 0.0, 0.0]  \
+           (scales [0.00203, 0.00597, 0.00544, 0.00255] )
+== (e) general-D assembly, units kappa^2 k: -V1 + (D-1)/(D-3) W - V3 - V4 ==
+  coefficients: LB: (D - 1)/(D - 3)  LL: -4/(D - 3)  M: (D - 1)**2/(D - 3)  Q4: -2*(D - 4)/(D - 3)  \
+                T: 2/(D - 3)  Tp: 2/(D - 3)
+  derived (44)_log-local + derived (67)_local = \
+                -(D - 4)*(D + 1)*(D**2*M + D*LB - 2*D*M - LB - 4*LL + M)/(4*(D - 3))
+  at D=4: LB, LL, M coefficients of (67) = [3, -4, 9]  T,Tp: [2, 2]
+== (f) the paper's (63)-(66) and (67), units kappa^2 H^2/(8 pi^2) at D=4 ==
+  each equals minus the derived term: True True True True
+  paper sum: -3*LB + 4*LL - 9*M - 2*T - 2*Tp    (paper's (67): -3LB + 4LL - 9M - 2T - 2Tp)
+\end{verbatim}
+}
+\noindent
+The factor in (e) is $D^2M+D\,LB-2DM-LB-4LL+M=(D-1)LB-4LL+(D-1)^2M$, which is the bracket of \eqref{eq:ch04:cancel}.
+
+% ---------------------------------------------------------------------
+\subsection{Calculation record}
+% ---------------------------------------------------------------------
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item \textbf{Derived.} \eqI{60}--\eqI{61} [Eqs.~\eqref{eq:ch04:60}--\eqref{eq:ch04:61}]; \eqI{62} [Eq.~\eqref{eq:ch04:62}];
+distributional tools (D1)--(D5); \eqI{63}--\eqI{66} at general $D$ [Eqs.~\eqref{eq:ch04:63}--\eqref{eq:ch04:V4}];
+\eqI{67} at general $D$ [Eq.~\eqref{eq:ch04:67D}] and at $D=4$ [Eq.~\eqref{eq:ch04:67}];
+justification of the passage to $D=4$ (Section~\ref{sec:ch04:Dto4});
+cancellation against \eqI{44} [Eq.~\eqref{eq:ch04:cancel}].
+\item \textbf{Checks passed.} SymPy (a)--(f), actually run.
+\item \textbf{Discrepancies.} \eqI{60}--\eqI{62} agree.
+In \eqI{63}--\eqI{67} the overall sign is reversed. This is inherited from \eqI{47}; there is no new error.
+\item \textbf{Settled.} The local terms of \eqI{67} and the $\ln(aa')$ and $H^2$ local terms of \eqI{44} cancel each other at general $D$, up to a remainder of order $D-4$.
+The relative sign is consistent.
+\item \textbf{Open point (at the time of Task 10).} The normal contributions (\eqI{68} and later), and the treatment of the term $2H(aa')^2(a\partial_0+a'\partial'_0)\nabla^2A$ of \eqI{67}.
+\end{itemize}

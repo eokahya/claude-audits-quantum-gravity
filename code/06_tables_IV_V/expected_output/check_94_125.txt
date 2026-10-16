@@ -1,0 +1,31 @@
+== (A) Eqs. (94)-(96), (97)-(98), (100)-(101), (102)-(103): pointwise, D=4,5 ==
+  D=4: (94) True  (95) True  (96) True  (97) True  (98) True  (100) True  (101) True  (102)-(103) True
+  D=5: (94) True  (95) True  (96) True  (97) True  (98) True  (100) True  (101) True  (102)-(103) True
+== (B) (99), (108), (112) ==
+  (99): True
+  (108) gamma3 = 2 gamma1 + gamma2 : True
+  (112) eps3 = 2 eps1 + eps2       : True
+== (C) Eqs. (116)-(123): exact-D leading coefficients (two leading terms of A, B, C) and D=4 closed forms ==
+  A'^2  : coeff (4/y)^D = 1,   coeff (4/y)^(D-1) = D
+  AA''  : coeff (4/y)^D = D/(D - 2),   coeff (4/y)^(D-1) = D*(D - 2)/(D - 4)
+  A'B'  : coeff (4/y)^D = 1,   coeff (4/y)^(D-1) = D - 2
+  A''B  : coeff (4/y)^D = D/(D - 2),   coeff (4/y)^(D-1) = D
+  A'dB' : coeff (4/y)^D = 0,   coeff (4/y)^(D-1) = -2
+  A''dB : coeff (4/y)^D = 0,   coeff (4/y)^(D-1) = -2*D/(D - 4)
+  A'dC' : coeff (4/y)^D = 0,   coeff (4/y)^(D-1) = -8
+  A''dC : coeff (4/y)^D = 0,   coeff (4/y)^(D-1) = -8*D/(D - 4)
+  (A-type products' (4/y)^(D-1) coefficient is not separately meaningful when it carries a 1/(D-4) pole: it combines with the
+   constant -pi cot(pi D/2) term into the D=4 logarithms; only the (4/y)^D coefficient of A''-type products enters Table IV.)
+  D=4: every series term of (27) and (28) vanishes, so B = C = i Delta_cf = 4h/y : True True
+  A'^2  : exact D=4 product == (h^2/16) x paper's bracket at D=4 : True
+  AA''  : exact D=4 product == (h^2/16) x paper's bracket at D=4 : True
+  A'B'  : exact D=4 product == (h^2/16) x paper's bracket at D=4 : True
+  A''B  : exact D=4 product == (h^2/16) x paper's bracket at D=4 : True
+  A'dB' : exact D=4 product == (h^2/16) x paper's bracket at D=4 : True
+  A''dB : exact D=4 product == (h^2/16) x paper's bracket at D=4 : True
+  A'dC' : exact D=4 product == (h^2/16) x paper's bracket at D=4 : True
+  A''dC : exact D=4 product == (h^2/16) x paper's bracket at D=4 : True
+== (D) Eq. (124)-(125): alpha coefficient I^2[(A+dC)A''] ==
+  (A+dC)A'' bracket at D=4: 2*z**4 - 12*z**3*log(z) + 8*z**3 - 12*z**2*log(z) + 6*z**2
+  I^2[finite part]/16 - (paper's finite bracket) = (-36 + 24*log(2))*log(2)   (a constant: killed by alpha = (aa')^D Box^2)
+  I^2[D/(D-2)(4/y)^D]/16 == D/((D-1)(D-2)^2) (4/y)^(D-2) for D = 5, 6, 7, 9/2 : [True, True, True, True]

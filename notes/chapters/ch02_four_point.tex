@@ -1,0 +1,1624 @@
+% ======================================================================
+% Chapter: The 4-point contribution, Eqs. (I.31)-(I.44)   (Tasks 3, 4, 5)
+% ======================================================================
+% Note: '\begin{aligned}\relax&' avoids a mathtools bug (empty first cell of the first row
+% followed by \sqrt or a prime raises 'Missing control sequence inserted').
+\providecommand{\chIIc}[1]{i\bigl[#1\bigr](x;x)}          % coincident graviton propagator
+\providecommand{\chIIdel}{\delta^D(x-x')}
+\providecommand{\chIIM}{M^2_{\rm 4pt}}
+\providecommand{\chIIN}{\mathcal N}
+\providecommand{\chIIK}{\mathcal K}
+\providecommand{\chIIok}{\checkmark}
+\providecommand{\chIIno}{\textbf{\textsf{x}}}
+
+\chapter{The 4-point contribution: Eqs. (I.31)--(I.44)}
+\label{ch:fourpoint}
+
+This chapter records the independent re-derivation of the contribution of the
+4-point (``seagull'') vertices of Table~II of \PI{} to the one-loop scalar
+self-mass-squared, from the general structure \eqI{31} to the final local
+expression \eqI{44}. It consists of three tasks:
+\begin{itemize}[nosep]
+\item \textbf{Task 3} (Section~\ref{sec:t3}): the structure \eqI{31} of the 4-point
+contribution and the rule by which the derivatives of Table~II are to be read, leading
+to \eqI{32} and \eqI{33};
+\item \textbf{Task 4} (Section~\ref{sec:t4}): the coincidence limits of the scalar
+propagators and of the four contractions of the graviton propagator, \eqI{34}--\eqI{40};
+\item \textbf{Task 5} (Section~\ref{sec:t5}): substitution of the coincidence limits
+into \eqI{33}, which gives \eqI{41}, and its rewriting with \eqI{42} and \eqI{43} as
+the final form \eqI{44}.
+\end{itemize}
+Each section translates the corresponding (Turkish) working report. Analytic
+derivations and code checks are kept in separate subsections; the scripts are in
+\texttt{code/02\_four\_point/} of the repository.
+
+\begin{notebox}[Conventions used in this chapter]
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item Labels: \tP{} given in the paper; \tD{} derived here; \tA{} assumption or
+convention; \tC{} check (code checks, and analytic cross-checks that the reports label
+as checks; the subsection titles say which).
+\item \(\partial_\mu\equiv\partial/\partial x^\mu\), \(\partial'_\mu\equiv\partial/\partial x'^\mu\),
+\(\eta_{\mu\nu}={\rm diag}(-1,1,\ldots,1)\); indices are raised and lowered with \(\eta\).
+\(D\) is general throughout unless a step says otherwise.
+\item Abbreviations: \(\chIIN\equiv H^{D-2}/(4\pi)^{D/2}\);
+\(k\equiv\chIIN\,\Gamma(D-1)/\Gamma(\tfrac D2)\) (the constant of \eqI{13});
+\(h\equiv H^2/16\pi^2\); \(\pihat\equiv-\pi\cot(\tfrac{\pi D}{2})\);
+\(b\equiv i\Delta_B(x;x)\), \(c\equiv i\Delta_C(x;x)\). As \(D\to4\): \(k\to2h=H^2/8\pi^2\).
+\item \textbf{Sign conventions.} All kernels that we \emph{derive} are in the
+\emph{definition sign}: the sign fixed by \PI's own definition \eqI{168},
+\(\partial_\mu(\sqrt{-\hat g}\,\hat g^{\mu\nu}\partial_\nu\Phi)-\int M^2\Phi=0\),
+together with \(-iM^2=\delta^2(i\Gamma)/\delta\Phi\delta\Phi\). The \emph{printed}
+equations \eqI{32}, \eqI{33}, \eqI{41}, \eqI{44} are in the \emph{paper's convention},
+which (Task 3) is \(-1\) times the definition sign.
+\item Equation tags: \((\mathrm{I}.n)\) for our derived version of a paper equation that
+agrees with the print; \((\mathrm{I}.n')\) if our result differs. Printed equations are
+retyped and labelled ``\PI{} prints''.
+\end{itemize}
+\end{notebox}
+
+\begin{discbox}[Summary of the findings of this chapter]
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item \eqI{31}: structure and normalization (1) reproduced.
+\item Reading rule of \eqI{32}: \(\partial_1\) is treated as in the paper; \(\partial_2\)
+acts on \(\chIIdel\) as \(+\partial\) with respect to \(x\), i.e.\ as \(-\partial'\), whereas
+the paper uses \(+\partial'\). Consequently our \eqI{32} and \eqI{33} are exactly
+\(-1\) times the printed ones (magnitudes, contractions and relative signs agree).
+The printed \eqI{33} confirms that the derived \(U_2=+\tfrac i4\) was used; the
+\(-\tfrac i4\) in Table~II is a typo.
+\item \eqI{34}--\eqI{39} reproduced (exactly in \(D\); finite \(B\)/\(C\) parts at \(D=4\));
+\eqI{39} has an index-placement typo (\(\bar\eta_{\rho\sigma}\to\bar\eta^{\rho\sigma}\)).
+\item \eqI{40}: finite part is \(-2\,\delta^0_\alpha\delta^\sigma_0\,h\), not \(+2\); the
+printed \eqI{40} is inconsistent with the printed \eqI{38} through a trace identity.
+\item \eqI{41}, \eqI{44}: our results are \(-1\) times the printed ones (inherited from
+\eqI{32}), and the extra bracket of \eqI{41} and the constants \(-2\), \(+2\) of \eqI{44}
+are absent (inherited from \eqI{40}); with the correct \eqI{40} the finite \(B\)/\(C\)
+contributions are exactly \(\order{D-4}\). The algebra \eqI{41}\(\to\)\eqI{44} of the
+paper is correct; \eqI{42}, \eqI{43} reproduced (with a general-\(D\) version of
+\eqI{43}).
+\end{itemize}
+\end{discbox}
+
+\begin{notebox}[Where these findings stand in the full calculation (from later tasks)]
+The reports of Tasks~3--5 leave open how the overall sign affects the rest of the
+calculation. For orientation we record what later tasks established (these
+statements are \emph{not} part of Tasks~3--5): Task~6 found the paper's 3-point
+derivative rule to be consistent with the definitions; Task~7 found the printed
+\eqI{47}--\eqI{49} to be \(-1\) times what follows from the paper's own \eqI{46};
+Task~9 concluded that the 4-point and 3-point contributions of the paper are therefore
+mutually consistent, both being reversed relative to \eqI{168} and \eqI{131}, so that
+the paper's bare \(-iM^2\) is \(-1\) times the one defined by \eqI{168}. Task~17 found
+that the \eqI{40} error (together with an arithmetic error in \eqI{59}) only shifts
+finite local coefficients, \(\beta_2:-\tfrac{61}{3}\to-\tfrac{49}{3}\) and
+\(\beta_3:+\tfrac{58}{3}\to+\tfrac{52}{3}\) (paper convention), which are absorbed into
+\(\Delta\alpha_{2,3}\). Task~17 also concluded that the overall sign does have a physical
+consequence: with the definition sign the local finite part is arbitrary
+(\(\Delta\alpha_i\)), but the nonlocal part of the renormalized self-mass-squared is
+\(-1\) times the (corrected) Table~X of the paper.
+\end{notebox}
+
+% ======================================================================
+\section{Task 3: the 4-point contribution, Eqs. (I.31)--(I.33)}
+\label{sec:t3}
+% ======================================================================
+
+\begin{discbox}[Task 3: summary of findings]
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item The structure of \eqI{31} is derived: the normalization is 1, and the
+contribution has the form vertex \(\times\) coincident graviton propagator
+\(\times\,\chIIdel\).
+\item There is a difference in the rule by which the derivatives are read:
+\begin{itemize}[nosep]
+\item for \(\partial_1\) the rule is the same as in the paper: it is integrated by parts
+back onto the whole expression, i.e.\ it becomes \(-\partial\);
+\item \(\partial_2\), however, acts on \(\chIIdel\) as \(+\partial\) \emph{with respect to
+\(x\)}, i.e.\ as \(-\partial'\). The paper uses \(+\partial'\) in \eqI{32}.
+\end{itemize}
+\item Therefore the derived \eqI{32} and \eqI{33} are exactly \(-1\) times the printed
+ones. The magnitudes, tensor contractions and relative signs of the four terms agree.
+\item The second term of the printed \eqI{33} is \(+\tfrac i4\). This shows that the
+derived \(U_2=+\tfrac i4\) was used in the calculation; the \(-\tfrac i4\) in Table~II
+is only a typesetting error.
+\item Four pieces of evidence support the overall sign difference:
+(1) the paper's own definition \eqI{168};
+(2) the paper's counterterm rule \eqI{131}, which has the same derivative structure;
+(3) a direct calculation with test functions;
+(4) a lattice Hessian.
+Details in Sections~\ref{sec:t3-anal-checks}--\ref{sec:t3-code}.
+\end{itemize}
+\end{discbox}
+
+% ----------------------------------------------------------------------
+\subsection{Goal, inputs and scope}
+
+\paragraph{Targets \tP.}
+\PI{} (p.~124005-4) depicts in its Fig.~1 a single 4-point vertex at \(x\) with a
+graviton loop closing on itself, and gives:
+\begin{align*}
+\text{(I.31)}\quad & {-i}\chIIM(x;x')=\sum_{I=1}^4U_I^{\alpha\beta\rho\sigma}\,
+  i\bigl[{}_{\alpha\beta}\Delta_{\rho\sigma}\bigr](x;x)\,\chIIdel,\\[2pt]
+\text{(I.32)}\quad & {-}\tfrac i8\kappa^2a^{D-2}\eta^{\alpha\beta}\eta^{\rho\sigma}\,
+  \partial_1\!\cdot\partial_2\times i\bigl[{}_{\alpha\beta}\Delta_{\rho\sigma}\bigr](x;x)\,\chIIdel\\
+ &\qquad\Rightarrow\ +\tfrac i8\kappa^2\partial^\mu\Bigl\{a^{D-2}\chIIc{{}^\alpha_\alpha\Delta^\rho_\rho}\,
+  \partial'_\mu\chIIdel\Bigr\},\\[2pt]
+\text{(I.33)}\quad & {-i}\chIIM(x;x')=-\tfrac i8\kappa^2\partial^\mu\bigl\{a^{D-2}\chIIc{{}^\alpha_\alpha\Delta^\rho_\rho}\,\partial_\mu\chIIdel\bigr\}\\
+ &\hspace{7.6em}+\tfrac i4\kappa^2\partial^\mu\bigl\{a^{D-2}\chIIc{{}^{\alpha\beta}\Delta_{\alpha\beta}}\,\partial_\mu\chIIdel\bigr\}\\
+ &\hspace{7.6em}+\tfrac i2\kappa^2\partial_\rho\bigl\{a^{D-2}\chIIc{{}^\alpha_\alpha\Delta^{\rho\sigma}}\,\partial_\sigma\chIIdel\bigr\}\\
+ &\hspace{7.6em}-i\kappa^2\partial^\alpha\bigl\{a^{D-2}\chIIc{{}_{\alpha\rho}\Delta^{\rho\sigma}}\,\partial_\sigma\chIIdel\bigr\}.
+\end{align*}
+The paper's reading rule, in summary: ``\(\partial_2\)'' acts on \(x'^\mu\), while
+``\(\partial_1\)'' is to be integrated by parts back onto the entire contribution.
+These target expressions were \emph{not} used as inputs of the derivation; they enter
+only in the comparison of Section~\ref{sec:t3-comp}.
+
+\paragraph{Inputs.}
+\begin{itemize}[leftmargin=2.6em]
+\item[(G1)] Derived Table~II and its normalization \tD{} (Task~2):
+\begin{equation}\label{eq:t3-G1}
+\kappa^2\mathcal L^{(2)}=\frac12\cdot\frac1i\sum_{I=1}^4\Bigl[U_I^{\alpha\beta\rho\sigma}\phi_1\phi_2\Bigr]_{\phi_1=\phi_2=\phi}h_{\alpha\beta}h_{\rho\sigma},
+\end{equation}
+\begin{equation}\label{eq:t3-U}
+\begin{aligned}
+U_1&=-\tfrac i8\kappa^2a^{D-2}\eta^{\alpha\beta}\eta^{\rho\sigma}\,\partial_1\!\cdot\partial_2, &
+U_2&=+\tfrac i4\kappa^2a^{D-2}\eta^{\alpha\rho}\eta^{\beta\sigma}\,\partial_1\!\cdot\partial_2,\\
+U_3&=+\tfrac i2\kappa^2a^{D-2}\eta^{\alpha\beta}\,\partial_1^\rho\partial_2^\sigma, &
+U_4&=-i\kappa^2a^{D-2}\,\partial_1^\alpha\eta^{\beta\rho}\partial_2^\sigma .
+\end{aligned}
+\end{equation}
+Following the author's instruction (``proceed with the results you computed and believe
+correct; printed values may be typos''), the \emph{derived} Table~II values are used,
+in particular \(U_2=+\tfrac i4\kappa^2a^{D-2}\eta^{\alpha\rho}\eta^{\beta\sigma}\partial_1\!\cdot\partial_2\)
+(Table~II prints \(-\tfrac i4\)).
+\item[(G2)] Graviton propagator \tP: definitions \eqI{20}--\eqI{24} and \eqI{25}.
+Standard identification \tA:
+\(\bigl\langle T\,h_{\alpha\beta}(x)h_{\rho\sigma}(x')\bigr\rangle=i\bigl[{}_{\alpha\beta}\Delta_{\rho\sigma}\bigr](x;x')\).
+This is consistent with a quadratic action of the form \(\tfrac12hDh\) and with
+\eqI{25}. In dimensional regularization the coincidence limit
+\(X_{\alpha\beta\rho\sigma}(x)\equiv i[{}_{\alpha\beta}\Delta_{\rho\sigma}](x;x)\) is a
+smooth function of \(x\) for general \(D\). Its explicit values, \eqI{34}--\eqI{40}, are
+\emph{not} used here. Indices are moved with \(\eta\):
+\(i[{}^\alpha{}_\beta\Delta^\rho{}_\sigma]\equiv\eta^{\alpha\lambda}\eta^{\rho\kappa}\,i[{}_{\lambda\beta}\Delta_{\kappa\sigma}]\), etc.
+\item[(G3)] Definition of \(M^2\) \tP, \PI{} \eqI{168} (the paper writes it in \(D=4\) for
+\(M^2_{\rm ren}\); we use the same form for the regulated kernel):
+\begin{equation}\label{eq:t3-G3}
+\partial_\mu\bigl(\sqrt{-\hat g}\,\hat g^{\mu\nu}\partial_\nu\Phi(x)\bigr)-\int d^Dx'\,M^2(x;x')\,\Phi(x')=0 .
+\end{equation}
+In Section~IV the paper calls \(-iM^2\) the ``1PI function''. Accordingly we take \tA{}
+\(\Gamma[\Phi]=S_0[\Phi]-\tfrac12\iint\Phi M^2\Phi+\ldots\) and
+\(-iM^2(x;x')=\delta^2(i\Gamma_1)/\delta\Phi(x)\delta\Phi(x')\), where \(\Gamma_1\) is the
+quantum correction to \(\Gamma\).
+\item[(G4)] Effective action \tA{} (standard):
+\(e^{i\Gamma[\Phi]}=\int[Dh][D\varphi]_{\rm 1PI}\,e^{iS[\Phi+\varphi,h]}\).
+\item[(G5)] Calibration data \tP: the counterterms \eqI{129} and their vertices
+\eqI{130}--\eqI{131}; the definition of \(\square\), \eqI{42}. Used only for checks
+(Sections~\ref{sec:t3-calib} and \ref{sec:t3-anal-checks}). \PI{} prints (p.~124005-11,
+right column):
+\begin{gather*}
+\tfrac12\alpha_1\kappa^2\square\phi\,\square\phi\,a^D\ \to\ i\alpha_1\kappa^2a^D\square^2\delta^D(x-x'),
+\qquad\text{(I.130)}\\
+-\tfrac12\alpha_2\kappa^2H^2\partial_\mu\phi\,\partial^\mu\phi\,a^{D-2}\ \to\ i\alpha_2\kappa^2H^2a^D\square\,\delta^D(x-x').
+\qquad\text{(I.131)}
+\end{gather*}
+\end{itemize}
+
+\paragraph{Scope.}
+The coincidence limits \eqI{34}--\eqI{40}, the result \eqI{41}--\eqI{44} and the
+3-point contribution from \eqI{45} on are not treated in this task. \(D\) is general;
+the limit \(D\to4\) is not taken at any step. Unless stated otherwise, equalities hold
+in the sense of distributions in \((x,x')\) (Section~\ref{sec:t3-dist}).
+
+% ----------------------------------------------------------------------
+\subsection{Preliminaries}
+
+\subsubsection{Distribution conventions \texorpdfstring{\tA}{}}\label{sec:t3-dist}
+Since \(\chIIdel\) depends only on the difference of its arguments,
+\begin{equation}\label{eq:t3-dprime}
+\partial'_\mu\chIIdel=-\partial_\mu\chIIdel .
+\end{equation}
+A kernel \(\chIIK(x;x')\) acts as \((\chIIK f)(x)=\int d^Dx'\,\chIIK(x;x')f(x')\). The basic
+identities are
+\begin{equation}\label{eq:t3-ident}
+\int d^Dx'\,\bigl[\partial_\nu\chIIdel\bigr]f(x')=\partial_\nu f(x),\qquad
+\int d^Dx'\,\bigl[\partial'_\nu\chIIdel\bigr]f(x')=-\partial_\nu f(x).
+\end{equation}
+Two kernels are equal if they give the same result when integrated against every pair
+of compactly supported test functions \(f_1(x)f_2(x')\).
+
+\subsubsection{Lemma A: the kernel of a quadratic functional with derivatives \texorpdfstring{\tD}{}}
+Let \(F[\phi]=\int d^Dz\,K^{\mu\nu}(z)\,\partial_\mu\phi\,\partial_\nu\phi\), with \(K\)
+smooth and not necessarily symmetric. With \(\chIIK^{\mu\nu}\equiv K^{\mu\nu}+K^{\nu\mu}\),
+\begin{equation}\label{eq:t3-lemmaA}
+\boxed{\;\frac{\delta^2F}{\delta\phi(x)\,\delta\phi(x')}
+=-\partial_\mu\Bigl[\chIIK^{\mu\nu}(x)\,\partial_\nu\chIIdel\Bigr]
+=+\partial_\mu\Bigl[\chIIK^{\mu\nu}(x)\,\partial'_\nu\chIIdel\Bigr]\;}
+\end{equation}
+
+\emph{Proof 1 (test functions).} The coefficient of \(\epsilon_1\epsilon_2\) in
+\(F[\epsilon_1f_1+\epsilon_2f_2]\) is
+\begin{equation}\label{eq:t3-bilinear}
+\frac{\partial^2F}{\partial\epsilon_1\partial\epsilon_2}
+=\int d^Dx\,K^{\mu\nu}\bigl(\partial_\mu f_1\partial_\nu f_2+\partial_\mu f_2\partial_\nu f_1\bigr)
+=\int d^Dx\,\chIIK^{\mu\nu}\,\partial_\mu f_1\,\partial_\nu f_2 ,
+\end{equation}
+where \(\mu\leftrightarrow\nu\) was relabelled in the second term. Testing the right-hand
+side of \eqref{eq:t3-lemmaA}, using \eqref{eq:t3-ident} and then integrating by parts
+(the boundary term vanishes by compact support), gives back \eqref{eq:t3-bilinear}:
+\begin{equation*}
+\iint f_1(x)\Bigl(-\partial_\mu\bigl[\chIIK^{\mu\nu}\partial_\nu\chIIdel\bigr]\Bigr)f_2(x')
+=\int d^Dx\,f_1\Bigl(-\partial_\mu\bigl[\chIIK^{\mu\nu}\partial_\nu f_2\bigr]\Bigr)
+=\int d^Dx\,\partial_\mu f_1\,\chIIK^{\mu\nu}\,\partial_\nu f_2 .
+\end{equation*}
+
+\emph{Proof 2 (formal \(\delta\)'s).}
+\(\delta^2F=\int d^Dz\,K^{\mu\nu}(z)\bigl[\partial^z_\mu\delta^D(z-x)\,\partial^z_\nu\delta^D(z-x')+(x\leftrightarrow x')\bigr]\).
+In the first term \(\partial^z_\mu\) is moved off \(\delta^D(z-x)\) by an integration by
+parts in \(z\), and \(z=x\) is set:
+\(-\partial_\mu\bigl[K^{\mu\nu}(x)\partial_\nu\chIIdel\bigr]\). The second term gives the
+same with \(K^{\nu\mu}\). The sum is \eqref{eq:t3-lemmaA}.
+
+\emph{Interpretation.} One of the two derivatives goes, by integration by parts, onto the
+whole expression as \(-\partial\). The other acts on \(\chIIdel\) as \(+\partial\)
+\emph{with respect to \(x\)}; by \eqref{eq:t3-dprime} this means \(-\partial'\).
+\emph{Positivity test:} for \(D=1\), \(K=c>0\) one has \(F=\int c\,\phi'^2\ge0\), so the
+Hessian must be a positive operator. Indeed \(-2\partial(c\,\partial\,\cdot)\) is positive:
+\(\int f\bigl(-2(cf')'\bigr)=\int2cf'^2\ge0\). The opposite sign
+\(+2\partial(c\,\partial\,\cdot)\) is negative (see code check (b),
+Section~\ref{sec:t3-code}).
+
+\subsubsection{Calibration with the paper's own counterterm vertices \texorpdfstring{\tC}{}}\label{sec:t3-calib}
+By (G3), a counterterm action \(S_{\rm ct}\) gives
+\(-iM^2_{\rm ct}=i\,\delta^2S_{\rm ct}/\delta\Phi\delta\Phi\).
+\begin{itemize}
+\item \textbf{\eqI{131}.} For \(S_{\rm ct}=\int-\tfrac12\alpha_2\kappa^2H^2a^{D-2}\eta^{\mu\nu}\partial_\mu\Phi\partial_\nu\Phi\)
+one has \(\chIIK^{\mu\nu}=-\alpha_2\kappa^2H^2a^{D-2}\eta^{\mu\nu}\). With
+\eqref{eq:t3-lemmaA} and \eqI{42}, \(\square=a^{-D}\partial_\mu(a^{D-2}\partial^\mu)\):
+\begin{equation}\label{eq:t3-calib131}
+i\frac{\delta^2S_{\rm ct}}{\delta\Phi\,\delta\Phi}
+=-i\,\partial_\mu\bigl[-\alpha_2\kappa^2H^2a^{D-2}\partial^\mu\chIIdel\bigr]
+=+i\alpha_2\kappa^2H^2a^D\square\,\chIIdel .
+\end{equation}
+This is identical to the paper's \eqI{131}. \emph{Passed.}
+\item \textbf{\eqI{130}.} For \(S_{\rm ct}=\int\tfrac12\alpha_1\kappa^2a^D(\square\Phi)^2\) the
+coefficient of \(\epsilon_1\epsilon_2\) is \(\alpha_1\kappa^2\int a^D\square f_1\,\square f_2\).
+The operator \(a^D\square\) is self-adjoint:
+\(a^Dg\square h-a^Dh\square g=\partial_\mu[a^{D-2}(g\partial^\mu h-h\partial^\mu g)]\), a total
+divergence. Hence the coefficient is \(\alpha_1\kappa^2\int f_1\,a^D\square^2f_2\), so
+\(-iM^2_{\rm ct}=i\alpha_1\kappa^2a^D\square^2\chIIdel\), identical to \eqI{130}.
+\emph{Passed.}
+\end{itemize}
+The definition (G3) correctly reproduces the paper's own counterterm vertices. Like the
+4-point vertices, \eqI{131} carries \emph{one derivative on each leg}; it is therefore a
+direct calibration of the derivative-sign rule. \eqI{130} carries two derivatives on each
+leg and is insensitive to the sign rule.
+
+\subsubsection{Symmetries of the coincident propagator \texorpdfstring{\tD}{}}\label{sec:t3-sym}
+\(X_{\alpha\beta\rho\sigma}(x)=i[{}_{\alpha\beta}\Delta_{\rho\sigma}](x;x)\) is symmetric within
+each pair because \(h_{\alpha\beta}=h_{\beta\alpha}\). The pair-exchange symmetry
+\(X_{\alpha\beta\rho\sigma}=X_{\rho\sigma\alpha\beta}\) also holds:
+\begin{enumerate}
+\item General reason: the time-ordered product of two bosonic operators at the same point
+is symmetric.
+\item Explicit reason, from the definitions \eqI{20}--\eqI{24}:
+\begin{itemize}
+\item \(T^A\): \(2\bar\eta_{\alpha(\rho}\bar\eta_{\sigma)\beta}=\bar\eta_{\alpha\rho}\bar\eta_{\sigma\beta}+\bar\eta_{\alpha\sigma}\bar\eta_{\rho\beta}\)
+maps into itself under \((\alpha\beta)\leftrightarrow(\rho\sigma)\); \(\bar\eta_{\alpha\beta}\bar\eta_{\rho\sigma}\)
+is manifestly symmetric.
+\item \(T^B\): \(-4\delta^0_{(\alpha}\bar\eta_{\beta)(\rho}\delta^0_{\sigma)}\) expands into four
+terms, \(-\delta^0_\alpha\bar\eta_{\beta\rho}\delta^0_\sigma-\delta^0_\alpha\bar\eta_{\beta\sigma}\delta^0_\rho
+-\delta^0_\beta\bar\eta_{\alpha\rho}\delta^0_\sigma-\delta^0_\beta\bar\eta_{\alpha\sigma}\delta^0_\rho\).
+Pair exchange permutes these four terms among themselves.
+\item \(T^C\): \(f_{\alpha\beta}f_{\rho\sigma}\) has product form and is manifestly symmetric.
+\item The factors \(i\Delta_I(x;x)\) are scalars.
+\end{itemize}
+\end{enumerate}
+These two symmetries imply that
+\(N_{\lambda\kappa}\equiv X_{\lambda\rho}{}^{\rho}{}_{\kappa}=X_{\lambda\rho\rho'\kappa}\eta^{\rho\rho'}\)
+is symmetric. Indeed, \(X_{\lambda\rho\rho'\kappa}=X_{\rho'\kappa\lambda\rho}\) (pair symmetry)
+\(=X_{\kappa\rho'\rho\lambda}\) (both within-pair symmetries), so \(N_{\lambda\kappa}=N_{\kappa\lambda}\).
+This is used in Section~\ref{sec:t3-U4}.
+
+% ----------------------------------------------------------------------
+\subsection{Derivation of Eq. (I.31)}
+
+\subsubsection{One-loop effective action from the 4-point vertex \texorpdfstring{\tD}{}}
+Expanding \(e^{iS_{\rm int}}\) in (G4) and taking the logarithm gives, at first order,
+\(i\Gamma\supset\langle iS_4\rangle\). The 1PI contributions of order \(\kappa^2\) and
+quadratic in the background \(\Phi\) are:
+(i) a single 4-point vertex with a closed graviton loop (Fig.~1 of \PI, this task);
+(ii) two 3-point vertices (Fig.~2, outside the scope);
+(iii) counterterms.
+The term made of a single 3-point vertex and a graviton tadpole is not 1PI and is
+excluded. Thus
+\begin{equation}\label{eq:t3-Gamma4}
+i\Gamma_{\rm 4pt}[\Phi]=i\bigl\langle S_4[\Phi,h]\bigr\rangle
+=i\int d^Dz\,\bigl\langle\kappa^2\mathcal L^{(2)}(\Phi,h)\bigr\rangle .
+\end{equation}
+
+\subsubsection{Graviton contraction}
+With (G1) and (G2):
+\begin{equation}\label{eq:t3-contract}
+\begin{aligned}
+\bigl\langle\kappa^2\mathcal L^{(2)}\bigr\rangle
+&=\frac1{2i}\sum_I\Bigl[U_I^{\alpha\beta\rho\sigma}\Phi_1\Phi_2\Bigr]_{\Phi_1=\Phi_2=\Phi}\bigl\langle h_{\alpha\beta}h_{\rho\sigma}\bigr\rangle\\
+&=\frac1{2i}\sum_I\Bigl[U_I^{\alpha\beta\rho\sigma}\Phi_1\Phi_2\Bigr]_{\Phi_1=\Phi_2=\Phi}X_{\alpha\beta\rho\sigma}(z).
+\end{aligned}
+\end{equation}
+No symmetry factor is needed: the expectation value is taken directly from the
+Lagrangian. The paper's convention of ``not extracting a factor \(\tfrac12\) for the
+gravitons'' is automatically correct here (cf.\ Task~2).
+
+\subsubsection{Effective kinetic coefficient}
+For each \(I\) define \(\tilde K_I^{\mu\nu}(z)\) by
+\begin{equation}\label{eq:t3-Ktilde}
+U_I^{\alpha\beta\rho\sigma}X_{\alpha\beta\rho\sigma}\equiv\tilde K_I^{\mu\nu}(z)\,\partial_{1\mu}\partial_{2\nu}
+\quad\Longrightarrow\quad
+\bigl\langle S_4\bigr\rangle=\int d^Dz\,\frac1{2i}\sum_I\tilde K_I^{\mu\nu}\,\partial_\mu\Phi\,\partial_\nu\Phi .
+\end{equation}
+
+\subsubsection{The kernel}
+Apply (G3), \eqref{eq:t3-Ktilde} and Lemma~A \eqref{eq:t3-lemmaA} with \(K=\tilde K_I/(2i)\):
+\begin{equation}\label{eq:t3-kernel}
+\begin{aligned}
+-i\chIIM(x;x')&=i\,\frac{\delta^2\langle S_4\rangle}{\delta\Phi(x)\,\delta\Phi(x')}
+=i\cdot\frac1{2i}\sum_I\Bigl(-\partial_\mu\bigl[(\tilde K_I+\tilde K_I^T)^{\mu\nu}\partial_\nu\chIIdel\bigr]\Bigr)\\
+&=-\sum_I\partial_\mu\Bigl[\tilde K_{I,s}^{\mu\nu}(x)\,\partial_\nu\chIIdel\Bigr],
+\end{aligned}
+\end{equation}
+where \(\tilde K_s\equiv\tfrac12(\tilde K+\tilde K^T)\). Factors: the scalar \(\tfrac12\) in
+(G1) and the factor 2 from the two ways of attaching the legs in Lemma~A cancel. Hence
+the normalization of \eqI{31} is 1.
+
+\subsubsection{The form (I.31) and the reading rule}\label{sec:t3-rule}
+\eqref{eq:t3-kernel} can be written in the form of \eqI{31}:
+\begin{equation*}\label{eq:t3-I31}
+\boxed{\;-i\chIIM(x;x')=\sum_{I=1}^4U_I^{\alpha\beta\rho\sigma}\;i\bigl[{}_{\alpha\beta}\Delta_{\rho\sigma}\bigr](x;x)\;\chIIdel\;}
+\tag{I.31}
+\end{equation*}
+This notation acquires its meaning through the following reading rule:
+\begin{itemize}[leftmargin=2.6em]
+\item[(R1)] \(\partial_{1\mu}\to-\partial_\mu\), acting on everything to its right
+(\(a^{D-2}\), \(i[\Delta](x;x)\) and the factor containing \(\delta\)). This is the paper's
+rule that \(\partial_1\) ``must be partially integrated back onto the entire contribution''.
+\item[(R2)] \(\partial_{2\nu}\to+\partial_\nu\) (derivative with respect to \(x\)), acting only
+on \(\chIIdel\). By \eqref{eq:t3-dprime} this means \(-\partial'_\nu\).
+\item[(R3)] If \(\tilde K_I\) is not symmetric, symmetrize in \(\mu\leftrightarrow\nu\). By
+Section~\ref{sec:t3-sym} this is not needed here (see Section~\ref{sec:t3-I33}).
+\end{itemize}
+Check: with (R1)--(R2), \(\tilde K^{\mu\nu}\partial_{1\mu}\partial_{2\nu}\,\delta\) becomes
+\(-\partial_\mu[\tilde K^{\mu\nu}\partial_\nu\delta]\), which is \eqref{eq:t3-kernel}.
+
+\begin{notebox}[Difference from the paper]
+For \(\partial_2\) the paper says ``acts upon \(x'^\mu\)'' and uses \(\partial_2\to+\partial'_\nu\)
+in \eqI{32}. By \eqref{eq:t3-dprime} this is exactly the opposite of (R2). Since each
+\(U_I\) contains exactly one \(\partial_1\) and one \(\partial_2\), the difference is a common
+factor \((-1)\) for the whole of \(-i\chIIM\).
+\end{notebox}
+
+% ----------------------------------------------------------------------
+\subsection{Derivation of Eq. (I.32): the \texorpdfstring{$U_1$}{U1} contribution}
+In \(U_1=-\tfrac i8\kappa^2a^{D-2}\eta^{\alpha\beta}\eta^{\rho\sigma}\,\eta^{\mu\nu}\partial_{1\mu}\partial_{2\nu}\)
+the contraction is
+\begin{equation}\label{eq:t3-K1}
+\eta^{\alpha\beta}\eta^{\rho\sigma}X_{\alpha\beta\rho\sigma}=X^\alpha{}_\alpha{}^\rho{}_\rho\equiv\chIIc{{}^\alpha_\alpha\Delta^\rho_\rho}
+\quad\Longrightarrow\quad
+\tilde K_1^{\mu\nu}=-\tfrac i8\kappa^2a^{D-2}\,\chIIc{{}^\alpha_\alpha\Delta^\rho_\rho}\,\eta^{\mu\nu}.
+\end{equation}
+\(\tilde K_1\) is symmetric. Applying (R1)--(R2) step by step:
+\begin{equation*}
+\begin{aligned}
+\relax&{-}\tfrac i8\kappa^2\,\eta^{\mu\nu}\,(-\partial_\mu)\Bigl\{a^{D-2}\chIIc{{}^\alpha_\alpha\Delta^\rho_\rho}\,\bigl(+\partial_\nu\chIIdel\bigr)\Bigr\}\\
+&\qquad=+\tfrac i8\kappa^2\,\partial^\mu\Bigl\{a^{D-2}\chIIc{{}^\alpha_\alpha\Delta^\rho_\rho}\,\partial_\mu\chIIdel\Bigr\}.
+\end{aligned}
+\end{equation*}
+Converting to the paper's notation with \(\partial'\) by \eqref{eq:t3-dprime}
+(definition sign):
+\begin{equation*}\label{eq:t3-I32}
+\boxed{\begin{aligned}\relax&{-}\tfrac i8\kappa^2a^{D-2}\eta^{\alpha\beta}\eta^{\rho\sigma}\partial_1\!\cdot\partial_2\times i[{}_{\alpha\beta}\Delta_{\rho\sigma}](x;x)\,\chIIdel\\
+&\qquad\Rightarrow\ -\tfrac i8\kappa^2\,\partial^\mu\Bigl\{a^{D-2}\chIIc{{}^\alpha_\alpha\Delta^\rho_\rho}\,\partial'_\mu\chIIdel\Bigr\}\end{aligned}}
+\tag{I.32$'$}
+\end{equation*}
+The right-hand side of the printed \eqI{32} has \(+\tfrac i8\); we obtain
+\(-\tfrac i8\). The difference comes from the \(\partial_2\) rule (R2) of
+Section~\ref{sec:t3-rule}.
+
+% ----------------------------------------------------------------------
+\subsection{Derivation of Eq. (I.33)}\label{sec:t3-I33}
+
+\subsubsection{\texorpdfstring{$U_2$}{U2} (with the derived sign \texorpdfstring{$+\tfrac i4$}{+i/4})}
+\begin{equation}\label{eq:t3-K2}
+\eta^{\alpha\rho}\eta^{\beta\sigma}X_{\alpha\beta\rho\sigma}=X_{\alpha\beta}{}^{\alpha\beta}=\chIIc{{}^{\alpha\beta}\Delta_{\alpha\beta}},\qquad
+\tilde K_2^{\mu\nu}=+\tfrac i4\kappa^2a^{D-2}\,\chIIc{{}^{\alpha\beta}\Delta_{\alpha\beta}}\,\eta^{\mu\nu}.
+\end{equation}
+By \eqref{eq:t3-kernel} the contribution is
+\begin{equation*}
+-\partial_\mu\bigl[\tilde K_2^{\mu\nu}\partial_\nu\delta\bigr]
+=-\tfrac i4\kappa^2\partial^\mu\bigl\{a^{D-2}\chIIc{{}^{\alpha\beta}\Delta_{\alpha\beta}}\partial_\mu\chIIdel\bigr\}.
+\end{equation*}
+
+\subsubsection{\texorpdfstring{$U_3$}{U3}}
+\begin{equation}\label{eq:t3-K3}
+\begin{aligned}
+\relax&\eta^{\alpha\beta}X_{\alpha\beta\rho\sigma}\,\partial_1^\rho\partial_2^\sigma
+=i\bigl[{}^\alpha_\alpha\Delta_{\rho\sigma}\bigr]\partial_1^\rho\partial_2^\sigma
+=i\bigl[{}^\alpha_\alpha\Delta^{\rho\sigma}\bigr]\partial_{1\rho}\partial_{2\sigma},\\
+&\tilde K_3^{\rho\sigma}=+\tfrac i2\kappa^2a^{D-2}\,\chIIc{{}^\alpha_\alpha\Delta^{\rho\sigma}}.
+\end{aligned}
+\end{equation}
+In the second step the derivative indices were lowered and the propagator indices raised
+with \(\eta\). \(\tilde K_3\) is symmetric in \(\rho\sigma\) by the within-pair symmetry.
+Contribution:
+\begin{equation*}
+-\partial_\rho\bigl[\tilde K_3^{\rho\sigma}\partial_\sigma\delta\bigr]
+=-\tfrac i2\kappa^2\partial_\rho\bigl\{a^{D-2}\chIIc{{}^\alpha_\alpha\Delta^{\rho\sigma}}\partial_\sigma\chIIdel\bigr\}.
+\end{equation*}
+
+\subsubsection{\texorpdfstring{$U_4$}{U4}}\label{sec:t3-U4}
+\begin{equation}\label{eq:t3-K4}
+\begin{aligned}
+\relax&\partial_1^\alpha\eta^{\beta\rho}\partial_2^\sigma X_{\alpha\beta\rho\sigma}
+=X_{\alpha\beta}{}^\beta{}_\sigma\,\partial_1^\alpha\partial_2^\sigma
+\overset{\beta\to\rho}{=}i\bigl[{}_{\alpha\rho}\Delta^\rho{}_\sigma\bigr]\partial_1^\alpha\partial_2^\sigma
+=i\bigl[{}^\alpha{}_\rho\Delta^{\rho\sigma}\bigr]\partial_{1\alpha}\partial_{2\sigma},\\
+&\tilde K_4^{\alpha\sigma}=-i\kappa^2a^{D-2}\,\chIIc{{}^\alpha{}_\rho\Delta^{\rho\sigma}}.
+\end{aligned}
+\end{equation}
+The \(\alpha\leftrightarrow\sigma\) symmetry of \(\tilde K_4\) follows from
+\(N_{\lambda\kappa}=N_{\kappa\lambda}\) of Section~\ref{sec:t3-sym}; the pair-exchange
+symmetry is genuinely needed here. Contribution:
+\begin{equation*}
+-\partial_\alpha\bigl[\tilde K_4^{\alpha\sigma}\partial_\sigma\delta\bigr]
+=+i\kappa^2\partial^\alpha\bigl\{a^{D-2}\chIIc{{}_{\alpha\rho}\Delta^{\rho\sigma}}\partial_\sigma\chIIdel\bigr\}.
+\end{equation*}
+
+\subsubsection{The derived (I.33)}
+\begin{resultbox}[Derived Eq. (I.33), definition sign, general \(D\)]
+\begin{equation*}\label{eq:t3-I33}
+\begin{aligned}
+-i\chIIM(x;x')={}&+\tfrac i8\kappa^2\partial^\mu\bigl\{a^{D-2}\chIIc{{}^\alpha_\alpha\Delta^\rho_\rho}\,\partial_\mu\chIIdel\bigr\}\\
+&-\tfrac i4\kappa^2\partial^\mu\bigl\{a^{D-2}\chIIc{{}^{\alpha\beta}\Delta_{\alpha\beta}}\,\partial_\mu\chIIdel\bigr\}\\
+&-\tfrac i2\kappa^2\partial_\rho\bigl\{a^{D-2}\chIIc{{}^\alpha_\alpha\Delta^{\rho\sigma}}\,\partial_\sigma\chIIdel\bigr\}\\
+&+i\kappa^2\partial^\alpha\bigl\{a^{D-2}\chIIc{{}_{\alpha\rho}\Delta^{\rho\sigma}}\,\partial_\sigma\chIIdel\bigr\}
+\end{aligned}
+\tag{I.33$'$}
+\end{equation*}
+\end{resultbox}
+Compact form: \(-i\chIIM=-\partial_\mu\bigl[\chIIK^{\mu\nu}_{\rm 4pt}(x)\,\partial_\nu\chIIdel\bigr]\), with
+\begin{equation}\label{eq:t3-Kcal}
+\chIIK^{\mu\nu}_{\rm 4pt}=\sum_I\tilde K_I^{\mu\nu}=\kappa^2a^{D-2}\Bigl\{-\tfrac i8\eta^{\mu\nu}i[{}^\alpha_\alpha\Delta^\rho_\rho]
++\tfrac i4\eta^{\mu\nu}i[{}^{\alpha\beta}\Delta_{\alpha\beta}]+\tfrac i2\,i[{}^\alpha_\alpha\Delta^{\mu\nu}]-i\,i[{}^\mu{}_\rho\Delta^{\rho\nu}]\Bigr\}(x;x).
+\end{equation}
+Physically this is the correction to the effective kinetic term generated by
+\(\langle\kappa^2\mathcal L^{(2)}\rangle\). All steps were carried out for general \(D\).
+
+% ----------------------------------------------------------------------
+\subsection{Independent analytic cross-checks \texorpdfstring{\tC}{}}\label{sec:t3-anal-checks}
+These checks are analytic (no code).
+
+\paragraph{Field-equation route.}
+This route does not use the \(z\)-integration of Lemma~A; it uses only the
+Euler--Lagrange equation. By \eqref{eq:t3-Ktilde},
+\(\Gamma\supset\int\frac1{2i}\chIIK^{\mu\nu}_{\rm 4pt}\partial_\mu\Phi\partial_\nu\Phi\), and
+\(\chIIK_{\rm 4pt}\) is symmetric. Euler--Lagrange:
+\begin{equation}\label{eq:t3-EL}
+\frac{\delta\Gamma}{\delta\Phi(x)}=\partial_\mu\bigl(a^{D-2}\partial^\mu\Phi\bigr)-\partial_\mu\Bigl(\tfrac1i\chIIK^{\mu\nu}_{\rm 4pt}\partial_\nu\Phi\Bigr)+\ldots
+=\partial_\mu\bigl(a^{D-2}\partial^\mu\Phi\bigr)+i\,\partial_\mu\bigl(\chIIK^{\mu\nu}_{\rm 4pt}\partial_\nu\Phi\bigr)+\ldots
+\end{equation}
+Comparison with (G3) gives \(\int M^2\Phi=-i\,\partial_\mu(\chIIK^{\mu\nu}_{\rm 4pt}\partial_\nu\Phi)\),
+hence \(-i\int M^2\Phi=-\partial_\mu(\chIIK^{\mu\nu}_{\rm 4pt}\partial_\nu\Phi)\). By
+\eqref{eq:t3-ident} the kernel is \(-i\chIIM=-\partial_\mu[\chIIK^{\mu\nu}_{\rm 4pt}\partial_\nu\chIIdel]\),
+the same as \eqref{eq:t3-I33}--\eqref{eq:t3-Kcal}. \emph{Passed.}
+
+\paragraph{Cross-test with the paper's own \eqI{131}.}
+Written as a ``vertex operator'' in the Table~II normalization, the term \eqI{131} is
+\(U_{\rm ct}=2i\cdot(-\tfrac12\alpha_2\kappa^2H^2a^{D-2})\,\partial_1\!\cdot\partial_2=-i\alpha_2\kappa^2H^2a^{D-2}\partial_1\!\cdot\partial_2\).
+\begin{itemize}
+\item The paper's 4-point rule (\(\partial_1\to-\partial\) on everything, \(\partial_2\to+\partial'\)) gives
+\begin{equation*}
+-i\alpha_2\kappa^2H^2(-\partial^\mu)\{a^{D-2}\partial'_\mu\delta\}=-i\alpha_2\kappa^2H^2a^D\square\delta .
+\end{equation*}
+This has the \emph{opposite sign} to the \(+i\alpha_2\kappa^2H^2a^D\square\delta\) of the
+paper's \eqI{131}.
+\item (R1)--(R2) give
+\begin{equation*}
+-i\alpha_2\kappa^2H^2(-\partial^\mu)\{a^{D-2}\partial_\mu\delta\}=+i\alpha_2\kappa^2H^2a^D\square\delta .
+\end{equation*}
+This is \emph{the same} as \eqI{131}.
+\end{itemize}
+Conclusion: the paper's \eqI{131} and the rule of \eqI{32} cannot both be correct under a
+single convention. \eqI{131} is consistent with the paper's defining equation \eqI{168}.
+
+\paragraph{Positivity.}
+For \(c>0\) the Hessian of \(\int c\,\phi'^2\) is a positive operator. The sign structure
+of Lemma~A guarantees this; the sign structure in \eqI{32} does not
+(Lemma~A, interpretation). This argument is independent of the \(M^2\) convention; it
+only uses the definition of the second functional derivative.
+
+% ----------------------------------------------------------------------
+\subsection{Comparison with the paper}\label{sec:t3-comp}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.10\textwidth}@{}}
+\toprule
+Item & Derived & \PI{} & \\
+\midrule
+\eqI{31}: structure, normalization 1, \(U\times i[\Delta](x;x)\times\delta^D\) & \eqref{eq:t3-I31} & same & \chIIok\\
+reading rule, \(\partial_1\) & \(-\partial\), on everything & \(-\partial\), on everything & \chIIok\\
+reading rule, \(\partial_2\) & \(+\partial\) (w.r.t.\ \(x\)) on \(\delta\), \(=-\partial'\) & \(+\partial'\) on \(\delta\) & \chIIno{} sign\\
+\eqI{32}, written with \(\partial'_\mu\delta\) & \(-\tfrac i8\kappa^2\partial^\mu\{\ldots\partial'_\mu\delta\}\) & \(+\tfrac i8\kappa^2\partial^\mu\{\ldots\partial'_\mu\delta\}\) & \chIIno{} overall sign\\
+\eqI{33}, 1st term (\(\partial_\mu\delta\) notation) & \(+\tfrac i8\) & \(-\tfrac i8\) & \chIIno\\
+\eqI{33}, 2nd term & \(-\tfrac i4\) & \(+\tfrac i4\) & \chIIno\\
+\eqI{33}, 3rd term & \(-\tfrac i2\) & \(+\tfrac i2\) & \chIIno\\
+\eqI{33}, 4th term & \(+i\) & \(-i\) & \chIIno\\
+tensor contractions & \(i[{}^\alpha_\alpha\Delta^\rho_\rho]\), \(i[{}^{\alpha\beta}\Delta_{\alpha\beta}]\), \(i[{}^\alpha_\alpha\Delta^{\rho\sigma}]\), \(i[{}_{\alpha\rho}\Delta^{\rho\sigma}]\) & same & \chIIok\\
+magnitudes and relative signs & \(\tfrac18:\tfrac14:\tfrac12:1\); \((+,-,-,+)\) & \(\tfrac18:\tfrac14:\tfrac12:1\); \((-,+,+,-)\) & \chIIok{} (relative)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{discbox}[Result of the comparison]
+The derived \eqref{eq:t3-I33} is exactly \(-1\) times the printed \eqI{33}; the same
+relation holds for \eqI{32}. Everything else agrees.
+\end{discbox}
+
+\subsubsection{Resolution of the sign of \texorpdfstring{$U_2$}{U2} in Table~II}
+With the paper's own rule, a vertex \(U_2=c\,\eta^{\alpha\rho}\eta^{\beta\sigma}\kappa^2a^{D-2}\partial_1\!\cdot\partial_2\)
+gives the coefficient \(+c\) in \eqI{33} (in the \(\partial_\mu\delta\) notation). In the
+printed \eqI{33} this coefficient is \(+\tfrac i4\); hence \(c=+\tfrac i4\) was used in the
+calculation. This is the value derived in Task~2. The \(-\tfrac i4\) of Table~II is only
+a typesetting error; the author's guess is confirmed. The SymPy check (c) confirms this
+independently.
+
+\subsubsection{Origin of the overall sign difference}
+In Lemma~A, after one derivative has been moved onto the whole expression by integration
+by parts, the remaining derivative acts on \(\chIIdel\) \emph{with respect to the vertex
+coordinate \(x\)}. If one writes \(\partial'\) under the interpretation ``\(\partial_2\) acts on
+\(x'\)'', an extra factor \((-1)\) enters through \eqref{eq:t3-dprime}. Evidence:
+(i) the paper's definition \eqI{168}; (ii) the vertex \eqI{131}, which has the same
+derivative structure; (iii) the test-function calculation; (iv) the lattice Hessian and
+positivity.
+
+\subsubsection{Other observations}
+\begin{itemize}
+\item The flat-space limit in the paper's \eqI{174} carries the same signs as \eqI{33}, so
+it is consistent with the paper's rule. However, since the coincident flat-space
+propagator vanishes in dimensional regularization, this expression cannot discriminate
+the sign.
+\item \emph{Preliminary note (not yet derived in this task).} In the 3-point diagram the two
+external legs sit at different vertices (\(x\) and \(x'\)). By the logic of Lemma~A each
+becomes \(-\partial\) at its own vertex after integration by parts. This appears to agree
+with the paper's rule at \eqI{45} (``remembering to partially integrate any derivative that
+acts upon an outer leg''). This will be shown separately when \eqI{45}--\eqI{46} are derived.
+If confirmed, the 4-point contribution enters the paper with the opposite sign relative to
+the 3-point contribution and to the counterterms \eqI{130}--\eqI{131}. (Later tasks: Task~6
+confirmed the 3-point rule, but Task~7 found the printed \eqI{47}--\eqI{49} reversed as well
+and Task~9 found this sign carried forward, so in the paper the two contributions have a
+consistent relative sign; see the notebox at the beginning of this chapter.)
+\end{itemize}
+
+\begin{notebox}[Open question (at the end of Task 3)]
+How does the overall sign of \(-i\chIIM\) propagate into \eqI{41}, \eqI{44}, the
+cancellation of divergences in Section~IV, the final result \eqI{167} and Table~X?
+This must be checked in later tasks. This task does not go beyond \eqI{33}.
+(For the later resolution see the notebox at the beginning of this chapter.)
+\end{notebox}
+
+% ----------------------------------------------------------------------
+\subsection{Code checks \texorpdfstring{\tC}{}}\label{sec:t3-code}
+Script: \texttt{code/02\_four\_point/check\_4pt.py} (Python~3, SymPy~1.14.0; about
+22\,s). It performs four checks. It does not replace the analytic derivation.
+\begin{itemize}
+\item[(a)] \textbf{Lemma A with explicit test functions.}
+Set-up: \(D=2\), \(\eta={\rm diag}(-1,1)\), a deliberately non-symmetric polynomial
+\(K^{\mu\nu}=\bigl(\begin{smallmatrix}1+t^2&x\\ tx&2+x^2\end{smallmatrix}\bigr)\), Gaussian-type
+\(f_1=e^{-t^2-x^2}\), \(f_2=(1+t+x^2)e^{-(t-1)^2-2x^2}\).
+Result: \(\partial^2F/\partial\epsilon_1\partial\epsilon_2=\tfrac{97\sqrt6\,\pi}{54}e^{-1/2}\approx8.384\).
+The kernel \eqref{eq:t3-lemmaA} gives the same value; the opposite-sign kernel gives
+\(-8.384\).
+\item[(b)] \textbf{Lattice Hessian.}
+Set-up: 1-dimensional periodic lattice, \(N=7\), symbolic \(c_z\);
+\(S=\sum_zc_z(\phi_{z+1}-\phi_z)^2\).
+The Hessian equals \(-\nabla^-(2c\,\nabla^+)\) exactly; this is the lattice version of
+\(-\partial(2c\,\partial\,\delta)\). It is not equal to \(+\nabla^-(2c\nabla^+)\).
+Eigenvalues for \(c=1\): \(0,\ 1.506,\ 4.890,\ 7.604\) (all \(\ge0\)).
+\item[(c)] \textbf{Operator-level check of \eqI{33}.}
+Set-up: \(D=3\); a general pair-symmetric \(X_{\alpha\beta\rho\sigma}(x)\) built from 21
+independent functions; general \(a(\eta)\) and a test function \(f\). Results:
+\(\tilde K_4\) is symmetric; the kernel \eqref{eq:t3-kernel} is identical to the derived
+\eqref{eq:t3-I33} and exactly \(-1\) times the printed \eqI{33}; the paper's rule
+combined with the derived \(U_2=+\tfrac i4\) reproduces the printed \eqI{33}
+\emph{exactly}, while the printed \(U_2=-\tfrac i4\) does \emph{not}.
+\item[(d)] \textbf{Calibration with \eqI{131}.} Lemma~A reproduces the paper's \eqI{131};
+the paper's 4-point rule gives the opposite.
+\end{itemize}
+All expected lines gave \texttt{True}, and the expected counter-examples gave
+\texttt{False}. \emph{Passed.} The output of the re-run (identical to the original log):
+\begingroup\scriptsize
+\begin{verbatim}
+== (a) Lemma A with explicit test functions, D=2, eta=diag(-1,1) ==
+  A  = d2F/de1de2           = 97*sqrt(6)*pi*exp(-1/2)/54 ~ 8.38409578627033
+  B_ours  (kernel -d[K_s d delta]) = 8.38409578627033  equal to A: True
+  B_paper (kernel +d[K_s d delta]) = -8.38409578627033  equal to -A: True
+== (b) lattice Hessian, 1D periodic, N=7 ==
+  Hessian == -D^-(2c D^+)  [lattice version of -d(2c d delta)]: True
+  Hessian == +D^-(2c D^+)  [lattice version of +d(2c d delta)]: False
+  eigenvalues for c=1 (must be >= 0 for a sum of squares): [0.0, 1.506041, 4.890084, 7.603875]
+== (c) operator-level check of (33), D=3, generic pair-symmetric coincident propagator ==
+  K~_4 symmetric (pair symmetry of X): True
+  derived kernel == derived (33)  [+i/8, -i/4, -i/2, +i]: True
+  derived kernel == -(paper's 33) [-i/8, +i/4, +i/2, -i]: True
+  paper's rule + derived U2(+i/4) reproduces paper's (33): True
+  paper's rule + printed U2(-i/4) reproduces paper's (33): False
+== (d) calibration with the paper's counterterm vertex (131), D=3 ==
+  i*delta^2 S (Lemma A) == paper's (131): True
+  paper's 4-pt rule applied to (131) == paper's (131): False
+\end{verbatim}
+\endgroup
+
+% ----------------------------------------------------------------------
+\subsection{Calculation record}
+\begin{itemize}
+\item \textbf{Derived.} Lemma~A \eqref{eq:t3-lemmaA}, obtained in two independent ways.
+Calibration \eqref{eq:t3-calib131}: the paper's \eqI{130}--\eqI{131} reproduced. Pair
+symmetry of the coincident propagator shown from \eqI{20}--\eqI{24}
+(Section~\ref{sec:t3-sym}). The 4-point effective action
+\eqref{eq:t3-Gamma4}--\eqref{eq:t3-Ktilde}. The derived form \eqref{eq:t3-I31} of
+\eqI{31} and the reading rule (R1)--(R3). The derived form \eqref{eq:t3-I32} of \eqI{32}.
+The derived form \eqref{eq:t3-I33} of \eqI{33} and its compact form \eqref{eq:t3-Kcal}.
+All for general \(D\), with the derived \(U_2=+\tfrac i4\).
+\item \textbf{Checks passed.} Field-equation route; cross-test with the paper's \eqI{131};
+positivity; SymPy (a)--(d), actually run.
+\item \textbf{Discrepancies.}
+\begin{itemize}[nosep]
+\item The structure and normalization of \eqI{31} agree; there is a sign difference in the
+reading rule for \(\partial_2\).
+\item As a consequence, the derived \eqI{32} and \eqI{33} are \(-1\) times the printed ones.
+Relative signs, magnitudes and contractions agree.
+\item The printed \eqI{33} shows that the derived \(U_2=+\tfrac i4\) was used in the
+calculation; the sign in Table~II is a typesetting error.
+\end{itemize}
+\item \textbf{Open point.} The effect of the overall sign difference on the combination with
+the 3-point contribution and on the final result must be checked in later tasks.
+\end{itemize}
+
+% ======================================================================
+\section{Task 4: coincidence limits, Eqs. (I.34)--(I.40)}
+\label{sec:t4}
+% ======================================================================
+
+\begin{discbox}[Task 4: summary of findings]
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item \eqI{34}, \eqI{35} and \eqI{36} are derived exactly for general \(D\).
+\item \eqI{37}, \eqI{38} and \eqI{39} are first derived exactly for general \(D\); with
+\(D=4\) in the finite parts they agree exactly with the paper. In the finite part of
+\eqI{39} the paper writes \(\bar\eta_{\rho\sigma}\); the correct placement is
+\(\bar\eta^{\rho\sigma}\), but numerically this is the same matrix, so the result is not
+affected.
+\item \eqI{40}: the coefficient of \(i\Delta_A\) agrees. The finite part is derived as
+\(-2\,\delta^0_\alpha\delta^\sigma_0\,h\); the paper writes \(+2\). The paper is internally
+inconsistent at this point: the trace of \eqI{40} must equal \eqI{38} identically. The
+finite part of the paper's \eqI{38} is \(-2h\), while the trace of the paper's \eqI{40}
+is \(+2h\).
+\item All exact-\(D\) expressions are verified by explicit component calculation for
+\(D=4,\ldots,7\).
+\end{itemize}
+\end{discbox}
+
+% ----------------------------------------------------------------------
+\subsection{Goal, inputs and scope}
+
+\paragraph{Targets \tP.} \PI{} (p.~124005-4) prints:
+\begin{align*}
+\text{(I.34)}\quad&\lim_{x'\to x}i\Delta_A(x;x')=\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(\frac D2)}\Bigl\{-\pi\cot\Bigl(\frac\pi2D\Bigr)+2\ln(a)\Bigr\},\\
+\text{(I.35)}\quad&\lim_{x'\to x}i\Delta_B(x;x')=\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(\frac D2)}\times-\frac{1}{D-2}\ \longrightarrow\ -\frac{H^2}{16\pi^2},\\
+\text{(I.36)}\quad&\lim_{x'\to x}i\Delta_C(x;x')=\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(\frac D2)}\times\frac{1}{(D-2)(D-3)}\ \longrightarrow\ \frac{H^2}{16\pi^2},\\
+\text{(I.37)}\quad&\chIIc{{}^\alpha_\alpha\Delta^\rho_\rho}\to-4\Bigl(\frac{D-1}{D-3}\Bigr)i\Delta_A(x;x)+4\frac{H^2}{16\pi^2},\\
+\text{(I.38)}\quad&\chIIc{{}^{\alpha\beta}\Delta_{\alpha\beta}}\to\frac{(D-1)(D^2-3D-2)}{D-3}\,i\Delta_A(x;x)-2\frac{H^2}{16\pi^2},\\
+\text{(I.39)}\quad&\chIIc{{}^\alpha_\alpha\Delta^{\rho\sigma}}\to-\frac{4}{D-3}\,\bar\eta^{\rho\sigma}\,i\Delta_A(x;x)+\bigl[2\delta^\rho_0\delta^\sigma_0+2\bar\eta_{\rho\sigma}\bigr]\frac{H^2}{16\pi^2},\\
+\text{(I.40)}\quad&\chIIc{{}_{\alpha\rho}\Delta^{\rho\sigma}}\to\Bigl(\frac{D^2-3D-2}{D-3}\Bigr)\bar\delta^\sigma_\alpha\,i\Delta_A(x;x)+2\delta^0_\alpha\delta^\sigma_0\frac{H^2}{16\pi^2}.
+\end{align*}
+Immediately after \eqI{40} the paper states that, to save space, \(D=4\) has been taken in
+the finite contributions of the \(B\)- and \(C\)-type propagators. These expressions were
+not used as inputs of the derivation; they enter only in the comparison of
+Section~\ref{sec:t4-comp}.
+
+\paragraph{Inputs (definitions) \tP.}
+\begin{itemize}
+\item \eqI{10}: \(\bar\eta_{\mu\nu}\equiv\eta_{\mu\nu}+\delta^0_\mu\delta^0_\nu\) and
+\(\bar\delta^\mu_\nu\equiv\delta^\mu_\nu-\delta^\mu_0\delta^0_\nu\).
+\item \eqI{11}: \(y(x;x')=aa'H^2\{\|\vec x-\vec x'\|^2-(|\eta-\eta'|-i\delta)^2\}\).
+\item \eqI{13}--\eqI{14}: \(i\Delta_A=A(y)+k\ln(aa')\) and the series for \(A(y)\).
+\item \eqI{20}--\eqI{24}: \(i[{}_{\mu\nu}\Delta_{\rho\sigma}]=\sum_I[{}_{\mu\nu}T^I_{\rho\sigma}]\,i\Delta_I\) and the
+tensor factors.
+\item \eqI{26}--\eqI{28}: the series for \(i\Delta_{\rm cf}\), \(i\Delta_B\) and \(i\Delta_C\).
+\item \eqI{29}--\eqI{30}: hypergeometric representations; used only for the independent
+check.
+\end{itemize}
+As in the previous tasks, indices are raised and lowered with \(\eta\):
+\(i[{}^\alpha{}_\beta\Delta^\rho{}_\sigma]\equiv\eta^{\alpha\lambda}\eta^{\rho\kappa}i[{}_{\lambda\beta}\Delta_{\kappa\sigma}]\), etc.
+
+\paragraph{Scope.}
+\eqI{41} and beyond are not treated. The sign issue of \eqI{33} found in Task~3 does not
+affect this task, because the coincidence limits are independent of the vertices and of
+the derivative rule. \(D\) is general everywhere. The passage to \(D=4\) in the finite
+parts is made only in Section~\ref{sec:t4-finite}, for the comparison with the paper,
+and with its justification.
+
+% ----------------------------------------------------------------------
+\subsection{The coincidence limit in dimensional regularization \texorpdfstring{\tA}{}}
+\paragraph{(i) \(y\to0\).} Taking \(x'\to x\) in \eqI{11} gives \(\|\vec x-\vec x'\|\to0\),
+\(|\eta-\eta'|\to0\) and \(a'\to a\). Then, as \(\delta\to0^+\), \(y(x;x)=0\). The term
+\(\ln(aa')\to\ln a^2=2\ln a\) is independent of \(y\).
+
+\paragraph{(ii) The rule.} The propagators are sums of terms of the form
+\(\bigl(\tfrac y4\bigr)^{p(D)}\), where \(p\) is linear in \(D\). The analytic-continuation
+rule is
+\begin{equation}\label{eq:t4-rule}
+\lim_{y\to0}\Bigl(\frac y4\Bigr)^{p(D)}=\begin{cases}1,& p\equiv0,\\
+0,& \text{in the region }\mathrm{Re}\,p(D)>0;\ \text{by analytic continuation for all }D.\end{cases}
+\end{equation}
+The exponents occurring in \eqI{14} and \eqI{26}--\eqI{28} are of the form
+\(1-\tfrac D2\), \(2-\tfrac D2\), \(n\) (\(n\ge1\)) and \(n-\tfrac D2+2\) (\(n\ge0\)). In the region
+\(\mathrm{Re}\,D<2\) they are all positive. In this region the limit exists literally and
+the result is a meromorphic function of \(D\); for other values of \(D\) it is defined by
+analytic continuation. This is the property of dimensional regularization that sets
+power-law divergences to zero. A logarithmic divergence appears instead as a \(D=4\) pole
+in the constant terms.
+
+\paragraph{(iii) Term-by-term limit.} The series in \((y/4)^n\) converge for \(|y|<4\), as
+seen from the hypergeometric structure \eqI{29}--\eqI{30}. For \(\mathrm{Re}\,D<2\), after
+the power-law factors are separated, the series converge uniformly on \(0<y\le y_0<4\).
+Hence the limit and the sum may be interchanged. The numerical check at \(D=0.6\)
+(Section~\ref{sec:t4-code}) shows this directly.
+
+% ----------------------------------------------------------------------
+\subsection{Eq. (I.34): \texorpdfstring{$i\Delta_A(x;x)$}{iDeltaA(x;x)} \texorpdfstring{\tD}{}}
+The terms of \eqI{14} and their behaviour in the limit:\footnote{The first coefficient
+is written as printed in \eqI{14}. Task~8 later found it to be a typo (the correct
+coefficient is \(\Gamma(\tfrac D2-1)\)). Since this term vanishes in the coincidence limit,
+\eqI{34} is not affected.}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Term (\(\times\chIIN\)) & exponent of \((y/4)\) & \(y\to0\)\\
+\midrule
+\(\dfrac{\Gamma(\frac D2-1)}{\frac D2-1}\bigl(\tfrac4y\bigr)^{\frac D2-1}\) & \(1-\tfrac D2\) & \(0\)\\
+\(\dfrac{\Gamma(\frac D2+1)}{\frac D2-2}\bigl(\tfrac4y\bigr)^{\frac D2-2}\) & \(2-\tfrac D2\) & \(0\)\\
+\(-\pi\cot\bigl(\tfrac{\pi D}2\bigr)\dfrac{\Gamma(D-1)}{\Gamma(\frac D2)}\) & \(0\) & \textbf{survives}\\
+\(\sum_{n\ge1}\dfrac1n\dfrac{\Gamma(n+D-1)}{\Gamma(n+\frac D2)}\bigl(\tfrac y4\bigr)^n\) & \(n\ge1\) & \(0\)\\
+\(-\sum_{n\ge1}\dfrac{1}{n-\frac D2+2}\dfrac{\Gamma(n+\frac D2+1)}{\Gamma(n+2)}\bigl(\tfrac y4\bigr)^{n-\frac D2+2}\) & \(n-\tfrac D2+2\) & \(0\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+The term \(k\ln(aa')\) of \eqI{13} goes to \(2k\ln a\). Since \(k=\chIIN\Gamma(D-1)/\Gamma(\frac D2)\):
+\begin{equation*}\label{eq:t4-I34}
+\boxed{\;\lim_{x'\to x}i\Delta_A(x;x')=\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(\frac D2)}\Bigl\{-\pi\cot\Bigl(\frac{\pi D}{2}\Bigr)+2\ln a\Bigr\}\;}
+\tag{I.34}
+\end{equation*}
+
+\paragraph{Pole structure.} Writing \(D=4+\epsilon\),
+\(\cot(\pi D/2)=\cot(2\pi+\pi\epsilon/2)=\cot(\pi\epsilon/2)\). With \(\cot z=1/z-z/3+\order{z^3}\):
+\begin{equation}\label{eq:t4-pole}
+\begin{aligned}
+-\pi\cot\Bigl(\frac{\pi D}2\Bigr)&=-\frac{2}{D-4}+\frac{\pi^2}{6}(D-4)+\order{(D-4)^3},\\
+\Longrightarrow\quad i\Delta_A(x;x)&=k\Bigl\{-\frac{2}{D-4}+2\ln a+\order{D-4}\Bigr\}.
+\end{aligned}
+\end{equation}
+So \(i\Delta_A(x;x)\) has a simple pole at \(D=4\). The factor \(k\) must be kept exactly in
+\(D\); as \(D\to4\), \(k\to2h\).
+
+% ----------------------------------------------------------------------
+\subsection{Eq. (I.35): \texorpdfstring{$i\Delta_B(x;x)$}{iDeltaB(x;x)} \texorpdfstring{\tD}{}}
+From \eqI{27} and \eqI{26}:
+\begin{itemize}
+\item the term \(i\Delta_{\rm cf}\propto(4/y)^{\frac D2-1}\) goes to \(0\), since its exponent is
+\(1-\tfrac D2\);
+\item the \(n=0\) term of the first sum, \(\Gamma(D-2)/\Gamma(\tfrac D2)\), survives; the
+\(n\ge1\) terms go to \(0\);
+\item all terms of the second sum (exponent \(n-\tfrac D2+2\), \(n\ge0\)) go to \(0\).
+\end{itemize}
+\begin{equation*}\label{eq:t4-I35}
+\lim_{x'\to x}i\Delta_B=-\chIIN\frac{\Gamma(D-2)}{\Gamma(\frac D2)}
+=\boxed{\;\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(\frac D2)}\times\Bigl(-\frac1{D-2}\Bigr)\;}\equiv b(D),
+\tag{I.35}
+\end{equation*}
+using \(\Gamma(D-1)=(D-2)\Gamma(D-2)\). At \(D=4\), \(\chIIN\to h\) and \(\Gamma(3)/\Gamma(2)=2\), so
+\(b(4)=h\cdot2\cdot(-\tfrac12)=-h\), i.e.\ \(-H^2/16\pi^2\). This value is finite.
+
+% ----------------------------------------------------------------------
+\subsection{Eq. (I.36): \texorpdfstring{$i\Delta_C(x;x)$}{iDeltaC(x;x)} \texorpdfstring{\tD}{}}
+In \eqI{28}, too, only the \(n=0\) term of the first sum survives:
+\((0+1)\Gamma(D-3)/\Gamma(\frac D2)\). Using \(\Gamma(D-1)=(D-2)(D-3)\Gamma(D-3)\):
+\begin{equation*}\label{eq:t4-I36}
+\lim_{x'\to x}i\Delta_C=\chIIN\frac{\Gamma(D-3)}{\Gamma(\frac D2)}
+=\boxed{\;\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(\frac D2)}\times\frac1{(D-2)(D-3)}\;}\equiv c(D),\qquad c(4)=+h.
+\tag{I.36}
+\end{equation*}
+A useful relation \tD:
+\begin{equation}\label{eq:t4-cb}
+c(D)=-\frac{b(D)}{D-3}.
+\end{equation}
+
+% ----------------------------------------------------------------------
+\subsection{Preparation for the tensor algebra \texorpdfstring{\tD}{}}
+Define \(u_\mu\equiv\delta^0_\mu\). It follows that
+\begin{equation}\label{eq:t4-u1}
+u^\mu=\eta^{\mu\nu}u_\nu=-\delta^\mu_0,\qquad u\cdot u=\eta^{00}=-1,\qquad
+\bar\eta_{\mu\nu}=\eta_{\mu\nu}+u_\mu u_\nu,\qquad \bar\eta^{\mu\nu}=\eta^{\mu\nu}+u^\mu u^\nu,
+\end{equation}
+\begin{equation}\label{eq:t4-u2}
+\bar\eta_{\mu\nu}u^\nu=u_\mu+u_\mu(u\cdot u)=0,\qquad
+\eta^{\mu\alpha}\bar\eta_{\alpha\nu}=\delta^\mu_\nu+\eta^{\mu0}\delta^0_\nu=\bar\delta^\mu_\nu,\qquad
+\bar\eta_{\mu\alpha}\eta^{\alpha\beta}\bar\eta_{\beta\nu}=\bar\eta_{\mu\nu},
+\end{equation}
+\begin{equation}\label{eq:t4-u3}
+\eta^{\mu\nu}\bar\eta_{\mu\nu}=D+\eta^{00}=D-1,\qquad \bar\delta^\mu_\mu=D-1,\qquad
+u_\alpha u^\sigma=-\delta^0_\alpha\delta^\sigma_0,\qquad u^\rho u^\sigma=\delta^\rho_0\delta^\sigma_0 .
+\end{equation}
+In this notation the tensors \eqI{22}--\eqI{24} read (the symmetrizations of \eqI{23}
+written out):
+\begin{equation}\label{eq:t4-T}
+\begin{aligned}
+T^A_{\alpha\beta\rho\sigma}&=\bar\eta_{\alpha\rho}\bar\eta_{\sigma\beta}+\bar\eta_{\alpha\sigma}\bar\eta_{\rho\beta}-\tfrac{2}{D-3}\bar\eta_{\alpha\beta}\bar\eta_{\rho\sigma},\\
+T^B_{\alpha\beta\rho\sigma}&=-\bigl[u_\alpha\bar\eta_{\beta\rho}u_\sigma+u_\beta\bar\eta_{\alpha\rho}u_\sigma+u_\alpha\bar\eta_{\beta\sigma}u_\rho+u_\beta\bar\eta_{\alpha\sigma}u_\rho\bigr],\\
+T^C_{\alpha\beta\rho\sigma}&=\tfrac{2}{(D-2)(D-3)}f_{\alpha\beta}f_{\rho\sigma},\qquad f_{\alpha\beta}\equiv(D-3)u_\alpha u_\beta+\bar\eta_{\alpha\beta}.
+\end{aligned}
+\end{equation}
+Since the \(T^I\) are constant tensors, the coincidence limit of \eqI{20} acts only on the
+scalars:
+\begin{equation}\label{eq:t4-X}
+X_{\alpha\beta\rho\sigma}\equiv i[{}_{\alpha\beta}\Delta_{\rho\sigma}](x;x)=T^A_{\alpha\beta\rho\sigma}\,i\Delta_A(x;x)+T^B_{\alpha\beta\rho\sigma}\,b+T^C_{\alpha\beta\rho\sigma}\,c .
+\end{equation}
+
+% ----------------------------------------------------------------------
+\subsection{Eq. (I.37): \texorpdfstring{$i[{}^\alpha_\alpha\Delta^\rho_\rho]=\eta^{\alpha\beta}\eta^{\rho\sigma}X_{\alpha\beta\rho\sigma}$}{the double trace} \texorpdfstring{\tD}{}}
+\begin{itemize}
+\item \(T^A\): \(\eta^{\alpha\beta}\eta^{\rho\sigma}\bar\eta_{\alpha\rho}\bar\eta_{\sigma\beta}=\bar\delta^\beta{}_\rho\bar\delta^\rho{}_\beta=D-1\).
+The second term also gives \(D-1\); the third gives \(-\tfrac2{D-3}(D-1)^2\).
+Total: \(2(D-1)\bigl[1-\tfrac{D-1}{D-3}\bigr]=-\tfrac{4(D-1)}{D-3}\).
+\item \(T^B\): in every term a \(u\) is contracted with a \(\bar\eta\), e.g.\
+\(u^\beta\bar\eta_{\beta\rho}=0\). Result: \(0\).
+\item \(T^C\): \(\eta^{\alpha\beta}f_{\alpha\beta}=(D-3)(-1)+(D-1)=2\). Result:
+\(\tfrac2{(D-2)(D-3)}\cdot2\cdot2=\tfrac8{(D-2)(D-3)}\).
+\end{itemize}
+\begin{equation*}\label{eq:t4-I37}
+\boxed{\;\chIIc{{}^\alpha_\alpha\Delta^\rho_\rho}=-\frac{4(D-1)}{D-3}\,i\Delta_A(x;x)+\frac{8}{(D-2)(D-3)}\,c\;}
+\tag{I.37}
+\end{equation*}
+
+% ----------------------------------------------------------------------
+\subsection{Eq. (I.38): \texorpdfstring{$i[{}^{\alpha\beta}\Delta_{\alpha\beta}]=\eta^{\alpha\rho}\eta^{\beta\sigma}X_{\alpha\beta\rho\sigma}$}{the cross trace} \texorpdfstring{\tD}{}}
+\begin{itemize}
+\item \(T^A\): the three terms give \((D-1)^2\), \(D-1\) and \(-\tfrac{2}{D-3}(D-1)\),
+respectively. Total: \((D-1)\bigl[D-\tfrac2{D-3}\bigr]=\tfrac{(D-1)(D^2-3D-2)}{D-3}\).
+\item \(T^B\): the four terms give
+\(u^\rho\bar\eta_{\beta\rho}u^\beta=0\);
+\((u\cdot u)\,\bar\eta_{\beta\sigma}\eta^{\beta\sigma}=-(D-1)\);
+\((u\cdot u)(D-1)=-(D-1)\);
+\(u^\sigma\bar\eta_{\alpha\sigma}u^\alpha=0\).
+With the overall minus sign the result is \(+2(D-1)\).
+\item \(T^C\): \(f_{\alpha\beta}f^{\alpha\beta}=(D-3)^2(u\cdot u)^2+2(D-3)u^\alpha u^\beta\bar\eta_{\alpha\beta}+\bar\eta\cdot\bar\eta=(D-3)^2+D-1\).
+Result: \(\tfrac{2(D^2-5D+8)}{(D-2)(D-3)}\).
+\end{itemize}
+\begin{equation*}\label{eq:t4-I38}
+\boxed{\;\chIIc{{}^{\alpha\beta}\Delta_{\alpha\beta}}=\frac{(D-1)(D^2-3D-2)}{D-3}\,i\Delta_A(x;x)+2(D-1)\,b+\frac{2(D^2-5D+8)}{(D-2)(D-3)}\,c\;}
+\tag{I.38}
+\end{equation*}
+
+% ----------------------------------------------------------------------
+\subsection{Eq. (I.39): \texorpdfstring{$i[{}^\alpha_\alpha\Delta^{\rho\sigma}]=\eta^{\alpha\beta}\eta^{\rho\mu}\eta^{\sigma\nu}X_{\alpha\beta\mu\nu}$}{the single trace} \texorpdfstring{\tD}{}}
+\begin{itemize}
+\item \(T^A\): \(\eta^{\alpha\beta}\bar\eta_{\alpha\mu}\bar\eta_{\nu\beta}=\bar\eta_{\mu\nu}\) (see
+\eqref{eq:t4-u2}). The first two terms give \(2\bar\eta_{\mu\nu}\), the third
+\(-\tfrac{2(D-1)}{D-3}\bar\eta_{\mu\nu}\). Total: \(-\tfrac{4}{D-3}\bar\eta_{\mu\nu}\).
+\item \(T^B\): with \(\eta^{\alpha\beta}\), every term produces \(u^\beta\bar\eta_{\beta\,\cdot}=0\).
+Result: \(0\).
+\item \(T^C\): since \(\eta^{\alpha\beta}f_{\alpha\beta}=2\), the result is
+\(\tfrac{4}{(D-2)(D-3)}f_{\mu\nu}\).
+\end{itemize}
+When the indices are raised, \eqref{eq:t4-u3} is used: \(u^\rho u^\sigma=\delta^\rho_0\delta^\sigma_0\)
+and \(\bar\eta_{\mu\nu}\to\bar\eta^{\rho\sigma}\).
+\begin{equation*}\label{eq:t4-I39}
+\boxed{\;\chIIc{{}^\alpha_\alpha\Delta^{\rho\sigma}}=-\frac{4}{D-3}\,\bar\eta^{\rho\sigma}\,i\Delta_A(x;x)+\frac{4}{(D-2)(D-3)}\bigl[(D-3)\delta^\rho_0\delta^\sigma_0+\bar\eta^{\rho\sigma}\bigr]\,c\;}
+\tag{I.39}
+\end{equation*}
+
+% ----------------------------------------------------------------------
+\subsection{Eq. (I.40): \texorpdfstring{$i[{}_{\alpha\rho}\Delta^{\rho\sigma}]=\eta^{\rho\lambda}\eta^{\sigma\kappa}X_{\alpha\rho\lambda\kappa}$}{the mixed contraction} \texorpdfstring{\tD}{}}
+Here the second index of the first pair is contracted with the first index of the second
+pair, and \(\kappa\) is raised to \(\sigma\).
+\begin{itemize}
+\item \(T^A\): write
+\(T^A_{\alpha\rho\lambda\kappa}=\bar\eta_{\alpha\lambda}\bar\eta_{\kappa\rho}+\bar\eta_{\alpha\kappa}\bar\eta_{\lambda\rho}-\tfrac2{D-3}\bar\eta_{\alpha\rho}\bar\eta_{\lambda\kappa}\).
+With \(\eta^{\rho\lambda}\) the terms give \(\bar\eta_{\alpha\kappa}\), \((D-1)\bar\eta_{\alpha\kappa}\) and
+\(-\tfrac{2}{D-3}\bar\eta_{\alpha\kappa}\), respectively. Total:
+\(\tfrac{D^2-3D-2}{D-3}\bar\eta_{\alpha\kappa}\). Raising gives
+\(\bar\eta_{\alpha\kappa}\eta^{\kappa\sigma}=\bar\delta^\sigma_\alpha\).
+\item \(T^B\): write
+\(T^B_{\alpha\rho\lambda\kappa}=-[u_\alpha\bar\eta_{\rho\lambda}u_\kappa+u_\rho\bar\eta_{\alpha\lambda}u_\kappa+u_\alpha\bar\eta_{\rho\kappa}u_\lambda+u_\rho\bar\eta_{\alpha\kappa}u_\lambda]\).
+With \(\eta^{\rho\lambda}\) the four terms give:
+\begin{enumerate}[nosep]
+\item \((D-1)u_\alpha u_\kappa\);
+\item \(u^\lambda\bar\eta_{\alpha\lambda}u_\kappa=0\);
+\item \(u_\alpha\bar\eta_{\rho\kappa}u^\rho=0\);
+\item \((u\cdot u)\bar\eta_{\alpha\kappa}=-\bar\eta_{\alpha\kappa}\).
+\end{enumerate}
+With the overall minus sign: \(-(D-1)u_\alpha u_\kappa+\bar\eta_{\alpha\kappa}\). Raising with
+\eqref{eq:t4-u3}: \((D-1)\delta^0_\alpha\delta^\sigma_0+\bar\delta^\sigma_\alpha\).
+\item \(T^C\): \(f_{\alpha\rho}\eta^{\rho\lambda}f_{\lambda\kappa}=(D-3)^2(u\cdot u)u_\alpha u_\kappa+0+0+\bar\eta_{\alpha\kappa}
+=-(D-3)^2u_\alpha u_\kappa+\bar\eta_{\alpha\kappa}\). Raising:
+\((D-3)^2\delta^0_\alpha\delta^\sigma_0+\bar\delta^\sigma_\alpha\).
+\end{itemize}
+\begin{equation*}\label{eq:t4-I40}
+\boxed{\begin{aligned}\chIIc{{}_{\alpha\rho}\Delta^{\rho\sigma}}={}&\frac{D^2-3D-2}{D-3}\,\bar\delta^\sigma_\alpha\,i\Delta_A(x;x)+\bigl[(D-1)\delta^0_\alpha\delta^\sigma_0+\bar\delta^\sigma_\alpha\bigr]\,b\\
+&+\frac{2}{(D-2)(D-3)}\bigl[(D-3)^2\delta^0_\alpha\delta^\sigma_0+\bar\delta^\sigma_\alpha\bigr]\,c\end{aligned}}
+\tag{I.40$'$}
+\end{equation*}
+(The \(i\Delta_A\) coefficient agrees with the paper; the prime refers to the finite part,
+Section~\ref{sec:t4-comp}.)
+
+\paragraph{Trace identities \tC.}
+\begin{itemize}
+\item The trace \(\alpha=\sigma\) of \eqref{eq:t4-I40} must equal \eqref{eq:t4-I38} identically.
+Reason: using the within-pair symmetry of the second pair in
+\(\eta^{\rho\lambda}\eta^{\alpha\kappa}X_{\alpha\rho\lambda\kappa}\) gives
+\(\eta^{\alpha\kappa}\eta^{\rho\lambda}X_{\alpha\rho\kappa\lambda}\), which is the definition of
+\eqref{eq:t4-I38}. Check:
+\(A\): \(\tfrac{D^2-3D-2}{D-3}(D-1)\) \chIIok;
+\(B\): \((D-1)\cdot1+(D-1)=2(D-1)\) \chIIok;
+\(C\): \(\tfrac2{(D-2)(D-3)}[(D-3)^2+D-1]\) \chIIok.
+\item Similarly \(\eta_{\rho\sigma}\cdot\eqref{eq:t4-I39}=\eqref{eq:t4-I37}\) must hold:
+\(A\): \(-\tfrac{4(D-1)}{D-3}\) \chIIok;
+\(C\): \(\tfrac{4}{(D-2)(D-3)}[-(D-3)+D-1]=\tfrac8{(D-2)(D-3)}\) \chIIok.
+\end{itemize}
+
+% ----------------------------------------------------------------------
+\subsection{Finite parts, passage to \texorpdfstring{$D=4$}{D=4}, and its legitimacy}\label{sec:t4-finite}
+
+\subsubsection{Exact-\texorpdfstring{$D$}{D} finite parts (in terms of \texorpdfstring{$b$}{b}) \texorpdfstring{\tD}{}}
+Substituting \(c=-b/(D-3)\) from \eqref{eq:t4-cb}, the finite parts are
+\begin{equation}\label{eq:t4-finiteD}
+\begin{aligned}
+\eqref{eq:t4-I37}:&\quad -\frac{8\,b}{(D-2)(D-3)^2},\\
+\eqref{eq:t4-I38}:&\quad 2b\Bigl[(D-1)-\frac{D^2-5D+8}{(D-2)(D-3)^2}\Bigr],\\
+\eqref{eq:t4-I39}:&\quad -\frac{4\,b}{(D-2)(D-3)^2}\bigl[(D-3)\delta^\rho_0\delta^\sigma_0+\bar\eta^{\rho\sigma}\bigr],\\
+\eqref{eq:t4-I40}:&\quad \frac{D(D-3)}{D-2}\,b\;\delta^0_\alpha\delta^\sigma_0+b\Bigl[1-\frac{2}{(D-2)(D-3)^2}\Bigr]\bar\delta^\sigma_\alpha .
+\end{aligned}
+\end{equation}
+Algebra used for the \eqref{eq:t4-I40} line:
+\((D-1)b+\tfrac{2(D-3)}{D-2}c=b\bigl[(D-1)-\tfrac{2}{D-2}\bigr]=b\,\tfrac{D(D-3)}{D-2}\).
+
+\subsubsection{\texorpdfstring{$D=4$}{D=4} values (\texorpdfstring{$b\to-h$}{b -> -h})}
+\begin{equation}\label{eq:t4-finite4}
+\begin{aligned}
+\relax&\eqref{eq:t4-I37}\to+4h,\qquad \eqref{eq:t4-I38}\to-2h,\\
+&\eqref{eq:t4-I39}\to\bigl[2\delta^\rho_0\delta^\sigma_0+2\bar\eta^{\rho\sigma}\bigr]h,\qquad
+\eqref{eq:t4-I40}\to-2\,\delta^0_\alpha\delta^\sigma_0\,h\quad(\text{coefficient of }\bar\delta\text{ is }0).
+\end{aligned}
+\end{equation}
+
+\subsubsection{When is this simplification legitimate? \texorpdfstring{\tA}{}}
+\begin{itemize}
+\item \(i\Delta_A(x;x)\) has a pole (see \eqref{eq:t4-pole}). The \(D\)-dependent coefficients in
+front of \(i\Delta_A\), e.g.\ \(-4(D-1)/(D-3)\), must therefore be kept \emph{exactly};
+otherwise finite contributions of the form pole \(\times\,\order{D-4}\) are lost. The paper
+keeps these coefficients exact.
+\item \(b\) and \(c\) are finite at \(D=4\). In \eqI{33}, \(X\) enters linearly and without a
+pole-carrying prefactor. Therefore taking \(D\to4\) in the finite parts changes
+\(-i\chIIM\) only by \(\order{D-4}\), which vanishes in the limit \(D\to4\).
+\item This holds only provided these terms are not multiplied by a pole in a later step. It
+is consistent with the \(+\order{D-4}\) written in \eqI{41}; the condition is checked again
+when \eqI{41} is derived (Task~5).
+\item In this task all results are first given exactly in \(D\): \eqref{eq:t4-I37}--\eqref{eq:t4-I40}
+and \eqref{eq:t4-finiteD}.
+\end{itemize}
+
+% ----------------------------------------------------------------------
+\subsection{Independent analytic cross-check: Gauss's theorem \texorpdfstring{\tC}{}}\label{sec:t4-gauss}
+In \eqI{29}--\eqI{30}, \(y\to0\) corresponds to \({}_2F_1(a,b;c;1)\). Gauss's theorem holds in the
+region \(\mathrm{Re}(c-a-b)=1-\tfrac D2>0\):
+\begin{equation}\label{eq:t4-gauss}
+{}_2F_1(a,b;c;1)=\frac{\Gamma(c)\Gamma(c-a-b)}{\Gamma(c-a)\Gamma(c-b)}.
+\end{equation}
+\begin{itemize}
+\item \(B\): \(a=D-2\), \(b=1\), \(c=\tfrac D2\). Using \(\Gamma(1-\tfrac D2)/\Gamma(2-\tfrac D2)=-\tfrac2{D-2}\)
+and \(\Gamma(\tfrac D2-1)=\tfrac{2\Gamma(D/2)}{D-2}\) one finds
+\(i\Delta_B(x;x)=-\chIIN\Gamma(D-2)/\Gamma(\tfrac D2)\), which is \eqref{eq:t4-I35} \chIIok.
+\item \(C\): \(a=D-3\), \(b=2\), \(c=\tfrac D2\). With the identity
+\((\tfrac D2-1)(\tfrac D2-2)=(1-\tfrac D2)(2-\tfrac D2)\) one finds
+\(i\Delta_C(x;x)=\chIIN\Gamma(D-3)/\Gamma(\tfrac D2)\), which is \eqref{eq:t4-I36} \chIIok.
+\end{itemize}
+(Here \(a,b,c\) denote the hypergeometric parameters, not the scale factor and the
+coincident propagators.) This route is independent of the series representation and of
+the rule \eqref{eq:t4-rule}. It is also verified symbolically by part (1) of the script.
+
+% ----------------------------------------------------------------------
+\subsection{Comparison with the paper}\label{sec:t4-comp}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.18\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.15\textwidth}@{}}
+\toprule
+Equation & Derived & \PI{} & \\
+\midrule
+\eqI{34} & \eqref{eq:t4-I34} & same & \chIIok\\
+\eqI{35} & \(k\cdot(-\tfrac1{D-2})\to-h\) & same & \chIIok\\
+\eqI{36} & \(k\cdot\tfrac1{(D-2)(D-3)}\to+h\) & same & \chIIok\\
+\eqI{37}, \(i\Delta_A\) coeff. & \(-\tfrac{4(D-1)}{D-3}\) & same & \chIIok\\
+\eqI{37}, finite (\(D=4\)) & \(+4h\) & \(+4h\) & \chIIok\\
+\eqI{38}, \(i\Delta_A\) coeff. & \(\tfrac{(D-1)(D^2-3D-2)}{D-3}\) & same & \chIIok\\
+\eqI{38}, finite (\(D=4\)) & \(-2h\) & \(-2h\) & \chIIok\\
+\eqI{39}, \(i\Delta_A\) coeff. & \(-\tfrac4{D-3}\bar\eta^{\rho\sigma}\) & same & \chIIok\\
+\eqI{39}, finite (\(D=4\)) & \([2\delta^\rho_0\delta^\sigma_0+2\bar\eta^{\rho\sigma}]h\) & \([2\delta^\rho_0\delta^\sigma_0+2\bar\eta_{\rho\sigma}]h\) & \chIIok{} (index placement)\\
+\eqI{40}, \(i\Delta_A\) coeff. & \(\tfrac{D^2-3D-2}{D-3}\bar\delta^\sigma_\alpha\) & same & \chIIok\\
+\eqI{40}, finite (\(D=4\)) & \(-2\,\delta^0_\alpha\delta^\sigma_0\,h\) & \(+2\,\delta^0_\alpha\delta^\sigma_0\,h\) & \chIIno{} sign\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Index placement in (I.39)}
+The left-hand side has upper indices \(\rho\sigma\). In the finite term on the right-hand side
+the paper writes \(\bar\eta_{\rho\sigma}\); the consistent notation is \(\bar\eta^{\rho\sigma}\).
+\(\bar\eta^{\rho\sigma}\) and \(\bar\eta_{\rho\sigma}\) are numerically the same matrix
+\({\rm diag}(0,1,\ldots,1)\), so the result is not affected. This is a typesetting-level note.
+
+\subsubsection{The finite part of (I.40)}
+\begin{itemize}
+\item The paper's \eqI{40} and \eqI{38} are mutually inconsistent. The trace identity
+\(\mathrm{tr}\,\eqI{40}=\eqI{38}\) rests only on the within-pair symmetry, i.e.\ it holds by
+definition. The trace of the paper's \eqI{40} gives \(+2\delta^0_\alpha\delta^\alpha_0h=+2h\);
+the finite part of the paper's \eqI{38} is \(-2h\).
+\item The derived value \(-2h\) is consistent with both the derived and the printed \eqI{38}.
+\item The difference cannot be explained by the sign of \(T^B\) or \(T^C\). For example, if
+\(T^B\) were taken with the opposite sign, the finite part of \eqI{38} would be \(+10h\),
+contradicting the paper's \(-2h\).
+\item The explicit component calculation (Section~\ref{sec:t4-code}) also gives \(-2h\).
+\end{itemize}
+\begin{notebox}[Open point (at the end of Task 4)]
+\eqI{40} enters the fourth term of \eqI{33}. Whether the printed \(+2\) or the correct
+\(-2\) was used in \eqI{41} must be checked when \eqI{41} is derived. In addition to the
+overall-sign question of Task~3, this may affect \(H^2\)-terms of the type
+\(\partial_0(a^2\partial_0\delta)\). (Answered in Task~5: the printed \(+2\) was used.)
+\end{notebox}
+
+\subsubsection{Findings accumulated so far (Tasks 2--4)}
+Identifiers in parentheses (S$n$, B$n$, C$n$) refer to the classified list of findings in Chapter~\ref{ch:summary}.
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.44\textwidth}>{\raggedright\arraybackslash}p{0.34\textwidth}@{}}
+\toprule
+Location & Finding & Effect\\
+\midrule
+\eqI{7}, left-hand side (C3) & \(-\tfrac12\kappa\) printed, correct \(+\tfrac12\kappa\) & none (\(V_1\) correct)\\
+Table~II, \(U_2\) (C5) & \(-\tfrac i4\) printed, correct \(+\tfrac i4\) & none (\(+\tfrac i4\) used in the calculation)\\
+\eqI{32}--\eqI{33} (S1) & overall sign reversed because of the \(\partial_2\) rule & open: \eqI{41}, \eqI{44} and combination with the 3-point part\\
+\eqI{39} (C6) & \(\bar\eta_{\rho\sigma}\to\bar\eta^{\rho\sigma}\) (index placement) & none\\
+\eqI{40} (B1) & finite part \(+2\) printed, correct \(-2\,\delta^0_\alpha\delta^\sigma_0h\) & open: which one is used in \eqI{41}?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ----------------------------------------------------------------------
+\subsection{Code checks \texorpdfstring{\tC}{}}\label{sec:t4-code}
+Script: \texttt{code/02\_four\_point/check\_coincidence.py} (SymPy~1.14.0 and mpmath; about
+2\,s). All parts were actually run.
+\begin{itemize}
+\item[(1)] \textbf{Gauss's theorem on \eqI{29}--\eqI{30}}, symbolic \(D\): both limits
+\eqref{eq:t4-I35}, \eqref{eq:t4-I36} reproduced (\texttt{True}).
+\item[(2)] \textbf{Numerical limits at \(D=0.6\).} In the region \(\mathrm{Re}\,D<2\) the limit exists
+literally, without analytic continuation. With 30 digits and \(H=1\):
+\begin{itemize}[nosep]
+\item at \(y=0.5\) the difference between the series \eqI{27}--\eqI{28} and the hypergeometric
+forms \eqI{29}--\eqI{30} is of order \(10^{-31}\); this shows that the definitions were read
+correctly;
+\item the differences between the series values and \eqref{eq:t4-I34}--\eqref{eq:t4-I36} go to zero
+like \((y/4)^{0.7}\) for \(y=10^{-2},10^{-4},10^{-6},10^{-8}\). For example, at \(y=10^{-8}\) the
+differences are \(A\): \(2.7\times10^{-6}\), \(B\): \(-1.9\times10^{-6}\), \(C\): \(-1.9\times10^{-6}\).
+\end{itemize}
+(The \(A\) series uses the first coefficient of \eqI{14} as printed. This coefficient
+multiplies the leading term \((y/4)^{1-D/2}\) of the \(A\) difference, so it affects the size
+of that difference but not the fact that it vanishes like \((y/4)^{0.7}\).)
+\item[(3)] \textbf{Explicit components and trace identities.} \(T^A\), \(T^B\) and \(T^C\) were built
+as explicit arrays with \(D^4\) components for \(D=4,5,6,7\), with \(i\Delta_A\), \(b\) and \(c\)
+left symbolic. Results: the pair-exchange and within-pair symmetries hold;
+\eqref{eq:t4-I37}, \eqref{eq:t4-I38}, \eqref{eq:t4-I39} and \eqref{eq:t4-I40} are correct in every
+component; \(\mathrm{tr}\,\eqref{eq:t4-I40}=\eqref{eq:t4-I38}\) and
+\(\eta_{\rho\sigma}\eqref{eq:t4-I39}=\eqref{eq:t4-I37}\) hold. All gave \texttt{True}. Since the
+rational coefficients have low degree in \(D\), agreement at four values of \(D\) is a strong
+confirmation of the closed forms.
+\item[(4)] \textbf{\(D=4\) finite parts} compared with the print: (37) \(4h\), (38) \(-2h\),
+(39) \([2,2,0]h\) for \((\rho\sigma)=(00),(11),(01)\), (40) \([-2,0,0]h\) for
+\((\alpha\sigma)=(00),(11),(01)\), against the printed \([+2,0,0]h\).
+\end{itemize}
+Output of the re-run (identical to the original log; long lines wrapped):
+\begingroup\scriptsize
+\begin{verbatim}
+== (1) Gauss theorem on the hypergeometric forms (29)-(30): 2F1(a,b;c;1) = G(c)G(c-a-b)/(G(c-a)G(c-b)),
+       Re(c-a-b)=1-D/2>0 ==
+  iDelta_B(x;x) via (29) == -N G(D-1)/((D-2) G(D/2)) : True
+  iDelta_C(x;x) via (30) ==  N G(D-1)/((D-2)(D-3) G(D/2)): True
+== (2) numerical coincidence limits at D = 0.6 (Re D < 2: the limit exists literally), H = 1 ==
+  series vs hypergeometric at y=0.5:  B: -9.8608e-32   C: -1.2326e-31
+  y= 1e-2:  A(y)-(34) =     0.04504   B(y)-(35) =    -0.02527   C(y)-(36) =    -0.02306
+  y= 1e-4:  A(y)-(34) =    0.001735   B(y)-(35) =   -0.001153   C(y)-(36) =   -0.001132
+  y= 1e-6:  A(y)-(34) =    6.851e-5   B(y)-(35) =   -4.733e-5   C(y)-(36) =   -4.713e-5
+  y= 1e-8:  A(y)-(34) =    2.721e-6   B(y)-(35) =   -1.899e-6   C(y)-(36) =   -1.897e-6
+  (differences scale like (y/4)^(1-D/2) = (y/4)^0.7 -> 0)
+== (3) explicit-component contractions of T^A, T^B, T^C, D = 4,5,6,7 ==
+  D=4: pair/within-pair symmetric True; (37) True; (38) True; (39) True; (40) True;
+       trace(40)=(38) True; eta.(39)=(37) True
+  D=5: pair/within-pair symmetric True; (37) True; (38) True; (39) True; (40) True;
+       trace(40)=(38) True; eta.(39)=(37) True
+  D=6: pair/within-pair symmetric True; (37) True; (38) True; (39) True; (40) True;
+       trace(40)=(38) True; eta.(39)=(37) True
+  D=7: pair/within-pair symmetric True; (37) True; (38) True; (39) True; (40) True;
+       trace(40)=(38) True; eta.(39)=(37) True
+== (4) D = 4 reduction of the finite (B,C) parts, h = H^2/(16 pi^2): iDB -> -h, iDC -> +h ==
+  (37) finite: 4 * h      paper: +4 h
+  (38) finite: -2 * h      paper: -2 h
+  (39) finite [rho,sigma]=(0,0),(1,1),(0,1): [2, 2, 0] * h   paper: [2, 2, 0]
+  (40) finite [alpha,sigma]=(0,0),(1,1),(0,1): [-2, 0, 0] * h   paper: [+2, 0, 0]
+  trace of paper's (40) finite part = +2h, but paper's (38) finite part = -2h
+       -> paper's (40) inconsistent with its (38)
+\end{verbatim}
+\endgroup
+
+% ----------------------------------------------------------------------
+\subsection{Calculation record}
+\begin{itemize}
+\item \textbf{Derived.} The dimensional-regularization limit rule and the justification of the
+term-by-term limit. \eqI{34} [\eqref{eq:t4-I34}] and its pole structure \eqref{eq:t4-pole}.
+\eqI{35} [\eqref{eq:t4-I35}] and \eqI{36} [\eqref{eq:t4-I36}], and the relation
+\(c=-b/(D-3)\) \eqref{eq:t4-cb}. Tensor contractions exactly in \(D\): \eqI{37}
+[\eqref{eq:t4-I37}], \eqI{38} [\eqref{eq:t4-I38}], \eqI{39} [\eqref{eq:t4-I39}], \eqI{40}
+[\eqref{eq:t4-I40}]. Exact-\(D\) form of the finite parts \eqref{eq:t4-finiteD} and their
+\(D=4\) values \eqref{eq:t4-finite4}. Condition for the legitimacy of the \(D=4\)
+simplification.
+\item \textbf{Checks passed.} Hypergeometric limits by Gauss's theorem; numerical limits at
+\(D=0.6\); explicit component calculation and trace identities at \(D=4,\ldots,7\). All
+actually run.
+\item \textbf{Discrepancies.} \eqI{34}--\eqI{39} agree; \eqI{39} has only an index-placement
+note. The finite part of \eqI{40} has a sign difference: derived
+\(-2\,\delta^0_\alpha\delta^\sigma_0\,H^2/16\pi^2\). The paper's \eqI{40} contradicts its own
+\eqI{38} through the trace identity.
+\item \textbf{Open point.} Which sign is used in \eqI{41}.
+\end{itemize}
+
+% ======================================================================
+\section{Task 5: the final 4-point contribution, Eqs. (I.41)--(I.44)}
+\label{sec:t5}
+% ======================================================================
+
+\begin{discbox}[Task 5: summary of findings]
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item \eqI{42} is a definition and is verified. \eqI{43} is derived exactly as a
+distributional identity; a general-\(D\) version is also given.
+\item \textbf{The derived \eqI{41} and \eqI{44}} differ from the printed ones in two respects:
+\begin{enumerate}[nosep]
+\item the overall sign is reversed; this difference comes from the \(\partial_2\) rule of
+Task~3;
+\item the terms \(\{-\partial^\mu(a^2\partial_\mu\delta^4)+a^2\nabla^2\delta^4\}\) of the paper's
+\eqI{41} and the constants \(-2\) and \(+2\) in \eqI{44} are absent from the derived result.
+When the correct \eqI{40} is used, the finite \(B\)- and \(C\)-type contributions are exactly
+\(\order{D-4}\) and drop out.
+\end{enumerate}
+\item \textbf{Diagnosis.} The paper's \eqI{41} follows exactly from the paper's \eqI{33} and the
+\emph{printed} \eqI{40} (\(+2\)). The paper's \eqI{44} also follows exactly from the paper's
+\eqI{41} via \eqI{42}--\eqI{43}. So the algebra \eqI{41}\(\to\)\eqI{44} is correct; the
+differences are inherited from earlier steps.
+\item \textbf{Physical assessment.} The extra terms caused by \eqI{40} have exactly the form of
+the paper's counterterm vertices \eqI{131} and \eqI{145}. They can therefore be absorbed
+into the arbitrary finite counterterm coefficients. The overall sign difference, however,
+also affects the \(\ln(aa')\) terms and the \(9H^2a^D\) term; its effect must be assessed
+at the renormalization stage.
+\end{itemize}
+\end{discbox}
+
+% ----------------------------------------------------------------------
+\subsection{Goal, inputs and scope}
+
+\paragraph{Targets \tP.} \PI{} prints (\eqI{41} on p.~124005-4, right column; \eqI{42}--\eqI{44}
+on p.~124005-5, left column):
+\begin{align*}
+\text{(I.41)}\quad &{-i}\chIIM(x;x')=\frac{i\kappa^2H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(\frac D2)}
+-\pi\cot\Bigl(\frac\pi2D\Bigr)\\
+&\qquad\times\Bigl\{\tfrac14D(D-1)\partial^\mu\bigl(a^{D-2}\partial_\mu\chIIdel\bigr)-Da^{D-2}\nabla^2\chIIdel\Bigr\}\\
+&\qquad+\frac{i\kappa^2H^2}{4\pi^2}\Bigl\{3\partial^\mu\bigl(a^2\ln(a)\partial_\mu\delta^4(x-x')\bigr)-4\ln(a)a^2\nabla^2\delta^4(x-x')\\
+&\qquad\qquad\qquad-\partial^\mu\bigl(a^2\partial_\mu\delta^4(x-x')\bigr)+a^2\nabla^2\delta^4(x-x')\Bigr\}+\order{D-4},\\[6pt]
+\text{(I.42)}\quad &\square\equiv\frac1{\sqrt{-\hat g}}\partial_\mu\bigl(\sqrt{-\hat g}\,\hat g^{\mu\nu}\partial_\nu\bigr)=\frac1{a^D}\partial^\mu\bigl(a^{D-2}\partial_\mu\bigr),\\[6pt]
+\text{(I.43)}\quad &\partial^\mu\bigl(a^2\ln(a)\partial_\mu\delta^4(x-x')\bigr)=\tfrac12\ln(aa')a^4\square\delta^4(x-x')+\tfrac32H^2a^4\delta^4(x-x'),\\[6pt]
+\text{(I.44)}\quad &{-i}\chIIM(x;x')=\frac{i\kappa^2H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(\frac D2)}\\
+&\qquad\times\Bigl\{\Bigl[-\tfrac14D(D-1)\pi\cot\Bigl(\frac\pi2D\Bigr)-2+3\ln(aa')\Bigr]a^D\square\\
+&\qquad\qquad+\Bigl[D\pi\cot\Bigl(\frac\pi2D\Bigr)+2-4\ln(aa')\Bigr]a^{D-2}\nabla^2+9H^2a^D+\order{D-4}\Bigr\}\chIIdel .
+\end{align*}
+In \eqI{41} the factor \(-\pi\cot(\frac\pi2D)\) is printed without enclosing
+parentheses; it multiplies the prefactor (as \eqI{44} confirms), and it is read this
+way below.
+These expressions were not used as inputs of the derivation; they enter only in the
+comparison of Section~\ref{sec:t5-comp}. \eqI{42} is a definition; it is verified in
+Section~\ref{sec:t5-42} before being used.
+
+\paragraph{Inputs.} Following the author's instruction, the results \emph{derived} in the previous
+tasks are used: for \eqI{33}, Task~3 \eqref{eq:t3-I33}--\eqref{eq:t3-Kcal}; for \eqI{34}--\eqI{40},
+Task~4.
+\begin{itemize}[leftmargin=2.6em]
+\item[(G1)] The derived \eqI{33} \tD{} (Task~3):
+\begin{equation}\label{eq:t5-G1}
+\begin{aligned}
+\relax&{-i}\chIIM(x;x')=-\partial_\mu\bigl[\chIIK^{\mu\nu}(x)\,\partial_\nu\chIIdel\bigr],\\
+&\chIIK^{\mu\nu}=\kappa^2a^{D-2}\Bigl\{-\tfrac i8\eta^{\mu\nu}X_1+\tfrac i4\eta^{\mu\nu}X_2+\tfrac i2X_3^{\mu\nu}-i\,X_4^{\mu\nu}\Bigr\},
+\end{aligned}
+\end{equation}
+with \(X_1=i[{}^\alpha_\alpha\Delta^\rho_\rho]\), \(X_2=i[{}^{\alpha\beta}\Delta_{\alpha\beta}]\),
+\(X_3^{\mu\nu}=i[{}^\alpha_\alpha\Delta^{\mu\nu}]\) and
+\(X_4^{\mu\nu}=\eta^{\mu\alpha}i[{}_{\alpha\rho}\Delta^{\rho\nu}]\), all at \((x;x)\).
+\item[(G2)] The derived \eqI{34}--\eqI{40}, exactly in \(D\) \tD{} (Task~4,
+\eqref{eq:t4-I34}, \eqref{eq:t4-I37}--\eqref{eq:t4-I40}):
+\begin{equation}\label{eq:t5-G2}
+\begin{aligned}
+X_1&=-\tfrac{4(D-1)}{D-3}\Lambda+F_1, & X_2&=\tfrac{(D-1)(D^2-3D-2)}{D-3}\Lambda+F_2,\\
+X_3^{\mu\nu}&=-\tfrac{4}{D-3}\bar\eta^{\mu\nu}\Lambda+F_3^{\mu\nu}, & X_4^{\mu\nu}&=\tfrac{D^2-3D-2}{D-3}\bar\eta^{\mu\nu}\Lambda+F_4^{\mu\nu},\\
+\Lambda&\equiv i\Delta_A(x;x)=k\bigl(\pihat+2\ln a\bigr). &&
+\end{aligned}
+\end{equation}
+The \(F_i\) are the \(B\)- and \(C\)-type finite parts (Task~4, \eqref{eq:t4-finiteD}). For
+\(X_4\), \(\eta^{\mu\alpha}\bar\delta^\nu_\alpha=\bar\eta^{\mu\nu}\) was used.
+\item[(G3)] \PI{} \eqI{42}, definition \tP. Also \(a=-1/(H\eta)\), hence \(\partial_0a=Ha^2\) (\PI{} \eqI{2}).
+\end{itemize}
+
+\paragraph{Scope.} The 3-point contributions (\eqI{45} and beyond) and the renormalization
+(Section~IV) are not derived. Only in Section~\ref{sec:t5-phys} is a comparison of form made
+with \eqI{131} and \eqI{145}, to assess the physical significance.
+
+% ----------------------------------------------------------------------
+\subsection{Preliminaries: purely time-dependent coefficients \texorpdfstring{\tD}{}}
+\(a\), \(\Lambda\), \(b\) and \(c\) depend only on \(\eta=x^0\) (\(b\) and \(c\) are constants).
+For \(g=g(\eta)\) define the two basic objects
+\begin{equation}\label{eq:t5-PS}
+P[g]\equiv\partial_0\bigl(g\,\partial_0\chIIdel\bigr),\qquad S[g]\equiv g\,\nabla^2\chIIdel .
+\end{equation}
+Since \(\partial_ig=0\), the following reductions hold:
+\begin{equation}\label{eq:t5-red}
+\begin{aligned}
+\relax&\partial^\mu\bigl(g\,\partial_\mu\delta\bigr)=-P[g]+S[g], &&\partial_\mu\bigl(g\,\bar\eta^{\mu\nu}\partial_\nu\delta\bigr)=S[g],\\
+&\partial_\mu\bigl(g\,u^\mu u^\nu\partial_\nu\delta\bigr)=P[g]\quad(u^\mu=-\delta^\mu_0), &&\partial_\mu\bigl(g\,\eta^{\mu\nu}\partial_\nu\delta\bigr)=-P[g]+S[g].
+\end{aligned}
+\end{equation}
+
+% ----------------------------------------------------------------------
+\subsection{Derivation of Eq. (I.41)}
+
+\subsubsection{The \texorpdfstring{$i\Delta_A$}{iDeltaA} part, exactly in \texorpdfstring{$D$}{D} \texorpdfstring{\tD}{}}
+Insert the \(\Lambda\)-terms of (G2) into (G1).
+The coefficient of \(\eta^{\mu\nu}\):
+\begin{equation*}
+\tfrac i8\cdot\tfrac{4(D-1)}{D-3}+\tfrac i4\cdot\tfrac{(D-1)(D^2-3D-2)}{D-3}
+=\tfrac{i(D-1)}{4(D-3)}\bigl[2+D^2-3D-2\bigr]=\tfrac i4D(D-1).
+\end{equation*}
+The coefficient of \(\bar\eta^{\mu\nu}\):
+\begin{equation*}
+\tfrac i2\cdot\bigl(-\tfrac4{D-3}\bigr)-i\cdot\tfrac{D^2-3D-2}{D-3}=-\tfrac{i}{D-3}\bigl[2+D^2-3D-2\bigr]=-iD.
+\end{equation*}
+\begin{equation}\label{eq:t5-KA}
+\boxed{\;\chIIK^{\mu\nu}_A=i\kappa^2a^{D-2}\,\Lambda\,\Bigl[\tfrac14D(D-1)\,\eta^{\mu\nu}-D\,\bar\eta^{\mu\nu}\Bigr]\;}
+\end{equation}
+The factors \(1/(D-3)\) coming from the graviton propagator cancel exactly. No
+\(D\)-dependent term has been dropped.
+
+\subsubsection{The \texorpdfstring{$B$}{B} and \texorpdfstring{$C$}{C} part, exactly in \texorpdfstring{$D$}{D} \texorpdfstring{\tD}{}}
+Insert the \(F_i\) of Task~4, \eqref{eq:t4-finiteD}. Using \(\eta^{\mu\nu}=\bar\eta^{\mu\nu}-u^\mu u^\nu\)
+and \(q\equiv\frac1{(D-2)(D-3)^2}\):
+\begin{equation}\label{eq:t5-KFbr}
+\begin{aligned}\frac{\chIIK^{\mu\nu}_F}{i\kappa^2a^{D-2}b}={}&\underbrace{\Bigl[q+\tfrac{D-1}2-\tfrac{(D^2-5D+8)q}2-1\Bigr]}_{=\frac{(D-2)(D-4)}{2(D-3)}}\bar\eta^{\mu\nu}\\
+&+\underbrace{\Bigl[-q-\tfrac{D-1}2+\tfrac{(D^2-5D+8)q}2-2(D-3)q+\tfrac{D(D-3)}{D-2}\Bigr]}_{=\frac{D(D-4)}{2(D-3)}}u^\mu u^\nu .\end{aligned}
+\end{equation}
+Simplification of the second bracket: with the common denominator \(2(D-2)(D-3)\) the
+numerator is \((D-6)-(D-1)(D-2)(D-3)+2D(D-3)^2=D^3-6D^2+8D=D(D-2)(D-4)\). The first bracket
+similarly reduces to \([(D-3)^2-1]/[2(D-3)]\).
+\begin{equation}\label{eq:t5-KF}
+\boxed{\;\chIIK^{\mu\nu}_F=i\kappa^2a^{D-2}\,b\,\frac{D-4}{2(D-3)}\Bigl[(D-2)\,\bar\eta^{\mu\nu}+D\,u^\mu u^\nu\Bigr]=\order{D-4}\;}
+\end{equation}
+That is, with the correct \eqI{40} the finite \(B\)- and \(C\)-type contributions cancel
+automatically at \(D=4\).
+
+\subsubsection{The kernel (exact \texorpdfstring{$D$}{D})}
+Combining (G1), \eqref{eq:t5-red}, \eqref{eq:t5-KA} and \eqref{eq:t5-KF}:
+\begin{equation}\label{eq:t5-kernelD}
+\begin{aligned}-i\chIIM={}&-i\kappa^2\Bigl\{\tfrac14D(D-1)\,\partial^\mu\bigl(a^{D-2}\Lambda\,\partial_\mu\delta^D\bigr)-D\,a^{D-2}\Lambda\,\nabla^2\delta^D\Bigr\}\\
+&-i\kappa^2b\,\frac{D-4}{2(D-3)}\Bigl\{D\,P[a^{D-2}]+(D-2)\,S[a^{D-2}]\Bigr\}.\end{aligned}
+\end{equation}
+
+\subsubsection{Substituting \texorpdfstring{$\Lambda$}{Lambda} and \texorpdfstring{$D\to4$}{D->4} \texorpdfstring{\tA}{}}
+By (G2), \(\Lambda=k\pihat+2k\ln a\). There are three kinds of terms:
+\begin{itemize}
+\item \textbf{\(k\pihat\) terms.} \(\pihat=-2/(D-4)+\order{D-4}\) is a pole. These terms are kept
+\textbf{exactly in \(D\)}: \(k\), \(\tfrac14D(D-1)\), \(D\), \(a^{D-2}\) and \(\delta^D\).
+\item \textbf{\(2k\ln a\) terms.} They are not multiplied by a pole and are finite. Setting
+\(D=4\) (\(2k\to H^2/4\pi^2\), \(a^{D-2}\to a^2\), \(\delta^D\to\delta^4\)) changes them only by
+\(\order{D-4}\). The paper does the same.
+\item \textbf{The \(b\) term.} It is explicitly \(\order{D-4}\) and is not multiplied by a pole;
+it drops out.
+\end{itemize}
+Result (definition sign):
+\begin{resultbox}[Derived Eq. (I.41), definition sign]
+\begin{equation*}\label{eq:t5-I41}
+\begin{aligned}
+-i\chIIM(x;x')={}&-i\kappa^2k\Bigl(-\pi\cot\frac{\pi D}{2}\Bigr)\\
+&\quad\times\Bigl\{\tfrac14D(D-1)\,\partial^\mu\bigl(a^{D-2}\partial_\mu\chIIdel\bigr)-D\,a^{D-2}\nabla^2\chIIdel\Bigr\}\\
+&-\frac{i\kappa^2H^2}{4\pi^2}\Bigl\{3\,\partial^\mu\bigl(a^2\ln(a)\,\partial_\mu\delta^4(x-x')\bigr)-4\ln(a)\,a^2\nabla^2\delta^4(x-x')\Bigr\}\\
+&+\order{D-4}
+\end{aligned}
+\tag{I.41$'$}
+\end{equation*}
+\end{resultbox}
+Here \(k=\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(D/2)}\), the same as the prefactor of the
+paper's \eqI{41}. Coefficient check: \(2k\cdot\tfrac14D(D-1)\to\tfrac{H^2}{4\pi^2}\cdot3\) and
+\(2k\cdot D\to\tfrac{H^2}{4\pi^2}\cdot4\).
+
+% ----------------------------------------------------------------------
+\subsection{Eq. (I.42) \texorpdfstring{\tD}{}}\label{sec:t5-42}
+By \eqI{9}, \(\sqrt{-\hat g}=a^D\) and \(\hat g^{\mu\nu}=a^{-2}\eta^{\mu\nu}\), so
+\(\sqrt{-\hat g}\,\hat g^{\mu\nu}=a^{D-2}\eta^{\mu\nu}\). Hence
+\begin{equation*}\label{eq:t5-I42}
+\begin{aligned}\relax&\square\equiv\frac1{\sqrt{-\hat g}}\partial_\mu\bigl(\sqrt{-\hat g}\,\hat g^{\mu\nu}\partial_\nu\bigr)
+=\frac1{a^D}\partial_\mu\bigl(a^{D-2}\eta^{\mu\nu}\partial_\nu\bigr)=\frac1{a^D}\partial^\mu\bigl(a^{D-2}\partial_\mu\bigr),\\
+&\partial^\mu\bigl(a^{D-2}\partial_\mu\delta^D\bigr)=a^D\square\,\delta^D .\end{aligned}
+\tag{I.42}
+\end{equation*}
+This is the same as the paper's \eqI{42} \chIIok.
+
+% ----------------------------------------------------------------------
+\subsection{Derivation of Eq. (I.43) \texorpdfstring{\tD}{}}
+
+\subsubsection{Lemma B}
+Let \(g(x,x')\) be a smooth function. In the sense of distributions,
+\begin{equation}\label{eq:t5-lemmaB}
+g(x,x')\,\partial_\mu\chIIdel=g(x,x)\,\partial_\mu\chIIdel+\bigl[\partial'_\mu g(x,x')\bigr]_{x'=x}\,\chIIdel .
+\end{equation}
+Proof: test with \(f(x')\). By \eqref{eq:t3-dprime} and an integration by parts,
+\(\int g\,\partial_\mu\delta\,f\,dx'=-\int g\,\partial'_\mu\delta\,f\,dx'=\int\delta\,\partial'_\mu(gf)\,dx'
+=[\partial'_\mu g]_{x'=x}f+g(x,x)\partial_\mu f\). This is the tested form of the right-hand side
+of \eqref{eq:t5-lemmaB}.
+Special case: for \(g=L'\equiv\ln a(\eta')\) one gets \(L'\partial_\mu\delta=L\,\partial_\mu\delta+(\partial_\mu L)\,\delta\),
+where \(L\equiv\ln a(\eta)\).
+
+\subsubsection{Derivation (general \texorpdfstring{$D$}{D})}
+Compute \(\tfrac12(L+L')\,\partial^\mu(a^{D-2}\partial_\mu\delta)\). \(L'\) is independent of \(x\) and
+can be moved inside \(\partial^\mu\). For \(L\) the product rule is used:
+\(L\,\partial^\mu(\ldots)=\partial^\mu(L\ldots)-(\partial^\mu L)\ldots\). Hence
+\begin{equation*}
+\tfrac12(L+L')\,\partial^\mu\bigl(a^{D-2}\partial_\mu\delta\bigr)=\tfrac12\partial^\mu\bigl(a^{D-2}(L+L')\partial_\mu\delta\bigr)-\tfrac12(\partial^\mu L)\,a^{D-2}\partial_\mu\delta .
+\end{equation*}
+By \eqref{eq:t5-lemmaB}, \(a^{D-2}L'\partial_\mu\delta=a^{D-2}L\,\partial_\mu\delta+a^{D-2}(\partial_\mu L)\delta\). The
+first term thus becomes \(\partial^\mu(a^{D-2}L\partial_\mu\delta)+\tfrac12\partial^\mu\bigl(a^{D-2}(\partial_\mu L)\delta\bigr)\).
+Expanding the last term with the product rule, the pieces \(\pm\tfrac12a^{D-2}(\partial_\mu L)\partial^\mu\delta\)
+cancel, and \(\tfrac12[\partial^\mu(a^{D-2}\partial_\mu L)]\delta\) remains:
+\begin{equation}\label{eq:t5-43step}
+\partial^\mu\bigl(a^{D-2}L\,\partial_\mu\delta\bigr)=\tfrac12\ln(aa')\,a^D\square\,\delta-\tfrac12\bigl[\partial^\mu(a^{D-2}\partial_\mu\ln a)\bigr]\delta .
+\end{equation}
+Using \(\partial_0\ln a=\partial_0a/a=Ha\) and \(\partial^0=-\partial_0\):
+\begin{equation}\label{eq:t5-boxlna}
+\begin{aligned}\relax&\partial^\mu\bigl(a^{D-2}\partial_\mu\ln a\bigr)=-\partial_0\bigl(Ha^{D-1}\bigr)=-(D-1)H\,a^{D-2}\,\partial_0a=-(D-1)H^2a^D\\
+&\Longleftrightarrow\quad \square\ln a=-(D-1)H^2 .\end{aligned}
+\end{equation}
+\begin{equation}\label{eq:t5-I43D}
+\boxed{\;\partial^\mu\bigl(a^{D-2}\ln(a)\,\partial_\mu\chIIdel\bigr)=\tfrac12\ln(aa')\,a^D\square\,\chIIdel+\tfrac12(D-1)H^2a^D\,\chIIdel\;}
+\end{equation}
+For \(D=4\), \(\tfrac12(D-1)=\tfrac32\), and this is the paper's \eqI{43} \chIIok.
+
+\paragraph{The \(\nabla^2\) counterpart.} Since \(L'\) does not depend on the spatial coordinates, all
+correction terms vanish in the second-order version of \eqref{eq:t5-lemmaB}:
+\begin{equation}\label{eq:t5-lap}
+\ln(a)\,\nabla^2\chIIdel=\tfrac12\ln(aa')\,\nabla^2\chIIdel .
+\end{equation}
+
+\paragraph{Importance of the symmetric \(\ln(aa')\).} Had \(\ln a^2\) been written instead of
+\(\ln(aa')\), \eqref{eq:t5-I43D} would be false. This is shown separately in the SymPy check
+(C), Section~\ref{sec:t5-code}.
+
+% ----------------------------------------------------------------------
+\subsection{Derivation of Eq. (I.44) \texorpdfstring{\tD}{}}
+In the \(\tfrac{H^2}{4\pi^2}\) term of \eqref{eq:t5-I41} write \(\tfrac{H^2}{4\pi^2}=2k+\order{D-4}\), and use
+\eqref{eq:t5-I43D} (at \(D=4\)) and \eqref{eq:t5-lap}:
+\begin{equation*}
+2\Bigl\{3\bigl[\tfrac12\ln(aa')a^4\square+\tfrac32H^2a^4\bigr]-4\cdot\tfrac12\ln(aa')\,a^2\nabla^2\Bigr\}\delta^4
+=\Bigl\{3\ln(aa')\,a^4\square+9H^2a^4-4\ln(aa')\,a^2\nabla^2\Bigr\}\delta^4 .
+\end{equation*}
+In the \(\pihat\) term, \eqref{eq:t5-I42} gives \(\partial^\mu(a^{D-2}\partial_\mu\delta^D)=a^D\square\delta^D\). In the
+finite terms the changes \(a^4\to a^D\), \(a^2\to a^{D-2}\) and \(\delta^4\to\delta^D\) are only
+\(\order{D-4}\). Result:
+\begin{resultbox}[Derived Eq. (I.44), definition sign]
+\begin{equation*}\label{eq:t5-I44}
+\begin{aligned}
+-i\chIIM(x;x')={}&-i\kappa^2k\times\Bigl\{\Bigl[-\tfrac14D(D-1)\pi\cot\bigl(\tfrac\pi2D\bigr)+3\ln(aa')\Bigr]a^D\square\\
+&\qquad+\Bigl[D\pi\cot\bigl(\tfrac\pi2D\bigr)-4\ln(aa')\Bigr]a^{D-2}\nabla^2+9H^2a^D+\order{D-4}\Bigr\}\chIIdel
+\end{aligned}
+\tag{I.44$'$}
+\end{equation*}
+with \(k=\frac{H^{D-2}}{(4\pi)^{D/2}}\frac{\Gamma(D-1)}{\Gamma(D/2)}\).
+In the paper's convention (multiply by \(-1\)) this is the printed \eqI{44} with the
+constants \(-2\) and \(+2\) removed.
+\end{resultbox}
+
+\paragraph{Exact-\(D\) form (supplement).} If \eqref{eq:t5-I43D} is used in general \(D\), there is
+no need to set \(D=4\) in the finite part:
+\begin{equation}\label{eq:t5-exactD}
+\begin{aligned}-i\chIIM={}&-i\kappa^2k\Bigl\{\tfrac14D(D-1)\bigl[\pihat+\ln(aa')\bigr]a^D\square-D\bigl[\pihat+\ln(aa')\bigr]a^{D-2}\nabla^2\\
+&\qquad+\tfrac14D(D-1)^2H^2a^D\Bigr\}\delta^D+\order{D-4}.\end{aligned}
+\end{equation}
+At \(D=4\) this agrees with \eqref{eq:t5-I44}: \(\tfrac14\cdot4\cdot3=3\), \(\tfrac14\cdot4\cdot9=9\).
+Here the \(\order{D-4}\) is the \(b\) term of \eqref{eq:t5-kernelD}.
+
+% ----------------------------------------------------------------------
+\subsection{Comparison with the paper}\label{sec:t5-comp}
+
+\subsubsection{Eq. (I.41)}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.42\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}@{}}
+\toprule
+Term & Derived \eqref{eq:t5-I41} & \PI{} \eqI{41} & \\
+\midrule
+\(k\pihat\{\tfrac14D(D-1)\partial^\mu(a^{D-2}\partial_\mu\delta^D)-Da^{D-2}\nabla^2\delta^D\}\) & coefficient \(-i\kappa^2\) & \(+i\kappa^2\) & \chIIno{} overall sign\\
+\(\tfrac{\kappa^2H^2}{4\pi^2}\{3\partial^\mu(a^2\ln a\,\partial_\mu\delta^4)-4\ln a\,a^2\nabla^2\delta^4\}\) & \(-i\) & \(+i\) & \chIIno{} overall sign\\
+\(\tfrac{\kappa^2H^2}{4\pi^2}\{-\partial^\mu(a^2\partial_\mu\delta^4)+a^2\nabla^2\delta^4\}\) & absent (\(\order{D-4}\)) & \(+i\) & \chIIno{} from \eqI{40}\\
+tensor and \(D\) structure: \(\tfrac14D(D-1)\), \(D\), \(3\), \(4\) & same & same & \chIIok\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Eqs. (I.42), (I.43) and (I.44)}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.40\textwidth}>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}@{}}
+\toprule
+Item & Derived & \PI{} & \\
+\midrule
+\eqI{42} & \eqref{eq:t5-I42} & same & \chIIok\\
+\eqI{43} & \eqref{eq:t5-I43D}, \(D=4\) & same & \chIIok{} (+ general-\(D\) version)\\
+\eqI{44}: \(-\tfrac14D(D-1)\pi\cot\), \(3\ln(aa')\), \(D\pi\cot\), \(-4\ln(aa')\), \(9H^2a^D\) & same structures, overall sign \(-\) & overall sign \(+\) & \chIIno{} overall sign\\
+\eqI{44}: the \(-2\) in the \(a^D\square\) bracket & absent & present & \chIIno{} from \eqI{40}\\
+\eqI{44}: the \(+2\) in the \(a^{D-2}\nabla^2\) bracket & absent & present & \chIIno{} from \eqI{40}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{discbox}[Diagnosis]
+When the paper's inputs (the paper's \eqI{33} and the printed \eqI{40}) are used, the paper's
+\eqI{41} and \eqI{44} are obtained \emph{exactly} (SymPy (A) and (D)). So there is no new error
+in the steps \eqI{33}\(\to\)\eqI{41}\(\to\)\eqI{44}. The differences are inherited from two
+earlier findings:
+(i) the \(\partial_2\) rule of Task~3, which flips the overall sign;
+(ii) the sign of \eqI{40} found in Task~4, which produces the \(\mp2\) constants and the extra
+bracket in \eqI{41}.
+Note that \(-2a^D\square+2a^{D-2}\nabla^2=2\,\partial_0(a^{D-2}\partial_0\,\cdot\,)\); this is the same as
+the \(P\)-form found in (A).
+\end{discbox}
+
+\subsubsection{Physical significance (preliminary assessment) \texorpdfstring{\tA}{}}\label{sec:t5-phys}
+\begin{itemize}
+\item \textbf{The terms caused by \eqI{40} are harmless.} With \(k\to H^2/8\pi^2\) at \(D=4\), the
+extra part of the paper's \eqI{44} reads
+\begin{equation*}
+i\kappa^2k\bigl(-2a^D\square+2a^{D-2}\nabla^2\bigr)\delta^D
+=i\bigl(-\tfrac1{4\pi^2}\bigr)\kappa^2H^2a^D\square\,\delta^D+i\bigl(+\tfrac1{4\pi^2}\bigr)\kappa^2H^2a^{D-2}\nabla^2\delta^D .
+\end{equation*}
+This has exactly the form of the paper's counterterm vertices \eqI{131},
+\(i\alpha_2\kappa^2H^2a^D\square\delta^D\), and \eqI{145}. \PI{} prints the latter
+(p.~124005-12) as
+\begin{equation*}
+-\tfrac12\alpha_3\kappa^2H^2a^D\,\frac{\nabla}{a}\varphi\cdot\frac{\nabla}{a}\varphi\ \to\ i\alpha_3\kappa^2H^2a^{D-2}\nabla^2\delta^D(x-x').
+\qquad\text{(I.145)}
+\end{equation*}
+The corresponding coefficient shifts are \(\Delta\alpha_2=-\tfrac1{4\pi^2}\) and
+\(\Delta\alpha_3=+\tfrac1{4\pi^2}\). Since the paper regards the finite parts of the counterterms
+as arbitrary, this error does not affect the physical results.
+\item \textbf{The overall sign difference may not be as harmless.} The terms
+\(3\ln(aa')a^D\square\), \(-4\ln(aa')a^{D-2}\nabla^2\) and \(9H^2a^D\) are not of counterterm form:
+the first two carry a time-dependent \(\ln a\) coefficient, and the last is of mass type,
+while the paper does not use a mass counterterm. Moreover, when the divergent part is combined
+with the counterterms, its sign produces finite \(\ln a\) terms through expansions such as
+\(a^D=a^4[1+(D-4)\ln a+\ldots]\). The overall sign may therefore matter in the combination with
+the 3-point contributions and in the renormalized result. This must be settled when
+\eqI{45} onwards and Section~IV are derived. (For the later resolution, see the notebox at the
+beginning of this chapter: the 3-point contributions of the paper turned out to be reversed as
+well, so the relative sign is consistent; the overall sign relative to \eqI{168} reverses the
+sign of the nonlocal part of the renormalized result, Task~17.)
+\end{itemize}
+
+\subsubsection{Accumulated findings (Tasks 2--5)}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.40\textwidth}>{\raggedright\arraybackslash}p{0.38\textwidth}@{}}
+\toprule
+Location & Finding & Effect\\
+\midrule
+\eqI{7}, left-hand side (C3) & \(-\tfrac12\kappa\) printed, correct \(+\tfrac12\kappa\) & none\\
+Table~II, \(U_2\) (C5) & \(-\tfrac i4\) printed, correct \(+\tfrac i4\) & none (correct value used in the calculation)\\
+\eqI{32}--\eqI{33} (S1) & overall sign reversed because of the \(\partial_2\) rule & carried into \eqI{41} and \eqI{44}; to be assessed at renormalization\\
+\eqI{39} (C6) & \(\bar\eta_{\rho\sigma}\to\bar\eta^{\rho\sigma}\) & none\\
+\eqI{40} (B1) & finite part \(+2\) printed, correct \(-2\) & carried into \eqI{41} and \eqI{44} (\(\mp2\)); absorbable into \(\Delta\alpha_{2,3}\)\\
+\eqI{41}\(\to\)\eqI{44} & algebra with \eqI{42}--\eqI{43} correct & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ----------------------------------------------------------------------
+\subsection{Code checks \texorpdfstring{\tC}{}}\label{sec:t5-code}
+Script: \texttt{code/02\_four\_point/check\_41\_44.py} (SymPy; about 1\,s). It performs four
+checks. It does not replace the analytic derivation.
+\begin{itemize}
+\item[(A)] \textbf{Calculation with symbolic \(D\).} The four terms of \eqI{33} are collected in
+terms of \(P\) and \(S\). Results:
+\begin{itemize}[nosep]
+\item derived \(\Lambda\) coefficients: \(P\): \(+\tfrac i4D(D-1)\), \(S\): \(-\tfrac i4D(D-5)\); this is the
+same as \eqref{eq:t5-kernelD};
+\item finite part: \(P\): \(-\tfrac{iDb(D-4)}{2(D-3)}\), \(S\): \(-\tfrac{ib(D-4)(D-2)}{2(D-3)}\), i.e.\
+\eqref{eq:t5-KF} is confirmed;
+\item \textbf{paper's chain:} with the paper's \eqI{33} signs and the printed \eqI{40}, the finite
+part at \(D=4\) is \(4i\kappa^2h\,P[a^2]=\tfrac{i\kappa^2H^2}{4\pi^2}\{-\partial^\mu(a^2\partial_\mu\delta)+a^2\nabla^2\delta\}\).
+These are the last two terms of the paper's \eqI{41}. With the correct \eqI{40} the same place
+gives \(0\).
+\end{itemize}
+\item[(B)] \textbf{Explicit component calculation at \(D=4\).} Arrays \(T^A\), \(T^B\), \(T^C\),
+\(a=-1/(H\eta)\), \(\Lambda=k(\pihat+2\ln a)\) and a test function \(f\) were used. The kernel is
+identical to \(-i\kappa^2\{3\partial^\mu(a^2\Lambda\partial_\mu f)-4a^2\Lambda\nabla^2f\}\). The \(B\) and \(C\)
+part alone (\(c=-b\)) gives a zero kernel.
+\item[(C)] \textbf{\eqI{43} as a kernel identity.} True on a test function at \(D=4\) and in general
+\(D\); false with \(\ln a^2\) in place of \(\ln(aa')\). \(\square\ln a=-(D-1)H^2\) is also verified.
+\item[(D)] \textbf{\eqI{41}\(\to\)\eqI{44} on a test function.} The derived \eqref{eq:t5-I41} is
+identical to the derived \eqref{eq:t5-I44}. The paper's \eqI{41} is also identical to the paper's
+\eqI{44}.
+\end{itemize}
+Output of the re-run (identical to the original log; long lines wrapped):
+\begingroup\scriptsize
+\begin{verbatim}
+== (A) symbolic-D bookkeeping of (33) in the basis P[g]=d_0(g d_0 delta), S[g]=g Lap delta ==
+  derived: coeff of P[a^{D-2}Lam] = I*D*(D - 1)/4  ; S[a^{D-2}Lam] = -I*D*(D - 5)/4
+           [expected  +i D(D-1)/4  and  -i D(D-1)/4 + i D, i.e. -i{D(D-1)/4 d^mu(.d_mu) - D Lap}]
+  derived: finite part  P[a^{D-2}] = -I*D*b*(D - 4)/(2*(D - 3))  ;
+           S[a^{D-2}] = -I*b*(D - 4)*(D - 2)/(2*(D - 3))    (both O(D-4))
+  paper chain (33)+printed(40), D=4: finite part P[a^2] = 4*I*h  ; S[a^2] = 0
+           -> (i kappa^2 H^2/4pi^2){-d^mu(a^2 d_mu) + a^2 Lap} = 4 i kappa^2 h P[a^2]
+  paper signs + derived (40), D=4: finite part P = 0  ; S = 0
+== (B) explicit D=4 tensors and functions: derived kernel vs derived (41) on a test function ==
+  kernel(X with Lam, b, c=-b) == -i kappa^2 {3 d^mu(a^2 Lam d_mu) - 4 a^2 Lam Lap} f : True
+  B/C finite part alone (Lam=0, c=-b) gives zero kernel: True
+== (C) Eq. (43) as an identity of kernels acting on test functions ==
+  D=4: d^mu(a^(D-2) ln a d_mu delta) == (1/2)ln(aa') a^D Box delta + (D-1)/2 H^2 a^D delta : True
+       | with ln(a^2) instead: False
+  general D: d^mu(a^(D-2) ln a d_mu delta) == (1/2)ln(aa') a^D Box delta + (D-1)/2 H^2 a^D delta : True
+       | with ln(a^2) instead: False
+  Box ln a = -(D-1) H^2 : True
+== (D) (41) -> (44) on a test function, D=4 (pihat, k kept symbolic) ==
+  derived (41) == derived (44)  [sign -, no -2/+2]: True
+  paper   (41) == paper   (44)  [sign +, with -2/+2]: True
+  (k -> H^2/8pi^2 at D=4 makes 2k = H^2/4pi^2, the prefactor of the finite bracket in (41))
+\end{verbatim}
+\endgroup
+
+% ----------------------------------------------------------------------
+\subsection{Calculation record}
+\begin{itemize}
+\item \textbf{Derived.} Exact-\(D\) kernel of the \(i\Delta_A\) part \eqref{eq:t5-KA}; the factors
+\(1/(D-3)\) cancel exactly. The \(B\) and \(C\) part \eqref{eq:t5-KF}, exactly \(\order{D-4}\).
+Exact-\(D\) kernel \eqref{eq:t5-kernelD} and \eqI{41} [\eqref{eq:t5-I41}]. \eqI{42}
+[\eqref{eq:t5-I42}]. Lemma~B \eqref{eq:t5-lemmaB}, \(\square\ln a=-(D-1)H^2\) \eqref{eq:t5-boxlna}
+and the general-\(D\) \eqI{43} [\eqref{eq:t5-I43D}]; the \(\nabla^2\) counterpart \eqref{eq:t5-lap}.
+\eqI{44} [\eqref{eq:t5-I44}] and its exact-\(D\) form \eqref{eq:t5-exactD}.
+\item \textbf{Checks passed.} SymPy (A)--(D), actually run. Reproduction of the paper's chain:
+\eqI{33} and the printed \eqI{40} give exactly the paper's \eqI{41}, and the paper's \eqI{41}
+gives exactly the paper's \eqI{44}.
+\item \textbf{Discrepancies.} \eqI{42} and \eqI{43} agree. In \eqI{41} and \eqI{44} the overall
+sign is reversed (inherited from Task~3). The \(\mp2\) constants and the extra bracket of
+\eqI{41} are absent from the derived result (inherited from Task~4); they can be absorbed into
+\(\Delta\alpha_2\) and \(\Delta\alpha_3\).
+\item \textbf{Open point.} The effect of the overall sign on the combination with the 3-point
+contributions and on the renormalized result.
+\end{itemize}
