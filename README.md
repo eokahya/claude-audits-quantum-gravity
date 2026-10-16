@@ -84,22 +84,28 @@ field equation.
 The two papers were split into **18 tasks**, which follow the papers' equations in order. They are grouped into nine stages,
 each with a summary page, a chapter of derivation notes and a folder of code checks.
 
+**Paper I: vertices and the 4-point diagram**
+
 ```mermaid
 %%{init: {"flowchart": {"htmlLabels": false, "padding": 18, "nodeSpacing": 35, "rankSpacing": 45}}}%%
-flowchart TB
-    subgraph R1["Paper I · vertices and the 4-point diagram"]
-        direction LR
-        S1["1 · Feynman rules<br/>(I.6)–(I.8)<br/>Tables I–II"] --> S2["2 · 4-point<br/>contribution<br/>(I.31)–(I.44)"]
-    end
-    subgraph R2["Paper I · the 3-point diagram"]
-        direction LR
-        S3["3 · 3-point<br/>setup<br/>(I.45)–(I.53)"] --> S4["4 · local and<br/>log terms<br/>(I.54)–(I.67)"] --> S5["5 · normal terms<br/>Table III<br/>(I.68)–(I.93)"] --> S6["6 · Tables<br/>IV–V<br/>(I.94)–(I.125)"]
-    end
-    subgraph R3["Renormalization (Paper I) · late times (Paper II)"]
-        direction LR
-        S7["7 · de Sitter<br/>symmetry and<br/>counterterms<br/>(I.126)–(I.145)"] --> S8["8 · renormalized<br/>self-mass<br/>Table X<br/>(I.146)–(I.167)"] --> S9["9 · Schwinger–<br/>Keldysh<br/>late-time mode<br/>function"]
-    end
-    R1 --> R2 --> R3
+flowchart LR
+    S1["1 · Feynman rules<br/>(I.6)–(I.8)<br/>Tables I–II"] --> S2["2 · 4-point<br/>contribution<br/>(I.31)–(I.44)"]
+```
+
+**Paper I: the 3-point diagram**
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false, "padding": 18, "nodeSpacing": 35, "rankSpacing": 45}}}%%
+flowchart LR
+    S3["3 · 3-point<br/>setup<br/>(I.45)–(I.53)"] --> S4["4 · local and<br/>log terms<br/>(I.54)–(I.67)"] --> S5["5 · normal terms<br/>Table III<br/>(I.68)–(I.93)"] --> S6["6 · Tables<br/>IV–V<br/>(I.94)–(I.125)"]
+```
+
+**Renormalization (Paper I) and late times (Paper II)**
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false, "padding": 18, "nodeSpacing": 35, "rankSpacing": 45}}}%%
+flowchart LR
+    S7["7 · de Sitter<br/>symmetry and<br/>counterterms<br/>(I.126)–(I.145)"] --> S8["8 · renormalized<br/>self-mass<br/>Table X<br/>(I.146)–(I.167)"] --> S9["9 · Schwinger–<br/>Keldysh<br/>late-time mode<br/>function"]
 ```
 
 Each stage goes through the same steps: the analytic derivation (index by index, general $`D`$), then an independent code check
