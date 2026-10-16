@@ -46,6 +46,7 @@ final table, Table X, need correcting.
 ## The question in one picture
 
 ```mermaid
+%%{init: {"flowchart": {"htmlLabels": false, "padding": 18, "nodeSpacing": 35, "rankSpacing": 45}}}%%
 flowchart LR
     A["Inflation<br/>(de Sitter, a = −1/Hη)"] --> B["A growing sea of<br/>long-wavelength gravitons"]
     B --> C["They couple to the scalar<br/>only through derivatives<br/>(κ h ∂φ ∂φ)"]
@@ -84,18 +85,19 @@ The two papers were split into **18 tasks**, which follow the papers' equations 
 each with a summary page, a chapter of derivation notes and a folder of code checks.
 
 ```mermaid
+%%{init: {"flowchart": {"htmlLabels": false, "padding": 18, "nodeSpacing": 35, "rankSpacing": 45}}}%%
 flowchart TB
-    subgraph R1["Vertices and the 4-point diagram"]
+    subgraph R1["Paper I · vertices and the 4-point diagram"]
         direction LR
-        S1["1 · Feynman rules<br/>(I.6)–(I.8), Tables I–II"] --> S2["2 · 4-point contribution<br/>(I.31)–(I.44)"]
+        S1["1 · Feynman rules<br/>(I.6)–(I.8)<br/>Tables I–II"] --> S2["2 · 4-point<br/>contribution<br/>(I.31)–(I.44)"]
     end
-    subgraph R2["The 3-point diagram"]
+    subgraph R2["Paper I · the 3-point diagram"]
         direction LR
-        S3["3 · 3-point setup<br/>(I.45)–(I.53)"] --> S4["4 · local and log terms<br/>(I.54)–(I.67)"] --> S5["5 · normal terms, Table III<br/>(I.68)–(I.93)"] --> S6["6 · Tables IV–V<br/>(I.94)–(I.125)"]
+        S3["3 · 3-point<br/>setup<br/>(I.45)–(I.53)"] --> S4["4 · local and<br/>log terms<br/>(I.54)–(I.67)"] --> S5["5 · normal terms<br/>Table III<br/>(I.68)–(I.93)"] --> S6["6 · Tables<br/>IV–V<br/>(I.94)–(I.125)"]
     end
-    subgraph R3["Renormalization (Paper I) and late times (Paper II)"]
+    subgraph R3["Renormalization (Paper I) · late times (Paper II)"]
         direction LR
-        S7["7 · de Sitter symmetry,<br/>counterterms (I.126)–(I.145)"] --> S8["8 · renormalized self-mass,<br/>Table X (I.146)–(I.167)"] --> S9["9 · Schwinger–Keldysh<br/>late-time mode function"]
+        S7["7 · de Sitter<br/>symmetry and<br/>counterterms<br/>(I.126)–(I.145)"] --> S8["8 · renormalized<br/>self-mass<br/>Table X<br/>(I.146)–(I.167)"] --> S9["9 · Schwinger–<br/>Keldysh<br/>late-time mode<br/>function"]
     end
     R1 --> R2 --> R3
 ```
