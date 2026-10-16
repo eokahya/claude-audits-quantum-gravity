@@ -113,7 +113,7 @@ solution; the initial condition removes the other homogeneous solution, $`u^*`$.
 > **Late-time mode function (definition sign, corrected self-mass, no use of (II.44)):**
 >
 > ```math
-> \Phi(\eta,k)=u(\eta,k)+\kappa^2\Phi_1(\eta,k)\ \xrightarrow{\ a\to\infty\ }\ u(0,k)\Big\{1+\frac{\kappa^2H^2}{16\pi^2}\Big[\tilde C+O\Big(\frac{\ln a}{a^2}\Big)\Big]\Big\}
+> \Phi(\eta,k)=u(\eta,k)+\kappa^2\Phi_1(\eta,k)\;\underset{a\to\infty}{\longrightarrow}\;u(0,k)\Big\{1+\frac{\kappa^2H^2}{16\pi^2}\Big[\tilde C+O\Big(\frac{\ln a}{a^2}\Big)\Big]\Big\}
 > ```
 >
 > $`\tilde C`$ is a constant (a field-strength renormalization, from the homogeneous part $`C\,u`$ of $`\Phi_1`$, with

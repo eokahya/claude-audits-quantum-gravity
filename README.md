@@ -59,7 +59,7 @@ the linearized effective field equation (Paper I, Eq. (I.168)):
 At tree level the plane-wave mode function freezes to a constant once the mode has left the horizon:
 
 ```math
-u(\eta,k)=\frac{H}{\sqrt{2k^3}}\Big(1-\frac{ik}{aH}\Big)\exp\Big(\frac{ik}{aH}\Big)\;\xrightarrow{\;a\to\infty\;}\;u(0,k)=\frac{H}{\sqrt{2k^3}} .
+u(\eta,k)=\frac{H}{\sqrt{2k^3}}\Big(1-\frac{ik}{aH}\Big)\exp\Big(\frac{ik}{aH}\Big)\;\underset{a\to\infty}{\longrightarrow}\;u(0,k)=\frac{H}{\sqrt{2k^3}} .
 ```
 
 Write $`M^2=\kappa^2M^2_1+O(\kappa^4)`$ and $`\Phi=u+\kappa^2\Phi_1`$, with $`\kappa^2=16\pi G`$; $`\Phi_1`$ is sourced by
@@ -102,7 +102,7 @@ kept separate from it, then a comparison with the printed equations.
 > simplification (II.44) of Paper II, the solution of the Schwinger–Keldysh mode equation approaches
 >
 > ```math
-> \Phi(\eta,k)=u(\eta,k)+\kappa^2\,\Phi_1(\eta,k)\;\xrightarrow{\;a\to\infty\;}\;u(0,k)\left\{1+\frac{\kappa^2H^2}{16\pi^2}\left[\,\tilde C+O\!\left(\frac{\ln a}{a^2}\right)\right]\right\}.
+> \Phi(\eta,k)=u(\eta,k)+\kappa^2\,\Phi_1(\eta,k)\;\underset{a\to\infty}{\longrightarrow}\;u(0,k)\left\{1+\frac{\kappa^2H^2}{16\pi^2}\left[\,\tilde C+O\!\left(\frac{\ln a}{a^2}\right)\right]\right\}.
 > ```
 >
 > $`\tilde C`$ is a constant (a field-strength renormalization). Nothing grows like $`\ln a`$, $`\ln^2 a`$ or $`a`$. None of the

@@ -61,7 +61,7 @@ The $`\nabla^4 A`$ term has a coefficient of order $`D-4`$ and drops out at $`D=
 **3. Cancellation against the 4-point terms.** Add the $`\ln(aa')`$ and $`H^2a^D`$ local terms of the correct (I.44) to the local terms above. The sum is
 
 ```math
--i\kappa^2 k\,\frac{(D-4)(D+1)}{4(D-3)}\Big\{(D-1)\ln(aa')\,a^D\square-4\ln(aa')\,a^{D-2}\nabla^2+(D-1)^2H^2a^D\Big\}\delta^D \;\xrightarrow{D\to4}\; 0 .
+-i\kappa^2 k\,\frac{(D-4)(D+1)}{4(D-3)}\Big\{(D-1)\ln(aa')\,a^D\square-4\ln(aa')\,a^{D-2}\nabla^2+(D-1)^2H^2a^D\Big\}\delta^D \;\underset{D\to4}{\longrightarrow}\;\; 0 .
 ```
 
 This remainder is not multiplied by a pole, so it vanishes at $`D=4`$: the terms $`3\ln(aa')a^D\square`$, $`-4\ln(aa')a^{D-2}\nabla^2`$ and $`9H^2a^D`$, which are not of counterterm form, cancel exactly. The cancellation also confirms that the relative sign of the 4-point and 3-point contributions is the one fixed by the definitions; with the other relative sign these terms would add. The only local 4-point remainder left over is the $`\mp2`$ term from the slip in (I.40) (Chapter 2), which has counterterm form.

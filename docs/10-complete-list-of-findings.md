@@ -43,7 +43,7 @@ check it. The full derivations, comparison tables and calculation records are in
 > tends to its tree-level value times a constant:
 >
 > ```math
-> \Phi=u+\kappa^2\Phi_1\ \xrightarrow{\ a\to\infty\ }\ u(0,k)\Big\{1+\frac{\kappa^2H^2}{16\pi^2}\Big[\tilde C+O\Big(\frac{\ln a}{a^2}\Big)\Big]\Big\},
+> \Phi=u+\kappa^2\Phi_1\;\underset{a\to\infty}{\longrightarrow}\;u(0,k)\Big\{1+\frac{\kappa^2H^2}{16\pi^2}\Big[\tilde C+O\Big(\frac{\ln a}{a^2}\Big)\Big]\Big\},
 > ```
 >
 > where $`\tilde C`$ is a field-strength renormalization constant. One-loop quantum gravity gives no significant correction
@@ -397,7 +397,7 @@ All results in this table are in the definition sign, with $`\kappa^2`$ counted 
 **E1. Late-time mode function (the main physics conclusion).**
 
 ```math
-\Phi=u+\kappa^2\Phi_1\ \xrightarrow{\ a\to\infty\ }\ u(0,k)\Big\{1+\frac{\kappa^2H^2}{16\pi^2}\Big[\tilde C+O\Big(\frac{\ln a}{a^2}\Big)\Big]\Big\},
+\Phi=u+\kappa^2\Phi_1\;\underset{a\to\infty}{\longrightarrow}\;u(0,k)\Big\{1+\frac{\kappa^2H^2}{16\pi^2}\Big[\tilde C+O\Big(\frac{\ln a}{a^2}\Big)\Big]\Big\},
 ```
 
 where $`\tilde C`$ is a field-strength renormalization constant. There is no growing ($`a`$, $`\ln a`$, $`\ln^2a`$) or
