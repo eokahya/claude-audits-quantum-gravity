@@ -5,6 +5,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](code/requirements.txt)
 [![checks: SymPy + mpmath](https://img.shields.io/badge/checks-SymPy%20%2B%20mpmath-informational.svg)](code/README.md)
+[![paper: PDF](https://img.shields.io/badge/paper-PDF-red.svg)](paper/paper.pdf)
+
+> **The paper:** E. O. Kahya, *Auditing a quantum gravity calculation with an AI model: corrected scalar self-mass and
+> unchanged late-time mode functions during inflation* (submitted to arXiv, 2026). [PDF](paper/paper.pdf) ·
+> [LaTeX source](paper/main.tex)
 
 This repository re-derives, step by step, a published one-loop quantum gravity calculation during inflation:
 the graviton correction to a massless, minimally coupled scalar on de Sitter space
@@ -28,6 +33,7 @@ final table, Table X, need correcting.
 [What was done](#what-was-done) ·
 [Main results](#main-results-at-a-glance) ·
 [Read it in order](#read-it-in-order) ·
+[The paper](paper/paper.pdf) ·
 [Complete list of findings](docs/10-complete-list-of-findings.md) ·
 [Full derivations](#full-derivations) ·
 [Reproduce the checks](#reproduce-the-checks) ·
@@ -303,6 +309,9 @@ The full list of limitations is at the end of the [complete list of findings](do
 
 ## Papers
 
+- **This work.** E. O. Kahya, "Auditing a quantum gravity calculation with an AI model: corrected scalar self-mass and
+  unchanged late-time mode functions during inflation", submitted to arXiv (2026). [PDF](paper/paper.pdf),
+  [LaTeX source](paper/main.tex) (single self-contained file, as submitted).
 - **Paper I.** E. O. Kahya and R. P. Woodard, "Quantum gravity corrections to the one loop scalar self-mass during
   inflation", *Phys. Rev. D* **76**, 124005 (2007). [doi:10.1103/PhysRevD.76.124005](https://doi.org/10.1103/PhysRevD.76.124005),
   [arXiv:0709.0536](https://arxiv.org/abs/0709.0536).
@@ -315,7 +324,7 @@ the papers; where a printed equation is compared, it is retyped in LaTeX.
 
 ## Citation
 
-If you use this re-derivation, please cite the original papers and this repository:
+If you use this re-derivation, please cite the paper above (arXiv identifier to be added), the original papers and this repository:
 
 ```bibtex
 @misc{Kahya2026ClaudeAuditsQG,
