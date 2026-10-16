@@ -1,4 +1,6 @@
-# Checking Quantum Gravity Calculation with Claude
+# Claude Audits Quantum Gravity
+
+*An AI re-derived a published one-loop quantum gravity calculation step by step. It found a sign error and a missing term, and confirmed the physical conclusion.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](code/requirements.txt)
@@ -204,8 +206,8 @@ sign of (I.168). To build the PDF yourself: `cd notes && tectonic -X compile not
 ## Reproduce the checks
 
 ```bash
-git clone https://github.com/eokahya/Checking-Quantum-Gravity-Calculation-with-Claude.git
-cd Checking-Quantum-Gravity-Calculation-with-Claude
+git clone https://github.com/eokahya/claude-audits-quantum-gravity.git
+cd claude-audits-quantum-gravity
 pip install -r code/requirements.txt      # sympy, mpmath
 
 python3 code/run_all.py --quick           # all but the two slowest scripts, about 6 minutes
@@ -316,11 +318,11 @@ the papers; where a printed equation is compared, it is retyped in LaTeX.
 If you use this re-derivation, please cite the original papers and this repository:
 
 ```bibtex
-@misc{Kahya2026CheckingQG,
+@misc{Kahya2026ClaudeAuditsQG,
   author       = {Kahya, Emre Onur},
-  title        = {Checking Quantum Gravity Calculation with {Claude}},
+  title        = {Claude Audits Quantum Gravity: a step-by-step {AI} re-derivation of a one-loop quantum gravity calculation during inflation},
   year         = {2026},
-  howpublished = {\url{https://github.com/eokahya/Checking-Quantum-Gravity-Calculation-with-Claude}},
+  howpublished = {\url{https://github.com/eokahya/claude-audits-quantum-gravity}},
   note         = {Step-by-step re-derivation of the one-loop scalar self-mass during inflation
                   (Phys. Rev. D 76, 124005) and of its late-time effect (arXiv:0710.5282),
                   carried out with Claude Opus 5.5}
